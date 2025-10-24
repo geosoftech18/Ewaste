@@ -8,7 +8,17 @@ import { CertificationsCompliance } from "@/components/certifications-compliance
 import { QuickPickupForm } from "@/components/quick-pickup-form"
 import { ClientsCarousel } from "@/components/clients-carousel"
 import { TestimonialsSection } from "@/components/testimonials-section"
-import InteractiveIndiaMap from "@/components/about/InteractiveIndiaMap"
+import dynamic from "next/dynamic"
+
+const InteractiveIndiaMap = dynamic(() => import("@/components/about/InteractiveIndiaMap"), {
+  ssr: false,
+  loading: () => <div className="w-full h-[700px] bg-gray-100 rounded-3xl flex items-center justify-center">
+    <div className="text-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4"></div>
+      <p className="text-gray-600">Loading interactive map...</p>
+    </div>
+  </div>
+})
 
 export default function Home() {
   return (
