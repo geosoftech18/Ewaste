@@ -25,7 +25,7 @@ const services: Service[] = [
     description: "Safe and compliant disposal of all types of e-waste.",
     icon: <Recycle className="w-12 h-12" />,
     color: "text-emerald-600",
-    link: "/services/electronic-waste",
+    link: "/services/electronic-waste-recycle",
     category: ["All", "Residential", "Corporate"],
   },
   {
@@ -158,7 +158,7 @@ export function ServicesGrid() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Our Services</h2>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Our Services</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Professional E-Waste Recycling Solutions for Businesses & Individuals
           </p>
@@ -177,7 +177,7 @@ export function ServicesGrid() {
                 setActiveFilter(filter)
                 setCurrentSlide(0)
               }}
-              className={`px-6 py-2 rounded-full font-medium transition-all duration-300 ${
+              className={`md:px-6 px-4 py-2 rounded-full font-medium transition-all duration-300 ${
                 activeFilter === filter
                   ? "bg-emerald-600 text-white shadow-lg scale-105"
                   : "bg-white text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 shadow"
@@ -190,7 +190,7 @@ export function ServicesGrid() {
         </div>
 
         {/* Desktop/Tablet Grid */}
-        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8  max-w-6xl mx-auto">
           {filteredServices.map((service, index) => (
             <Link
               key={service.id}
@@ -250,14 +250,14 @@ export function ServicesGrid() {
           {/* Carousel Controls */}
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-lg active:scale-95 transition-transform"
+            className="absolute md:block hidden left-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-lg active:scale-95 transition-transform"
             aria-label="Previous service"
           >
             <ChevronLeft className="w-6 h-6 text-emerald-600" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-lg active:scale-95 transition-transform"
+            className="absolute md:block hidden right-0 top-1/2 -translate-y-1/2 bg-white/90 p-2 rounded-full shadow-lg active:scale-95 transition-transform"
             aria-label="Next service"
           >
             <ChevronRight className="w-6 h-6 text-emerald-600" />

@@ -188,7 +188,7 @@ export default function InteractiveIndiaMap() {
     <section className="relative w-full min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 py-16 px-4">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          <h2 className="text-2xl md:text-5xl font-bold text-gray-800 mb-4">
             Live E-Waste Collection Tracking
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto">

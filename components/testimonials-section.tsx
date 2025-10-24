@@ -180,7 +180,7 @@ export function TestimonialsSection() {
             <Quote className="w-4 h-4" />
             Client Testimonials
           </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">What Our Clients Say</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Hear from businesses and households who trust us with their e-waste recycling
           </p>
@@ -192,40 +192,81 @@ export function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="flex justify-center gap-3 mb-12 flex-wrap"
+          className="mb-12"
         >
-          <Button
-            variant={filter === "all" ? "default" : "outline"}
-            onClick={() => {
-              setFilter("all")
-              setCurrentIndex(0)
-            }}
-            className={filter === "all" ? "bg-green-600 hover:bg-green-700" : ""}
-          >
-            All Reviews
-          </Button>
-          <Button
-            variant={filter === "corporate" ? "default" : "outline"}
-            onClick={() => {
-              setFilter("corporate")
-              setCurrentIndex(0)
-            }}
-            className={filter === "corporate" ? "bg-green-600 hover:bg-green-700" : ""}
-          >
-            <Building2 className="w-4 h-4 mr-2" />
-            Corporate
-          </Button>
-          <Button
-            variant={filter === "residential" ? "default" : "outline"}
-            onClick={() => {
-              setFilter("residential")
-              setCurrentIndex(0)
-            }}
-            className={filter === "residential" ? "bg-green-600 hover:bg-green-700" : ""}
-          >
-            <Home className="w-4 h-4 mr-2" />
-            Residential
-          </Button>
+          {/* Desktop: flex-wrap justify-center */}
+          <div className="hidden md:flex justify-center gap-3 flex-wrap">
+            <Button
+              variant={filter === "all" ? "default" : "outline"}
+              onClick={() => {
+                setFilter("all")
+                setCurrentIndex(0)
+              }}
+              className={filter === "all" ? "bg-green-600 hover:bg-green-700" : ""}
+            >
+              All Reviews
+            </Button>
+            <Button
+              variant={filter === "corporate" ? "default" : "outline"}
+              onClick={() => {
+                setFilter("corporate")
+                setCurrentIndex(0)
+              }}
+              className={filter === "corporate" ? "bg-green-600 hover:bg-green-700" : ""}
+            >
+              <Building2 className="w-4 h-4 mr-2" />
+              Corporate
+            </Button>
+            <Button
+              variant={filter === "residential" ? "default" : "outline"}
+              onClick={() => {
+                setFilter("residential")
+                setCurrentIndex(0)
+              }}
+              className={filter === "residential" ? "bg-green-600 hover:bg-green-700" : ""}
+            >
+              <Home className="w-4 h-4 mr-2" />
+              Residential
+            </Button>
+          </div>
+
+          {/* Mobile: horizontal scrollable */}
+          <div className="md:hidden">
+            <div className="flex gap-2 overflow-x-auto scrollbar-hide pb-2">
+              <Button
+                variant={filter === "all" ? "default" : "outline"}
+                onClick={() => {
+                  setFilter("all")
+                  setCurrentIndex(0)
+                }}
+                className={`whitespace-nowrap flex-shrink-0 ${filter === "all" ? "bg-green-600 hover:bg-green-700" : ""}`}
+              >
+                All Reviews
+              </Button>
+              <Button
+                variant={filter === "corporate" ? "default" : "outline"}
+                onClick={() => {
+                  setFilter("corporate")
+                  setCurrentIndex(0)
+                }}
+                className={`whitespace-nowrap flex-shrink-0 ${filter === "corporate" ? "bg-green-600 hover:bg-green-700" : ""}`}
+              >
+                <Building2 className="w-4 h-4 mr-1" />
+                Corporate
+              </Button>
+              <Button
+                variant={filter === "residential" ? "default" : "outline"}
+                onClick={() => {
+                  setFilter("residential")
+                  setCurrentIndex(0)
+                }}
+                className={`whitespace-nowrap flex-shrink-0 ${filter === "residential" ? "bg-green-600 hover:bg-green-700" : ""}`}
+              >
+                <Home className="w-4 h-4 mr-1" />
+                Residential
+              </Button>
+            </div>
+          </div>
         </motion.div>
 
         {/* Carousel Container */}
@@ -253,12 +294,16 @@ export function TestimonialsSection() {
           >
             <ChevronRight className="w-5 h-5" />
           </Button>
-
+                                                  
           {/* Testimonials Carousel */}
-          <div className="overflow-hidden px-4 py-6">
+          <div className="overflow-hidden px-2  md:px-4 py-6 max-w-7xl mx-auto">
             <motion.div
-              className="flex gap-6"
-              animate={{ x: `-${currentIndex * (100 / itemsPerView)}%` }}
+              className="flex gap-4 md:gap-6"
+              animate={{ 
+                x: itemsPerView === 1 
+                  ? `-${currentIndex * 100}%` 
+                  : `-${currentIndex * (100 / itemsPerView)}%` 
+              }}
               transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               {filteredTestimonials.map((testimonial, index) => (
@@ -269,10 +314,10 @@ export function TestimonialsSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="bg-white rounded-2xl p-6 shadow-lg border-2 border-green-100 hover:border-green-300 hover:shadow-xl transition-all duration-300 cursor-pointer relative group flex-shrink-0"
+                  className="bg-white rounded-2xl p-4 md:p-6 shadow-lg border-2 border-green-100 hover:border-green-300 hover:shadow-xl transition-all duration-300 cursor-pointer relative group flex-shrink-0"
                   style={{ 
-                    width: `calc(${100 / itemsPerView}% - ${(itemsPerView - 1) * 24 / itemsPerView}px)`,
-                    minWidth: '300px'
+                    width: itemsPerView === 1 ? 'calc(100% - 1rem)' : `calc(${100 / itemsPerView}% - ${(itemsPerView - 1) * 16 / itemsPerView}px)`,
+                    minWidth: itemsPerView === 1 ? 'calc(100% - 1rem)' : '280px'
                   }}
                   onClick={() => setSelectedTestimonial(testimonial)}
                 >

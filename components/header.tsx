@@ -81,7 +81,7 @@ export function Header() {
                     }
                   }
                   .ticker-scroll {
-                    animation: scroll-ticker 30s linear infinite;
+                    animation: scroll-ticker 10s linear infinite;
                   }
                   .ticker-scroll:hover {
                     animation-play-state: paused;
@@ -151,7 +151,7 @@ export function Header() {
             : ""
       }`}>
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-20 ">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0" onClick={scrollToTop}>
               <Image
@@ -159,7 +159,7 @@ export function Header() {
                 alt="SP Recycling Pvt Ltd"
                 width={220}
                 height={60}
-                className="h-12 w-auto"
+                className="h-12 w-50 md:h-16 md:w-auto"
                 priority
               />
             </Link>
@@ -202,14 +202,14 @@ export function Header() {
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" size="icon">
-                  <Menu className="w-6 h-6" />
+                <Button variant="ghost" className="!w-20 !h-20 !p-2">
+                  <Menu className="!w-8 !h-8" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-full sm:w-80">
+              <SheetContent side="right" className="w-full sm:w-80 p-4">
                 <div className="flex flex-col h-full">
-                  <div className="flex items-center justify-between mb-8">
-                    <Image src="/logo.webp" alt="SP Recycling" width={180} height={50} className="h-10 w-auto" />
+                  <div className="flex items-center justify-between mb-8 pt-4">
+                    <Image src="/elogo.webp" alt="SP Recycling" width={180} height={50} className="h-10 w-auto" />
                   </div>
 
                   <nav className="flex flex-col gap-1 flex-1">
@@ -289,7 +289,7 @@ export function Header() {
         href="https://wa.me/919949901238"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20BA5A] transition-all hover:scale-110"
+        className="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-125 z-50 animate-bounce"
         aria-label="Chat on WhatsApp"
       >
         <MessageCircle className="w-6 h-6" />

@@ -8,6 +8,7 @@ import { CertificationsCompliance } from "@/components/certifications-compliance
 import { QuickPickupForm } from "@/components/quick-pickup-form"
 import { ClientsCarousel } from "@/components/clients-carousel"
 import { TestimonialsSection } from "@/components/testimonials-section"
+import InteractiveIndiaMap from "@/components/about/InteractiveIndiaMap"
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <ProcessSteps />
       <WhyChooseUs />
       <CertificationsCompliance />
+      <InteractiveIndiaMap />
       <QuickPickupForm />
       <ClientsCarousel />
       <TestimonialsSection />

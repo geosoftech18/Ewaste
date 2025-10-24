@@ -1,7 +1,7 @@
 "use client"
 
 import { Users, Headphones, Shield, Lock, Recycle, Trophy } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 
 const features = [
   {
@@ -50,27 +50,49 @@ function AnimatedCounter({
   suffix?: string
 }) {
   const [count, setCount] = useState(0)
+  const [hasAnimated, setHasAnimated] = useState(false)
+  const ref = useRef<HTMLSpanElement>(null)
 
   useEffect(() => {
-    let startTime: number | null = null
-    const duration = 2000 // 2 seconds
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true)
+            let startTime: number | null = null
+            const duration = 2000 // 2 seconds
 
-    const animate = (currentTime: number) => {
-      if (!startTime) startTime = currentTime
-      const progress = Math.min((currentTime - startTime) / duration, 1)
+            const animate = (currentTime: number) => {
+              if (!startTime) startTime = currentTime
+              const progress = Math.min((currentTime - startTime) / duration, 1)
 
-      setCount(Math.floor(progress * end))
+              setCount(Math.floor(progress * end))
 
-      if (progress < 1) {
-        requestAnimationFrame(animate)
-      }
+              if (progress < 1) {
+                requestAnimationFrame(animate)
+              }
+            }
+
+            requestAnimationFrame(animate)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    if (ref.current) {
+      observer.observe(ref.current)
     }
 
-    requestAnimationFrame(animate)
-  }, [end])
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current)
+      }
+    }
+  }, [end, hasAnimated])
 
   return (
-    <span className="text-4xl md:text-5xl font-bold text-green-600">
+    <span ref={ref} className="text-4xl md:text-5xl font-bold text-green-600">
       {count}
       {suffix}
     </span>
@@ -86,7 +108,7 @@ export function WhyChooseUs() {
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Why Choose S P Recycling Pvt Ltd?
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
@@ -105,7 +127,7 @@ export function WhyChooseUs() {
         </div>
 
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => {
             const Icon = feature.icon
             return (

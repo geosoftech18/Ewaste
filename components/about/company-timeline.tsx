@@ -80,7 +80,7 @@ export function CompanyTimeline() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16 md:mb-24"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 text-balance">Our Journey</h2>
+          <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4 text-balance">Our Journey</h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto text-balance">
             From a small recycling initiative to a nationwide e-waste management network.
           </p>

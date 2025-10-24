@@ -193,7 +193,7 @@ export default function DataDestructionSection() {
                   </div>
 
                   <p className={`text-sm transition-colors duration-300 ${
-                    isActive ? 'text-gray-200' : 'text-gray-400'
+                    isActive ? 'text-white' : 'text-gray-200'
                   }`}>
                     {step.description}
                   </p>
@@ -333,7 +333,7 @@ export default function DataDestructionSection() {
               )}
             </div>
 
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-100 text-sm">
               Use arrow keys (← →) to navigate between steps
             </p>
           </div>

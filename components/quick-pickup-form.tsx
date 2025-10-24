@@ -368,7 +368,7 @@ export function QuickPickupForm() {
         >
           {/* Header */}
           <div className="text-center mb-8 md:mb-12">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
               Quick Pickup Request
             </h2>
             <p className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto">

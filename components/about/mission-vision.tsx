@@ -57,7 +57,7 @@ export function MissionVision() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">Our Mission & Vision</h2>
+          <h2 className="text-2xl md:text-5xl font-bold text-gray-900 mb-3">Our Mission & Vision</h2>
           <p className="text-lg text-gray-600 font-medium">Guided by sustainability. Driven by innovation.</p>
         </motion.div>
 

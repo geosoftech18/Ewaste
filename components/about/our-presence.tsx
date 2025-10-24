@@ -60,7 +60,7 @@ export function OurPresence() {
           <Badge variant="outline" className="mb-4 text-primary border-primary/30">
             Our Presence
           </Badge>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4 text-balance">
+          <h2 className="text-2xl md:text-5xl font-bold text-foreground mb-4 text-balance">
             Nationwide E-Waste Collection
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-pretty">

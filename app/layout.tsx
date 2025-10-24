@@ -7,6 +7,7 @@ import "./globals.css"
 import { Suspense } from "react"
 import { Toaster } from "@/components/ui/sonner"
 import { Header } from "@/components/header"
+import Footer from "@/components/contact/footer"
 
 export const metadata: Metadata = {
   title: "SP Recycling Pvt Ltd - E-Waste Recycling Services",
@@ -28,7 +29,7 @@ export default function RootLayout({
         </Suspense>
         <Analytics />
         <Toaster />
-       
+       <Footer />
       </body>
     </html>
   )

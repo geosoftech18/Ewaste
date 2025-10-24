@@ -33,7 +33,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+        <h1 className="text-3xl md:text-6xl font-bold text-white mb-6 leading-tight">
           Professional E-Waste Recycling
           <span className="block text-emerald-300">& Data Destruction Services</span>
         </h1>

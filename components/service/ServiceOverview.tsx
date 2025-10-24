@@ -99,7 +99,7 @@ export default function ServiceOverview() {
             whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl font-bold text-gray-900 mb-6"
+            className="text-2xl md:text-5xl font-bold text-gray-900 mb-6"
           >
             Service Overview
           </motion.h2>
@@ -108,7 +108,7 @@ export default function ServiceOverview() {
             whileInView={prefersReducedMotion ? {} : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-lg text-gray-600 leading-relaxed"
+            className="text-base md:text-lg text-gray-600 leading-relaxed"
           >
             At S P Recycling Pvt Ltd, we specialize in the responsible collection, recycling, and reuse of electronic waste across India.
             Our process ensures full compliance with environmental laws while safeguarding your data and reducing landfill impact.

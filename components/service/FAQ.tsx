@@ -31,7 +31,7 @@ export default function FAQ() {
           <div className="inline-block p-4 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl mb-4">
             <HelpCircle className="w-8 h-8 text-primary" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl md:text-5xl font-bold text-foreground mb-4">
             Frequently Asked Questions
           </h2>
           <p className="text-lg text-muted-foreground">
