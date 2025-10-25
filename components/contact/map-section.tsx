@@ -10,7 +10,7 @@ export default function MapSection() {
       address: "Thumkunta, Bommalaramaram Mandal, Bibinagar, Yadadri Bhuvanagiri, Telangana, 500078",
       phone: "+91 9949 901 238",
       email: "sprecycling563@gmail.com",
-      mapUrl: "https://maps.google.com/?q=Thumkunta+Bibinagar+Telangana",
+      mapUrl: "https://www.google.com/maps/place/MANDAL+OFFICE+BOMMALARAMARAM/@17.560303,78.743674,13z/data=!4m6!3m5!1s0x3bcb798b399b1829:0xa9f5bab8e3461c20!8m2!3d17.5603031!4d78.7436737!16s%2Fg%2F11ddx8dr2y?hl=en-US&entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D",
     },
   ]
 

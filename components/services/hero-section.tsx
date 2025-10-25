@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Calendar, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { QuoteModal } from './quote-modal';
+import { PickupFormModal } from '../pickup-form-modal';
 
 interface HeroSectionProps {
   title: string;
@@ -13,6 +14,7 @@ interface HeroSectionProps {
 
 export function HeroSection({ title, subtitle, backgroundImage }: HeroSectionProps) {
   const [showQuoteModal, setShowQuoteModal] = useState(false);
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
 
   return (
     <>
@@ -43,6 +45,7 @@ export function HeroSection({ title, subtitle, backgroundImage }: HeroSectionPro
             <Button
               size="lg"
               className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-6 text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"
+              onClick={() => setPickupModalOpen(true)}
             >
               <Calendar className="mr-2 h-5 w-5" />
               Book a Pickup
@@ -59,10 +62,16 @@ export function HeroSection({ title, subtitle, backgroundImage }: HeroSectionPro
           </div>
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 h-10 bg-gradient-to-t from-background to-transparent" />
       </section>
 
       <QuoteModal open={showQuoteModal} onClose={() => setShowQuoteModal(false)} />
+
+      {/* Pickup Form Modal */}
+      <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </>
   );
 }

@@ -1,8 +1,10 @@
 "use client"
 
 import { CheckCircle2, Lock, Award, Leaf, Zap, Shield, Truck, Globe } from "lucide-react"
-
+import { useState } from "react"
+import { PickupFormModal } from "@/components/pickup-form-modal"
 export default function CSRSection() {
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
   const credentials = [
     { icon: Leaf, title: "100% Eco-Compliant", desc: "Environmentally responsible recycling" },
     { icon: Lock, title: "Data Destruction Certified", desc: "Secure data handling & destruction" },
@@ -107,7 +109,7 @@ export default function CSRSection() {
               <div className="mt-10 pt-8 border-t-2 border-emerald-200 group-hover:border-emerald-300 transition-colors duration-300">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                   <p className="text-gray-700 font-semibold text-lg">Ready to make a difference?</p>
-                  <button className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 hover:shadow-lg hover:scale-105 transform">
+                  <button className="px-8 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold rounded-xl hover:from-emerald-700 hover:to-teal-700 transition-all duration-300 hover:shadow-lg hover:scale-105 transform" onClick={() => setPickupModalOpen(true)}>
                     Get Started Today
                   </button>
                 </div>
@@ -116,6 +118,10 @@ export default function CSRSection() {
           </div>
         </div>
       </div>
+      <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   )
 }

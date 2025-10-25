@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { HeroSection } from '@/components/services/hero-section';
 import { BenefitsSummary } from '@/components/services/benefits-summary';
+import { WhyChooseUs } from '@/components/services/why-choose-us';
 import { ScopeOfService } from '@/components/services/scope-of-service';
 import { ProcessWorkflow } from '@/components/services/process-workflow';
 import { DataSecurity } from '@/components/services/data-security';
@@ -48,10 +49,20 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
         backgroundImage={service.heroImage}
       />
 
-      <BenefitsSummary
+      {/* <BenefitsSummary
         summary={service.summary}
         benefits={service.benefits}
-      />
+      /> */}
+
+      {service.whyChooseUs && (
+        <WhyChooseUs
+          title={service.whyChooseUs.title}
+          subtitle={service.whyChooseUs.subtitle}
+          description={service.whyChooseUs.description}
+          features={service.whyChooseUs.features}
+          stats={service.whyChooseUs.stats}
+        />
+      )}
 
       <ScopeOfService
         items={service.scopeItems}

@@ -3,13 +3,16 @@
 import { Button } from '@/components/ui/button';
 import { Calendar, Phone, Mail, MessageCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { PickupFormModal } from '../pickup-form-modal';
+import { useState } from 'react';
 
 interface FinalCTAProps {
   serviceName: string;
 }
 
 export function FinalCTA({ serviceName }: FinalCTAProps) {
-  return (
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
+    return (
     <section className="py-20 px-6 bg-gradient-to-br from-emerald-600 via-teal-600 to-emerald-700 text-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -30,6 +33,7 @@ export function FinalCTA({ serviceName }: FinalCTAProps) {
           <Button
             size="lg"
             className="bg-white text-emerald-600 hover:bg-white/90 px-10 py-6 text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-105"
+            onClick={() => setPickupModalOpen(true)}
           >
             <Calendar className="mr-2 h-5 w-5" />
             Schedule a Pickup
@@ -75,6 +79,12 @@ export function FinalCTA({ serviceName }: FinalCTAProps) {
           </Badge>
         </div>
       </div>
+
+      {/* Pickup Form Modal */}
+      <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   );
 }

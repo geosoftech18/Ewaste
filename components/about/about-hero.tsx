@@ -4,8 +4,11 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar } from "lucide-react"
+import { PickupFormModal } from "../pickup-form-modal"
+import { useState } from "react"
 
 export function AboutHero() {
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-background via-background to-muted/30">
       {/* Animated background particles */}
@@ -102,10 +105,7 @@ export function AboutHero() {
               <Button
                 size="lg"
                 className="group bg-primary hover:bg-primary/90 text-primary-foreground font-semibold"
-                onClick={() => {
-                  // Open booking modal or navigate to booking page
-                  console.log("Schedule pickup clicked")
-                }}
+                onClick={() => setPickupModalOpen(true)}
               >
                 <Calendar className="mr-2 h-5 w-5" />
                 Schedule a Pickup
@@ -283,6 +283,12 @@ export function AboutHero() {
           </div>
         </motion.div>
       </motion.div>
+
+        {/* Pickup Form Modal */}
+        <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   )
 }

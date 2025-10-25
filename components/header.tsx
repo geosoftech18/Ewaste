@@ -11,10 +11,9 @@ import { PickupFormModal } from "@/components/pickup-form-modal"
 const navigation = [
   { name: "Home", href: "/" },
   { name: "About Us", href: "/about" },
-  { name: "E-Waste Recycling", href: "/services" },
-  { name: "Electronics Recycling", href: "/services/electronics" },
-  { name: "Read Our Blog", href: "/blog" },
+  { name: "Services", href: "/services" },
   { name: "Contact Us", href: "/contact" },
+  { name: "Read Our Blog", href: "/blog" },
 ]
 
 const socialLinks = [

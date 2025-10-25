@@ -45,6 +45,20 @@ export interface ServiceData {
     description: string;
     metrics: string;
   }>;
+  whyChooseUs?: {
+    title: string;
+    subtitle: string;
+    description: string;
+    features: Array<{
+      icon: string;
+      title: string;
+      description: string;
+    }>;
+    stats: Array<{
+      number: string;
+      label: string;
+    }>;
+  };
 }
 
 const servicesData: Record<string, ServiceData> = {
@@ -52,7 +66,7 @@ const servicesData: Record<string, ServiceData> = {
     slug: 'electronic-waste-recycle',
     title: 'Electronic Waste Recycling Services',
     subtitle: 'Eco-friendly recycling for all types of electronic waste — safe, certified, and compliant.',
-    heroImage: 'https://images.pexels.com/photos/3735218/pexels-photo-3735218.jpeg',
+    heroImage: '/services/electronic%20waste.png',
     summary: 'We handle every type of e-waste responsibly — from collection to certified recycling — ensuring zero landfill and full compliance.',
     benefits: [
       {
@@ -193,13 +207,56 @@ const servicesData: Record<string, ServiceData> = {
         description: 'Annual e-waste collection drive',
         metrics: '5,000 kg processed, zero landfill'
       }
-    ]
+    ],
+    whyChooseUs: {
+      title: 'Why Choose Our E-Waste Services',
+      subtitle: 'Leading the way in responsible electronic waste management',
+      description: 'We are pioneering the pathway to a landfill-free future! Our integrated e-waste management services offer a holistic approach to electronic waste, spanning from collection, transportation and ultimately, recycling. Through our robust solutions, organizations can seamlessly transition to achieve a \'zero waste to landfill\' status.',
+      features: [
+        {
+          icon: 'check-circle',
+          title: 'Certified Recycling',
+          description: 'All e-waste is processed through certified facilities with full compliance documentation and audit trails.'
+        },
+        {
+          icon: 'shield',
+          title: 'Data Security',
+          description: 'Complete data destruction with certified methods ensuring your sensitive information is permanently erased.'
+        },
+        {
+          icon: 'award',
+          title: 'Environmental Impact',
+          description: 'Achieve zero landfill status with 95%+ material recovery rates and carbon footprint reduction.'
+        },
+        {
+          icon: 'users',
+          title: 'Expert Team',
+          description: 'Certified technicians and environmental specialists with years of experience in e-waste management.'
+        },
+        {
+          icon: 'clock',
+          title: 'Convenient Pickup',
+          description: 'Flexible scheduling with same-day or scheduled pickups to fit your business operations.'
+        },
+        {
+          icon: 'leaf',
+          title: 'Sustainability Reports',
+          description: 'Monthly detailed reports on environmental impact, material recovery, and sustainability metrics.'
+        }
+      ],
+      stats: [
+        { number: '10,000+', label: 'Devices Recycled' },
+        { number: '95%', label: 'Recovery Rate' },
+        { number: '500+', label: 'Happy Clients' },
+        { number: 'Zero', label: 'Landfill Waste' }
+      ]
+    }
   },
   'it-telecom': {
     slug: 'it-telecom',
     title: 'IT & Telecom Equipment Recycling',
     subtitle: 'Specialized recycling services for IT infrastructure and telecommunications equipment',
-    heroImage: 'https://images.pexels.com/photos/442150/pexels-photo-442150.jpeg',
+    heroImage: '/services/IT%20&%20Telecommunication.png',
     summary: 'Enterprise-grade recycling solutions for outdated IT and telecom equipment with complete audit trails and compliance documentation.',
     benefits: [
       {
@@ -223,28 +280,59 @@ const servicesData: Record<string, ServiceData> = {
         description: 'Nationwide pickup and on-site services'
       }
     ],
-    scopeItems: [
+    scopeItems:[
+      {
+        icon: 'monitor',
+        title: 'IT & Telecommunication Equipment',
+        items: ['Desktops', 'Laptops', 'Printers', 'Scanners', 'Servers', 'Routers', 'Modems']
+      },
+      {
+        icon: 'smartphone',
+        title: 'Consumer Electronics',
+        items: ['Mobile Phones', 'Tablets', 'Televisions', 'Home Theatre Systems', 'Speakers']
+      },
+      {
+        icon: 'cpu',
+        title: 'Computer Peripherals',
+        items: ['Keyboards', 'Mice', 'Webcams', 'External Hard Drives', 'USB Devices']
+      },
+      {
+        icon: 'settings',
+        title: 'Electrical & Industrial Equipment',
+        items: ['Motors', 'Control Panels', 'Power Tools', 'Industrial Batteries']
+      },
+      {
+        icon: 'battery',
+        title: 'Batteries & Power Equipment',
+        items: ['UPS Units', 'Power Banks', 'Inverters', 'Lithium-ion Batteries']
+      },
+      {
+        icon: 'microwave',
+        title: 'Home Appliances',
+        items: ['Refrigerators', 'Microwaves', 'Washing Machines', 'Air Conditioners']
+      },
       {
         icon: 'server',
         title: 'Data Center Equipment',
-        items: ['Servers', 'Storage Arrays', 'Blade Systems', 'Racks']
+        items: ['Blade Systems', 'Racks', 'Storage Arrays', 'Network Cables']
       },
       {
-        icon: 'network',
-        title: 'Network Infrastructure',
-        items: ['Routers', 'Switches', 'Firewalls', 'Load Balancers']
+        icon: 'camera',
+        title: 'Security & Surveillance Equipment',
+        items: ['CCTV Cameras', 'DVR/NVR Systems', 'Access Control Devices', 'Sensors']
       },
       {
-        icon: 'phone',
-        title: 'Telecom Equipment',
-        items: ['PBX Systems', 'IP Phones', 'Modems', 'Base Stations']
+        icon: 'printer',
+        title: 'Office Equipment',
+        items: ['Fax Machines', 'Photocopiers', 'Projectors', 'Telephones']
       },
       {
-        icon: 'hard-drive',
-        title: 'Storage Devices',
-        items: ['Hard Drives', 'SSDs', 'Tape Drives', 'NAS Units']
+        icon: 'chip',
+        title: 'Electronic Components',
+        items: ['Circuit Boards', 'Semiconductors', 'Capacitors', 'Resistors']
       }
-    ],
+    ]
+    ,
     categories: ['Enterprise', 'Data Centers', 'Telecom Providers'],
     processSteps: [
       {
@@ -336,289 +424,405 @@ const servicesData: Record<string, ServiceData> = {
         description: 'Network upgrade equipment recycling',
         metrics: '15 tons processed, full audit trail provided'
       }
-    ]
+    ],
+    whyChooseUs: {
+      title: 'Why Choose Our IT & Telecom Services',
+      subtitle: 'Enterprise-grade solutions for IT infrastructure recycling',
+      description: 'We specialize in handling complex IT and telecommunications equipment with enterprise-level security and compliance. Our solutions ensure secure data handling, efficient reuse, and environmentally safe disposal—supporting a sustainable and digitally connected future.',
+      features: [
+        {
+          icon: 'shield',
+          title: 'Enterprise Security',
+          description: 'Bank-level data destruction with witnessed destruction and video documentation for maximum security.'
+        },
+        {
+          icon: 'award',
+          title: 'Compliance Certified',
+          description: 'Full compliance with data protection regulations and industry standards for secure IT asset disposal.'
+        },
+        {
+          icon: 'users',
+          title: 'Expert Handling',
+          description: 'Specialized technicians trained in enterprise IT equipment with years of experience in data center operations.'
+        },
+        {
+          icon: 'clock',
+          title: 'Minimal Downtime',
+          description: 'Coordinated pickup and replacement services to ensure zero business disruption during equipment transitions.'
+        },
+        {
+          icon: 'check-circle',
+          title: 'Audit Trail',
+          description: 'Complete documentation and tracking from collection to final disposition with detailed compliance reports.'
+        },
+        {
+          icon: 'leaf',
+          title: 'Sustainable Solutions',
+          description: 'Maximize equipment reuse and material recovery while ensuring zero environmental impact from IT waste.'
+        }
+      ],
+      stats: [
+        { number: '15,000+', label: 'Servers Processed' },
+        { number: '100%', label: 'Data Security' },
+        { number: '200+', label: 'Enterprise Clients' },
+        { number: 'Zero', label: 'Security Breaches' }
+      ]
+    }
   },
   'printer-recycle': {
     slug: 'printer-recycle',
-    title: 'Printer & Imaging Equipment Recycling',
-    subtitle: 'Responsible recycling of printers, copiers, scanners, and imaging equipment',
-    heroImage: 'https://images.pexels.com/photos/4226890/pexels-photo-4226890.jpeg',
-    summary: 'Specialized handling of printers and imaging equipment with proper disposal of toner cartridges and secure data removal from network-enabled devices.',
+    title: 'Sustainable Waste Solutions',
+    subtitle: 'Integrated waste management for comprehensive recycling and environmental sustainability',
+    heroImage: '/services/Sustainable%20Waste%20Solutions.png',
+    summary: 'Holistic approach to waste management that combines waste collection, segregation, recycling, and disposal into one efficient system, focusing on reducing environmental impact while maximizing resource recovery.',
     benefits: [
       {
-        icon: 'printer',
-        title: 'All Printer Types',
-        description: 'Inkjet, laser, multifunction, and industrial printers'
+        icon: 'recycle',
+        title: 'Waste Segregation',
+        description: 'Intelligent sorting of different waste streams for optimal recycling'
       },
       {
-        icon: 'droplet',
-        title: 'Toner Management',
-        description: 'Safe disposal of cartridges and toner waste'
+        icon: 'leaf',
+        title: 'Resource Recovery',
+        description: 'Maximizing material recovery and reducing landfill waste'
       },
       {
-        icon: 'wifi-off',
-        title: 'Memory Clearing',
-        description: 'Complete data removal from network printers'
+        icon: 'globe',
+        title: 'Environmental Impact',
+        description: 'Comprehensive approach to reducing carbon footprint'
       },
       {
-        icon: 'building',
-        title: 'Bulk Services',
-        description: 'Office-wide and fleet recycling programs'
+        icon: 'users',
+        title: 'Community Solutions',
+        description: 'Tailored waste management programs for communities and industries'
       }
     ],
     scopeItems: [
       {
-        icon: 'printer',
-        title: 'Printers',
-        items: ['Laser Printers', 'Inkjet Printers', 'Dot Matrix', '3D Printers']
-      },
-      {
-        icon: 'copy',
-        title: 'Multifunction Devices',
-        items: ['All-in-One Units', 'Copiers', 'Fax Machines', 'Scanners']
-      },
-      {
-        icon: 'image',
-        title: 'Imaging Equipment',
-        items: ['Plotters', 'Photo Printers', 'Label Printers', 'Barcode Scanners']
+        icon: 'trash-2',
+        title: 'Organic Waste',
+        items: ['Food Waste', 'Garden Waste', 'Biodegradable Materials', 'Compost']
       },
       {
         icon: 'package',
-        title: 'Consumables',
-        items: ['Toner Cartridges', 'Ink Cartridges', 'Drums', 'Fusers']
+        title: 'Recyclable Materials',
+        items: ['Paper & Cardboard', 'Plastic Containers', 'Glass Bottles', 'Metal Cans']
+      },
+      {
+        icon: 'battery',
+        title: 'Hazardous Waste',
+        items: ['Batteries', 'Electronic Waste', 'Chemicals', 'Medical Waste']
+      },
+      {
+        icon: 'building',
+        title: 'Industrial Waste',
+        items: ['Manufacturing Waste', 'Construction Debris', 'Textile Waste', 'Packaging Materials']
       }
     ],
     categories: ['Office', 'Industrial', 'Retail'],
     processSteps: [
       {
         number: 1,
-        title: 'Collection',
-        description: 'Pickup from your location with proper handling',
+        title: 'Waste Collection',
+        description: 'Comprehensive collection from residential, commercial, and industrial locations',
         icon: 'package-check'
       },
       {
         number: 2,
-        title: 'Memory Wiping',
-        description: 'Secure deletion of stored documents and network data',
-        icon: 'database'
-      },
-      {
-        number: 3,
-        title: 'Component Separation',
-        description: 'Segregation of plastics, metals, and electronic parts',
+        title: 'Segregation',
+        description: 'Intelligent sorting of waste streams for optimal processing',
         icon: 'git-branch'
       },
       {
+        number: 3,
+        title: 'Processing',
+        description: 'Advanced processing techniques for different waste types',
+        icon: 'settings'
+      },
+      {
         number: 4,
-        title: 'Toner Disposal',
-        description: 'Safe handling of toner powder and cartridges',
-        icon: 'trash-2'
+        title: 'Recycling',
+        description: 'Transformation of waste into reusable materials and products',
+        icon: 'refresh-cw'
       },
       {
         number: 5,
-        title: 'Material Recovery',
-        description: 'Recycling of reusable components and materials',
+        title: 'Resource Recovery',
+        description: 'Extraction of valuable materials and energy from waste streams',
         icon: 'arrow-right-circle'
       }
     ],
-    hasDataSecurity: true,
-    dataSecurityFeatures: [
-      {
-        title: 'Hard Drive Removal',
-        description: 'Physical removal and destruction of internal storage'
-      },
-      {
-        title: 'Memory Clearing',
-        description: 'Deletion of cached documents and print jobs'
-      },
-      {
-        title: 'Network Data Wipe',
-        description: 'Clearing of stored credentials and network settings'
-      }
-    ],
+    hasDataSecurity: false,
+    dataSecurityFeatures: [],
     galleryImages: [
       {
-        src: 'https://images.pexels.com/photos/3735218/pexels-photo-3735218.jpeg',
-        alt: 'Old printers collection',
+        src: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop&crop=center',
+        alt: 'Waste collection and sorting',
         type: 'before'
       },
       {
-        src: 'https://images.pexels.com/photos/7512827/pexels-photo-7512827.jpeg',
-        alt: 'Printer dismantling',
+        src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=center',
+        alt: 'Waste processing facility',
         type: 'process'
       },
       {
-        src: 'https://images.pexels.com/photos/9324336/pexels-photo-9324336.jpeg',
-        alt: 'Component separation',
+        src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop&crop=center',
+        alt: 'Recycled materials output',
         type: 'after'
       }
     ],
     pricingType: 'table',
     pricingInfo: [
-      { item: 'Desktop Printers', price: '₹50-150/unit' },
-      { item: 'Large Format Printers', price: '₹500-2000/unit' },
-      { item: 'Multifunction Copiers', price: '₹300-1500/unit' },
-      { item: 'Toner Cartridges', price: '₹10-30/piece' }
+      { item: 'Organic Waste Collection', price: '₹200-500/ton' },
+      { item: 'Recyclable Materials', price: '₹100-300/ton' },
+      { item: 'Hazardous Waste', price: '₹500-1500/ton' },
+      { item: 'Industrial Waste', price: '₹300-800/ton' }
     ],
     faqs: [
       {
-        question: 'Do you accept toner and ink cartridges?',
-        answer: 'Yes, we accept all types of toner and ink cartridges. We have specialized processes for safe disposal of toner powder.'
+        question: 'What types of waste do you handle?',
+        answer: 'We handle all types of waste including organic, recyclable materials, hazardous waste, and industrial waste with specialized processing for each category.'
       },
       {
-        question: 'What about printers with internal storage?',
-        answer: 'All printers with internal storage or hard drives undergo complete data sanitization before recycling. We remove and destroy all storage media.'
+        question: 'Do you provide waste segregation services?',
+        answer: 'Yes, we offer comprehensive waste segregation services to ensure optimal recycling and minimal environmental impact through intelligent sorting systems.'
       },
       {
-        question: 'Can you handle large copier machines?',
-        answer: 'Yes, we have the equipment and expertise to handle large industrial copiers and multifunction devices, including on-site dismantling if needed.'
+        question: 'Can you handle large-scale industrial waste?',
+        answer: 'Yes, we have the capacity and expertise to handle large-scale industrial waste management programs with customized solutions for different industries.'
       }
     ],
     caseStudies: [
       {
-        client: 'Corporate Print Services',
-        description: 'Fleet replacement program',
-        metrics: '300+ units recycled, all data sanitized'
+        client: 'Metropolitan City Corporation',
+        description: 'City-wide waste management program',
+        metrics: '500+ tons processed monthly, 85% recycling rate achieved'
       },
       {
-        client: 'Retail Chain Network',
-        description: 'Store equipment upgrade',
-        metrics: '150 locations serviced, zero downtime'
+        client: 'Industrial Manufacturing Hub',
+        description: 'Zero-waste manufacturing initiative',
+        metrics: '200+ companies served, 90% waste diversion from landfills'
       }
-    ]
+    ],
+    whyChooseUs: {
+      title: 'Why Choose Our Sustainable Waste Solutions',
+      subtitle: 'Comprehensive waste management for a cleaner future',
+      description: 'We are pioneering the pathway to a landfill-free future! Our integrated waste management services offer a holistic approach to waste, spanning from collection, transportation and ultimately, recycling. Through our robust solutions, organizations can seamlessly transition to achieve a \'zero waste to landfill\' status.',
+      features: [
+        {
+          icon: 'leaf',
+          title: 'Zero Landfill',
+          description: 'Achieve complete zero waste to landfill status with our comprehensive waste segregation and processing systems.'
+        },
+        {
+          icon: 'award',
+          title: 'Resource Recovery',
+          description: 'Maximize material recovery and resource extraction from waste streams with advanced processing technologies.'
+        },
+        {
+          icon: 'users',
+          title: 'Community Impact',
+          description: 'Tailored waste management programs for communities and industries with measurable environmental benefits.'
+        },
+        {
+          icon: 'check-circle',
+          title: 'Compliance Assured',
+          description: 'Full compliance with environmental regulations and sustainability standards for responsible waste management.'
+        },
+        {
+          icon: 'clock',
+          title: 'Flexible Solutions',
+          description: 'Customized waste management programs that adapt to your specific needs and operational requirements.'
+        },
+        {
+          icon: 'shield',
+          title: 'Environmental Impact',
+          description: 'Comprehensive approach to reducing carbon footprint and environmental impact through sustainable practices.'
+        }
+      ],
+      stats: [
+        { number: '500+', label: 'Tons Processed' },
+        { number: '85%', label: 'Recycling Rate' },
+        { number: '200+', label: 'Companies Served' },
+        { number: 'Zero', label: 'Landfill Waste' }
+      ]
+    }
   },
   'battery-recycle': {
     slug: 'battery-recycle',
-    title: 'Battery Recycling Services',
-    subtitle: 'Safe and compliant recycling of all battery types with specialized hazmat handling',
-    heroImage: 'https://images.pexels.com/photos/9800098/pexels-photo-9800098.jpeg',
-    summary: 'Expert handling of all battery types from consumer to industrial scale, ensuring safe disposal of hazardous materials and maximum material recovery.',
+    title: 'EPR Compliance Solutions',
+    subtitle: 'Extended Producer Responsibility services for manufacturers and brands',
+    heroImage: '/services/EPR%20Compliance%20Solutions.png',
+    summary: 'Comprehensive EPR solutions that empower manufacturers and brands to take accountability for the entire lifecycle of their products, ensuring regulatory compliance and responsible waste management.',
     benefits: [
       {
-        icon: 'battery',
-        title: 'All Battery Types',
-        description: 'Li-ion, lead-acid, alkaline, and more'
+        icon: 'file-check',
+        title: 'Regulatory Compliance',
+        description: 'Ensure full compliance with EPR regulations and environmental laws'
       },
       {
-        icon: 'shield-alert',
-        title: 'Hazmat Certified',
-        description: 'Licensed for hazardous material handling'
+        icon: 'lifecycle',
+        title: 'Lifecycle Management',
+        description: 'Comprehensive product lifecycle tracking and management'
       },
       {
-        icon: 'recycle',
-        title: 'Material Recovery',
-        description: 'Extract valuable metals and materials'
+        icon: 'building',
+        title: 'Brand Accountability',
+        description: 'Take responsibility for product end-of-life management'
       },
       {
-        icon: 'check-circle',
-        title: 'Full Compliance',
-        description: 'Meet all environmental regulations'
+        icon: 'globe',
+        title: 'Ecosystem Solutions',
+        description: 'Create sustainable ecosystem for product waste management'
       }
     ],
     scopeItems: [
       {
-        icon: 'battery-charging',
-        title: 'Rechargeable Batteries',
-        items: ['Li-ion', 'Li-polymer', 'NiMH', 'NiCd']
+        icon: 'smartphone',
+        title: 'Electronics EPR',
+        items: ['Mobile Phones', 'Laptops', 'Tablets', 'Consumer Electronics']
       },
       {
         icon: 'battery',
-        title: 'Primary Batteries',
-        items: ['Alkaline', 'Zinc-Carbon', 'Lithium', 'Button Cells']
+        title: 'Battery EPR',
+        items: ['Lithium Batteries', 'Lead-Acid', 'Alkaline', 'Button Cells']
       },
       {
-        icon: 'car',
-        title: 'Vehicle Batteries',
-        items: ['Lead-Acid', 'Car Batteries', 'UPS Batteries', 'Inverter Batteries']
+        icon: 'package',
+        title: 'Packaging EPR',
+        items: ['Plastic Packaging', 'Paper Packaging', 'Glass Containers', 'Metal Cans']
       },
       {
-        icon: 'zap',
-        title: 'Industrial Batteries',
-        items: ['Forklift Batteries', 'Telecom Batteries', 'Solar Batteries', 'Marine Batteries']
+        icon: 'truck',
+        title: 'Automotive EPR',
+        items: ['End-of-Life Vehicles', 'Tires', 'Oil Filters', 'Auto Parts']
       }
     ],
-    categories: ['Consumer', 'Automotive', 'Industrial', 'Renewable Energy'],
+    categories: ['Electronics', 'Packaging', 'Automotive', 'Batteries'],
     processSteps: [
       {
         number: 1,
-        title: 'Safe Collection',
-        description: 'Hazmat-compliant collection with proper containers',
-        icon: 'shield-check'
+        title: 'Compliance Assessment',
+        description: 'Evaluate current EPR obligations and regulatory requirements',
+        icon: 'file-check'
       },
       {
         number: 2,
-        title: 'Sorting & Testing',
-        description: 'Classification by chemistry and condition',
-        icon: 'list-filter'
+        title: 'Strategy Development',
+        description: 'Create comprehensive EPR strategy and implementation plan',
+        icon: 'target'
       },
       {
         number: 3,
-        title: 'Discharge & Neutralization',
-        description: 'Safe discharge of remaining energy',
-        icon: 'zap-off'
+        title: 'Collection Network',
+        description: 'Establish product collection and take-back systems',
+        icon: 'network'
       },
       {
         number: 4,
-        title: 'Material Extraction',
-        description: 'Recovery of lithium, cobalt, lead, and other metals',
-        icon: 'gem'
+        title: 'Processing & Recycling',
+        description: 'Implement efficient recycling and material recovery processes',
+        icon: 'refresh-cw'
       },
       {
         number: 5,
-        title: 'Certified Disposal',
-        description: 'Proper disposal of non-recyclable components',
-        icon: 'check-square'
+        title: 'Reporting & Compliance',
+        description: 'Generate compliance reports and maintain regulatory records',
+        icon: 'bar-chart'
       }
     ],
     hasDataSecurity: false,
     galleryImages: [
       {
-        src: 'https://images.pexels.com/photos/9800098/pexels-photo-9800098.jpeg',
-        alt: 'Battery collection',
+        src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&h=600&fit=crop&crop=center',
+        alt: 'EPR compliance documentation',
         type: 'before'
       },
       {
-        src: 'https://images.pexels.com/photos/7512827/pexels-photo-7512827.jpeg',
-        alt: 'Battery sorting facility',
+        src: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop&crop=center',
+        alt: 'Product collection network',
         type: 'process'
       },
       {
-        src: 'https://images.pexels.com/photos/9324336/pexels-photo-9324336.jpeg',
-        alt: 'Recovered materials',
+        src: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&h=600&fit=crop&crop=center',
+        alt: 'Sustainable ecosystem',
         type: 'after'
       }
     ],
     pricingType: 'quote',
     faqs: [
       {
-        question: 'What types of batteries do you accept?',
-        answer: 'We accept all types of batteries including alkaline, lithium-ion, lead-acid, NiMH, NiCd, button cells, and industrial battery packs.'
+        question: 'What is Extended Producer Responsibility (EPR)?',
+        answer: 'EPR is a policy approach that makes manufacturers responsible for the entire lifecycle of their products, including end-of-life management, recycling, and disposal.'
       },
       {
-        question: 'How are hazardous materials handled?',
-        answer: 'We follow strict hazmat protocols with certified facilities and trained personnel. All toxic materials are neutralized or disposed of according to environmental regulations.'
+        question: 'Which products require EPR compliance?',
+        answer: 'EPR applies to electronics, batteries, packaging materials, automotive parts, and other products as defined by local regulations. We help identify your specific obligations.'
       },
       {
-        question: 'Do you issue compliance certificates?',
-        answer: 'Yes, we provide certificates of recycling that document the weight, type, and proper disposal of all battery materials for your compliance records.'
+        question: 'How do you ensure regulatory compliance?',
+        answer: 'We provide comprehensive compliance assessment, strategy development, and ongoing monitoring to ensure you meet all EPR requirements and environmental regulations.'
       },
       {
-        question: 'Can damaged or swollen batteries be recycled?',
-        answer: 'Yes, we have specialized procedures for damaged batteries. They require special handling and must be transported in UN-approved containers.'
+        question: 'Can you handle EPR for multiple product categories?',
+        answer: 'Yes, we offer integrated EPR solutions for multiple product categories, providing a unified approach to compliance and waste management across your entire product portfolio.'
       }
     ],
     caseStudies: [
       {
-        client: 'Electric Vehicle Manufacturer',
-        description: 'EV battery pack recycling program',
-        metrics: '50+ packs processed, 95% material recovery'
+        client: 'Electronics Manufacturing Company',
+        description: 'Comprehensive EPR program for consumer electronics',
+        metrics: '100% compliance achieved, 500+ tons processed annually'
       },
       {
-        client: 'Telecom Tower Company',
-        description: 'Annual battery replacement cycle',
-        metrics: '2,000+ lead-acid batteries, full compliance'
+        client: 'Packaging Industry Leader',
+        description: 'Multi-category EPR implementation',
+        metrics: '4 product categories covered, 90% recycling rate achieved'
       }
-    ]
+    ],
+    whyChooseUs: {
+      title: 'Why Choose Our EPR Compliance Solutions',
+      subtitle: 'Comprehensive EPR services for manufacturers and brands',
+      description: 'We empower manufacturers and brands to take accountability for the entire lifecycle of their products. From design to post-consumer waste collection, our EPR services ensure regulatory compliance, efficient recycling, and responsible waste management—creating a cleaner and more sustainable ecosystem for all.',
+      features: [
+        {
+          icon: 'file-check',
+          title: 'Regulatory Compliance',
+          description: 'Ensure full compliance with EPR regulations and environmental laws with expert guidance and support.'
+        },
+        {
+          icon: 'award',
+          title: 'Lifecycle Management',
+          description: 'Comprehensive product lifecycle tracking and management from design to end-of-life disposal.'
+        },
+        {
+          icon: 'users',
+          title: 'Brand Accountability',
+          description: 'Take responsibility for product end-of-life management with complete brand accountability solutions.'
+        },
+        {
+          icon: 'check-circle',
+          title: 'Ecosystem Solutions',
+          description: 'Create sustainable ecosystem for product waste management with integrated solutions across categories.'
+        },
+        {
+          icon: 'clock',
+          title: 'Expert Support',
+          description: 'Dedicated EPR specialists providing ongoing support and guidance for compliance and implementation.'
+        },
+        {
+          icon: 'leaf',
+          title: 'Sustainable Impact',
+          description: 'Achieve measurable environmental impact with detailed reporting and sustainability metrics.'
+        }
+      ],
+      stats: [
+        { number: '100%', label: 'Compliance Rate' },
+        { number: '500+', label: 'Tons Processed' },
+        { number: '4+', label: 'Categories Covered' },
+        { number: '90%', label: 'Recycling Rate' }
+      ]
+    }
   },
   'consumer-electronics': {
     slug: 'consumer-electronics',

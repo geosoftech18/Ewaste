@@ -2,8 +2,11 @@
 
 import { Smartphone, Truck, DollarSign } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useState } from "react"
+import { PickupFormModal } from "@/components/pickup-form-modal"
 
 export default function CashForEWasteSection() {
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
   return (
     <section className="py-16 sm:py-24 bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 relative overflow-hidden">
       {/* Animated background */}
@@ -47,11 +50,16 @@ export default function CashForEWasteSection() {
           <Button
             size="lg"
             className="bg-white text-emerald-700 hover:bg-emerald-50 px-8 py-6 text-lg font-bold rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-2xl"
+            onClick={() => setPickupModalOpen(true)}
           >
             Schedule Your Free Pickup
           </Button>
         </div>
       </div>
+      <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   )
 }

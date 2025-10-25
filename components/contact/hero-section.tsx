@@ -2,8 +2,11 @@
 
 import { Button } from "@/components/ui/button"
 import { MessageCircle, Phone } from "lucide-react"
+import { PickupFormModal } from "@/components/pickup-form-modal"
+import { useState } from "react"
 
 export default function HeroSection() {
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 flex items-center justify-center">
       {/* Animated background elements */}
@@ -35,17 +38,19 @@ export default function HeroSection() {
           <Button
             size="lg"
             className="bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-6 text-lg rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-2xl animate-fade-in animation-delay-400"
+            onClick={() => setPickupModalOpen(true)}
           >
             Request Pickup Now
           </Button>
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-2 border-emerald-300 text-emerald-100 hover:bg-emerald-500/20 px-8 py-6 text-lg rounded-lg font-semibold transition-all duration-300 bg-transparent hover:scale-105 hover:shadow-2xl animate-fade-in animation-delay-600"
+          <a
+            href="https://wa.me/919949901238?text=Hi%2C%20I%27m%20interested%20in%20recycling%20services%20and%20would%20like%20to%20speak%20with%20an%20expert%20about%20your%20e-waste%20management%20solutions."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center border-2 border-emerald-300 text-emerald-100 hover:bg-emerald-500/20 px-8 !py-2 text-lg rounded-lg font-semibold transition-all duration-300 bg-transparent hover:scale-105 hover:shadow-2xl animate-fade-in animation-delay-600"
           >
             <MessageCircle className="w-5 h-5 mr-2" />
             Talk to an Expert
-          </Button>
+          </a>
         </div>
 
         <div className="mt-16 flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -67,6 +72,12 @@ export default function HeroSection() {
           </a>
         </div>
       </div>
+
+        {/* Pickup Form Modal */}
+        <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   )
 }
