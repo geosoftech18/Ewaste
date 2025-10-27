@@ -23,7 +23,7 @@ export function HeroSection({ title, subtitle, backgroundImage }: HeroSectionPro
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/90 via-teal-900/85 to-slate-900/90" />
+          <div className="absolute inset-0 opacity-70 bg-gradient-to-r from-emerald-900/90 via-teal-900/85 to-slate-900/90" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
@@ -33,7 +33,7 @@ export function HeroSection({ title, subtitle, backgroundImage }: HeroSectionPro
             <span className="text-sm font-medium">ISO 14001 Compliant</span>
           </div>
 
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
             {title}
           </h1>
 

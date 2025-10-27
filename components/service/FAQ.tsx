@@ -2,10 +2,17 @@
 import { useState } from 'react';
 import { ChevronDown, HelpCircle } from 'lucide-react';
 
-export default function FAQ() {
+interface FAQProps {
+  faqs?: Array<{
+    question: string;
+    answer: string;
+  }>;
+}
+
+export default function FAQ({ faqs: customFaqs }: FAQProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const faqs = [
+  const defaultFaqs = [
     {
       question: 'What types of e-waste do you recycle?',
       answer: 'We recycle all types of electronic waste including IT equipment (computers, servers, laptops), consumer electronics (TVs, mobile phones, home appliances), telecommunication equipment, printers, batteries (lithium-ion, lead-acid, dry cell), and various other electronic devices. Our facilities are equipped to handle both small-scale and large-scale e-waste disposal needs.',
@@ -23,6 +30,8 @@ export default function FAQ() {
       answer: 'Yes, we offer convenient nationwide pickup service. Whether you are a household with a few electronic items or a large organization with bulk e-waste, we provide flexible pickup solutions. Simply contact us through our website, phone, or WhatsApp, and our team will schedule a pickup at your preferred time and location. We serve residential, commercial, and industrial clients across India.',
     },
   ];
+
+  const faqs = customFaqs || defaultFaqs;
 
   return (
     <section className="py-20 bg-background">

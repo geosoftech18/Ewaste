@@ -469,8 +469,8 @@ const servicesData: Record<string, ServiceData> = {
       ]
     }
   },
-  'printer-recycle': {
-    slug: 'printer-recycle',
+  'Sustainable-Waste-Solutions': {
+    slug: 'Sustainable-Waste-Solutions',
     title: 'Sustainable Waste Solutions',
     subtitle: 'Integrated waste management for comprehensive recycling and environmental sustainability',
     heroImage: '/services/Sustainable%20Waste%20Solutions.png',
@@ -648,8 +648,8 @@ const servicesData: Record<string, ServiceData> = {
       ]
     }
   },
-  'battery-recycle': {
-    slug: 'battery-recycle',
+  'EPR-Compliance-Solutions': {
+    slug: 'EPR-Compliance-Solutions',
     title: 'EPR Compliance Solutions',
     subtitle: 'Extended Producer Responsibility services for manufacturers and brands',
     heroImage: '/services/EPR%20Compliance%20Solutions.png',

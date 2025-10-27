@@ -102,15 +102,41 @@ const testimonials: Testimonial[] = [
   },
 ]
 
-export function TestimonialsSection() {
+interface TestimonialsSectionProps {
+  testimonials?: Array<{
+    name: string;
+    role: string;
+    company: string;
+    content: string;
+    rating: number;
+  }>;
+}
+
+export function TestimonialsSection({ testimonials: customTestimonials }: TestimonialsSectionProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [filter, setFilter] = useState<"all" | "corporate" | "residential">("all")
   const [selectedTestimonial, setSelectedTestimonial] = useState<Testimonial | null>(null)
   const [isAutoPlaying, setIsAutoPlaying] = useState(true)
   const [itemsPerView, setItemsPerView] = useState(3)
 
+  // Use custom testimonials if provided, otherwise use default
+  const testimonialsToUse = customTestimonials ? 
+    customTestimonials.map((t, index) => ({
+      id: index + 1,
+      name: t.name,
+      role: t.role,
+      company: t.company,
+      type: "corporate" as const,
+      rating: t.rating,
+      quote: t.content.length > 100 ? t.content.substring(0, 100) + "..." : t.content,
+      fullTestimonial: t.content,
+      image: "/placeholder-user.jpg",
+      hasVideo: false,
+      videoUrl: undefined,
+    })) : testimonials;
+
   // Filter testimonials
-  const filteredTestimonials = testimonials.filter((t) => filter === "all" || t.type === filter)
+  const filteredTestimonials = testimonialsToUse.filter((t) => filter === "all" || t.type === filter)
 
   // Update items per view based on screen size
   useEffect(() => {

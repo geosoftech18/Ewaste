@@ -4,7 +4,8 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import * as Icons from 'lucide-react';
 import { LucideIcon } from 'lucide-react';
-import { Check } from 'lucide-react';
+import { Check, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 
 interface ScopeItem {
   icon: string;
@@ -18,6 +19,17 @@ interface ScopeOfServiceProps {
 }
 
 export function ScopeOfService({ items, categories }: ScopeOfServiceProps) {
+  // Function to get EPR slug based on title
+  const getEPRSlug = (title: string): string | null => {
+    const titleToSlug: Record<string, string> = {
+      'Electronics EPR': 'electronics-epr',
+      'Battery EPR': 'battery-epr',
+      'Packaging EPR': 'packaging-epr',
+      'Automotive EPR': 'automotive-epr',
+    };
+    return titleToSlug[title] || null;
+  };
+
   return (
     <section className="py-20 px-6 bg-background">
       <div className="max-w-7xl mx-auto">
@@ -43,8 +55,15 @@ export function ScopeOfService({ items, categories }: ScopeOfServiceProps) {
               ).join('')
             ] as LucideIcon || Icons.Package;
 
-            return (
-              <Card key={index} className="p-6 hover:shadow-lg transition-all duration-300 border-l-4 border-l-emerald-500">
+            const eprSlug = getEPRSlug(item.title);
+            const isEPRService = eprSlug !== null;
+
+            const CardContent = () => (
+              <Card className={`p-6 transition-all duration-300 border-l-4 border-l-emerald-500 relative overflow-hidden ${
+                isEPRService 
+                  ? 'hover:shadow-lg hover:scale-105 cursor-pointer group' 
+                  : 'hover:shadow-lg'
+              }`}>
                 <div className="mb-4 inline-flex p-3 rounded-lg bg-emerald-50 text-emerald-600">
                   <IconComponent className="h-7 w-7" />
                 </div>
@@ -57,7 +76,31 @@ export function ScopeOfService({ items, categories }: ScopeOfServiceProps) {
                     </li>
                   ))}
                 </ul>
+                {isEPRService && (
+                  <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-emerald-50 via-emerald-50/80 to-transparent transform translate-y-full group-hover:translate-y-0 transition-all duration-500 ease-out">
+                    <div className="flex items-center justify-center text-emerald-600 text-sm font-semibold group-hover:text-emerald-700">
+                      <span className="mr-2">Learn More</span>
+                      <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    </div>
+                  </div>
+                )}
+                {/* Loading Progress Bar */}
+                {isEPRService && (
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-emerald-200/30">
+                    <div className="h-full bg-gradient-to-r from-emerald-500 to-emerald-600 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-out"></div>
+                  </div>
+                )}
               </Card>
+            );
+
+            return isEPRService ? (
+              <Link key={index} href={`/services/EPR-compliance/${eprSlug}`}>
+                <CardContent />
+              </Link>
+            ) : (
+              <div key={index}>
+                <CardContent />
+              </div>
             );
           })}
         </div>

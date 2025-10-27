@@ -9,13 +9,13 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-300 py-12 sm:py-16">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
           {/* Company Info */}
           <div className="animate-fade-in">
             {/* <h3 className="text-white font-bold text-lg mb-4 group-hover:text-emerald-400 transition-colors">
               SP Recycling
             </h3> */}
-            <Image src="/elogo.webp" alt="SP Recycling" width={300} height={300} className="mb-4" />
+            <Image src="/elogo.webp" alt="SP Recycling" width={400} height={400} className="mb-4" />
             <p className="text-sm text-gray-400 mb-4 hover:text-gray-300 transition-colors">
               Leading e-waste recycling solutions for a sustainable future.
             </p>
@@ -53,16 +53,29 @@ export default function Footer() {
           <div className="animate-fade-in animation-delay-400">
             <h4 className="text-white text-lg font-bold mb-4">Services</h4>
             <ul className="space-y-2 text-sm">
-              {["E-Waste Pickup", "IT & Telecom Equipment", "Printer & Imaging Equipment", "Battery Recycling", "Consumer Electronics", "Data Destruction"].map((service, index) => (
+              {["E-Waste Pickup", "IT & Telecom Equipment", "Sustainable Waste Solutions", "EPR Compliance Solutions"].map((service, index) => (
                 <li key={index}>
                   <a
-                    href={service === "E-Waste Pickup" ? "/services/electronic-waste-recycle" : service === "IT & Telecom Equipment" ? "/services/it-telecom" : service === "Printer & Imaging Equipment" ? "/services/printer-recycle" : service === "Battery Recycling" ? "/services/battery-recycle" : service === "Consumer Electronics" ? "/services/consumer-electronics" : "/services/data-destruction"}
+                    href={service === "E-Waste Pickup" ? "/services/electronic-waste-recycle" : service === "IT & Telecom Equipment" ? "/services/it-telecom" : service === "Sustainable Waste Solutions" ? "/services/Sustainable-Waste-Solutions" : service === "EPR Compliance Solutions" ? "/services/EPR-Compliance-Solutions" : "/services/data-destruction"}
                     className="hover:text-emerald-400 transition-all duration-300 hover:translate-x-2 inline-block"
                   >
                     {service}
                   </a>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          <div className="animate-fade-in animation-delay-400">
+            <h4 className="text-white text-lg font-bold mb-4">Cities We Serve</h4>
+            <ul className="space-y-2 text-sm">
+              {["Hyderabad", "Delhi", "Mumbai", "Bangalore", "Chennai","Pune","Andhra-Pradesh"].map((city, index) => (
+                <li key={index}>
+                  <a href={`/services/city/${city.toLowerCase()}`} className="hover:text-emerald-400 transition-all duration-300 hover:translate-x-2 inline-block">
+                    {city}
+                  </a>
+                </li>
+              ))} 
             </ul>
           </div>
 

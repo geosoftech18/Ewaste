@@ -7,13 +7,17 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Mail, Phone, MapPin } from "lucide-react"
 
-export function RequestPickup() {
+interface RequestPickupProps {
+  cityName?: string;
+}
+
+export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     email: "",
     itemType: "",
-    city: "",
+    city: cityName.toLowerCase(),
     address: "",
     message: "",
   })
@@ -31,11 +35,11 @@ export function RequestPickup() {
 
   return (
     <section id="contact" className="py-20 sm:py-32 bg-gradient-to-br from-primary/5 to-accent/5">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Left Content */}
           <div className="animate-slide-in-left">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-foreground mb-6">
               Ready to Recycle Your E-Waste?
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
@@ -70,7 +74,7 @@ export function RequestPickup() {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">Location</h4>
-                  <p className="text-muted-foreground">Hyderabad, India</p>
+                  <p className="text-muted-foreground">{cityName}, India</p>
                 </div>
               </div>
             </div>
@@ -151,7 +155,10 @@ export function RequestPickup() {
                     <option value="bangalore">Bangalore</option>
                     <option value="chennai">Chennai</option>
                     <option value="mumbai">Mumbai</option>
+                    <option value="delhi">Delhi</option>
                     <option value="pune">Pune</option>
+                    <option value="gujarat">Gujarat</option>
+                    <option value="andhra-pradesh">Andhra Pradesh</option>
                   </select>
                 </div>
               </div>

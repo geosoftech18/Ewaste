@@ -53,7 +53,7 @@ const services: Service[] = [
     image: "/services/Sustainable Waste Solutions.png",
     gradient: "from-purple-500 to-pink-600",
     features: ["Waste Segregation", "Resource Recovery", "Environmental Impact", "Community Solutions"],
-    link: "/services/printer-recycle",
+    link: "/services/Sustainable-Waste-Solutions",
     category: ["All", "Corporate"],
     rating: 4.7,
     clients: "200+"
@@ -65,7 +65,7 @@ const services: Service[] = [
     image: "/services/EPR Compliance Solutions.png",
     gradient: "from-yellow-500 to-orange-600",
     features: ["Regulatory Compliance", "Lifecycle Management", "Brand Accountability", "Ecosystem Solutions"],
-    link: "/services/battery-recycle",
+    link: "/services/EPR-Compliance-Solutions",
     category: ["All", "Residential", "Corporate"],
     rating: 4.9,
     clients: "400+"

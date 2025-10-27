@@ -86,7 +86,30 @@ const serviceCategories = [
   },
 ]
 
-export function Services() {
+interface ServicesProps {
+  cityName?: string;
+  services?: {
+    title: string;
+    items: Array<{
+      name: string;
+      description: string;
+      icon: string;
+    }>;
+  };
+}
+
+export function Services({ 
+  cityName = "Hyderabad",
+  services = {
+    title: "What You Can Recycle",
+    items: [
+      { name: "IT Equipment", description: "Servers, computers, networking equipment", icon: "Cpu" },
+      { name: "Mobile Devices", description: "Smartphones, tablets, laptops", icon: "Smartphone" },
+      { name: "Consumer Electronics", description: "TVs, gaming consoles, appliances", icon: "Monitor" },
+      { name: "Data Destruction", description: "Secure data wiping and destruction", icon: "Shield" }
+    ]
+  }
+}: ServicesProps) {
   const [activeCategory, setActiveCategory] = useState("it")
   const carouselRef = useRef<HTMLDivElement>(null)
   const activeService = serviceCategories.find((cat) => cat.id === activeCategory)
@@ -107,9 +130,9 @@ export function Services() {
       <div className="container  mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in-up">
-          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">What You Can Recycle</h2>
+          <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">{services.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            We handle safe, eco-friendly disposal of a wide range of electronic waste and equipment
+            We handle safe, eco-friendly disposal of a wide range of electronic waste and equipment in {cityName}
           </p>
         </div>
 
@@ -137,7 +160,7 @@ export function Services() {
           </div>
 
           {/* Mobile: Carousel */}
-          <div className="md:hidden relative">
+          <div className="md:hidden relative max-w-7xl mx-auto">
             <div
               ref={carouselRef}
               className="flex gap-3 overflow-x-auto pb-4 scroll-smooth snap-x snap-mandatory"
@@ -182,7 +205,7 @@ export function Services() {
 
         {/* Active Service Details */}
         {activeService && (
-          <div className="animate-fade-in-up max-w-7xl mx-auto">
+          <div className="animate-fade-in-up max-w-6xl mx-auto">
             {/* Stats Bar */}
             <div className="grid grid-cols-3 gap-4 mb-8">
               {[
@@ -201,7 +224,7 @@ export function Services() {
             </div>
 
             {/* Service Items Grid */}
-            <div className="grid md:grid-cols-2 gap-6 mb-8 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 mb-8 max-w-6xl mx-auto ">
               {activeService.items.map((item, idx) => (
                 <Card
                   key={idx}
@@ -237,7 +260,7 @@ export function Services() {
                 size="lg"
                 className={`bg-gradient-to-r ${activeService.color} text-white hover:shadow-lg transition-all duration-300 hover:scale-105`}
               >
-                Schedule Pickup for {activeService.name}
+                Schedule Pickup in {cityName}
               </Button>
             </div>
           </div>

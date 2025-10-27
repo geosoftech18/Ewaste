@@ -12,10 +12,9 @@ import { RequestPickup } from "@/components/city/request-pickup"
 import { ServiceCities } from "@/components/city/service-cities"
 import { TestimonialsSection } from "@/components/testimonials-section"
 
-export default function Home() {
+export default function CityHome() {
   return (
     <main className="min-h-screen bg-background">
-    
       <Hero />
       <Services />
       <EnvironmentalImpact />
