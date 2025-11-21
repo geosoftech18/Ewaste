@@ -1,7 +1,11 @@
 "use client"
+import { useState } from 'react';
 import { Download, Shield, Award, CheckCircle } from 'lucide-react';
+import { BrochureDownloadModal } from './BrochureDownloadModal';
 
 export default function HeroSection() {
+  const [isBrochureModalOpen, setIsBrochureModalOpen] = useState(false);
+
   const scrollToForm = () => {
     document.getElementById('quote-form')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -52,12 +56,20 @@ export default function HeroSection() {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
             </svg>
           </button>
-          <button className="px-8 py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-semibold rounded-lg border-2 border-white/30 hover:border-white/50 transition-all duration-200 flex items-center justify-center gap-2">
+          <button 
+            onClick={() => setIsBrochureModalOpen(true)}
+            className="px-8 py-4 bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-semibold rounded-lg border-2 border-white/30 hover:border-white/50 transition-all duration-200 flex items-center justify-center gap-2"
+          >
             <Download className="w-5 h-5" />
             Download Brochure
           </button>
         </div>
       </div>
+
+      <BrochureDownloadModal 
+        open={isBrochureModalOpen} 
+        onClose={() => setIsBrochureModalOpen(false)} 
+      />
 
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">

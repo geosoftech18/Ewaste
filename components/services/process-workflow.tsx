@@ -21,8 +21,8 @@ export function ProcessWorkflow({ steps }: ProcessWorkflowProps) {
     <section className="py-20 px-6 bg-gradient-to-b from-muted/30 to-background">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-            <span className="text-3xl">🔄</span>
+          <h2 className="text-2xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+            <span className=" md:text-3xl text-2xl">🔄</span>
             Our Process – Safe, Transparent, and Certified
           </h2>
         </div>
@@ -58,7 +58,7 @@ export function ProcessWorkflow({ steps }: ProcessWorkflowProps) {
 
                   {index < steps.length - 1 && (
                     <div className="hidden lg:block absolute -right-8 top-1/2 transform -translate-y-1/2 text-emerald-500">
-                      <ArrowRight className="h-6 w-6" />
+                      {/* <ArrowRight className="h-6 w-6" /> */}
                     </div>
                   )}
                 </Card>

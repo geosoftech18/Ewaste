@@ -224,15 +224,29 @@ export function QuickPickupForm() {
     setShowError(false)
 
     try {
-      // In production, replace with actual API call:
-      // const response = await fetch('/api/quick-pickup', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
-      // if (!response.ok) throw new Error('Failed to submit')
+      // Send email via API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'quick-pickup',
+          data: {
+            fullName: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            itemType: formData.itemType,
+            address: formData.address,
+            preferredDate: formData.preferredDate,
+            preferredTime: formData.preferredTime,
+            photos: formData.photos.length > 0 ? formData.photos.map((_, i) => `Photo ${i + 1}`) : undefined,
+          },
+        }),
+      })
 
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to send email')
+      }
 
       setShowSuccess(true)
       setFormData({

@@ -10,34 +10,69 @@ import { Button } from "@/components/ui/button"
 interface Slide {
   id: number
   image: string
-  title: string
+  heading: string
   description: string
+  cta1: { label: string; href?: string }
+  cta2: { label: string; href?: string }
+  cardImage?: string
+  highlight?: string
 }
 
 const slides: Slide[] = [
   {
     id: 1,
-    image: "/slides/slide-1.jpg",
-    title: "E-Waste Recycling Solutions",
-    description: "Professional recycling facility with state-of-the-art technology",
+    image: "/hero/1.jpg",
+    heading: "Transforming E-Waste into Eco-Value",
+    description:
+      "Empowering homes and businesses with certified recycling that protects nature and reclaims valuable resources responsibly.",
+    cta1: { label: "♻ Start Recycling", href: "/contact" },
+    cta2: { label: "Learn More", href: "/services" },
+    cardImage: "/services/electronic waste.png",
+    highlight: "Eco-Value",
   },
   {
     id: 2,
-    image: "/slides/slide-2.jpg",
-    title: "Secure Data Destruction",
-    description: "100% secure HDD shredding and data wiping services",
+    image: "/hero/2.jpg",
+    heading: "Secure, Certified IT Asset Recycling",
+    description:
+      "Safe data destruction, responsible device recovery, and sustainable reuse for IT and telecom industries.",
+    cta1: { label: "Schedule Pickup", href: "/contact" },
+    cta2: { label: "View Services", href: "/service" },
+    cardImage: "/services/IT & Telecommunication.png",
+    highlight: "IT Asset",
   },
   {
     id: 3,
-    image: "/slides/slide-3.jpg",
-    title: "Eco-Friendly Disposal",
-    description: "ISO certified and environmentally compliant processes",
+    image: "/hero/3.jpg",
+    heading: "Sustainable Waste Solutions that Deliver Impact",
+    description:
+      "Integrating collection, segregation, and recycling to minimize waste footprint and maximize material recovery.",
+    cta1: { label: "Explore Solutions", href: "/services" },
+    cta2: { label: "Get Consultation", href: "/contact" },
+    cardImage: "/services/Sustainable Waste Solutions.png",
+    highlight: "Waste Solutions",
   },
   {
     id: 4,
-    image: "/slides/slide-4.jpg",
-    title: "Corporate & Residential Services",
-    description: "Convenient pickup services for businesses and homes",
+    image: "/hero/4.jpg",
+    heading: "Future-Ready EPR & Brand Responsibility",
+    description:
+      "Ensuring complete product lifecycle compliance with customized recycling and accountability programs.",
+    cta1: { label: "Know More", href: "/services/EPR-compliance" },
+    cta2: { label: "Partner With Us", href: "/contact" },
+    cardImage: "/services/EPR Compliance Solutions.png",
+    highlight: "EPR",
+  },
+  {
+    id: 5,
+    image: "/hero/5.jpg",
+    heading: "10+ Years of Sustainable Excellence",
+    description:
+      "Trusted by 500+ clients across 20+ industries with 99% satisfaction in e-waste recycling services.",
+    cta1: { label: "Join Us", href: "/about" },
+    cta2: { label: "Contact Now", href: "/contact" },
+    cardImage: "/placeholder.jpg",
+    highlight: "Sustainable Excellence",
   },
 ]
 
@@ -50,9 +85,8 @@ export function HeroSlider() {
   const [typedText, setTypedText] = useState("")
   const [isTypingComplete, setIsTypingComplete] = useState(false)
 
-  const fullText = "Welcome to S P Recycling Pvt Ltd"
-
   useEffect(() => {
+    const fullText = slides[currentSlide].heading
     setTypedText("")
     setIsTypingComplete(false)
     let currentIndex = 0
@@ -65,7 +99,7 @@ export function HeroSlider() {
         setIsTypingComplete(true)
         clearInterval(typingInterval)
       }
-    }, 80)
+    }, 60)
 
     return () => clearInterval(typingInterval)
   }, [currentSlide])
@@ -148,21 +182,21 @@ export function HeroSlider() {
       {slides.map((slide, index) => (
         <div
           key={slide.id}
-          className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+          className={`absolute  inset-0 transition-opacity duration-500 ease-in-out ${
             index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
           }`}
           aria-hidden={index !== currentSlide}
         >
           <Image
             src={slide.image || "/placeholder.svg"}
-            alt={slide.title}
+            alt={slide.heading}
             fill
             priority={index === 0}
             loading={index === 0 ? "eager" : "lazy"}
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+          <div className="absolute inset-0 bg-[#00996c] opacity-50" />
         </div>
       ))}
 
@@ -170,10 +204,20 @@ export function HeroSlider() {
         <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 text-balance min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem]">
             <span className="inline-block">
-              {typedText.split("S P Recycling Pvt Ltd")[0]}
-              {typedText.includes("S P Recycling Pvt Ltd") && (
-                <span className="text-[#10B981]">S P Recycling Pvt Ltd</span>
-              )}
+              {(() => {
+                const highlight = slides[currentSlide].highlight
+                if (highlight && typedText.includes(highlight)) {
+                  const parts = typedText.split(highlight)
+                  return (
+                    <>
+                      <span>{parts[0]}</span>
+                      <span className="text-[#4afaa5]">{highlight}</span>
+                      <span>{parts.slice(1).join(highlight)}</span>
+                    </>
+                  )
+                }
+                return typedText
+              })()}
               <span className={`typing-cursor ${isTypingComplete ? "opacity-0" : ""}`}>|</span>
             </span>
           </h1>
@@ -184,15 +228,17 @@ export function HeroSlider() {
             <Button
               size="lg"
               className="bg-[#10B981] hover:bg-[#059669] text-white px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              asChild
             >
-              Get Our Service Now
+              <a href={slides[currentSlide].cta1.href || "#"}>{slides[currentSlide].cta1.label}</a>
             </Button>
             <Button
               size="lg"
               variant="outline"
               className="border-2 border-white text-white hover:bg-white hover:text-[#074E3B] px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 bg-transparent"
+              asChild
             >
-              Request a Corporate Quote
+              <a href={slides[currentSlide].cta2.href || "#"}>{slides[currentSlide].cta2.label}</a>
             </Button>
           </div>
 

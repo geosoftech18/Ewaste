@@ -82,6 +82,16 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
           delete newErrors.phone
         }
         break
+      case "email":
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if (!value.trim()) {
+          newErrors.email = "Email address is required"
+        } else if (!emailRegex.test(value.trim())) {
+          newErrors.email = "Please enter a valid email address"
+        } else {
+          delete newErrors.email
+        }
+        break
       case "address":
         if (!value.trim()) {
           newErrors.address = "Pickup address is required"
@@ -152,6 +162,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
     if (step === 1) {
       validateField("fullName", formData.fullName)
       validateField("phone", formData.phone)
+      validateField("email", formData.email)
     } else if (step === 2) {
       validateField("address", formData.address)
       validateField("city", formData.city)
@@ -161,7 +172,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
     // Check if there are any errors for the current step
     const stepErrors = Object.keys(newErrors).filter(key => {
       if (step === 1) {
-        return key === "fullName" || key === "phone"
+        return key === "fullName" || key === "phone" || key === "email"
       } else if (step === 2) {
         return key === "address" || key === "city" || key === "date"
       }
@@ -177,7 +188,8 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
     console.log("Form data:", formData)
     
     if (currentStep === 1) {
-      if (!formData.fullName?.trim() || !formData.phone || formData.phone.length !== 10) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!formData.fullName?.trim() || !formData.phone || formData.phone.length !== 10 || !formData.email?.trim() || !emailRegex.test(formData.email.trim())) {
         console.log("❌ Step 1 validation failed")
         toast.error("Please fill in all required fields correctly")
         return
@@ -213,6 +225,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
     // Validate all required fields
     validateField("fullName", formData.fullName)
     validateField("phone", formData.phone)
+    validateField("email", formData.email)
     validateField("address", formData.address)
     validateField("city", formData.city)
     validateField("date", formData.date)
@@ -226,15 +239,33 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
     setIsSubmitting(true)
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
+      // Send email via API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'pickup-form',
+          data: {
+            fullName: formData.fullName,
+            phone: formData.phone,
+            alternatePhone: formData.alternatePhone || undefined,
+            email: formData.email,
+            address: formData.address,
+            city: formData.city,
+            date: formData.date ? formData.date.toISOString() : undefined,
+            wasteTypes: formData.wasteTypes,
+            otherWasteType: formData.otherWasteType || undefined,
+            quantityValue: formData.quantityValue || undefined,
+            quantityUnit: formData.quantityUnit || undefined,
+            additionalNotes: formData.additionalNotes || undefined,
+          },
+        }),
+      })
 
-      // In production, make actual API call:
-      // const response = await fetch('/api/book-pickup', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // })
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to send email')
+      }
 
       setShowSuccess(true)
 
@@ -355,14 +386,18 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address (Optional)</Label>
+                <Label htmlFor="email">
+                  Email Address <span className="text-red-500">*</span>
+                </Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="your.email@example.com"
                   value={formData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
+                  className={cn(errors.email && "border-red-500")}
                 />
+                {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
               </div>
             </div>
           </div>

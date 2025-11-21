@@ -79,10 +79,10 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
       <PhotoGallery images={service.galleryImages} />
 
-      <PricingGuide
+      {/* <PricingGuide
         pricingType={service.pricingType}
         pricingInfo={service.pricingInfo}
-      />
+      /> */}
 
       <ServiceFAQ faqs={service.faqs} />
 

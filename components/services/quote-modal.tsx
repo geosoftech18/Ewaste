@@ -27,11 +27,51 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
     items: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Quote request:', formData);
-    onClose();
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      // Send email via API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'quote-modal',
+          data: {
+            name: formData.name,
+            phone: formData.phone,
+            email: formData.email,
+            items: formData.items,
+            message: formData.message || undefined,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to send email');
+      }
+
+      // Reset form and close modal
+      setFormData({
+        name: '',
+        phone: '',
+        email: '',
+        items: '',
+        message: ''
+      });
+      onClose();
+    } catch (error: any) {
+      console.error('Error submitting quote request:', error);
+      setSubmitError(error.message || 'Failed to submit request. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -45,6 +85,12 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+          {submitError && (
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+              {submitError}
+            </div>
+          )}
+
           <div className="space-y-2">
             <Label htmlFor="name">Full Name *</Label>
             <Input
@@ -53,6 +99,7 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               placeholder="John Doe"
+              disabled={isSubmitting}
             />
           </div>
 
@@ -65,17 +112,20 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
               value={formData.phone}
               onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               placeholder="+91 98765 43210"
+              disabled={isSubmitting}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email Address</Label>
+            <Label htmlFor="email">Email Address *</Label>
             <Input
               id="email"
               type="email"
+              required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="john@example.com"
+              disabled={isSubmitting}
             />
           </div>
 
@@ -88,10 +138,11 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
               onChange={(e) => setFormData({ ...formData, items: e.target.value })}
               placeholder="List the items you want to recycle (e.g., 10 laptops, 5 printers, etc.)"
               rows={3}
+              disabled={isSubmitting}
             />
           </div>
 
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="message">Additional Details</Label>
             <Textarea
               id="message"
@@ -99,8 +150,9 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Any special requirements or questions?"
               rows={3}
+              disabled={isSubmitting}
             />
-          </div>
+          </div> */}
 
           <div className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-6 text-center hover:border-emerald-500 transition-colors cursor-pointer">
             <Upload className="h-8 w-8 mx-auto mb-2 text-muted-foreground" />
@@ -118,14 +170,16 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
               variant="outline"
               onClick={onClose}
               className="flex-1"
+              disabled={isSubmitting}
             >
               Cancel
             </Button>
             <Button
               type="submit"
               className="flex-1 bg-emerald-500 hover:bg-emerald-600"
+              disabled={isSubmitting}
             >
-              Submit Request
+              {isSubmitting ? 'Submitting...' : 'Submit Request'}
             </Button>
           </div>
         </form>

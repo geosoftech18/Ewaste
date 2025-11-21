@@ -154,11 +154,11 @@ export function Header() {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0" onClick={scrollToTop}>
               <Image
-                src="/elogo.webp"
+                src="/sp-logo.png"
                 alt="SP Recycling Pvt Ltd"
                 width={220}
-                height={60}
-                className="h-12 w-50 md:h-16 md:w-auto"
+                height={220}
+                className="h-32 w-50 md:h-36 md:w-72"
                 priority
               />
             </Link>
@@ -169,7 +169,7 @@ export function Header() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#074E3B] relative group transition-colors"
+                  className="px-3 py-2 text-lg font-medium text-gray-700 hover:text-[#074E3B] relative group transition-colors"
                   onClick={item.href === "/" ? scrollToTop : undefined}
                 >
                   {item.name}

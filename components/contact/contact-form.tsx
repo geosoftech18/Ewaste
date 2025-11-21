@@ -35,6 +35,7 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const validateStep = (currentStep: number): boolean => {
     const newErrors: Record<string, string> = {}
@@ -85,12 +86,39 @@ export default function ContactForm() {
     if (!validateStep(2)) return
 
     setLoading(true)
+    setSubmitError('')
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      // Send email via API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'contact-form',
+          data: {
+            fullName: formData.fullName,
+            companyName: formData.companyName || undefined,
+            email: formData.email,
+            mobile: formData.mobile,
+            city: formData.city,
+            serviceType: formData.serviceType,
+            message: formData.message || undefined,
+          },
+        }),
+      })
 
-    setSubmitted(true)
-    setLoading(false)
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to send email')
+      }
+
+      setSubmitted(true)
+    } catch (error: any) {
+      console.error('Error submitting form:', error)
+      setSubmitError(error.message || 'Failed to submit inquiry. Please try again.')
+    } finally {
+      setLoading(false)
+    }
 
     // Reset form after 3 seconds
     setTimeout(() => {
@@ -133,6 +161,15 @@ export default function ContactForm() {
             onSubmit={handleSubmit}
             className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 border border-emerald-100 hover:shadow-2xl transition-all duration-300 animate-fade-in"
           >
+            {submitError && (
+              <div className="mb-6 bg-red-50 border-2 border-red-200 rounded-lg p-4 flex items-start gap-3 text-red-800">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-sm">Submission Failed</p>
+                  <p className="text-sm text-red-700 mt-1">{submitError}</p>
+                </div>
+              </div>
+            )}
             <div className="mb-8">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">

@@ -10,6 +10,7 @@ import Testimonials from '@/components/service/Testimonials';
 import FAQ from '@/components/service/FAQ';
 import QuoteForm from '@/components/service/QuoteForm';
 import Footer from '@/components/service/Footer';
+import { ServicesGrid } from '@/components/services-grid';
 
 const services = [
   {
@@ -94,66 +95,8 @@ export default function Home() {
         </div>
       </section> */}
       <HeroSection />
-      <ServiceOverview />
+      <ServicesGrid/>
 
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Our Services</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Comprehensive recycling solutions tailored to your specific needs
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <Card
-                key={service.slug}
-                className="group overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border-2 hover:border-emerald-200 p-0 relative"
-              >
-                {/* Image Section */}
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-60 group-hover:opacity-40 transition-opacity duration-300`} />
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors duration-300" />
-                  <div className="absolute top-4 right-4">
-                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                      <Recycle className="w-6 h-6 text-white" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content Section */}
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-emerald-600 transition-colors">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <Button
-                    asChild
-                    variant="ghost"
-                    className="w-full group-hover:bg-emerald-50 group-hover:text-emerald-600 border border-transparent group-hover:border-emerald-200"
-                  >
-                    <Link href={`/services/${service.slug}`}>
-                      Learn More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </Button>
-                </div>
-
-                {/* Flowing Line Animation */}
-                <div className="absolute bottom-0 left-0 w-0 h-1 bg-emerald-600 group-hover:w-full transition-all duration-500 ease-out"></div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <DataDestructionSection />
       <WhyChooseUs />
