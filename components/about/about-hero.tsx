@@ -79,7 +79,7 @@ export function AboutHero() {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <h4 className="text-xl sm:text-2xl text-muted-foreground font-medium text-pretty">
-                Committed to sustainable e-waste management and a cleaner future.
+              Pioneering sustainable e-waste solutions for a circular economy.
               </h4>
             </motion.div>
 
@@ -90,8 +90,8 @@ export function AboutHero() {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-pretty">
-                We are India&apos;s trusted e-waste management and recycling company, dedicated to reducing
-                environmental impact through secure, compliant, and innovative recycling practices.
+              We are India&apos;s leading e-waste management and recycling company, transforming how businesses and communities handle electronic waste.
+               Through cutting-edge technology, certified processes, and unwavering commitment to environmental stewardship, we're building a future where nothing goes to waste—and everything has value.
               </p>
             </motion.div>
 
@@ -121,7 +121,8 @@ export function AboutHero() {
                   document.getElementById("how-we-work")?.scrollIntoView({ behavior: "smooth" })
                 }}
               >
-                Learn More About Our Process
+               Discover Our Journey
+               
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </motion.div>

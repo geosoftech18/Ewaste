@@ -14,20 +14,24 @@ export default function FAQ({ faqs: customFaqs }: FAQProps) {
 
   const defaultFaqs = [
     {
-      question: 'What types of e-waste do you recycle?',
-      answer: 'We recycle all types of electronic waste including IT equipment (computers, servers, laptops), consumer electronics (TVs, mobile phones, home appliances), telecommunication equipment, printers, batteries (lithium-ion, lead-acid, dry cell), and various other electronic devices. Our facilities are equipped to handle both small-scale and large-scale e-waste disposal needs.',
+      question: 'What types of e-waste do you accept?',
+      answer: 'We accept all electronic waste including computers, laptops, mobile phones, servers, printers, network equipment, batteries, cables, circuit boards, household appliances, and IT peripherals. Both business and household e-waste are welcome.'
     },
     {
-      question: 'How do you ensure data security during recycling?',
-      answer: 'Data security is our top priority. We use certified data wiping software that meets international standards for data destruction. Our process includes multiple-pass data sanitization, physical destruction of storage media when required, and comprehensive documentation. We provide an official Certificate of Data Destruction for every data-bearing device processed, ensuring complete peace of mind.',
+      question: 'How does your same-day pickup service work?',
+      answer: 'Simply schedule a pickup through our website or call our support team. Once confirmed, our trained professionals will arrive at your location the same day to collect your e-waste safely and issue a collection receipt.',
     },
     {
-      question: 'Do you provide certificates for recycled waste?',
-      answer: 'Yes, absolutely. We provide comprehensive documentation including Certificate of Recycling, Certificate of Data Destruction, EPR (Extended Producer Responsibility) documentation, and detailed reports outlining the recycling process and materials recovered. All certificates are issued upon completion of the recycling process and are compliant with government regulations.',
+      question: 'Is my data completely secure during recycling?',
+      answer: 'Absolutely. We provide certified data destruction services with complete confidentiality. All storage devices are physically destroyed or degaussed, and you receive documentation certifying the secure erasure of all sensitive information.',
     },
     {
-      question: 'Can you pick up e-waste from my location?',
-      answer: 'Yes, we offer convenient nationwide pickup service. Whether you are a household with a few electronic items or a large organization with bulk e-waste, we provide flexible pickup solutions. Simply contact us through our website, phone, or WhatsApp, and our team will schedule a pickup at your preferred time and location. We serve residential, commercial, and industrial clients across India.',
+      question: 'Are your recycling processes certified and compliant?',
+      answer: 'Yes. We are fully certified and authorized by government regulatory bodies. Our processes comply with EPR regulations, e-waste management rules, and international environmental standards, ensuring complete legal compliance for your organization.',
+    },
+    {
+      question: 'Do you offer recycling services for businesses?',
+      answer: 'Yes. We provide comprehensive corporate e-waste solutions including bulk pickups, EPR compliance support, asset management, certified reporting, and customized recycling programs tailored to your industry&apos;s specific requirements and sustainability goals.',
     },
   ];
 

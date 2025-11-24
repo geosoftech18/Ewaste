@@ -144,7 +144,7 @@ export function Header() {
       {/* Main Header */}
       <div className={`bg-white transition-all duration-300 ${
         isNavFixed 
-          ? "fixed top-0 left-0 right-0 z-50 shadow-lg backdrop-blur-sm bg-white/95" 
+          ? "fixed top-0 left-0 right-0 z-[1000] shadow-lg backdrop-blur-sm bg-white/95" 
           : isScrolled 
             ? "shadow-lg backdrop-blur-sm bg-white/95" 
             : ""

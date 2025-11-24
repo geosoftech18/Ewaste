@@ -272,7 +272,7 @@ export default function InteractiveIndiaMap() {
             <MapController />
           </MapContainer>
 
-          <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-white rounded-xl shadow-lg p-3 sm:p-4 z-[1000] max-w-[180px] sm:max-w-xs">
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4 bg-white rounded-xl shadow-lg p-3 sm:p-4 z-[500] max-w-[180px] sm:max-w-xs">
             <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
               <div className="w-8 h-8 sm:w-10 sm:h-10 bg-emerald-100 rounded-full flex items-center justify-center">
                 <Truck className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
@@ -313,7 +313,7 @@ export default function InteractiveIndiaMap() {
             </div>
           </div>
 
-          <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-white rounded-xl shadow-lg p-2 sm:p-3 z-[1000]">
+          <div className="absolute bottom-2 right-2 sm:bottom-4 sm:right-4 bg-white rounded-xl shadow-lg p-2 sm:p-3 z-[500]">
             <div className="flex flex-col gap-1.5 sm:gap-2 text-[10px] sm:text-xs">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 bg-emerald-500 rounded-full border-2 border-white"></div>
@@ -645,7 +645,7 @@ export default function InteractiveIndiaMap() {
           right: 0;
           bottom: 0;
           pointer-events: none;
-          z-index: 400;
+          z-index: 300;
           background: radial-gradient(
             ellipse 55% 60% at 50% 48%,
             transparent 0%,
@@ -667,15 +667,15 @@ export default function InteractiveIndiaMap() {
         .custom-city-marker,
         .custom-truck-marker,
         .leaflet-marker-pane {
-          z-index: 600 !important;
+          z-index: 400 !important;
         }
 
         .leaflet-popup-pane {
-          z-index: 700 !important;
+          z-index: 500 !important;
         }
 
         .leaflet-control {
-          z-index: 800 !important;
+          z-index: 600 !important;
         }
       `}</style>
     </section>

@@ -48,7 +48,7 @@ export default function WhyChooseUs() {
     {
       icon: Award,
       title: 'Certified & Compliant Recycling',
-      description: 'ISO certified processes ensuring adherence to all environmental and safety regulations.',
+      description: 'Fully authorized and certified by government bodies. Our processes meet all EPR regulations and environmental standards, ensuring complete legal compliance and peace of mind for your organization',
     },
     {
       icon: Users,
@@ -57,13 +57,13 @@ export default function WhyChooseUs() {
     },
     {
       icon: Clock,
-      title: '24/7 Support & Flexible Operations',
-      description: 'Round-the-clock customer support and flexible scheduling to meet your needs.',
+      title: '24/7 Support & Transparency',
+      description: 'Always here when you need us. Round-the-clock customer support, real-time tracking, transparent reporting, and a 99% satisfaction rate backed by 500+ happy clients nationwide.',
     },
     {
       icon: Lock,
-      title: '100% Data Security',
-      description: 'Military-grade data destruction with certified documentation for complete peace of mind.',
+      title: '100% Secure Data Destruction',
+      description: 'Your confidentiality is our priority. We provide certified data destruction with complete documentation, ensuring sensitive information on hard drives and devices is permanently and securely erased.'
     },
     {
       icon: Leaf,
@@ -72,8 +72,8 @@ export default function WhyChooseUs() {
     },
     {
       icon: FileCheck,
-      title: 'Transparent Process Reports',
-      description: 'Detailed documentation and certificates for every stage of the recycling process.',
+      title: 'Same-Day Pickup Service',
+      description: "Convenience meets efficiency. Schedule a pickup and we'll arrive the same day—no waiting, no hassle. Fast, reliable collection services available across your city for urgent disposal needs.",
     },
   ];
 

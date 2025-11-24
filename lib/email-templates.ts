@@ -10,10 +10,10 @@ export function generatePickupFormEmail(data: {
   phone: string
   alternatePhone?: string
   email: string
-  address: string
+  address?: string
   city: string
   date: string
-  wasteTypes: string[]
+  wasteTypes?: string[]
   otherWasteType?: string
   quantityValue?: string
   quantityUnit?: string
@@ -84,12 +84,14 @@ export function generatePickupFormEmail(data: {
               <h2 style="margin: 30px 0 20px 0; color: #1f2937; font-size: 22px; font-weight: 600;">Pickup Details</h2>
               
               <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                ${data.address ? `
                 <tr>
                   <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
                     <strong style="color: #374151; font-size: 14px; display: inline-block; width: 140px;">Address:</strong>
                     <span style="color: #1f2937; font-size: 14px;">${data.address}</span>
                   </td>
                 </tr>
+                ` : ''}
                 <tr>
                   <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
                     <strong style="color: #374151; font-size: 14px; display: inline-block; width: 140px;">City:</strong>
@@ -104,15 +106,17 @@ export function generatePickupFormEmail(data: {
                 </tr>
               </table>
 
+              ${data.wasteTypes && data.wasteTypes.length > 0 ? `
               <h2 style="margin: 30px 0 20px 0; color: #1f2937; font-size: 22px; font-weight: 600;">Waste Information</h2>
               
               <div style="background-color: #f0fdf4; border-left: 4px solid #10B981; padding: 15px; margin-bottom: 20px; border-radius: 6px;">
                 <p style="margin: 0 0 10px 0; color: #065f46; font-weight: 600; font-size: 14px;">Waste Types:</p>
                 <p style="margin: 0; color: #047857; font-size: 14px;">
-                  ${data.wasteTypes.length > 0 ? data.wasteTypes.join(', ') : 'Not specified'}
+                  ${data.wasteTypes.join(', ')}
                   ${data.otherWasteType ? ` (Other: ${data.otherWasteType})` : ''}
                 </p>
               </div>
+              ` : ''}
 
               ${data.quantityValue ? `
               <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">

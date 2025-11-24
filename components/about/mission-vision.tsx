@@ -58,7 +58,7 @@ export function MissionVision() {
           className="text-center mb-16"
         >
           <h2 className="text-2xl md:text-5xl font-bold text-gray-900 mb-3">Our Mission & Vision</h2>
-          <p className="text-lg text-gray-600 font-medium">Guided by sustainability. Driven by innovation.</p>
+          <p className="text-lg text-gray-600 font-medium">Shaping tomorrow through responsible innovation today.</p>
         </motion.div>
 
         {/* Mission & Vision Cards */}
@@ -121,8 +121,8 @@ export function MissionVision() {
             {/* Content */}
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">Mission</h3>
             <p className="text-gray-700 leading-relaxed">
-              To create a zero-waste ecosystem by providing responsible, efficient, and compliant recycling solutions
-              for individuals and businesses.
+            To revolutionize waste management by delivering end-to-end 
+            recycling solutions that are secure, compliant, and impactful—empowering individuals and enterprises to participate in a truly circular economy while protecting our planet's finite resources.
             </p>
           </motion.div>
 
@@ -179,8 +179,8 @@ export function MissionVision() {
             {/* Content */}
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">Vision</h3>
             <p className="text-gray-700 leading-relaxed">
-              To be India's most trusted and innovative e-waste recycling partner, ensuring sustainability and
-              environmental well-being for generations to come.
+            To lead India's transition toward zero-waste sustainability as the nation's most trusted e-waste recycling partner—where innovation 
+            meets responsibility, and every action contributes to environmental well-being for generations to come.
             </p>
           </motion.div>
         </motion.div>
