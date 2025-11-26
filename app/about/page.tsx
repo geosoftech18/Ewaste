@@ -6,6 +6,7 @@ import { OurPresence } from "@/components/about/our-presence"
 import { EWasteJourney } from "@/components/about/ewaste-journey"
 import { JourneyCarousel } from "@/components/about/journey-carousel"
 import dynamic from "next/dynamic"
+import JourneySection from "@/components/about/journey-section"
 
 const InteractiveIndiaMap = dynamic(() => import("@/components/about/InteractiveIndiaMap"), {
   ssr: false,
@@ -23,7 +24,7 @@ export default function AboutPage() {
       <AboutHero />
 
       <MissionVision />
-
+      <JourneySection />
       <CompanyTimeline />
 
       <TeamSection />

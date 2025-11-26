@@ -15,7 +15,7 @@ export default function Footer() {
             {/* <h3 className="text-white font-bold text-lg mb-4 group-hover:text-emerald-400 transition-colors">
               SP Recycling
             </h3> */}
-            <Image src="/elogo.webp" alt="SP Recycling" width={400} height={400} className="mb-4" />
+            <Image src="/S.P recycling-footer.png" alt="SP Recycling" width={400} height={200} className="mb-4 h-15 !w-46" />
             <p className="text-sm text-gray-400 mb-4 hover:text-gray-300 transition-colors">
               Leading e-waste recycling solutions for a sustainable future.
             </p>

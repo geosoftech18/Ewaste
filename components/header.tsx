@@ -168,11 +168,11 @@ export function Header() {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0" onClick={scrollToTop}>
               <Image
-                src="/sp-logo.png"
+                src="/S.P recycling.png"
                 alt="SP Recycling Pvt Ltd"
                 width={220}
                 height={220}
-                className="h-32 w-50 md:h-36 md:w-72"
+                className="h-32 w-50 md:h-40 md:w-72"
                 priority
               />
             </Link>
@@ -326,7 +326,7 @@ export function Header() {
               <SheetContent side="right" className="w-full sm:w-80 p-4">
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-between mb-8 pt-4">
-                    <Image src="/elogo.webp" alt="SP Recycling" width={180} height={50} className="h-10 w-auto" />
+                    <Image src="/S.P recycling.png" alt="SP Recycling" width={180} height={50} className="h-10 w-auto" />
                   </div>
 
                   <nav className="flex flex-col gap-1 flex-1">
