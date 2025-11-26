@@ -35,7 +35,7 @@ export function AboutHero() {
         ))}
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 md:py-20  relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Column - Text Content */}
           <motion.div
@@ -44,30 +44,15 @@ export function AboutHero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="space-y-8"
           >
-            {/* Logo */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
-            >
-              <Image
-                src="/images/sp-recycling-logo.png"
-                alt="S P Recycling Pvt Ltd"
-                width={400}
-                height={80}
-                className="h-16 w-auto"
-                priority
-              />
-            </motion.div>
-
+         
+         
             {/* Main Heading */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance">
+              <h1 className="text-3xl sm:text-5xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
                 About <span className="text-primary">S P Recycling Pvt Ltd</span>
               </h1>
             </motion.div>
@@ -198,10 +183,10 @@ export function AboutHero() {
                     ease: "easeInOut",
                     delay: 0.2,
                   }}
-                  className="absolute top-10 -left-8 w-20 h-20 bg-card rounded-2xl shadow-lg flex items-center justify-center border border-border z-20"
+                  className="absolute top-10 -left-8 w-16 h-16 bg-card rounded-2xl shadow-lg flex items-center justify-center border border-border z-20"
                 >
                   <Image
-                    src="/recycling-symbol-icon-green.jpg"
+                    src="/recycle-icon.png"
                     alt="Recycling"
                     width={60}
                     height={60}
@@ -220,10 +205,10 @@ export function AboutHero() {
                     ease: "easeInOut",
                     delay: 0.8,
                   }}
-                  className="absolute bottom-20 -right-8 w-20 h-20 bg-card rounded-2xl shadow-lg flex items-center justify-center border border-border z-20"
+                  className="absolute bottom-20 -right-8 w-16 h-16 bg-card rounded-2xl shadow-lg flex items-center justify-center border border-border z-20"
                 >
                   <Image
-                    src="/green-leaf-eco-icon.jpg"
+                    src="/leaf.png"
                     alt="Eco-friendly"
                     width={60}
                     height={60}
@@ -245,7 +230,7 @@ export function AboutHero() {
                   className="absolute top-1/2 -right-12 w-16 h-16 bg-card rounded-2xl shadow-lg flex items-center justify-center border border-border z-20"
                 >
                   <Image
-                    src="/electronic-device-icon.jpg"
+                    src="/laptop-icon.png"
                     alt="Electronics"
                     width={50}
                     height={50}

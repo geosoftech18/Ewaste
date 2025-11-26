@@ -88,7 +88,7 @@ export default function FAQ({ faqs: customFaqs }: FAQProps) {
         <div className="mt-12 text-center">
           <p className="text-gray-600 mb-4">Still have questions?</p>
           <a
-            href="#quote-form"
+            href="/contact"
             className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
           >
             Contact Us

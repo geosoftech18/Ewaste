@@ -36,8 +36,10 @@ export async function POST(request: NextRequest) {
 
     // Import email templates dynamically
     const { 
-      generatePickupFormEmail, 
-      generateQuickPickupEmail, 
+      generatePickupFormEmail,
+      generatePickupFormThankYouEmail,
+      generateQuickPickupEmail,
+      generateQuickPickupThankYouEmail,
       generateContactFormEmail, 
       generateQuoteModalEmail,
       generateBrochureDownloadEmail
@@ -75,7 +77,7 @@ export async function POST(request: NextRequest) {
         )
     }
 
-    // Create email send request for Brevo
+    // Create email send request for Brevo (Owner notification)
     const sendSmtpEmail = new brevo.SendSmtpEmail()
     sendSmtpEmail.subject = subject
     sendSmtpEmail.htmlContent = htmlContent
@@ -83,8 +85,44 @@ export async function POST(request: NextRequest) {
     sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL }
     sendSmtpEmail.to = [{ email: OWNER_EMAIL, name: 'S P Recycling Team' }]
 
-    // Send email via Brevo
+    // Send owner notification email
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail)
+
+    // Send thank you email to customer for quick-pickup and pickup-form types
+    if ((type === 'quick-pickup' || type === 'pickup-form') && data.email) {
+      try {
+        let thankYouHtml = ''
+        let thankYouSubject = ''
+
+        if (type === 'quick-pickup') {
+          thankYouHtml = generateQuickPickupThankYouEmail({
+            fullName: data.fullName,
+            itemType: data.itemType
+          })
+          thankYouSubject = 'Thank You for Your E-Waste Pickup Request - S P Recycling'
+        } else if (type === 'pickup-form') {
+          thankYouHtml = generatePickupFormThankYouEmail({
+            fullName: data.fullName,
+            city: data.city,
+            date: data.date
+          })
+          thankYouSubject = 'Thank You for Scheduling Your E-Waste Pickup - S P Recycling'
+        }
+
+        const customerEmail = new brevo.SendSmtpEmail()
+        customerEmail.subject = thankYouSubject
+        customerEmail.htmlContent = thankYouHtml
+        customerEmail.textContent = thankYouHtml.replace(/<[^>]*>/g, '')
+        customerEmail.sender = { name: FROM_NAME, email: FROM_EMAIL }
+        customerEmail.to = [{ email: data.email, name: data.fullName }]
+
+        // Send thank you email to customer
+        await apiInstance.sendTransacEmail(customerEmail)
+      } catch (customerEmailError: any) {
+        // Log error but don't fail the request if customer email fails
+        console.error('Error sending customer thank you email:', customerEmailError)
+      }
+    }
 
     return NextResponse.json(
       { 

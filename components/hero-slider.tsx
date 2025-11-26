@@ -33,13 +33,13 @@ const slides: Slide[] = [
   {
     id: 2,
     image: "/hero/2.jpg",
-    heading: "Secure, Certified IT Asset Recycling",
+    heading: "Secure, Certified E-Waste Recycling",
     description:
       "Safe data destruction, responsible device recovery, and sustainable reuse for IT and telecom industries.",
     cta1: { label: "Schedule Pickup", href: "/contact" },
     cta2: { label: "View Services", href: "/service" },
     cardImage: "/services/IT & Telecommunication.png",
-    highlight: "IT Asset",
+    highlight: "E-Waste",
   },
   {
     id: 3,
@@ -196,13 +196,13 @@ export function HeroSlider() {
             className="object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-[#00996c] opacity-50" />
+          <div className="absolute inset-0 bg-[#00996c] opacity-40" />
         </div>
       ))}
 
       <div className="relative z-20 h-full flex items-center justify-center px-4">
         <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 text-balance min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem]">
+          <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold text-white mb-4 md:mb-6 text-balance min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem]">
             <span className="inline-block">
               {(() => {
                 const highlight = slides[currentSlide].highlight

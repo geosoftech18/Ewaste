@@ -40,9 +40,9 @@ interface FormData {
   email: string
   itemType: string
   address: string
-  preferredDate: string
-  preferredTime: string
-  photos: File[]
+  // preferredDate: string
+  // preferredTime: string
+  // photos: File[]
 }
 
 interface FormErrors {
@@ -51,11 +51,8 @@ interface FormErrors {
   email?: string
   itemType?: string
   address?: string
-  preferredDate?: string
-  preferredTime?: string
-  photos?: string
+ 
 }
-
 interface TouchedFields {
   [key: string]: boolean
 }
@@ -67,9 +64,9 @@ export function QuickPickupForm() {
     email: "",
     itemType: "",
     address: "",
-    preferredDate: "",
-    preferredTime: "",
-    photos: [],
+    // preferredDate: "",
+    // preferredTime: "",
+    // photos: [],
   })
 
   const [errors, setErrors] = useState<FormErrors>({})
@@ -93,7 +90,7 @@ export function QuickPickupForm() {
   ]
 
   useEffect(() => {
-    const requiredFields = ["fullName", "phone", "itemType", "address", "preferredDate", "preferredTime"]
+    const requiredFields = ["fullName", "phone","email", "itemType", "address",]
     const filledFields = requiredFields.filter((field) => {
       const value = formData[field as keyof FormData]
       if (field === "phone") return value !== "+91" && value.length > 3
@@ -126,10 +123,11 @@ export function QuickPickupForm() {
         break
 
       case "email":
-        if (value && typeof value === "string" && value.trim()) {
-          if (!VALIDATION_RULES.EMAIL_REGEX.test(value)) {
-            return "Please enter a valid email address"
-          }
+        if (!value || (typeof value === "string" && !value.trim())) {
+          return "Email address is required"
+        }
+        if (typeof value === "string" && !VALIDATION_RULES.EMAIL_REGEX.test(value)) {
+          return "Please enter a valid email address"
         }
         break
 
@@ -151,25 +149,7 @@ export function QuickPickupForm() {
         }
         break
 
-      case "preferredDate":
-        if (!value) {
-          return "Preferred date is required"
-        }
-        if (typeof value === "string") {
-          const selectedDate = new Date(value)
-          const today = new Date()
-          today.setHours(0, 0, 0, 0)
-          if (selectedDate < today) {
-            return "Please select a future date"
-          }
-        }
-        break
-
-      case "preferredTime":
-        if (!value) {
-          return "Preferred time is required"
-        }
-        break
+     
     }
     return undefined
   }
@@ -182,8 +162,8 @@ export function QuickPickupForm() {
     newErrors.email = validateField("email", formData.email)
     newErrors.itemType = validateField("itemType", formData.itemType)
     newErrors.address = validateField("address", formData.address)
-    newErrors.preferredDate = validateField("preferredDate", formData.preferredDate)
-    newErrors.preferredTime = validateField("preferredTime", formData.preferredTime)
+      //  newErrors.preferredDate = validateField("preferredDate", formData.preferredDate)
+      //   newErrors.preferredTime = validateField("preferredTime", formData.preferredTime)
 
     // Remove undefined errors
     Object.keys(newErrors).forEach((key) => {
@@ -236,9 +216,7 @@ export function QuickPickupForm() {
             email: formData.email,
             itemType: formData.itemType,
             address: formData.address,
-            preferredDate: formData.preferredDate,
-            preferredTime: formData.preferredTime,
-            photos: formData.photos.length > 0 ? formData.photos.map((_, i) => `Photo ${i + 1}`) : undefined,
+           
           },
         }),
       })
@@ -255,9 +233,8 @@ export function QuickPickupForm() {
         email: "",
         itemType: "",
         address: "",
-        preferredDate: "",
-        preferredTime: "",
-        photos: [],
+        
+        
       })
       setErrors({})
       setTouched({})
@@ -291,38 +268,9 @@ export function QuickPickupForm() {
     }
   }
 
-  const validateFiles = (files: File[]): string | null => {
-    if (formData.photos.length + files.length > VALIDATION_RULES.MAX_FILES) {
-      return `Maximum ${VALIDATION_RULES.MAX_FILES} files allowed`
-    }
+  
 
-    for (const file of files) {
-      if (!VALIDATION_RULES.ALLOWED_FILE_TYPES.includes(file.type)) {
-        return `Only JPG, PNG, and WebP images are allowed`
-      }
-      if (file.size > VALIDATION_RULES.MAX_FILE_SIZE) {
-        return `File ${file.name} exceeds 5MB limit`
-      }
-    }
-
-    return null
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files)
-      const validationError = validateFiles(newFiles)
-
-      if (validationError) {
-        setErrors({ ...errors, photos: validationError })
-        setTimeout(() => setErrors({ ...errors, photos: undefined }), 4000)
-        return
-      }
-
-      setFormData({ ...formData, photos: [...formData.photos, ...newFiles] })
-      setErrors({ ...errors, photos: undefined })
-    }
-  }
+ 
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
@@ -333,37 +281,11 @@ export function QuickPickupForm() {
     setIsDragging(false)
   }
 
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault()
-    setIsDragging(false)
-
-    if (e.dataTransfer.files) {
-      const newFiles = Array.from(e.dataTransfer.files).filter((file) =>
-        VALIDATION_RULES.ALLOWED_FILE_TYPES.includes(file.type),
-      )
-
-      const validationError = validateFiles(newFiles)
-
-      if (validationError) {
-        setErrors({ ...errors, photos: validationError })
-        setTimeout(() => setErrors({ ...errors, photos: undefined }), 4000)
-        return
-      }
-
-      setFormData({ ...formData, photos: [...formData.photos, ...newFiles] })
-      setErrors({ ...errors, photos: undefined })
-    }
-  }
-
-  const removePhoto = (index: number) => {
-    const newPhotos = formData.photos.filter((_, i) => i !== index)
-    setFormData({ ...formData, photos: newPhotos })
-    setErrors({ ...errors, photos: undefined })
-  }
+ 
 
   const handleWhatsApp = () => {
     const message = `Hi! I'd like to schedule a pickup for ${formData.itemType || "items"}.`
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(message)}`, "_blank")
+    window.open(`https://wa.me/+91 9949901238?text=${encodeURIComponent(message)}`, "_blank")
   }
 
   const isFieldValid = (fieldName: string): boolean => {
@@ -372,13 +294,13 @@ export function QuickPickupForm() {
 
   return (
     <section className="py-12 md:py-20 lg:py-24 bg-gradient-to-b from-white via-green-50/20 to-white">
-      <div className="container mx-auto px-4 sm:px-6">
+      <div className="container max-w-5xl mx-auto px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="max-w-5xl mx-auto"
+          className="max-w-4xl mx-auto"
         >
           {/* Header */}
           <div className="text-center mb-8 md:mb-12">
@@ -582,8 +504,8 @@ export function QuickPickupForm() {
                 </div>
 
                 {/* Item Type */}
-                <div className="space-y-2">
-                  <Label htmlFor="itemType" className="text-sm font-medium text-gray-700 flex items-center gap-1">
+                <div className="space-y-2 ">
+                  <Label htmlFor="itemType" className="text-sm  font-medium text-gray-700 flex items-center gap-1">
                     Item Type <span className="text-red-500">*</span>
                   </Label>
                   <div className="relative">
@@ -598,7 +520,7 @@ export function QuickPickupForm() {
                       }}
                     >
                       <SelectTrigger
-                        className={`pl-10 pr-10 h-11 transition-all ${
+                        className={`w-full pl-10 pr-10 h-11 transition-all ${
                           errors.itemType && touched.itemType
                             ? "border-red-500 focus:border-red-500"
                             : isFieldValid("itemType")
@@ -636,7 +558,7 @@ export function QuickPickupForm() {
                 </div>
 
                 {/* Preferred Date */}
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <Label htmlFor="preferredDate" className="text-sm font-medium text-gray-700 flex items-center gap-1">
                     Preferred Date <span className="text-red-500">*</span>
                   </Label>
@@ -680,10 +602,10 @@ export function QuickPickupForm() {
                       {errors.preferredDate}
                     </motion.p>
                   )}
-                </div>
+                </div> */}
 
                 {/* Preferred Time */}
-                <div className="space-y-2">
+                {/* <div className="space-y-2">
                   <Label htmlFor="preferredTime" className="text-sm font-medium text-gray-700 flex items-center gap-1">
                     Preferred Time <span className="text-red-500">*</span>
                   </Label>
@@ -726,13 +648,13 @@ export function QuickPickupForm() {
                       {errors.preferredTime}
                     </motion.p>
                   )}
-                </div>
+                </div> */}
               </div>
 
               {/* Brief Address - Full Width */}
               <div className="space-y-2">
                 <Label htmlFor="address" className="text-sm font-medium text-gray-700 flex items-center gap-1">
-                  Brief Address <span className="text-red-500">*</span>
+                   Address <span className="text-red-500">*</span>
                 </Label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-3 w-5 h-5 text-gray-400 pointer-events-none" />
@@ -784,7 +706,7 @@ export function QuickPickupForm() {
               </div>
 
               {/* Upload Photos */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <Label className="text-sm font-medium text-gray-700">
                   Upload Photos (Optional - Max {VALIDATION_RULES.MAX_FILES} files, 5MB each)
                 </Label>
@@ -866,7 +788,7 @@ export function QuickPickupForm() {
                     ))}
                   </motion.div>
                 )}
-              </div>
+              </div> */}
 
               <div className="flex flex-col sm:flex-row gap-3 pt-4 md:pt-6">
                 <Button
@@ -894,7 +816,7 @@ export function QuickPickupForm() {
                   type="button"
                   variant="outline"
                   onClick={handleWhatsApp}
-                  className="sm:w-auto border-2 border-green-600 text-green-600 hover:bg-green-50 hover:border-green-700 h-12 md:h-13 text-base md:text-lg font-semibold bg-transparent transition-all"
+                  className="sm:w-auto border-2 border-green-600 !text-green-600 hover:bg-green-50 hover:border-green-700 h-12 md:h-13 text-base md:text-lg font-semibold bg-transparent transition-all"
                 >
                   <MessageCircle className="w-5 h-5 mr-2" />
                   <span className="hidden sm:inline">WhatsApp Us Now</span>

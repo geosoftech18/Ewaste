@@ -12,7 +12,7 @@ const teamMembers = [
     name: "Rajesh Patel",
     position: "Managing Director",
     bio: "Leading the company with 15+ years of experience in sustainable waste management and operational excellence.",
-    image: "/professional-indian-male-executive-in-business-sui.jpg",
+    image: "/team/team1.jpg",
     linkedin: "#",
     email: "rajesh@sprecycling.com",
   },
@@ -20,7 +20,7 @@ const teamMembers = [
     name: "Meera Shah",
     position: "Head of Compliance & Operations",
     bio: "Ensures all recycling activities meet environmental and legal standards, driving efficiency and transparency.",
-    image: "/professional-indian-female-executive-in-business-a.jpg",
+    image: "/team/team2.jpg",
     linkedin: "#",
     email: "meera@sprecycling.com",
   },
@@ -28,7 +28,7 @@ const teamMembers = [
     name: "Amit Deshmukh",
     position: "Technical Director",
     bio: "Oversees process innovation, recycling automation, and IT infrastructure management.",
-    image: "/professional-indian-male-tech-director-in-smart-ca.jpg",
+    image: "/team/team3.jpg",
     linkedin: "#",
     email: "amit@sprecycling.com",
   },
@@ -36,7 +36,7 @@ const teamMembers = [
     name: "Priya Menon",
     position: "Sustainability Officer",
     bio: "Champions corporate sustainability initiatives and community awareness programs.",
-    image: "/professional-indian-female-sustainability-officer.jpg",
+    image: "/team/team4.jpg",
     linkedin: "#",
     email: "priya@sprecycling.com",
   },
@@ -44,7 +44,7 @@ const teamMembers = [
     name: "Nikhil Verma",
     position: "Client Relations Manager",
     bio: "Builds partnerships with businesses and manages customer service excellence across all regions.",
-    image: "/professional-indian-male-client-relations-manager.jpg",
+    image: "/team/team5.jpg",
     linkedin: "#",
     email: "nikhil@sprecycling.com",
   },
@@ -61,7 +61,7 @@ function TeamCard({ member, index }: { member: (typeof teamMembers)[0]; index: n
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.1 }}
       whileHover={{ y: -8, scale: 1.02 }}
-      className="group relative bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 flex-[0_0_100%] min-w-0 md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-4"
+      className="group relative bg-white rounded-2xl p-6 shadow-md hover:shadow-2xl transition-all duration-300 w-full"
       style={{
         boxShadow: "0 4px 20px rgba(34, 197, 94, 0.1)",
       }}
@@ -128,6 +128,26 @@ function TeamCard({ member, index }: { member: (typeof teamMembers)[0]; index: n
 export function TeamSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
+  const [slidesPerView, setSlidesPerView] = useState(1)
+
+  // Calculate slides per view based on screen size
+  useEffect(() => {
+    const updateSlidesPerView = () => {
+      if (typeof window === "undefined") return
+      const width = window.innerWidth
+      if (width >= 1024) {
+        setSlidesPerView(3) // lg: 3 slides
+      } else if (width >= 768) {
+        setSlidesPerView(2) // md: 2 slides
+      } else {
+        setSlidesPerView(1) // mobile: 1 slide
+      }
+    }
+
+    updateSlidesPerView()
+    window.addEventListener("resize", updateSlidesPerView)
+    return () => window.removeEventListener("resize", updateSlidesPerView)
+  }, [])
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
@@ -173,6 +193,13 @@ export function TeamSection() {
       emblaApi.off("reInit", onSelect)
     }
   }, [emblaApi, onSelect])
+
+  // Reinitialize carousel when slidesPerView changes
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.reInit()
+    }
+  }, [emblaApi, slidesPerView])
 
   return (
     <section
@@ -224,9 +251,14 @@ export function TeamSection() {
         <div className="relative">
           {/* Carousel Viewport */}
           <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-4">
+            <div className="flex -mx-2">
               {teamMembers.map((member, index) => (
-                <TeamCard key={member.name} member={member} index={index} />
+                <div
+                  key={member.name}
+                  className="flex-[0_0_100%] min-w-0 px-2 md:flex-[0_0_50%] lg:flex-[0_0_33.333%]"
+                >
+                  <TeamCard member={member} index={index} />
+                </div>
               ))}
             </div>
           </div>

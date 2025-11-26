@@ -2,8 +2,13 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Leaf } from "lucide-react"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { PickupFormModal } from "../pickup-form-modal"
 
 export function CTA() {
+  const router = useRouter()
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
   return (
     <section className="py-20 sm:py-32 bg-gradient-to-r from-primary to-accent relative overflow-hidden">
       {/* Background Elements */}
@@ -27,16 +32,22 @@ export function CTA() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white hover:bg-white/90 text-primary font-semibold group">
+            <Button size="lg" className="bg-white hover:bg-white/90 text-primary font-semibold group"
+            onClick={() => setPickupModalOpen(true)}>
               Request Pickup Now
               <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 bg-transparent">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 bg-transparent"
+            onClick={() => router.push("/contact")}>
               Contact Us
             </Button>
           </div>
         </div>
       </div>
+      <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   )
 }

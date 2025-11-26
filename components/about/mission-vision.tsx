@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Globe, Recycle } from "lucide-react"
+import { Rocket, Telescope, Sparkles, Zap, Star } from "lucide-react"
 
 export function MissionVision() {
   const containerVariants = {
@@ -22,7 +22,7 @@ export function MissionVision() {
       y: 0,
       transition: {
         duration: 0.6,
-        ease: "easeOut",
+        ease: "easeOut" as const,
       },
     },
   }
@@ -33,7 +33,7 @@ export function MissionVision() {
       scale: 1,
       rotate: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         stiffness: 200,
         damping: 15,
       },
@@ -102,7 +102,22 @@ export function MissionVision() {
             />
 
             {/* Icon */}
-            <motion.div variants={iconVariants} className="mb-6 inline-block">
+            <motion.div variants={iconVariants} className="mb-6 inline-block relative">
+              {/* Outer glow effect */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 blur-xl"
+              />
+              
+              {/* Main icon container */}
               <motion.div
                 animate={{
                   rotate: 360,
@@ -112,10 +127,132 @@ export function MissionVision() {
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "linear",
                 }}
-                className="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center shadow-lg"
+                className="relative w-20 h-20 bg-gradient-to-br from-green-500 via-emerald-500 to-green-600 rounded-full flex items-center justify-center shadow-2xl"
+                style={{
+                  boxShadow: "0 10px 40px rgba(16, 185, 129, 0.4), inset 0 2px 10px rgba(255, 255, 255, 0.2)",
+                }}
               >
-                <Globe className="w-8 h-8 text-white" />
+                {/* Inner glow ring */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    opacity: [0.6, 0.9, 0.6],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute inset-0 rounded-full border-[3px] border-white/40"
+                />
+                
+                {/* Secondary ring */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.25, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: 0.3,
+                  }}
+                  className="absolute inset-[-4px] rounded-full border-2 border-emerald-300/50"
+                />
+                
+                {/* Main icon */}
+                <motion.div
+                  animate={{
+                    y: [0, -5, 0],
+                    rotate: [0, 5, -5, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  className="relative z-10"
+                >
+                  <Rocket className="w-10 h-10 text-white" strokeWidth={3} />
+                </motion.div>
+                
+                {/* Sparkles around icon */}
+                {[0, 90, 180, 270].map((angle, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{
+                      rotate: angle,
+                      scale: [0.8, 1.2, 0.8],
+                      opacity: [0.4, 1, 0.4],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut",
+                      delay: i * 0.2,
+                    }}
+                    className="absolute"
+                    style={{
+                      top: "50%",
+                      left: "50%",
+                      transformOrigin: "0 0",
+                      marginTop: "-2px",
+                      marginLeft: "-2px",
+                    }}
+                  >
+                    <Star
+                      className="w-3 h-3 text-yellow-300 fill-yellow-300"
+                      style={{
+                        transform: `translate(35px, 0)`,
+                      }}
+                    />
+                  </motion.div>
+                ))}
+                
+                {/* Rocket trail effect */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    opacity: [0.3, 0.7, 0.3],
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-8 bg-gradient-to-t from-orange-400 via-yellow-400 to-transparent rounded-full blur-sm"
+                />
               </motion.div>
+              
+              {/* Floating sparkles */}
+              {[0, 1, 2].map((i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    y: [0, -15, 0],
+                    x: [0, i % 2 === 0 ? 10 : -10, 0],
+                    opacity: [0, 1, 0],
+                    scale: [0.5, 1, 0.5],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: i * 0.5,
+                  }}
+                  className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none"
+                >
+                  <Sparkles
+                    className="w-4 h-4 text-emerald-400"
+                    style={{
+                      position: "absolute",
+                      top: `${20 + i * 30}%`,
+                      left: `${30 + i * 20}%`,
+                    }}
+                  />
+                </motion.div>
+              ))}
             </motion.div>
 
             {/* Content */}
@@ -160,7 +297,22 @@ export function MissionVision() {
             />
 
             {/* Icon */}
-            <motion.div variants={iconVariants} className="mb-6 inline-block">
+            <motion.div variants={iconVariants} className="mb-6 inline-block relative">
+              {/* Outer glow effect */}
+              <motion.div
+                animate={{
+                  scale: [1, 1.3, 1],
+                  opacity: [0.3, 0.6, 0.3],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Number.POSITIVE_INFINITY,
+                  ease: "easeInOut",
+                }}
+                className="absolute inset-0 rounded-full bg-gradient-to-br from-blue-400 to-cyan-500 blur-xl"
+              />
+              
+              {/* Main icon container */}
               <motion.div
                 animate={{
                   rotate: -360,
@@ -170,10 +322,132 @@ export function MissionVision() {
                   repeat: Number.POSITIVE_INFINITY,
                   ease: "linear",
                 }}
-                className="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-600 rounded-full flex items-center justify-center shadow-lg"
+                className="relative w-20 h-20 bg-gradient-to-br from-blue-500 via-cyan-500 to-blue-600 rounded-full flex items-center justify-center shadow-2xl"
+                style={{
+                  boxShadow: "0 10px 40px rgba(59, 130, 246, 0.4), inset 0 2px 10px rgba(255, 255, 255, 0.2)",
+                }}
               >
-                <Recycle className="w-8 h-8 text-white" />
+                {/* Inner glow ring */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.15, 1],
+                    opacity: [0.6, 0.9, 0.6],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute inset-0 rounded-full border-[3px] border-white/40"
+                />
+                
+                {/* Secondary ring */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.25, 1],
+                    opacity: [0.3, 0.6, 0.3],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: 0.3,
+                  }}
+                  className="absolute inset-[-4px] rounded-full border-2 border-cyan-300/50"
+                />
+                
+                {/* Main icon */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.05, 1],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  className="relative z-10"
+                >
+                  <Telescope className="w-10 h-10 text-white" strokeWidth={3} />
+                </motion.div>
+                
+                {/* Stars visible through telescope */}
+                {[0, 60, 120, 180, 240, 300].map((angle, i) => (
+                  <motion.div
+                    key={i}
+                    animate={{
+                      rotate: angle,
+                      scale: [0.5, 1, 0.5],
+                      opacity: [0.2, 0.9, 0.2],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Number.POSITIVE_INFINITY,
+                      ease: "easeInOut",
+                      delay: i * 0.2,
+                    }}
+                    className="absolute"
+                    style={{
+                      top: "50%",
+                      left: "50%",
+                      transformOrigin: "0 0",
+                      marginTop: "-3px",
+                      marginLeft: "-3px",
+                    }}
+                  >
+                    <Star
+                      className="w-2.5 h-2.5 text-cyan-200 fill-cyan-200"
+                      style={{
+                        transform: `translate(30px, 0)`,
+                      }}
+                    />
+                  </motion.div>
+                ))}
+                
+                {/* Telescope viewing circle effect */}
+                <motion.div
+                  animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.2, 0.5, 0.2],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute inset-0 rounded-full border-2 border-cyan-200/40"
+                />
               </motion.div>
+              
+              {/* Floating energy particles */}
+              {[0, 1, 2].map((i) => (
+                <motion.div
+                  key={i}
+                  animate={{
+                    y: [0, -20, 0],
+                    x: [0, i % 2 === 0 ? 12 : -12, 0],
+                    opacity: [0, 1, 0],
+                    scale: [0.4, 1.2, 0.4],
+                    rotate: [0, 180, 360],
+                  }}
+                  transition={{
+                    duration: 3.5,
+                    repeat: Number.POSITIVE_INFINITY,
+                    ease: "easeInOut",
+                    delay: i * 0.6,
+                  }}
+                  className="absolute top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none"
+                >
+                  <Zap
+                    className="w-5 h-5 text-cyan-400"
+                    style={{
+                      position: "absolute",
+                      top: `${15 + i * 35}%`,
+                      left: `${25 + i * 25}%`,
+                    }}
+                  />
+                </motion.div>
+              ))}
             </motion.div>
 
             {/* Content */}

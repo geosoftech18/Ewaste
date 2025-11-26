@@ -35,7 +35,7 @@ export const cityData: Record<string, CityData> = {
     name: 'Hyderabad',
     title: 'E-Waste Recycling Services in Hyderabad',
     description: 'Professional e-waste recycling services in Hyderabad with certified data destruction, secure pickup, and eco-friendly disposal. Serving IT companies, hospitals, and businesses across the city.',
-    heroImage: '/city/hyderabad-hero.jpg',
+    heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '10.4M',
     wasteCollection: 450,
     coverage: 'Greater Hyderabad Municipal Corporation',

@@ -145,18 +145,18 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
       validationErrors.city = "City is required"
     }
     
-    if (!formData.date) {
-      validationErrors.date = "Pickup date is required"
-    } else {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const selectedDate = new Date(formData.date)
-      selectedDate.setHours(0, 0, 0, 0)
+    // if (!formData.date) {
+    //   validationErrors.date = "Pickup date is required"
+    // } else {
+    //   const today = new Date()
+    //   today.setHours(0, 0, 0, 0)
+    //   const selectedDate = new Date(formData.date)
+    //   selectedDate.setHours(0, 0, 0, 0)
       
-      if (selectedDate < today) {
-        validationErrors.date = "Please select today or a future date"
-      }
-    }
+    //   if (selectedDate < today) {
+    //     validationErrors.date = "Please select today or a future date"
+    //   }
+    // }
     
     if (!formData.agreeToTerms) {
       validationErrors.agreeToTerms = "You must agree to terms and privacy policy"
@@ -218,7 +218,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
   if (showSuccess) {
     return (
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md z-[1002]">
           <div className="flex flex-col items-center justify-center py-8 text-center">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
               <CheckCircle2 className="w-10 h-10 text-green-600" />
@@ -230,7 +230,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
                 const message = encodeURIComponent(
                   `Hi! I just scheduled an e-waste pickup. My name is ${formData.fullName}.`,
                 )
-                window.open(`https://wa.me/919876543210?text=${message}`, "_blank")
+                window.open(`https://wa.me/+919949901238?text=${message}`, "_blank")
               }}
               className="bg-green-600 hover:bg-green-700"
             >
@@ -245,7 +245,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-xl max-h-[100vh] overflow-y-auto py-8">
+      <DialogContent className="sm:max-w-xl max-h-[100vh] overflow-y-auto py-8 z-[1002]">
         <DialogHeader className="pb-6">
           <DialogTitle className="text-2xl font-bold">Schedule Your E-Waste Pickup</DialogTitle>
           <DialogDescription>Fill in the details and our team will contact you shortly.</DialogDescription>
@@ -308,10 +308,10 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
                   City / Location <span className="text-red-500">*</span>
                 </Label>
                 <Select value={formData.city} onValueChange={(value) => handleInputChange("city", value)}>
-                  <SelectTrigger className={cn("h-11", errors.city && "border-red-500")}>
+                  <SelectTrigger className={cn("w-full h-11", errors.city && "border-red-500")}>
                     <SelectValue placeholder="Select your city" />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className="z-[1003]">
                     {cities.map((city) => (
                       <SelectItem key={city} value={city}>
                         {city}
@@ -325,7 +325,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
 
             <div className="space-y-3">
               <Label>
-                Preferred Pickup Date <span className="text-red-500">*</span>
+                Preferred Pickup Date 
               </Label>
               <div className="flex gap-2">
                 <Input

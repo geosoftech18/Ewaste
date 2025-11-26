@@ -15,15 +15,16 @@ const features = [
     description: "Always available to assist with queries, pickups, and urgent disposal needs.",
   },
   {
-    icon: Shield,
-    title: "Compliant & Certified Processes",
-    description: "End-to-end recycling aligned with government norms, EPR compliance, and environmental standards.",
-  },
-  {
     icon: Lock,
     title: "100% Secure Data Destruction",
     description: "Certified destruction of data storage devices with complete confidentiality.",
   },
+  {
+    icon: Shield,
+    title: "Same-Day Pickup Service",
+    description: "Convenience meets efficiency. Schedule a pickup and we'll arrive the same day—no waiting, no hassle. Fast, reliable collection services available across your city for urgent disposal needs.",
+  },
+
   {
     icon: Recycle,
     title: "Eco-Friendly Recycling",

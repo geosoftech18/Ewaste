@@ -2,6 +2,9 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Leaf } from "lucide-react"
+import { useRouter } from "next/navigation";
+import { PickupFormModal } from "../pickup-form-modal";
+import { useState } from "react";
 
 interface HeroProps {
   cityName?: string;
@@ -24,6 +27,8 @@ export function Hero({
     satisfactionRate: "98%"
   }
 }: HeroProps) {
+  const router = useRouter();
+  const [pickupModalOpen, setPickupModalOpen] = useState(false);
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-10 sm:py-32 lg:py-20">
       {/* Animated background elements */}
@@ -56,14 +61,16 @@ export function Hero({
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground group">
+              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground group" onClick={() => setPickupModalOpen(true)}>
+           
                 Request Pickup Now
                 <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary text-primary hover:bg-primary/5 bg-transparent"
+                className="border-primary !text-primary hover:bg-primary/5 bg-transparent"
+                onClick={() => router.push(`/services`)}
               >
                 Learn More
               </Button>
@@ -98,7 +105,11 @@ export function Hero({
             <div className="absolute -bottom-4 -right-4 h-24 w-24 rounded-lg bg-primary/20 blur-2xl" />
           </div>
         </div>
-      </div>
+      </div>  {/* Pickup Form Modal */}
+      <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   )
 }

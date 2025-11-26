@@ -7,27 +7,32 @@ import { useRef, useState, useEffect } from "react"
 const timelineData = [
   {
     year: "2015",
-    milestone: "Company founded with a vision to manage e-waste responsibly.",
+    headline: "Company Launched",
+    milestone: "We officially launched our company with a clear vision to deliver high-quality solutions and build long-term customer relationships.",
     icon: Factory,
   },
   {
     year: "2017",
-    milestone: "Achieved first Government Recycling Certification for compliance excellence.",
+    headline: "20% Customer Acquisition",
+    milestone: "Within just two years, we successfully acquired 20% of our initial customer target, marking a strong and promising start.",
     icon: Award,
   },
   {
     year: "2019",
-    milestone: "Expanded operations to include IT & Telecom waste recycling.",
+    headline: "80% Customer Acquisition",
+    milestone: "Our services gained significant momentum, and by 2019, we achieved 80% of our total customer acquisition goal, establishing a strong market presence.",
     icon: Radio,
   },
   {
     year: "2021",
-    milestone: "Launched Secure Data Destruction services for corporate clients.",
+    headline:"Expanded to 7 Cities",
+    milestone: "With rising demand, we expanded operations into 7 major cities, strengthening our regional reach and service capability.",
     icon: Lock,
   },
   {
     year: "2024",
-    milestone: "Served 20+ industries, recycled 5000+ tons of e-waste, and achieved national recognition.",
+    headline: "Operating in 10 Cities",
+    milestone: "By 2024, we scaled our network to 10 cities, achieving wider coverage and improved accessibility for customers across India.",
     icon: Globe,
   },
 ]
@@ -220,6 +225,7 @@ function TimelineItemHorizontal({
         }`}
       >
         <div className="text-3xl font-bold text-primary mb-3">{item.year}</div>
+        <div className="text-base font-bold text-primary mb-2">{item.headline}</div>
         <p className="text-sm text-muted-foreground leading-relaxed">{item.milestone}</p>
       </motion.div>
     </motion.div>
@@ -287,6 +293,7 @@ function TimelineItemVertical({
         }`}
       >
         <div className="text-2xl font-bold text-primary mb-2">{item.year}</div>
+        <div className="text-base font-bold text-primary mb-2">{item.headline}</div>
         <p className="text-sm text-muted-foreground leading-relaxed">{item.milestone}</p>
       </motion.div>
     </motion.div>

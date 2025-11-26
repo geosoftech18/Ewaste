@@ -3,15 +3,18 @@
 import { useState, useRef, useEffect } from "react"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
 
 const cities = [
-  { name: "Hyderabad", image: "/city/hyderabad-city-skyline.jpg" },
-  { name: "Bangalore", image: "/city/bangalore-tech-city.jpg" },
-  { name: "Chennai", image: "/city/chennai-coastal-city.jpg" },
-  { name: "Mumbai", image: "/city/mumbai-metropolitan.jpg" },
-  { name: "Pune", image: "/city/pune-city-landscape.jpg" },
+  { name: "Hyderabad", image: "/city/hyderabad-city-skyline.jpg", slug: "hyderabad" },
+  { name: "Bangalore", image: "/city/bangalore-tech-city.jpg", slug: "bangalore" },
+  { name: "Chennai", image: "/city/chennai-coastal-city.jpg", slug: "chennai" },
+  { name: "Mumbai", image: "/city/mumbai-metropolitan.jpg", slug: "mumbai" },
+  { name: "Pune", image: "/city/pune-city-landscape.jpg", slug: "pune" },
+  { name: "Andhra Pradesh", image: "/city/andhra-pradesh-coastal-city.jpg", slug: "andhra-pradesh" },
+
+  { name: "Nagpur", image: "/city/nagpur-orange-city.jpg", slug: "nagpur" },
   { name: "Nashik", image: "/city/nashik-vineyard-region.jpg" },
-  { name: "Nagpur", image: "/city/nagpur-orange-city.jpg" },
   { name: "Gujarat", image: "/city/gujarat-industrial-area.jpg" },
   { name: "New Delhi", image: "/city/new-delhi-capital-city.jpg" },
   { name: "Aurangabad", image: "/city/aurangabad-historic-city.jpg" },
@@ -30,14 +33,13 @@ const cities = [
   { name: "Haryana", image: "/placeholder.svg?height=300&width=300" },
   { name: "Himachal Pradesh", image: "/placeholder.svg?height=300&width=300" },
   { name: "Visakhapatnam", image: "/placeholder.svg?height=300&width=300" },
-  { name: "Andhra Pradesh", image: "/placeholder.svg?height=300&width=300" },
 ]
 
 export function ServiceCities() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(5)
   const carouselRef = useRef<HTMLDivElement>(null)
-
+  const router = useRouter()
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 640) setItemsPerView(2)
@@ -89,6 +91,7 @@ export function ServiceCities() {
                     <div
                       className="relative group h-64 sm:h-72 md:h-80 rounded-2xl overflow-hidden cursor-pointer animate-scale-in"
                       style={{ animationDelay: `${(index % itemsPerView) * 0.05}s` }}
+                      onClick={() => router.push(`/services/city/${city.slug}`)}
                     >
                       {/* Background Image */}
                       <img

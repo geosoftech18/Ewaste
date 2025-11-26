@@ -4,6 +4,7 @@ import { useState, useRef } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Cpu, Smartphone, Zap, Pill, Wrench, Trash2, CheckCircle2, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react"
+import { PickupFormModal } from "../pickup-form-modal"
 
 const serviceCategories = [
   {
@@ -114,7 +115,7 @@ export function Services({
   const carouselRef = useRef<HTMLDivElement>(null)
   const activeService = serviceCategories.find((cat) => cat.id === activeCategory)
   const Icon = activeService?.icon || Cpu
-
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
   const scrollCarousel = (direction: "left" | "right") => {
     if (carouselRef.current) {
       const scrollAmount = 200 // Adjust based on tab width
@@ -258,6 +259,7 @@ export function Services({
             <div className="text-center">
               <Button
                 size="lg"
+                onClick={() => setPickupModalOpen(true)}
                 className={`bg-gradient-to-r ${activeService.color} text-white hover:shadow-lg transition-all duration-300 hover:scale-105`}
               >
                 Schedule Pickup in {cityName}
@@ -266,6 +268,10 @@ export function Services({
           </div>
         )}
       </div>
+      <PickupFormModal 
+        open={pickupModalOpen} 
+        onOpenChange={setPickupModalOpen} 
+      />
     </section>
   )
 }
