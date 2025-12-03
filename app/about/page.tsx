@@ -25,7 +25,7 @@ export default function AboutPage() {
 
       <MissionVision />
       <JourneySection />
-      <CompanyTimeline />
+      {/* <CompanyTimeline /> */}
 
       <TeamSection />
 

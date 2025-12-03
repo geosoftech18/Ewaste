@@ -102,8 +102,18 @@ export function AboutHero() {
                 variant="outline"
                 className="group border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-semibold bg-transparent"
                 onClick={() => {
-                  // Smooth scroll to "How We Work" section
-                  document.getElementById("how-we-work")?.scrollIntoView({ behavior: "smooth" })
+                  // Smooth scroll to "Our Journey" section
+                  const element = document.getElementById("how-we-work")
+                  if (element) {
+                    const headerOffset = 80 // Adjust this value based on your header height
+                    const elementPosition = element.getBoundingClientRect().top
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: "smooth"
+                    })
+                  }
                 }}
               >
                Discover Our Journey

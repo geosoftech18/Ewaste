@@ -2,9 +2,17 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
+
+interface Partner {
+  id: number;
+  name: string;
+  industry: string;
+  logo: string;
+}
 
 interface PartnersCarouselProps {
-  partners: string[];
+  partners: Partner[];
 }
 
 export default function PartnersCarousel({ partners }: PartnersCarouselProps) {
@@ -84,11 +92,14 @@ export default function PartnersCarousel({ partners }: PartnersCarouselProps) {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.5, ease: "easeInOut" }}
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 md:gap-8"
+                className="grid gap-6 md:gap-8"
+                style={{
+                  gridTemplateColumns: `repeat(${cardsPerView}, minmax(0, 1fr))`
+                }}
               >
                 {visiblePartners.map((partner, index) => (
                   <motion.div
-                    key={`${currentIndex}-${index}`}
+                    key={`${partner.id}-${currentIndex}-${index}`}
                     initial={{ opacity: 0, scale: 0.8, rotateY: -20 }}
                     animate={{ opacity: 1, scale: 1, rotateY: 0 }}
                     transition={{
@@ -102,22 +113,32 @@ export default function PartnersCarousel({ partners }: PartnersCarouselProps) {
                       rotateY: 5,
                       transition: { duration: 0.3 }
                     }}
-                    className="flex items-center justify-center p-6 md:p-8 rounded-xl bg-gradient-to-br from-gray-50 to-emerald-50 hover:from-emerald-50 hover:to-teal-50 transition-all duration-300 group cursor-pointer"
+                    className="flex flex-col items-center justify-center p-6 md:p-8 rounded-xl bg-gradient-to-br from-gray-50 to-emerald-50 hover:from-emerald-50 hover:to-teal-50 transition-all duration-300 group cursor-pointer"
                     style={{ perspective: '1000px' }}
                   >
-                    <div className="text-center">
+                    <div className="text-center w-full">
                       <motion.div
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
-                        className="w-20 h-20 md:w-24 md:h-24 bg-gradient-to-br from-emerald-100 to-teal-100 group-hover:from-emerald-200 group-hover:to-teal-200 rounded-full flex items-center justify-center mb-3 md:mb-4 shadow-md group-hover:shadow-xl transition-all duration-300 mx-auto"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="w-24 h-24 md:w-28 md:h-28 bg-white rounded-full flex items-center justify-center mb-4 shadow-md group-hover:shadow-xl transition-all duration-300 mx-auto p-3"
                       >
-                        <span className="text-2xl md:text-3xl font-bold text-emerald-700 group-hover:text-emerald-800 transition-colors duration-300">
-                          {partner.charAt(0)}
-                        </span>
+                        <Image
+                          src={partner.logo}
+                          alt={partner.name}
+                          width={112}
+                          height={112}
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            // Fallback to placeholder if image fails to load
+                            const target = e.target as HTMLImageElement;
+                            target.src = '/placeholder-logo.png';
+                          }}
+                        />
                       </motion.div>
-                      <p className="text-sm md:text-base text-gray-700 font-semibold group-hover:text-emerald-700 transition-colors duration-300">
-                        {partner}
+                      <p className="text-sm md:text-base text-gray-700 font-semibold group-hover:text-emerald-700 transition-colors duration-300 mb-1">
+                        {partner.name}
                       </p>
+                      
                       <motion.div
                         initial={{ width: 0 }}
                         whileHover={{ width: '100%' }}
@@ -134,7 +155,7 @@ export default function PartnersCarousel({ partners }: PartnersCarouselProps) {
 
         <button
           onClick={handlePrev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 z-10 opacity-0 group-hover:opacity-100 hover:scale-110"
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 z-10 hover:scale-110"
           aria-label="Previous partners"
         >
           <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
@@ -142,7 +163,7 @@ export default function PartnersCarousel({ partners }: PartnersCarouselProps) {
 
         <button
           onClick={handleNext}
-          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 z-10 opacity-0 group-hover:opacity-100 hover:scale-110"
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full p-2 md:p-3 shadow-lg hover:shadow-xl transition-all duration-300 z-10 hover:scale-110"
           aria-label="Next partners"
         >
           <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />

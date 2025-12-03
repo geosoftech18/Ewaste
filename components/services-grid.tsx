@@ -298,7 +298,7 @@ export function ServicesGrid() {
                         fill
                         className="object-cover"
                       />
-                      <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-60`}></div>
+                      <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-20`}></div>
                       
                       {/* Rating Badge */}
                       <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center gap-1">

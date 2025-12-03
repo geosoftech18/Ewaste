@@ -56,7 +56,7 @@ export default function JourneySection() {
   }
 
   return (
-    <section className="bg-gray-50 py-36 md:py-28">
+    <section id="how-we-work" className="bg-gray-50 py-36 md:py-28">
       <div className="relative overflow-visible w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Desktop Timeline - Keep Original */}
         <div className="hidden md:block">

@@ -42,7 +42,9 @@ export async function POST(request: NextRequest) {
       generateQuickPickupThankYouEmail,
       generateContactFormEmail, 
       generateQuoteModalEmail,
-      generateBrochureDownloadEmail
+      generateBrochureDownloadEmail,
+      generateCityPickupRequestEmail,
+      generateCityPickupThankYouEmail
     } = await import('@/lib/email-templates')
 
     let htmlContent = ''
@@ -70,6 +72,10 @@ export async function POST(request: NextRequest) {
         htmlContent = generateBrochureDownloadEmail(data)
         subject = `📄 Brochure Download Request from ${data.name}`
         break
+      case 'city-pickup-request':
+        htmlContent = generateCityPickupRequestEmail(data)
+        subject = `🔄 New E-Waste Pickup Request from ${data.fullName} - ${data.city}`
+        break
       default:
         return NextResponse.json(
           { error: 'Invalid form type' },
@@ -88,8 +94,8 @@ export async function POST(request: NextRequest) {
     // Send owner notification email
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail)
 
-    // Send thank you email to customer for quick-pickup and pickup-form types
-    if ((type === 'quick-pickup' || type === 'pickup-form') && data.email) {
+    // Send thank you email to customer for quick-pickup, pickup-form, and city-pickup-request types
+    if ((type === 'quick-pickup' || type === 'pickup-form' || type === 'city-pickup-request') && data.email) {
       try {
         let thankYouHtml = ''
         let thankYouSubject = ''
@@ -107,6 +113,13 @@ export async function POST(request: NextRequest) {
             date: data.date
           })
           thankYouSubject = 'Thank You for Scheduling Your E-Waste Pickup - S P Recycling'
+        } else if (type === 'city-pickup-request') {
+          thankYouHtml = generateCityPickupThankYouEmail({
+            fullName: data.fullName,
+            city: data.city,
+            itemType: data.itemType
+          })
+          thankYouSubject = 'Thank You for Your E-Waste Pickup Request - S P Recycling'
         }
 
         const customerEmail = new brevo.SendSmtpEmail()

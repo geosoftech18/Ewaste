@@ -163,7 +163,7 @@ export function Header() {
             ? "shadow-lg backdrop-blur-sm bg-white/95" 
             : ""
       }`}>
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto md:px-4 px-2">
           <div className="flex items-center justify-between h-20 ">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0" onClick={scrollToTop}>
@@ -172,7 +172,7 @@ export function Header() {
                 alt="SP Recycling Pvt Ltd"
                 width={220}
                 height={220}
-                className="h-32 w-50 md:h-40 md:w-72"
+                className="h-34 w-64 md:h-40 md:w-72"
                 priority
               />
             </Link>

@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 const clients = [
   {
     id: 1,
-    name: "Tech Solutions Inc",
+    name: "Mars Petcare",
     industry: "IT & Technology",
     logo: "/partners/1.png",
     testimonial:
@@ -18,49 +18,49 @@ const clients = [
   },
   {
     id: 2,
-    name: "Green Manufacturing Co",
+    name: "Westin",
     industry: "Manufacturing",
     logo: "/partners/2.png",
     testimonial: "Excellent e-waste management for our factory. They handle everything from pickup to certification.",
   },
   {
     id: 3,
-    name: "City Hospital",
+    name: "Larsen & Toubro",
     industry: "Healthcare",
     logo: "/partners/3.png",
     testimonial: "Secure data destruction and compliant medical equipment recycling. Highly recommended!",
   },
   {
     id: 4,
-    name: "Smart Education Academy",
+    name: "ABB",
     industry: "Education",
     logo: "/partners/4.png",
     testimonial: "They recycled our old lab equipment and computers. Great service for educational institutions.",
   },
   {
     id: 5,
-    name: "Retail Chain Ltd",
+    name: "Usha International",
     industry: "Retail",
     logo: "/partners/5.png",
     testimonial: "Reliable partner for recycling POS systems and electronic equipment across our 20+ stores.",
   },
   {
     id: 6,
-    name: "Finance Corp",
+    name: "Biological E. Ltd",
     industry: "Banking & Finance",
     logo: "/partners/6.png",
     testimonial: "Secure and certified data destruction services. Perfect for our compliance requirements.",
   },
   {
     id: 7,
-    name: "Auto Industries",
+    name: "Schneider Electric",
     industry: "Automotive",
     logo: "/partners/7.png",
     testimonial: "Professional handling of industrial electronic waste. Timely and efficient service.",
   },
   {
     id: 8,
-    name: "Media House",
+    name: "DR.Reddy",
     industry: "Media & Entertainment",
     logo: "/partners/8.png",
     testimonial: "They recycled our old broadcasting equipment responsibly. Excellent environmental practices.",
@@ -329,10 +329,10 @@ export function ClientsCarousel() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex gap-4 md:gap-6"
+              className="flex gap-2 sm:gap-3 md:gap-4 lg:gap-6"
               animate={{ 
-                x: `-${currentIndex * (100 / itemsPerView)}%` 
+                x: `-${currentIndex * (100 / itemsPerView)}%`,
+                opacity: 1
               }}
               transition={{ 
                 duration: 0.8, 
@@ -344,10 +344,10 @@ export function ClientsCarousel() {
                 <motion.div
                   key={`${client.id}-${index}`}
                   onClick={() => setSelectedClient(client)}
-                  className="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 md:p-4 cursor-pointer border-2 border-transparent hover:border-green-200 flex-shrink-0"
+                  className="group relative bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-3 md:p-4 lg:p-6 cursor-pointer border-2 border-transparent hover:border-green-200 flex-shrink-0"
                   style={{ 
-                    width: `calc(${100 / itemsPerView}% - ${(itemsPerView - 1) * 16 / itemsPerView}px)`,
-                    minWidth: '200px'
+                    flexBasis: `calc(${100 / itemsPerView}% - ${itemsPerView === 2 ? 4 : itemsPerView === 4 ? 12 : 20}px)`,
+                    minWidth: itemsPerView === 2 ? 'calc(50% - 4px)' : '0'
                   }}
                 >
                   {/* Logo */}
@@ -360,16 +360,16 @@ export function ClientsCarousel() {
                   </div>
 
                   {/* Client Name */}
-                  <div className="mt-4 text-center">
-                    <p className="text-sm font-semibold text-gray-800 group-hover:text-green-600 transition-colors duration-300">
+                  <div className="mt-2 md:mt-4 text-center">
+                    <p className="text-xs md:text-sm font-semibold text-gray-800 group-hover:text-green-600 transition-colors duration-300 line-clamp-2">
                       {client.name}
                     </p>
-                    <p className="text-xs text-gray-500 mt-1">{client.industry}</p>
+                   
                   </div>
 
                   {/* Testimonial Icon */}
                   <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Quote className="w-5 h-5 text-green-600" />
+                    <Quote className="w-4 h-4 md:w-5 md:h-5 text-green-600" />
                   </div>
                 </motion.div>
               ))}

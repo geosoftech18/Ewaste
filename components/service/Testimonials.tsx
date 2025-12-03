@@ -50,7 +50,54 @@ export default function Testimonials() {
   ];
 
   const partners = [
-    'TechCorp', 'EcoSystems', 'DataSecure', 'GreenFuture', 'InfoTech Solutions', 'Government of India'
+    {
+      id: 1,
+      name: "Mars Petcare",
+      industry: "IT & Technology",
+      logo: "/partners/1.png",
+    },
+    {
+      id: 2,
+      name: "Westin",
+      industry: "Manufacturing",
+      logo: "/partners/2.png",
+    },
+    {
+      id: 3,
+      name: "Larsen & Toubro",
+      industry: "Healthcare",
+      logo: "/partners/3.png",
+    },
+    {
+      id: 4,
+      name: "ABB",
+      industry: "Education",
+      logo: "/partners/4.png",
+    },
+    {
+      id: 5,
+      name: "Usha International",
+      industry: "Retail",
+      logo: "/partners/5.png",
+    },
+    {
+      id: 6,
+      name: "Biological E. Ltd",
+      industry: "Banking & Finance",
+      logo: "/partners/6.png",
+    },
+    {
+      id: 7,
+      name: "Schneider Electric",
+      industry: "Automotive",
+      logo: "/partners/7.png",
+    },
+    {
+      id: 8,
+      name: "Media House",
+      industry: "Media & Entertainment",
+      logo: "/partners/8.png",
+    },
   ];
 
   useEffect(() => {

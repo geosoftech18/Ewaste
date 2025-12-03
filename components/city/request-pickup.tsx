@@ -5,7 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, Phone, MapPin, Loader2, CheckCircle2, AlertCircle } from "lucide-react"
 
 interface RequestPickupProps {
   cityName?: string;
@@ -21,16 +21,71 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
     address: "",
     message: "",
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showSuccess, setShowSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
+    // Clear error when user starts typing
+    if (submitError) setSubmitError("")
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Handle form submission
+    setIsSubmitting(true)
+    setSubmitError("")
+    setShowSuccess(false)
+
+    try {
+      // Send email via API
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'city-pickup-request',
+          data: {
+            fullName: formData.fullName,
+            phone: formData.phone,
+            email: formData.email,
+            itemType: formData.itemType,
+            city: formData.city,
+            address: formData.address,
+            message: formData.message || undefined,
+          },
+        }),
+      })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || 'Failed to send email')
+      }
+
+      // Show success message
+      setShowSuccess(true)
+      
+      // Reset form
+      setFormData({
+        fullName: "",
+        phone: "",
+        email: "",
+        itemType: "",
+        city: cityName.toLowerCase(),
+        address: "",
+        message: "",
+      })
+
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccess(false)
+      }, 5000)
+    } catch (error: any) {
+      console.error("Error submitting form:", error)
+      setSubmitError(error.message || "Failed to submit request. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -82,6 +137,26 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
 
           {/* Form */}
           <Card className="border border-border bg-card p-8 animate-slide-in-right">
+            {showSuccess && (
+              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3">
+                <CheckCircle2 className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-green-800 font-semibold">Request Submitted Successfully!</p>
+                  <p className="text-green-700 text-sm mt-1">We've received your pickup request and will contact you shortly.</p>
+                </div>
+              </div>
+            )}
+
+            {submitError && (
+              <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+                <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-red-800 font-semibold">Error</p>
+                  <p className="text-red-700 text-sm mt-1">{submitError}</p>
+                </div>
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
@@ -190,9 +265,17 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
 
               <Button
                 type="submit"
-                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2"
+                disabled={isSubmitting}
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-semibold py-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Request Pickup Now
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  "Request Pickup Now"
+                )}
               </Button>
             </form>
           </Card>
