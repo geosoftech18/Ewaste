@@ -1,4 +1,5 @@
 import { Header } from "@/components/header"
+import { VideoHero } from "@/components/video-hero"
 import { HeroSlider } from "@/components/hero-slider"
 import { TrustStrip } from "@/components/trust-strip"
 import { ServicesGrid } from "@/components/services-grid"
@@ -23,8 +24,8 @@ const InteractiveIndiaMap = dynamic(() => import("@/components/about/Interactive
 export default function Home() {
   return (
     <>
-      
-      <HeroSlider />
+      <VideoHero />
+      {/* <HeroSlider /> */}
       <TrustStrip />
       <ServicesGrid />
       <ProcessSteps />

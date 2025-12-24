@@ -107,7 +107,7 @@ export default function Footer() {
         {/* Divider */}
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 animate-fade-in animation-delay-800">
-            <p className="text-sm text-gray-400">© {currentYear} SP Recycling Pvt Ltd. All rights reserved.Designed & Developed by <a href="https://www.geosoftech.com" className="hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-block">GEO Softech</a></p>
+            <p className="text-sm text-gray-400">© {currentYear} SP Recycling Pvt Ltd. All rights reserved.</p>
             <div className="flex gap-6 text-sm">
               <a href="#" className="hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-block">
                 Privacy Policy
