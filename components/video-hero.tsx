@@ -41,7 +41,7 @@ export function VideoHero() {
   }, [])
 
   return (
-    <section className="relative w-full h-[90vh] min-h-[600px] overflow-hidden">
+    <section className="relative w-full h-[40vh] min-h-[250px] md:h-[90vh] md:min-h-[600px] overflow-hidden">
       {/* YouTube Video Background */}
       <div className="absolute inset-0 w-full h-full bg-black">
         <iframe
@@ -64,9 +64,9 @@ export function VideoHero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#00996c]/30 via-[#00996c]/25 to-[#00996c]/35 z-10" />
 
       {/* Content */}
-      <div className="relative z-20 h-full flex items-center justify-center px-4">
+      <div className="relative z-20 h-full flex items-center justify-center px-4 ">
         <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 text-balance min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem]">
+          <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 text-balance min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem]">
             <span className="inline-block">
               {(() => {
                 if (highlight && typedText.includes(highlight)) {
@@ -74,7 +74,7 @@ export function VideoHero() {
                   return (
                     <>
                       <span>{parts[0]}</span>
-                      <span className="text-[#4afaa5]">{highlight}</span>
+                      <span className="text-[#48c616]">{highlight}</span>
                       <span>{parts.slice(1).join(highlight)}</span>
                     </>
                   )
@@ -84,13 +84,13 @@ export function VideoHero() {
               <span className={`typing-cursor ${isTypingComplete ? "opacity-0" : ""}`}>|</span>
             </span>
           </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-8 md:mb-10 text-pretty">
+          <p className="text-md md:text-xl lg:text-2xl text-white/90 mb-8 md:mb-10 text-pretty">
             {subheading}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               size="lg"
-              className="bg-[#10B981] hover:bg-[#059669] text-white px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="bg-[#fdf697] hover:bg-[#059669] text-[#00996c] hover:text-white px-4 py-4 md:px-8 md:py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl"
               asChild
             >
               <a href={cta1.href || "#"}>{cta1.label}</a>
@@ -98,8 +98,8 @@ export function VideoHero() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-[#074E3B] px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 bg-transparent"
-              asChild
+                className="border-2 border-[#fdf697] text-white hover:bg-white hover:text-[#074E3B] px-4 py-4 md:px-8 md:py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 bg-transparent"
+                asChild
             >
               <a href={cta2.href || "#"}>{cta2.label}</a>
             </Button>

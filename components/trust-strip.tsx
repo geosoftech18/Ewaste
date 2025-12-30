@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { Phone, Clock, Shield, Award, Factory } from "lucide-react"
+import { Phone, Clock, Shield, Award, Factory, Truck } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 
 interface USPItem {
@@ -46,6 +46,11 @@ export function TrustStrip() {
       title: "Industries Served",
       subtitle: "",
       countUp: { start: 0, end: 20, suffix: "+ Industries" },
+    },
+    {
+      icon: <Truck className="w-7 h-7" />,
+      title: "Same Day Pickup",
+      subtitle: "Fast Service",
     },
   ]
 
@@ -110,7 +115,7 @@ export function TrustStrip() {
     >
       <div className="container mx-auto px-4">
         <div
-          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 transition-all duration-1000 ${
+          className={`grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 md:gap-6 transition-all duration-1000 ${
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
