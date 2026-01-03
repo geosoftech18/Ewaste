@@ -9,6 +9,7 @@ import { CertificationsCompliance } from "@/components/certifications-compliance
 import { QuickPickupForm } from "@/components/quick-pickup-form"
 import { ClientsCarousel } from "@/components/clients-carousel"
 import { TestimonialsSection } from "@/components/testimonials-section"
+import EWastePopup from "@/components/EWastePopup"
 import dynamic from "next/dynamic"
 
 const InteractiveIndiaMap = dynamic(() => import("@/components/about/InteractiveIndiaMap"), {
@@ -35,6 +36,7 @@ export default function Home() {
       <QuickPickupForm />
       <ClientsCarousel />
       <TestimonialsSection />
+      <EWastePopup />
     </>
   )
 }

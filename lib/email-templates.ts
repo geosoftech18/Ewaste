@@ -1080,3 +1080,91 @@ export function generateBrochureDownloadEmail(data: {
 </html>
   `.trim()
 }
+
+export function generateEWastePopupEmail(data: {
+  name: string
+  contactNumber: string
+}): string {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Waste Pickup Request</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f5f5f5; padding: 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">♻️ New E-Waste Pickup Request</h1>
+              <p style="margin: 10px 0 0 0; color: #d1fae5; font-size: 16px;">S P Recycling Pvt Ltd</p>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding: 40px 30px;">
+              <div style="background-color: #ecfdf5; border-left: 4px solid #10B981; padding: 15px; margin-bottom: 30px; border-radius: 6px;">
+                <p style="margin: 0; color: #065f46; font-weight: 600; font-size: 16px;">🔄 Quick Pickup Request from Website Popup</p>
+              </div>
+
+              <h2 style="margin: 0 0 20px 0; color: #1f2937; font-size: 22px; font-weight: 600;">Customer Information</h2>
+              
+              <table role="presentation" style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                    <strong style="color: #374151; font-size: 14px; display: inline-block; width: 140px;">Name:</strong>
+                    <span style="color: #1f2937; font-size: 14px;">${data.name}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #e5e7eb;">
+                    <strong style="color: #374151; font-size: 14px; display: inline-block; width: 140px;">Contact Number:</strong>
+                    <span style="color: #1f2937; font-size: 14px;">${data.contactNumber}</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px 0;">
+                    <strong style="color: #374151; font-size: 14px; display: inline-block; width: 140px;">Source:</strong>
+                    <span style="color: #1f2937; font-size: 14px;">Website Popup Form</span>
+                  </td>
+                </tr>
+              </table>
+
+              <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin-bottom: 20px; border-radius: 6px;">
+                <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.6;">
+                  <strong>Note:</strong> This is a quick pickup request submitted through the website popup. Please contact the customer to collect additional details such as address, preferred pickup date, and e-waste items.
+                </p>
+              </div>
+
+              <!-- Action Button -->
+              <table role="presentation" style="width: 100%; margin-top: 30px;">
+                <tr>
+                  <td align="center" style="padding: 20px 0;">
+                    <a href="tel:${data.contactNumber}" style="display: inline-block; background: linear-gradient(135deg, #10B981 0%, #059669 100%); color: #ffffff; text-decoration: none; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.3);">Call Customer</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+              <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">This is an automated email from S P Recycling Pvt Ltd</p>
+              <p style="margin: 0; color: #9ca3af; font-size: 12px;">© ${new Date().getFullYear()} S P Recycling. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim()
+}

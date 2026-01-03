@@ -44,7 +44,8 @@ export async function POST(request: NextRequest) {
       generateQuoteModalEmail,
       generateBrochureDownloadEmail,
       generateCityPickupRequestEmail,
-      generateCityPickupThankYouEmail
+      generateCityPickupThankYouEmail,
+      generateEWastePopupEmail
     } = await import('@/lib/email-templates')
 
     let htmlContent = ''
@@ -75,6 +76,10 @@ export async function POST(request: NextRequest) {
       case 'city-pickup-request':
         htmlContent = generateCityPickupRequestEmail(data)
         subject = `🔄 New E-Waste Pickup Request from ${data.fullName} - ${data.city}`
+        break
+      case 'ewaste-popup':
+        htmlContent = generateEWastePopupEmail(data)
+        subject = `♻️ New E-Waste Pickup Request from ${data.name} (Popup)`
         break
       default:
         return NextResponse.json(
