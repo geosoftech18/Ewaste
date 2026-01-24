@@ -1081,6 +1081,79 @@ export function generateBrochureDownloadEmail(data: {
   `.trim()
 }
 
+export function generateAdminLoginOtpEmail(data: {
+  email: string
+  otp: string
+}): string {
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login OTP</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+  <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f5f5f5; padding: 20px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" style="max-width: 600px; width: 100%; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 40px 30px; text-align: center;">
+              <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 700;">🔐 Admin Login Verification</h1>
+              <p style="margin: 10px 0 0 0; color: #d1fae5; font-size: 16px;">S P Recycling Admin Panel</p>
+            </td>
+          </tr>
+          
+          <!-- Content -->
+          <tr>
+            <td style="padding: 40px 30px;">
+              <div style="background-color: #ecfdf5; border-left: 4px solid #10B981; padding: 15px; margin-bottom: 30px; border-radius: 6px;">
+                <p style="margin: 0; color: #065f46; font-weight: 600; font-size: 16px;">🔑 One-Time Password (OTP)</p>
+              </div>
+
+              <p style="color: #1f2937; font-size: 16px; line-height: 1.6; margin-bottom: 20px;">Hi Admin,</p>
+
+              <p style="color: #374151; font-size: 14px; line-height: 1.6; margin-bottom: 30px;">
+                You requested to log in to the admin panel. Use the 6-digit code below to complete your login. This code will expire in 10 minutes.
+              </p>
+
+              <!-- OTP Box -->
+              <div style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 30px; border-radius: 12px; text-align: center; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.2);">
+                <p style="margin: 0 0 15px 0; color: #d1fae5; font-size: 14px; font-weight: 600;">Your Verification Code</p>
+                <div style="background-color: rgba(255, 255, 255, 0.1); border: 2px dashed rgba(255, 255, 255, 0.3); padding: 20px; border-radius: 8px;">
+                  <p style="margin: 0; color: #ffffff; font-size: 48px; font-weight: bold; letter-spacing: 8px; font-family: 'Courier New', monospace;">${data.otp}</p>
+                </div>
+                <p style="margin: 15px 0 0 0; color: #d1fae5; font-size: 12px;">Valid for 10 minutes</p>
+              </div>
+
+              <div style="background-color: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; margin-bottom: 30px; border-radius: 6px;">
+                <p style="margin: 0; color: #92400e; font-size: 14px; line-height: 1.6;"><strong>Security Note:</strong> Never share this code with anyone.</p>
+              </div>
+
+              <p style="color: #6b7280; font-size: 12px; line-height: 1.6; margin-bottom: 20px;"><strong>Email:</strong> ${data.email}</p>
+
+              <p style="color: #374151; font-size: 14px; line-height: 1.6;">If you didn't request this code, you can safely ignore this email. Your account is secure.</p>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background-color: #f9fafb; padding: 30px; text-align: center; border-top: 1px solid #e5e7eb;">
+              <p style="margin: 0 0 10px 0; color: #6b7280; font-size: 14px;">This is an automated security email from S P Recycling Admin Panel</p>
+              <p style="margin: 0; color: #9ca3af; font-size: 12px;">© ${new Date().getFullYear()} S P Recycling. All rights reserved.</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
+  `.trim()
+}
+
 export function generateEWastePopupEmail(data: {
   name: string
   contactNumber: string
