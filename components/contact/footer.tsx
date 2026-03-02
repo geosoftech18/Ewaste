@@ -33,7 +33,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="animate-fade-in animation-delay-200">
+          <div className="animate-fade-in animation-delay-200 border-l-2 border-white pl-4 sm:border-l-0 sm:pl-0">
             <h4 className="text-white text-lg font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
               {["Home", "About Us", "Services","Social Impact","Contact Us"].map((link, index) => (
@@ -50,7 +50,7 @@ export default function Footer() {
           </div>
 
           {/* Services */}
-          <div className="animate-fade-in animation-delay-400">
+          <div className="animate-fade-in animation-delay-400 border-l-2 border-white pl-4 sm:border-l-0 sm:pl-0">
             <h4 className="text-white text-lg font-bold mb-4">Services</h4>
             <ul className="space-y-2 text-sm">
               {["E-Waste Pickup", "IT & Telecom Equipment", "Sustainable Waste Solutions", "EPR Compliance Solutions"].map((service, index) => (
@@ -66,7 +66,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="animate-fade-in animation-delay-400">
+          <div className="animate-fade-in animation-delay-400 border-l-2 border-white pl-4 sm:border-l-0 sm:pl-0">
             <h4 className="text-white text-lg font-bold mb-4">Cities We Serve</h4>
             <ul className="space-y-2 text-sm">
               {["Hyderabad", "Delhi", "Mumbai", "Bangalore", "Chennai","Pune","Andhra-Pradesh"].map((city, index) => (
@@ -80,7 +80,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="animate-fade-in animation-delay-600">
+          <div className="animate-fade-in animation-delay-600 border-l-2 border-white pl-4 sm:border-l-0 sm:pl-0">
             <h4 className="text-white text-lg font-bold mb-4">Contact</h4>
             <ul className="space-y-2 text-sm">
               <li>

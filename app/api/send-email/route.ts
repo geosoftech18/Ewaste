@@ -45,7 +45,13 @@ export async function POST(request: NextRequest) {
       generateBrochureDownloadEmail,
       generateCityPickupRequestEmail,
       generateCityPickupThankYouEmail,
-      generateEWastePopupEmail
+      generateEWastePopupEmail,
+      generateInstantPickupAdminEmail,
+      generateInstantPickupThankYouEmail,
+      generateStrongCTAEmail,
+      generateFinalLeadEmail,
+      generateFinalLeadThankYouEmail,
+      generateAuditRequestEmail
     } = await import('@/lib/email-templates')
 
     let htmlContent = ''
@@ -81,6 +87,22 @@ export async function POST(request: NextRequest) {
         htmlContent = generateEWastePopupEmail(data)
         subject = `♻️ New E-Waste Pickup Request from ${data.name} (Popup)`
         break
+      case 'instant-pickup':
+        htmlContent = generateInstantPickupAdminEmail(data)
+        subject = `⚡ Instant Pickup Request from ${data.fullName}`
+        break
+      case 'strong-cta':
+        htmlContent = generateStrongCTAEmail(data)
+        subject = `📅 Schedule Instant Pickup Request from ${data.name}`
+        break
+      case 'final-lead':
+        htmlContent = generateFinalLeadEmail(data)
+        subject = `🔒 Secure Compliance Consultation Request from ${data.fullName} - ${data.companyName}`
+        break
+      case 'audit-request':
+        htmlContent = generateAuditRequestEmail(data)
+        subject = `🔒 Professional Audit Request from ${data.fullName} - ${data.companyName}`
+        break
       default:
         return NextResponse.json(
           { error: 'Invalid form type' },
@@ -99,8 +121,8 @@ export async function POST(request: NextRequest) {
     // Send owner notification email
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail)
 
-    // Send thank you email to customer for quick-pickup, pickup-form, and city-pickup-request types
-    if ((type === 'quick-pickup' || type === 'pickup-form' || type === 'city-pickup-request') && data.email) {
+    // Send thank you email to customer for quick-pickup, pickup-form, city-pickup-request, instant-pickup, and final-lead types
+    if ((type === 'quick-pickup' || type === 'pickup-form' || type === 'city-pickup-request' || type === 'instant-pickup' || type === 'final-lead') && data.email) {
       try {
         let thankYouHtml = ''
         let thankYouSubject = ''
@@ -125,6 +147,17 @@ export async function POST(request: NextRequest) {
             itemType: data.itemType
           })
           thankYouSubject = 'Thank You for Your E-Waste Pickup Request - S P Recycling'
+        } else if (type === 'instant-pickup') {
+          thankYouHtml = generateInstantPickupThankYouEmail({
+            fullName: data.fullName
+          })
+          thankYouSubject = 'Thank You for Your Instant Pickup Request - S P Recycling'
+        } else if (type === 'final-lead') {
+          thankYouHtml = generateFinalLeadThankYouEmail({
+            fullName: data.fullName,
+            companyName: data.companyName
+          })
+          thankYouSubject = 'Thank You for Your Secure Compliance Consultation Request - S P Recycling'
         }
 
         const customerEmail = new brevo.SendSmtpEmail()
@@ -132,7 +165,7 @@ export async function POST(request: NextRequest) {
         customerEmail.htmlContent = thankYouHtml
         customerEmail.textContent = thankYouHtml.replace(/<[^>]*>/g, '')
         customerEmail.sender = { name: FROM_NAME, email: FROM_EMAIL }
-        customerEmail.to = [{ email: data.email, name: data.fullName }]
+        customerEmail.to = [{ email: data.email, name: data.fullName || data.name }]
 
         // Send thank you email to customer
         await apiInstance.sendTransacEmail(customerEmail)
