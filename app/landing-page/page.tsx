@@ -108,7 +108,7 @@ export default function Home() {
                 <div className="absolute bottom-0 right-0 w-2/3 h-2/3 bg-gradient-radial from-[#1FA463]/25 via-[#1FA463]/10 to-transparent z-10"></div>
 
                 <img
-                  src="https://images.adsttc.com/media/images/5f11/f230/b357/651e/7600/0343/newsletter/recycled-architecture-105.jpg?1595011593"
+                  src="/landing-page/landing-hero.png"
                   alt="E-Waste Recycling Facility"
                   className="w-full h-[300px] sm:h-[400px] object-cover scale-105 hover:scale-100 transition-transform duration-700"
                   style={{
@@ -277,7 +277,7 @@ export default function Home() {
                   <div className="absolute bottom-0 right-0 w-2/3 h-2/3 bg-gradient-radial from-[#1FA463]/25 via-[#1FA463]/10 to-transparent z-10"></div>
 
                   <img
-                    src="https://images.adsttc.com/media/images/5f11/f230/b357/651e/7600/0343/newsletter/recycled-architecture-105.jpg?1595011593"
+                    src="/landing-page/landing-hero.png"
                     alt="E-Waste Recycling Facility"
                     className="w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] object-cover scale-105 hover:scale-100 transition-transform duration-700"
                     style={{
