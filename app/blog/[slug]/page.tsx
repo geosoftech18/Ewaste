@@ -371,10 +371,7 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
                   <span>{post.readTime}</span>
                 </div>
                 
-                <div className="flex items-center gap-2">
-                  <MessageCircle className="w-4 h-4" />
-                  <span>{post.comments} comments</span>
-                </div>
+               
               </div>
 
               {/* Tags */}
