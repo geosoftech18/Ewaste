@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -11,6 +12,17 @@ import FAQ from '@/components/service/FAQ';
 import QuoteForm from '@/components/service/QuoteForm';
 import Footer from '@/components/service/Footer';
 import { ServicesGrid } from '@/components/services-grid';
+
+export const metadata: Metadata = {
+  title: "E-Waste Recycling Services in India | Electronic Waste Disposal & Data Destruction - SP Recycling",
+  description: "Comprehensive e-waste recycling services including IT equipment, consumer electronics, batteries, printers, and data destruction. ISO certified, secure, eco-friendly disposal across India. Get free quotes and same-day pickup.",
+  keywords: "e-waste recycling services, electronic waste disposal, IT equipment recycling, data destruction services, battery recycling, printer recycling, consumer electronics recycling",
+  openGraph: {
+    title: "E-Waste Recycling Services in India | SP Recycling",
+    description: "Comprehensive e-waste recycling services including IT equipment, consumer electronics, batteries, and data destruction. ISO certified and eco-friendly.",
+    type: "website",
+  },
+}
 
 const services = [
   {

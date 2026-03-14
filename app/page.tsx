@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { Header } from "@/components/header"
 import { VideoHero } from "@/components/video-hero"
 import { HeroSlider } from "@/components/hero-slider"
@@ -21,6 +22,17 @@ const InteractiveIndiaMap = dynamic(() => import("@/components/about/Interactive
     </div>
   </div>
 })
+
+export const metadata: Metadata = {
+  title: "E-Waste Recycling Services in India | SP Recycling Pvt Ltd - Certified & Eco-Friendly",
+  description: "Professional e-waste recycling services across India. ISO certified, secure data destruction, 100% eco-friendly disposal. Serving Hyderabad, Mumbai, Delhi, Bangalore, Chennai, Pune & more. Get cash for old electronics, corporate bulk processing, and certified data destruction certificates.",
+  keywords: "e-waste recycling, electronic waste disposal, data destruction, IT equipment recycling, certified recycling, eco-friendly disposal, Hyderabad, Mumbai, Delhi, Bangalore",
+  openGraph: {
+    title: "E-Waste Recycling Services in India | SP Recycling Pvt Ltd",
+    description: "Professional e-waste recycling services across India. ISO certified, secure data destruction, 100% eco-friendly disposal.",
+    type: "website",
+  },
+}
 
 export default function Home() {
   return (

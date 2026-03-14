@@ -133,7 +133,7 @@ export default function FinalLeadSection() {
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-      setIsSubmitting(false);
+    setIsSubmitting(false);
       alert('Unable to submit. Please check your connection and try again.');
     }
   };

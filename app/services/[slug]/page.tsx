@@ -24,13 +24,19 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   if (!service) {
     return {
-      title: 'Service Not Found',
+      title: 'Service Not Found | SP Recycling',
     };
   }
 
   return {
-    title: `${service.title} | E-Waste Recycling Services`,
-    description: service.subtitle,
+    title: `${service.title} | Professional E-Waste Recycling & Data Destruction Services in India - SP Recycling`,
+    description: `${service.subtitle} ISO certified, secure data destruction, eco-friendly disposal. Get free quotes and same-day pickup across major cities in India.`,
+    keywords: `${service.title.toLowerCase()}, e-waste recycling, electronic waste disposal, data destruction, certified recycling, ${service.title.toLowerCase()} services`,
+    openGraph: {
+      title: `${service.title} | Professional E-Waste Recycling Services`,
+      description: service.subtitle,
+      type: 'website',
+    },
   };
 }
 

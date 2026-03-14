@@ -2,7 +2,10 @@ import { MetadataRoute } from 'next'
 
 export default function robots(): MetadataRoute.Robots {
   // Get base URL from environment variable or use default
-    const baseUrl = 'https://www.sprecycling.in'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+    (process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:3000' 
+      : 'https://www.sprecycling.in')
 
   return {
     rules: [
@@ -31,4 +34,5 @@ export default function robots(): MetadataRoute.Robots {
     sitemap: `${baseUrl}/sitemap.xml`,
   }
 }
+
 

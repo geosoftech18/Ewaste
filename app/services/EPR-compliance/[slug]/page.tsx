@@ -22,17 +22,19 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   if (!service) {
     return {
-      title: 'EPR Service Not Found',
+      title: 'EPR Service Not Found | SP Recycling',
     };
   }
 
   return {
-    title: `${service.title} | EPR Compliance Solutions`,
-    description: service.subtitle,
+    title: `${service.title} | Extended Producer Responsibility Compliance Solutions in India - SP Recycling`,
+    description: `${service.subtitle} Complete EPR registration, documentation, and compliance support for manufacturers, importers, and brand owners. Regulatory compliance made easy.`,
+    keywords: `${service.title.toLowerCase()}, EPR compliance, extended producer responsibility, EPR registration, regulatory compliance, environmental compliance, ${service.title.toLowerCase()} services`,
     openGraph: {
-      title: service.title,
+      title: `${service.title} | EPR Compliance Solutions - SP Recycling`,
       description: service.subtitle,
       images: [service.heroImage],
+      type: 'website',
     },
   };
 }

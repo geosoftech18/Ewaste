@@ -1,3 +1,4 @@
+import { Metadata } from "next"
 import { AboutHero } from "@/components/about/about-hero"
 import { MissionVision } from "@/components/about/mission-vision"
 import { CompanyTimeline } from "@/components/about/company-timeline"
@@ -17,6 +18,17 @@ const InteractiveIndiaMap = dynamic(() => import("@/components/about/Interactive
     </div>
   </div>
 })
+
+export const metadata: Metadata = {
+  title: "About SP Recycling Pvt Ltd | Leading E-Waste Recycling Company in India - ISO Certified",
+  description: "Learn about SP Recycling, a leading ISO certified e-waste recycling company in India. Our mission, vision, team, and presence across major cities. We provide professional, eco-friendly electronic waste disposal and data destruction services with 100% compliance.",
+  keywords: "about e-waste recycling company, SP Recycling, ISO certified recycling, e-waste management company India, recycling company profile",
+  openGraph: {
+    title: "About SP Recycling Pvt Ltd | Leading E-Waste Recycling Company",
+    description: "ISO certified e-waste recycling company providing professional, eco-friendly electronic waste disposal across India.",
+    type: "website",
+  },
+}
 
 export default function AboutPage() {
   return (

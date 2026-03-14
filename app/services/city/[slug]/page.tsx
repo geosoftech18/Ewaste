@@ -26,17 +26,25 @@ export async function generateMetadata({ params }: { params: { slug: string } })
 
   if (!city) {
     return {
-      title: 'City Not Found',
+      title: 'City Not Found | SP Recycling',
     };
   }
 
+  // Create more SEO-friendly title
+  const seoTitle = `${city.title} | Certified E-Waste Recycling, Data Destruction & Secure Disposal Services - SP Recycling`;
+
+  // Create concise, SEO-friendly meta description (150-160 characters)
+  const metaDescription = `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics. ISO certified & eco-friendly disposal.`;
+
   return {
-    title: city.title,
-    description: city.description,
+    title: seoTitle,
+    description: metaDescription,
+    keywords: `e-waste recycling ${city.name}, electronic waste disposal ${city.name}, data destruction ${city.name}, IT equipment recycling ${city.name}, certified recycling ${city.name}, ${city.name} e-waste management`,
     openGraph: {
-      title: city.title,
-      description: city.description,
+      title: seoTitle,
+      description: metaDescription,
       images: [city.heroImage],
+      type: 'website',
     },
   };
 }

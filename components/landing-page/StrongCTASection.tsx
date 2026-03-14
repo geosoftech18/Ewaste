@@ -57,12 +57,12 @@ export default function StrongCTASection() {
       const result = await response.json();
 
       if (result.success) {
-        setIsSubmitting(false);
-        setSubmitSuccess(true);
-        setTimeout(() => {
-          setSubmitSuccess(false);
-          setFormData({ name: "", company: "", city: "", phone: "" });
-        }, 3000);
+    setIsSubmitting(false);
+    setSubmitSuccess(true);
+    setTimeout(() => {
+      setSubmitSuccess(false);
+      setFormData({ name: "", company: "", city: "", phone: "" });
+    }, 3000);
       } else {
         setIsSubmitting(false);
         console.error('Error submitting form:', result.error);

@@ -7,7 +7,10 @@ import { getAllEPRServiceSlugs } from '@/lib/epr-service-data'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Get base URL from environment variable or use default
-  const baseUrl = 'https://www.sprecycling.in'
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
+    (process.env.NODE_ENV === 'development' 
+      ? 'http://localhost:3000' 
+      : 'https://www.sprecycling.in')
 
   // Static pages with their priorities and change frequencies
   const staticPages: MetadataRoute.Sitemap = [
@@ -129,4 +132,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...eprServicePages,
   ]
 }
+
 

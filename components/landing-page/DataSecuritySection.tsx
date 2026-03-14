@@ -134,25 +134,25 @@ export default function DataSecuritySection() {
                 style={{ transitionTimingFunction: "cubic-bezier(0.16, 1, 0.3, 1)" }}
               >
                 <Link href="/audit-request">
-                  <button className="group relative bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base shadow-[0_12px_40px_rgba(31,164,99,0.35)] hover:shadow-[0_16px_50px_rgba(31,164,99,0.45)] hover:-translate-y-1 active:scale-[0.97] transition-all duration-300 overflow-hidden w-full sm:w-auto">
-                    <span className="relative z-10 flex items-center gap-2 justify-center">
-                      Request Secure Destruction Audit
-                      <svg
-                        className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
-                        />
-                      </svg>
-                    </span>
-                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </button>
+                <button className="group relative bg-gradient-to-r from-emerald-500 to-emerald-600 text-white px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-semibold text-sm sm:text-base shadow-[0_12px_40px_rgba(31,164,99,0.35)] hover:shadow-[0_16px_50px_rgba(31,164,99,0.45)] hover:-translate-y-1 active:scale-[0.97] transition-all duration-300 overflow-hidden w-full sm:w-auto">
+                  <span className="relative z-10 flex items-center gap-2 justify-center">
+                    Request Secure Destruction Audit
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </button>
                 </Link>
 
                 <p className="text-xs text-white/60 mt-3 font-medium text-center sm:text-left">

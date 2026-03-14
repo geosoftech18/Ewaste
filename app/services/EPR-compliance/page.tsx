@@ -7,8 +7,14 @@ import { ArrowRight, Shield, Battery, Package, Car } from 'lucide-react';
 import { getAllEPRServices } from '@/lib/epr-service-data';
 
 export const metadata: Metadata = {
-  title: 'EPR Compliance Solutions | Extended Producer Responsibility',
-  description: 'Comprehensive EPR compliance solutions for Electronics, Battery, Packaging, and Automotive sectors. Ensure regulatory compliance and environmental responsibility.',
+  title: 'EPR Compliance Solutions in India | Extended Producer Responsibility Services - SP Recycling',
+  description: 'Comprehensive EPR compliance solutions for Electronics, Battery, Packaging, and Automotive sectors. Complete EPR registration, documentation, and regulatory compliance support for manufacturers, importers, and brand owners in India.',
+  keywords: 'EPR compliance, extended producer responsibility, EPR registration, EPR compliance services, regulatory compliance, environmental compliance, electronics EPR, battery EPR, packaging EPR',
+  openGraph: {
+    title: 'EPR Compliance Solutions | Extended Producer Responsibility Services',
+    description: 'Complete EPR registration, documentation, and regulatory compliance support for manufacturers, importers, and brand owners.',
+    type: 'website',
+  },
 };
 
 const serviceIcons = {
