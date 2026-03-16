@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
   }
 
-  // Create more SEO-friendly title
-  const seoTitle = `${city.title} | Certified E-Waste Recycling, Data Destruction & Secure Disposal Services - SP Recycling`;
+  // Create concise, SEO-friendly title with brand at the end
+  const seoTitle = `${city.title} | SP Recycling`;
 
   // Create concise, SEO-friendly meta description (150-160 characters)
   const metaDescription = `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics. ISO certified & eco-friendly disposal.`;

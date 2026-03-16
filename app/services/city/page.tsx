@@ -14,7 +14,7 @@ import { ServiceCities } from "@/components/city/service-cities"
 import { TestimonialsSection } from "@/components/testimonials-section"
 
 export const metadata: Metadata = {
-  title: "E-Waste Recycling Services by City | Professional Electronic Waste Disposal Across India - SP Recycling",
+  title: "City-Wise E-Waste Recycling Services in India | SP Recycling",
   description: "Find professional e-waste recycling services in your city. We serve Hyderabad, Mumbai, Delhi, Bangalore, Chennai, Pune, Andhra Pradesh and more. Same-day pickup, certified data destruction, and eco-friendly disposal available.",
   keywords: "e-waste recycling by city, city-wise recycling services, Hyderabad e-waste, Mumbai e-waste, Delhi e-waste, Bangalore e-waste, Chennai e-waste, Pune e-waste, Andhra Pradesh e-waste",
   openGraph: {

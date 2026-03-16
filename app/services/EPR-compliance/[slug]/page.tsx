@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${service.title} | Extended Producer Responsibility Compliance Solutions in India - SP Recycling`,
+    title: `${service.title} | EPR Compliance in India | SP Recycling`,
     description: `${service.subtitle} Complete EPR registration, documentation, and compliance support for manufacturers, importers, and brand owners. Regulatory compliance made easy.`,
     keywords: `${service.title.toLowerCase()}, EPR compliance, extended producer responsibility, EPR registration, regulatory compliance, environmental compliance, ${service.title.toLowerCase()} services`,
     openGraph: {

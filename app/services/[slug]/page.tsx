@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${service.title} | Professional E-Waste Recycling & Data Destruction Services in India - SP Recycling`,
+    title: `${service.title} | Professional E-Waste Recycling | SP Recycling`,
     description: `${service.subtitle} ISO certified, secure data destruction, eco-friendly disposal. Get free quotes and same-day pickup across major cities in India.`,
     keywords: `${service.title.toLowerCase()}, e-waste recycling, electronic waste disposal, data destruction, certified recycling, ${service.title.toLowerCase()} services`,
     openGraph: {

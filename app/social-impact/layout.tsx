@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: "Social Impact & CSR Programs | Community Empowerment & Sustainability - SP Recycling",
+  title: "Social Impact & CSR Programs in India | SP Recycling",
   description: "Learn about SP Recycling's social impact initiatives including waste picker empowerment, zero waste events, circular economy advocacy, and community mobilization programs. Creating lasting change through sustainable action.",
   keywords: "social impact, CSR programs, waste picker empowerment, zero waste events, circular economy, community mobilization, sustainability programs",
   openGraph: {
@@ -18,6 +18,7 @@ export default function SocialImpactLayout({
 }) {
   return children
 }
+
 
 
 

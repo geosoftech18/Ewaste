@@ -8,7 +8,7 @@ import CSRSection from "@/components/contact/csr-section"
 import NewsletterSection from "@/components/contact/newsletter-section"
 
 export const metadata: Metadata = {
-  title: "Contact Us for E-Waste Recycling Services | SP Recycling - Get Free Quote & Schedule Pickup",
+  title: "Contact E-Waste Recycling Experts in India | SP Recycling",
   description: "Contact SP Recycling for professional e-waste recycling services. Get free quotes, schedule same-day pickup, request data destruction certificates. Available in Hyderabad, Mumbai, Delhi, Bangalore, Chennai, Pune. Call us or fill out the contact form for instant assistance.",
   keywords: "contact e-waste recycling, schedule pickup, free quote, data destruction, e-waste disposal contact, recycling services contact",
   openGraph: {

@@ -11,7 +11,7 @@ import { Header } from "@/components/header"
 import Footer from "@/components/contact/footer"
 
 export const metadata: Metadata = {
-  title: "SP Recycling Pvt Ltd - E-Waste Recycling Services",
+  title: "E-Waste Recycling Services in India | SP Recycling",
   description: "ISO Certified E-Waste Recycling | Secure Data Destruction | 100% Eco-Friendly",
   generator: "geosoft tech private limited",
 }

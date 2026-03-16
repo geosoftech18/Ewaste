@@ -14,7 +14,7 @@ import Footer from '@/components/service/Footer';
 import { ServicesGrid } from '@/components/services-grid';
 
 export const metadata: Metadata = {
-  title: "E-Waste Recycling Services in India | Electronic Waste Disposal & Data Destruction - SP Recycling",
+  title: "E-Waste Recycling Services Across India | SP Recycling",
   description: "Comprehensive e-waste recycling services including IT equipment, consumer electronics, batteries, printers, and data destruction. ISO certified, secure, eco-friendly disposal across India. Get free quotes and same-day pickup.",
   keywords: "e-waste recycling services, electronic waste disposal, IT equipment recycling, data destruction services, battery recycling, printer recycling, consumer electronics recycling",
   openGraph: {
