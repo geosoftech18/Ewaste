@@ -67,6 +67,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
           description={service.whyChooseUs.description}
           features={service.whyChooseUs.features}
           stats={service.whyChooseUs.stats}
+          link={service.link}
         />
       )}
 

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import { CheckCircle, Shield, Award, Users, Clock, Leaf } from "lucide-react"
+import { useRouter } from "next/navigation"
 
 interface WhyChooseUsProps {
   title: string
@@ -16,6 +17,7 @@ interface WhyChooseUsProps {
     number: string
     label: string
   }>
+  link: string
 }
 
 const iconMap = {
@@ -27,7 +29,8 @@ const iconMap = {
   'leaf': Leaf,
 }
 
-export function WhyChooseUs({ title, subtitle, description, features }: WhyChooseUsProps) {
+export function WhyChooseUs({ title, subtitle, description, features, link  }: WhyChooseUsProps) {
+  const router = useRouter()
   const [isVisible, setIsVisible] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const sectionRef = useRef<HTMLElement>(null)
@@ -91,7 +94,7 @@ export function WhyChooseUs({ title, subtitle, description, features }: WhyChoos
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-2xl cursor-pointer md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6" onClick={() => router.push(link)}>
             {title}
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-8">

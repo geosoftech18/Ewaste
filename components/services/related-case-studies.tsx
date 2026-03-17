@@ -19,7 +19,7 @@ export function RelatedCaseStudies({ caseStudies }: RelatedCaseStudiesProps) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-            <span className="text-3xl">🏢</span>
+            
             Trusted by Businesses & Institutions
           </h2>
           <p className="text-muted-foreground text-lg">Real results from real clients</p>

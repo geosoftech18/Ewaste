@@ -4,6 +4,7 @@ export interface ServiceData {
   subtitle: string;
   heroImage: string;
   summary: string;
+  link: string;
   benefits: Array<{
     icon: string;
     title: string;
@@ -68,6 +69,7 @@ const servicesData: Record<string, ServiceData> = {
     subtitle: 'Eco-friendly recycling for all types of electronic waste — safe, certified, and compliant.',
     heroImage: '/services/electronic%20waste.png',
     summary: 'We handle every type of e-waste responsibly — from collection to certified recycling — ensuring zero landfill and full compliance.',
+    link: '#',
     benefits: [
       {
         icon: 'leaf',
@@ -258,6 +260,7 @@ const servicesData: Record<string, ServiceData> = {
     subtitle: 'Specialized recycling services for IT infrastructure and telecommunications equipment',
     heroImage: '/services/IT%20&%20Telecommunication.png',
     summary: 'Enterprise-grade recycling solutions for outdated IT and telecom equipment with complete audit trails and compliance documentation.',
+    link: '#',
     benefits: [
       {
         icon: 'server',
@@ -475,7 +478,8 @@ const servicesData: Record<string, ServiceData> = {
     subtitle: 'Integrated waste management for comprehensive recycling and environmental sustainability',
     heroImage: '/services/Sustainable%20Waste%20Solutions.png',
     summary: 'Holistic approach to waste management that combines waste collection, segregation, recycling, and disposal into one efficient system, focusing on reducing environmental impact while maximizing resource recovery.',
-    benefits: [
+    link: '#',
+      benefits: [
       {
         icon: 'recycle',
         title: 'Waste Segregation',
@@ -654,6 +658,7 @@ const servicesData: Record<string, ServiceData> = {
     subtitle: 'Extended Producer Responsibility services for manufacturers and brands',
     heroImage: '/services/EPR%20Compliance%20Solutions.png',
     summary: 'Comprehensive EPR solutions that empower manufacturers and brands to take accountability for the entire lifecycle of their products, ensuring regulatory compliance and responsible waste management.',
+    link: '/blog/the-growing-crisis-of-e-waste-and-how-responsible-recycling-can-fix-it',
     benefits: [
       {
         icon: 'file-check',
@@ -830,6 +835,7 @@ const servicesData: Record<string, ServiceData> = {
     subtitle: 'Recycling services for home electronics, appliances, and personal devices',
     heroImage: 'https://images.pexels.com/photos/699122/pexels-photo-699122.jpeg',
     summary: 'Convenient and responsible recycling for everyday electronics from homes and small businesses, making it easy to dispose of old devices sustainably.',
+    link: '#',
     benefits: [
       {
         icon: 'smartphone',
@@ -963,6 +969,7 @@ const servicesData: Record<string, ServiceData> = {
     subtitle: 'Professional data destruction services ensuring complete information security',
     heroImage: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg',
     summary: 'Military-grade data destruction for businesses and individuals who need absolute assurance that sensitive information is permanently eliminated.',
+    link: '#',
     benefits: [
       {
         icon: 'shield',

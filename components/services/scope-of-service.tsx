@@ -35,7 +35,7 @@ export function ScopeOfService({ items, categories }: ScopeOfServiceProps) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-            <span className="text-3xl">♻️</span>
+            
             What We Collect and Recycle
           </h2>
           <div className="flex flex-wrap gap-2 justify-center mt-6">

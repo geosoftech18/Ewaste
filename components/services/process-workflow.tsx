@@ -22,7 +22,7 @@ export function ProcessWorkflow({ steps }: ProcessWorkflowProps) {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-2xl md:text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-            <span className=" md:text-3xl text-2xl">🔄</span>
+        
             Our Process – Safe, Transparent, and Certified
           </h2>
         </div>
