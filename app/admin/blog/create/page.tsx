@@ -22,8 +22,10 @@ import {
   Type,
   FileText,
   ArrowLeft,
-  Loader
+  Loader,
+  Globe
 } from 'lucide-react'
+import { Textarea } from '@/components/ui/textarea'
 import Link from 'next/link'
 
 function BlogCreateContent() {
@@ -33,6 +35,8 @@ function BlogCreateContent() {
   const isEditing = !!editId
 
   const [title, setTitle] = useState('')
+  const [metaTitle, setMetaTitle] = useState('')
+  const [metaDescription, setMetaDescription] = useState('')
   const [content, setContent] = useState('')
   const [tags, setTags] = useState<string[]>([])
   const [newTag, setNewTag] = useState('')
@@ -82,6 +86,8 @@ function BlogCreateContent() {
           if (result.success && result.data) {
             const blog = result.data
             setTitle(blog.title)
+            setMetaTitle(typeof blog.metaTitle === 'string' ? blog.metaTitle : '')
+            setMetaDescription(typeof blog.metaDescription === 'string' ? blog.metaDescription : '')
             setContent(blog.content)
             setTags(blog.tags || [])
             setFeaturedImage(blog.featuredImage)
@@ -143,6 +149,8 @@ function BlogCreateContent() {
       const blogData = {
         title,
         content,
+        metaTitle: metaTitle.trim(),
+        metaDescription: metaDescription.trim(),
         tags,
         featuredImage,
         status: isPublished ? 'published' : 'draft',
@@ -274,6 +282,52 @@ function BlogCreateContent() {
                   onChange={(e) => setTitle(e.target.value)}
                   className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-emerald-400 focus:ring-emerald-400/20 rounded-xl h-12"
                 />
+              </motion.div>
+
+              {/* SEO metadata */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.35 }}
+                className="space-y-4 rounded-xl border border-white/10 bg-white/5 p-4 md:p-5"
+              >
+                <div className="flex items-center gap-2 text-white">
+                  <Globe className="w-5 h-5 text-emerald-400" />
+                  <span className="font-semibold">SEO metadata</span>
+                </div>
+                <p className="text-sm text-white/60">
+                  Optional. Used for search and social previews. If left blank, the blog title and auto-generated excerpt are used instead.
+                </p>
+                <div className="space-y-2">
+                  <Label htmlFor="metaTitle" className="text-white/90">
+                    Meta title
+                  </Label>
+                  <Input
+                    id="metaTitle"
+                    type="text"
+                    placeholder="Search engine title (recommended ~60 characters)"
+                    value={metaTitle}
+                    onChange={(e) => setMetaTitle(e.target.value)}
+                    maxLength={70}
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-emerald-400 focus:ring-emerald-400/20 rounded-xl h-12"
+                  />
+                  <p className="text-xs text-white/50">{metaTitle.length}/70</p>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="metaDescription" className="text-white/90">
+                    Meta description
+                  </Label>
+                  <Textarea
+                    id="metaDescription"
+                    placeholder="Short summary for search results (recommended ~155 characters)"
+                    value={metaDescription}
+                    onChange={(e) => setMetaDescription(e.target.value)}
+                    maxLength={320}
+                    rows={3}
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/50 focus:border-emerald-400 focus:ring-emerald-400/20 rounded-xl resize-y min-h-[88px]"
+                  />
+                  <p className="text-xs text-white/50">{metaDescription.length}/320</p>
+                </div>
               </motion.div>
 
               {/* Featured Image Upload */}

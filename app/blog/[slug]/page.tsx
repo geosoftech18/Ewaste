@@ -25,6 +25,8 @@ interface BlogPost {
   title: string
   content: string
   excerpt: string
+  metaTitle?: string
+  metaDescription?: string
   tags: string[]
   status: string
   featuredImage: string | null

@@ -14,6 +14,11 @@ export const metadata: Metadata = {
   title: "E-Waste Recycling Services in India | SP Recycling",
   description: "ISO Certified E-Waste Recycling | Secure Data Destruction | 100% Eco-Friendly",
   generator: "geosoft tech private limited",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({

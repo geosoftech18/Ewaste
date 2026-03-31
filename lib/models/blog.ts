@@ -4,6 +4,8 @@ export interface IBlog extends Document {
   title: string
   content: string
   excerpt: string
+  metaTitle?: string
+  metaDescription?: string
   tags: string[]
   status: 'published' | 'draft'
   featuredImage: string | null
@@ -28,6 +30,16 @@ const BlogSchema = new Schema<IBlog>(
       type: String,
       trim: true,
       maxlength: [500, 'Excerpt cannot be more than 500 characters'],
+    },
+    metaTitle: {
+      type: String,
+      trim: true,
+      maxlength: [70, 'Meta title cannot be more than 70 characters'],
+    },
+    metaDescription: {
+      type: String,
+      trim: true,
+      maxlength: [320, 'Meta description cannot be more than 320 characters'],
     },
     tags: {
       type: [String],

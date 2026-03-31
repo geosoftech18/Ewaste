@@ -51,7 +51,8 @@ export async function PUT(
 
     const { id } = params
     const body = await request.json()
-    const { title, content, excerpt, tags, featuredImage, status } = body
+    const { title, content, excerpt, metaTitle, metaDescription, tags, featuredImage, status } =
+      body
 
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -60,19 +61,27 @@ export async function PUT(
       )
     }
 
-    const blog = await Blog.findByIdAndUpdate(
-      id,
-      {
-        title,
-        content,
-        excerpt,
-        tags: tags || [],
-        featuredImage,
-        status: status || 'draft',
-        updatedAt: new Date(),
-      },
-      { new: true, runValidators: true }
-    )
+    const updatePayload: Record<string, unknown> = {
+      title,
+      content,
+      excerpt,
+      tags: tags || [],
+      featuredImage,
+      status: status || 'draft',
+      updatedAt: new Date(),
+    }
+    if (metaTitle !== undefined) {
+      updatePayload.metaTitle = typeof metaTitle === 'string' ? metaTitle.trim() || null : null
+    }
+    if (metaDescription !== undefined) {
+      updatePayload.metaDescription =
+        typeof metaDescription === 'string' ? metaDescription.trim() || null : null
+    }
+
+    const blog = await Blog.findByIdAndUpdate(id, updatePayload, {
+      new: true,
+      runValidators: true,
+    })
 
     if (!blog) {
       return NextResponse.json(

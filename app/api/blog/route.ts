@@ -46,7 +46,8 @@ export async function POST(request: NextRequest) {
     await dbConnect()
 
     const body = await request.json()
-    const { title, content, excerpt, tags, featuredImage, status } = body
+    const { title, content, excerpt, metaTitle, metaDescription, tags, featuredImage, status } =
+      body
 
     if (!title || !content) {
       return NextResponse.json(
@@ -59,6 +60,12 @@ export async function POST(request: NextRequest) {
       title,
       content,
       excerpt,
+      metaTitle:
+        typeof metaTitle === 'string' && metaTitle.trim() ? metaTitle.trim() : undefined,
+      metaDescription:
+        typeof metaDescription === 'string' && metaDescription.trim()
+          ? metaDescription.trim()
+          : undefined,
       tags: tags || [],
       featuredImage,
       status: status || 'draft',
