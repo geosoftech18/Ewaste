@@ -64,7 +64,7 @@ export function AboutHero() {
               transition={{ duration: 0.6, delay: 0.6 }}
             >
               <h4 className="text-xl sm:text-2xl text-muted-foreground font-medium text-pretty">
-              Pioneering sustainable e-waste solutions for a circular economy.
+              Reimagining the lifecycle of electronics.
               </h4>
             </motion.div>
 
@@ -75,8 +75,7 @@ export function AboutHero() {
               transition={{ duration: 0.6, delay: 0.8 }}
             >
               <p className="text-base sm:text-lg text-muted-foreground leading-relaxed text-pretty">
-              We are India&apos;s leading e-waste management and recycling company, transforming how businesses and communities handle electronic waste.
-               Through cutting-edge technology, certified processes, and unwavering commitment to environmental stewardship, we're building a future where nothing goes to waste—and everything has value.
+              We stand at the forefront of India&apos;s e-waste revolution. Not just managing it, but fundamentally rethinking its potential. It&apos;s more than just shredding old tech. It&apos;s about crafting new possibilities from discarded devices. This involves state-of-the-art processes, scrupulous certifications, and a rock-solid dedication to Mother Earth. We see a tomorrow where waste vanishes. Where everything possesses intrinsic worth.
               </p>
             </motion.div>
 

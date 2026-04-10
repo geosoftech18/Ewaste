@@ -7,33 +7,33 @@ const features = [
   {
     icon: Users,
     title: "Expert & Experienced Team",
-    description: "A highly trained team with 10+ years of industry experience in handling all types of e-waste.",
+    description: "A team that lives and breathes this stuff. Ten-plus years deep. E-waste of any stripe? We've got it.",
   },
   {
     icon: Headphones,
     title: "24/7 Customer Support",
-    description: "Always available to assist with queries, pickups, and urgent disposal needs.",
+    description: "Questions? Need a pickup? Got urgent stuff? We're on it, always.",
   },
   {
     icon: Lock,
     title: "100% Secure Data Destruction",
-    description: "Certified destruction of data storage devices with complete confidentiality.",
+    description: "Data storage gone? We obliterate it. Total secrecy, guaranteed.",
   },
   {
     icon: Shield,
     title: "Same-Day Pickup Service",
-    description: "Convenience meets efficiency. Schedule a pickup and we'll arrive the same day—no waiting, no hassle. Fast, reliable collection services available across your city for urgent disposal needs.",
+    description: "No waiting around. Schedule, and we're there, today. Quick, dependable. Across the city, when disposal can't wait.",
   },
 
   {
     icon: Recycle,
     title: "Eco-Friendly Recycling",
-    description: "Zero landfill impact — ensuring recovery, reuse, and safe disposal of hazardous components.",
+    description: "Landfill? Never. We recover, reuse, and ditch risky bits safely.",
   },
   {
     icon: Trophy,
     title: "Proven Track Record",
-    description: "20+ industries served, 99% customer satisfaction, and thousands of successful pickups.",
+    description: "Across sectors, sky-high satisfaction, and pickups that add up.",
   },
 ]
 
@@ -113,7 +113,7 @@ export function WhyChooseUs() {
             Why Choose S P Recycling Pvt Ltd?
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Trusted by businesses and households for responsible E-Waste recycling.
+          Businesses and homes trust us to do E-Waste right.
           </p>
         </div>
 

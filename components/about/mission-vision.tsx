@@ -58,7 +58,7 @@ export function MissionVision() {
           className="text-center mb-16"
         >
           <h2 className="text-2xl md:text-5xl font-bold text-gray-900 mb-3">Our Mission & Vision</h2>
-          <p className="text-lg text-gray-600 font-medium">Shaping tomorrow through responsible innovation today.</p>
+          <p className="text-lg text-gray-600 font-medium">Responsibility, today. A better future, tomorrow.</p>
         </motion.div>
 
         {/* Mission & Vision Cards */}
@@ -258,8 +258,8 @@ export function MissionVision() {
             {/* Content */}
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">Mission</h3>
             <p className="text-gray-700 leading-relaxed">
-            To revolutionize waste management by delivering end-to-end 
-            recycling solutions that are secure, compliant, and impactful—empowering individuals and enterprises to participate in a truly circular economy while protecting our planet's finite resources.
+            To completely overhaul how we think about refuse. Providing comprehensive recycling services. Secure. Compliant.
+             Impactful. This empowers both individuals and corporations to actively engage in a truly regenerative economic model. All while safeguarding our planet's irreplaceable natural wealth.
             </p>
           </motion.div>
 
@@ -453,8 +453,8 @@ export function MissionVision() {
             {/* Content */}
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">Vision</h3>
             <p className="text-gray-700 leading-relaxed">
-            To lead India's transition toward zero-waste sustainability as the nation's most trusted e-waste recycling partner—where innovation 
-            meets responsibility, and every action contributes to environmental well-being for generations to come.
+            To spearhead India's journey toward a future devoid of waste. Becoming the nation's most relied-upon e-waste recycling ally.
+             Where inventive solutions converge with conscientious practices. And where each and every action contributes positively to the environmental health of coming generations.
             </p>
           </motion.div>
         </motion.div>

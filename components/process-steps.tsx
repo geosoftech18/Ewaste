@@ -9,19 +9,19 @@ const steps = [
   {
     number: 1,
     title: "Collect",
-    description: "We collect e-waste from homes and businesses — safely and responsibly.",
+    description: "E-waste from your place or business? We snag it, safely and with care.",
     icon: Truck,
   },
   {
     number: 2,
     title: "Recycle",
-    description: "We process and dismantle waste using eco-friendly certified methods.",
+    description: "We break it down, parts out. Eco-friendly methods, always.",
     icon: Recycle,
   },
   {
     number: 3,
     title: "Reuse",
-    description: "Valuable components are reused, reducing landfill and protecting nature.",
+    description: "Good bits get a new spin, lowering landfill, saving Earth.",
     icon: RefreshCw,
   },
 ]

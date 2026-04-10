@@ -25,7 +25,7 @@ const services: Service[] = [
   {
     id: "electronic-waste",
     title: "Electronic Waste Recycle",
-    description: "Electronic Waste Recycling focuses on the safe collection, processing, and recovery of discarded electronic products. Our solutions ensure environmentally responsible recycling of devices, minimizing toxic waste while maximizing the reuse of valuable materials like metals, plastics, and components.",
+    description: "Discarded electronics: a growing problem. Electronic Waste Recycling tackles this head-on. Focusing on the careful retrieval, handling, and repurposing of old tech. Our methods? They guarantee device recycling that respects the earth. Cutting down on dangerous waste while unlocking a second life for precious resources. Metals, resilient plastics, essential components—all get a chance to be reborn.",
     image: "/services/electronic waste.png",
     gradient: "from-emerald-500 to-teal-600",
     features: ["Safe Collection", "Data Destruction", "Certified Recycling", "Material Recovery"],
@@ -37,7 +37,7 @@ const services: Service[] = [
   {
     id: "it-telecom",
     title: "IT & Telecommunication Equipment",
-    description: "IT & Telecommunication Equipment plays a vital role in today's connected world. Our solutions focus on the responsible management, refurbishment, and recycling of devices such as computers, servers, routers, and mobile equipment. We ensure secure data handling, efficient reuse, and environmentally safe disposal—supporting a sustainable and digitally connected future.",
+    description: "The digital age hinges on IT & Telecommunication Equipment. Our services center around the mindful stewardship, renewal, and recycling of gadgets. Think computers, mighty servers, ever-present routers, and mobile devices. We pledge ironclad data protocols, resourceful reuse, and earth-conscious disposal. A truly sustainable, digitally interwoven tomorrow, secured.",
     image: "/services/IT & Telecommunication.png",
     gradient: "from-blue-500 to-indigo-600",
     features: ["Secure Data Handling", "Equipment Refurbishment", "Network Equipment", "Mobile Devices"],
@@ -49,7 +49,7 @@ const services: Service[] = [
   {
     id: "Sustainable-Waste-Solutions",
     title: "Sustainable Waste Solutions",
-    description: "Integrated Waste Management is a holistic approach that combines waste collection, segregation, recycling, and disposal into one efficient system. It focuses on reducing environmental impact while maximizing resource recovery, ensuring a cleaner and more sustainable future for communities and industries alike.",
+    description: "Integrated Waste Management: picture it. Not just one-off actions, but a symphony of waste actions. Collection, meticulous sorting, forward-thinking recycling, and responsible disposal all dancing in harmony. Aim? Diminishing our footprint while coaxing maximum worth from castoffs. A future, pristine and lasting, for both communities and the corporate landscape.",
     image: "/services/Sustainable Waste Solutions.png",
     gradient: "from-purple-500 to-pink-600",
     features: ["Waste Segregation", "Resource Recovery", "Environmental Impact", "Community Solutions"],
@@ -61,7 +61,7 @@ const services: Service[] = [
   {
     id: "EPR-Compliance-Solutions",
     title: "EPR Compliance Solutions",
-    description: "Extended Producer Responsibility (EPR) Solutions empower manufacturers and brands to take accountability for the entire lifecycle of their products. From design to post-consumer waste collection, our EPR services ensure regulatory compliance, efficient recycling, and responsible waste management—creating a cleaner and more sustainable ecosystem for all.",
+    description: "Extended Producer Responsibility (EPR) Solutions shift the script. They empower makers and brands, instilling ownership for their products' total journey. From blueprint to the moment it's no longer wanted, our EPR services are your shield. Navigating rules, championing recycling that works, and fostering waste handling that's accountable. It is crafting an ecosystem, cleaner and more viable, for everyone.",
     image: "/services/EPR Compliance Solutions.png",
     gradient: "from-yellow-500 to-orange-600",
     features: ["Regulatory Compliance", "Lifecycle Management", "Brand Accountability", "Ecosystem Solutions"],
