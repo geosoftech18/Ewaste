@@ -94,10 +94,10 @@ export function EnvironmentalImpact() {
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-2xl sm:text-5xl font-bold text-foreground mb-4">Our Environmental Impact</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Together, we're making a real difference for our planet. See the positive impact of responsible e-waste
-            recycling.
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+          Together, we're making a real difference for our planet. See the positive impact of responsible electronics recovery and asset recycling.
           </p>
+         
         </div>
 
         <div ref={ref} className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">

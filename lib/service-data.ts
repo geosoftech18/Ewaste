@@ -66,7 +66,7 @@ const servicesData: Record<string, ServiceData> = {
   'electronic-waste-recycle': {
     slug: 'electronic-waste-recycle',
     title: 'Electronic Waste Recycling Services',
-    subtitle: 'Eco-friendly recycling for all types of electronic waste — safe, certified, and compliant.',
+    subtitle: 'Eco-conscious disposal for electronics. We ensure safety, compliance, and proper certification.',
     heroImage: '/services/electronic%20waste.png',
     summary: 'We handle every type of e-waste responsibly — from collection to certified recycling — ensuring zero landfill and full compliance.',
     link: '#',

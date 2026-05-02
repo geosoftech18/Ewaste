@@ -126,7 +126,7 @@ export default function DataDestructionSection() {
             Secure Data Destruction
           </h2>
           <p className="text-gray-300 text-lg max-w-3xl mx-auto mb-6">
-            Protect your sensitive information with our certified data destruction service. We ensure complete data sanitization with documented proof of destruction.
+          Safeguard your sensitive details through our authenticated data destruction service. Full data sanitization, with verified proof of disposal.
           </p>
           <p className="text-gray-300 text-sm flex items-center justify-center gap-2">
             <CheckCircle className="w-4 h-4" />

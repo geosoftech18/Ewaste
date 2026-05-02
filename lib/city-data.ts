@@ -235,7 +235,7 @@ export const cityData: Record<string, CityData> = {
     slug: 'bangalore',
     name: 'Bangalore',
     title: 'E-Waste Recycling Services in Bangalore',
-    description: 'Tech-focused e-waste recycling services in Bangalore with specialized IT equipment disposal, secure data destruction, and comprehensive coverage of India\'s Silicon Valley.',
+    description: 'Laptops, servers, and networking gear are securely recycled with data destruction and complete asset recovery, while battery and circuit-board recovery for the city’s IT and EV sectors plays a crucial role in responsible waste management. WEEE handling supports end-to-end disposal for the region and beyond. EVs are increasingly part of the transition to cleaner transport and smarter asset planning, highlighting the importance of effective recovery processes for sustainable growth.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '13.6M',
     wasteCollection: 680,

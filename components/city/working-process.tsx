@@ -37,8 +37,8 @@ export function WorkingProcess() {
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">Our Working Process</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A systematic approach to sustainable e-waste management
+          <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
+          Laptops, servers, and networking gear are securely recycled with data destruction and complete asset recovery, while battery and circuit-board recovery for the city’s IT and EV sectors plays a crucial role in responsible waste management. WEEE handling supports end-to-end disposal for the region and beyond. EVs are increasingly part of the transition to cleaner transport and smarter asset planning, highlighting the importance of effective recovery processes for sustainable growth.
           </p>
         </div>
 

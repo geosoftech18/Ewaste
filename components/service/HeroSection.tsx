@@ -43,7 +43,7 @@ export default function HeroSection() {
         </h1>
 
         <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto">
-          Delivering sustainable, certified, and eco-safe recycling solutions across India.
+        Delivering recycling solutions across India: certified, sustainable, and ecologically sound.
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">

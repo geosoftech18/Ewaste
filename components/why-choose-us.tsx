@@ -7,7 +7,7 @@ const features = [
   {
     icon: Users,
     title: "Expert & Experienced Team",
-    description: "A team that lives and breathes this stuff. Ten-plus years deep. E-waste of any stripe? We've got it.",
+    description: "A team that lives and breathes this work. Ten-plus years of experience. We handle all types of electronic waste with expertise and care.",
   },
   {
     icon: Headphones,
@@ -112,8 +112,9 @@ export function WhyChooseUs() {
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
             Why Choose S P Recycling Pvt Ltd?
           </h2>
-          <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-          Businesses and homes trust us to do E-Waste right.
+          <p className="text-lg md:text-lg text-gray-600 max-w-4xl mx-auto">
+          Businesses and homes trust us to handle electronics responsibly, with secure data destruction and complete asset recovery. Recovery of batteries and circuit boards for the city’s IT and electric-vehicle sectors supports responsible waste management.
+           WEEE handling enables end-to-end disposal for the region and beyond. EVs are increasingly part of a cleaner transport shift and smarter asset planning, underscoring the importance of effective recovery processes for sustainable growth.
           </p>
         </div>
 

@@ -51,7 +51,7 @@ export function FinalCTA({ serviceName }: FinalCTAProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto mb-12">
           <div className="flex flex-col items-center gap-2 p-4 bg-white/10 backdrop-blur-sm rounded-lg">
             <Phone className="h-6 w-6" />
-            <span className="font-semibold">+91 98765 43210</span>
+            <span className="font-semibold">+91 9949901238</span>
             <span className="text-sm text-white/80">Mon-Sat, 9AM-6PM</span>
           </div>
           <div className="flex flex-col items-center gap-2 p-4 bg-white/10 backdrop-blur-sm rounded-lg">
@@ -61,7 +61,7 @@ export function FinalCTA({ serviceName }: FinalCTAProps) {
           </div>
           <div className="flex flex-col items-center gap-2 p-4 bg-white/10 backdrop-blur-sm rounded-lg">
             <Mail className="h-6 w-6" />
-            <span className="font-semibold">info@ewaste.com</span>
+            <span className="font-semibold">sprecycling563@gmail.com</span>
             <span className="text-sm text-white/80">24hr response time</span>
           </div>
         </div>
