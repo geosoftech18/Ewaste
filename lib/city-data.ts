@@ -3,6 +3,18 @@ export interface CityData {
   name: string;
   title: string;
   description: string;
+  /** Full dual-purpose H1 when set; otherwise Hero uses the default city template */
+  heroTitle?: string;
+  /** Secondary hero paragraph below the main description */
+  heroSubdescription?: string;
+  /** Bridge copy shown below the hero */
+  bridgeParagraph?: string;
+  /** Prominent blurb above/below the services category tabs */
+  servicesBlurb?: string;
+  /** Optional SEO title override */
+  metaTitle?: string;
+  /** Optional meta description override */
+  metaDescription?: string;
   heroImage: string;
   population: string;
   wasteCollection: number;
@@ -33,8 +45,17 @@ export const cityData: Record<string, CityData> = {
   'hyderabad': {
     slug: 'hyderabad',
     name: 'Hyderabad',
-    title: 'E-Waste Recycling Services in Hyderabad',
-    description: 'Professional e-waste reclamation solutions in Hyderabad. Data obliteration? Certified. Secure collection? Absolutely. Environmentally conscious disposal? Without question. Serving IT powerhouses, medical centers, and enterprises across the cityscape.',
+    title: 'E-Waste Recycling & Certified Scrap Buyers in Hyderabad: Sell Old Electronics Fast',
+    heroTitle: 'E-Waste Recycling & Certified Scrap Buyers in Hyderabad: Sell Old Electronics Fast',
+    description:
+      "Clearing out office tech clutter or home gadgets shouldn't be a headache. Whether you need corporate-grade e-waste recycling in Hyderabad with certified data destruction, or you are simply looking for trusted scrap buyers in Hyderabad to offload bulk hardware, SP Recycling has you covered.",
+    heroSubdescription:
+      'We make it incredibly easy to sell old electronics in Hyderabad for the best value. From legacy servers and outdated office laptops to old home appliances, our team handles the heavy lifting with free doorstep pickup across major tech hubs like HITEC City, Madhapur, and Gachibowli. Turn your old, retired electronic scrap into clean space today—responsibly, safely, and transparently.',
+    bridgeParagraph:
+      'SP Recycling clears the clutter. If you want the highest payout for old tech in Hyderabad or need a verified office cleanup, we manage the entire process starting at your front door.',
+    metaTitle: 'E-Waste Recycling & Scrap Buyers in Hyderabad | Sell Old Electronics',
+    metaDescription:
+      'Certified e-waste recycling & premium scrap buyers in Hyderabad. Sell old electronics, laptops, and corporate IT assets with free doorstep pickup and secure data wiping',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '10.4M',
     wasteCollection: 450,
@@ -57,6 +78,8 @@ export const cityData: Record<string, CityData> = {
       totalWeight: '450+ tons',
       satisfactionRate: '98%'
     },
+    servicesBlurb:
+      'SP Recycling serves as reliable Hyderabad-based scrap purchasers managing everything from massive industrial IT hardware to small piles of home electronics. We clear out massive quantities for offices, server hubs, and tech campuses throughout the city. Our team provides accurate price assessments based on current metal values and follows a clear, honest sequence for getting rid of junk.',
     services: {
       title: 'Our Services in Hyderabad',
       items: [
@@ -84,6 +107,21 @@ export const cityData: Record<string, CityData> = {
     },
     faqs: [
       {
+        question: 'How can I sell old electronics in Hyderabad responsibly?',
+        answer:
+          'SP Recycling makes responsible resale simple. Every pickup follows a certified e-waste workflow: secure data wiping or destruction on laptops, servers, and storage devices; environmentally compliant processing at our licensed facility; and documentation for corporate or personal records. We offer free doorstep collection across Hyderabad, and higher-value IT assets may qualify for buyback after inspection—so you earn from old gear while keeping e-waste out of landfills.',
+      },
+      {
+        question: 'Do you offer cash for electronic scrap?',
+        answer:
+          'Yes. SP Recycling buys electronic scrap for recycling and pays based on current metal and component values. We purchase old computers, desktops, servers, networking equipment, smartphones, printers, and other gadgets from homes, offices, server hubs, and tech campuses. Our team provides honest on-site assessments, handles certified data destruction before processing, and issues clear paperwork—whether you are clearing a small pile of home electronics or bulk office IT hardware.',
+      },
+      {
+        question: 'Where is the best electronic scrap buyer in Hyderabad?',
+        answer:
+          'SP Recycling is a reliable Hyderabad-based scrap buyer with free doorstep pickup throughout the city—including Madhapur, Gachibowli, HITEC City, Secunderabad, and the wider IT Corridor under GHMC. We manage everything from single devices to massive corporate lots, with same-day or 24–48 hour scheduling, certified data destruction, and a verified ecological workflow. For offices and tech campuses that need fast, compliant clearance with fair pricing, our local team is built for the job.',
+      },
+      {
         question: 'How quickly can you pick up e-waste in Hyderabad?',
         answer: 'We offer same-day pickup for urgent requests and typically schedule pickups within 24-48 hours.'
       },
@@ -94,7 +132,11 @@ export const cityData: Record<string, CityData> = {
       {
         question: 'What areas in Hyderabad do you cover?',
         answer: 'We cover all areas under Greater Hyderabad Municipal Corporation including IT Corridor, Secunderabad, and surrounding areas.'
-      }
+      },
+      {
+        question: 'Our services cover both commercial and residential scrap needs in Hyderabad.',
+        answer: 'We take it all. SP Recycling stands as a heavyweight commercial waste specialist in the region. We focus on buying up old office desktops, server racks, networking gear, and heavy electronic machinery from businesses, academic institutions, and factories. Every transaction comes with proper legal paperwork and pricing that makes sense for your bottom line.'
+      },
     ]
   },
   'mumbai': {

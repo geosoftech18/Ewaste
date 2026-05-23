@@ -33,12 +33,12 @@ const steps = [
 export function WorkingProcess() {
   return (
     <section id="process" className="py-20 sm:py-32 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">Our Working Process</h2>
           <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
-          Laptops, servers, and networking gear are securely recycled with data destruction and complete asset recovery, while battery and circuit-board recovery for the city’s IT and EV sectors plays a crucial role in responsible waste management. WEEE handling supports end-to-end disposal for the region and beyond. EVs are increasingly part of the transition to cleaner transport and smarter asset planning, highlighting the importance of effective recovery processes for sustainable growth.
+          Having a complete in-house setup cements our reputation among the top Hyderabad-based scrap purchasers. We simplify the way we reclaim value from old gear. This covers everything from the second we pick up your bulk electronics to the final stage of stripping things down to raw parts.
           </p>
         </div>
 

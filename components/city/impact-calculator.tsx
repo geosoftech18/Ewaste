@@ -39,8 +39,8 @@ const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
     id: "it-telecom",
     name: "IT & Telecommunication",
     icon: <Cpu className="w-6 h-6" />,
-    description: "Servers, routers, switches, telecom equipment",
-    items: ["Servers", "Routers", "Switches", "Network Equipment", "Telecom Devices"],
+    description: "Get buyback value for your servers, routers, and IT infrastructure.",
+    items: ["Servers", "Routers", "Switches", "Network Equipment", "Telecom Devices","Bulk Office IT Assets" ],
     co2PerUnit: 350,
     energyPerUnit: 75,
     waterPerUnit: 200,
@@ -50,8 +50,8 @@ const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
     id: "consumer-electrical",
     name: "Consumer Electrical",
     icon: <Smartphone className="w-6 h-6" />,
-    description: "Phones, tablets, laptops, cameras",
-    items: ["Smartphones", "Tablets", "Laptops", "Digital Cameras", "Portable Devices"],
+    description: "Best prices to sell old electronics like laptops and smartphones.",
+    items: ["Smartphones", "Tablets", "Laptops", "Digital Cameras", "Portable Devices","MacBooks & iPads" ],
     co2PerUnit: 150,
     energyPerUnit: 32,
     waterPerUnit: 90,
@@ -62,7 +62,7 @@ const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
     name: "Large Electrical Equipment",
     icon: <Monitor className="w-6 h-6" />,
     description: "Refrigerators, washing machines, TVs",
-    items: ["Refrigerators", "Washing Machines", "TVs", "Air Conditioners", "Microwave Ovens"],
+    items: ["Refrigerators", "Washing Machines", "TVs", "Air Conditioners", "Microwave Ovens","Old Air Conditioners (ACs)","Commercial Chillers"  ],
     co2PerUnit: 500,
     energyPerUnit: 120,
     waterPerUnit: 350,
@@ -81,9 +81,9 @@ const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
   },
   {
     id: "printer-recycle",
-    name: "Printer Recycle",
+    name: "Printer & Copier Buyback",
     icon: <Printer className="w-6 h-6" />,
-    description: "Printers, scanners, copiers, cartridges",
+    description: "Recycle or sell old office printers and commercial copiers.",
     items: ["Printers", "Scanners", "Copiers", "Ink Cartridges", "Toner Cartridges"],
     co2PerUnit: 200,
     energyPerUnit: 45,
@@ -94,7 +94,7 @@ const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
     id: "medical-devices",
     name: "Medical Devices",
     icon: <Trash2 className="w-6 h-6" />,
-    description: "Medical equipment, diagnostic devices",
+    description: "Compliant disposal for healthcare facilities",
     items: ["Diagnostic Equipment", "Monitoring Devices", "Surgical Equipment", "Lab Devices"],
     co2PerUnit: 400,
     energyPerUnit: 85,
@@ -105,7 +105,7 @@ const EQUIPMENT_CATEGORIES: EquipmentCategory[] = [
     id: "data-destruction",
     name: "Data Destruction",
     icon: <Lock className="w-6 h-6" />,
-    description: "Secure data destruction services",
+    description: "Certified data wiping for those looking to sell old hard drives safely.",
     items: ["Hard Drives", "SSDs", "USB Drives", "Memory Cards", "Secure Wiping"],
     co2PerUnit: 80,
     energyPerUnit: 18,
@@ -272,12 +272,12 @@ export function ImpactCalculator() {
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-muted/30 to-background">
       <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-12 animate-fade-in-up">
+        <div className="text-center max-w-3xl mx-auto mb-12 animate-fade-in-up">
           <h2 className="text-2xl sm:text-5xl font-bold text-foreground mb-4">
-            Calculate Your Impact & Schedule Pickup
+          Calculate Your Impact & Get Value for Your Devices
           </h2>
           <p className="text-lg text-muted-foreground">
-            Select your equipment categories, see your environmental contribution, and schedule a convenient pickup.
+          Select your equipment categories to see your environmental contribution and get a quote to sell old electronics in Hyderabad. Schedule a convenient pickup today!
           </p>
         </div>
 
@@ -341,6 +341,12 @@ export function ImpactCalculator() {
                 <ChevronRight className="w-5 h-5" />
               </button>
             </div>
+
+            <p className="mt-4 text-xs text-muted-foreground/80 leading-relaxed max-w-3xl">
+              <span className="font-medium text-muted-foreground">Note:</span> Higher quantities of IT assets and
+              consumer electronics may qualify for cash-back or buyback rewards. Our electronic scrap buyers in Hyderabad
+              will provide a final valuation upon inspection.
+            </p>
           </div>
 
           {/* Impact Metrics */}

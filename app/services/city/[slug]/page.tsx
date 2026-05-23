@@ -30,16 +30,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
   }
 
-  // Create concise, SEO-friendly title with brand at the end
-  const seoTitle = `${city.title} | SP Recycling`;
+  const seoTitle =
+    city.metaTitle ?? `E-waste Recycling & Sell Old Electronics in ${city.name} | Best Prices`;
 
-  // Create concise, SEO-friendly meta description (150-160 characters)
-  const metaDescription = `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics. ISO certified & eco-friendly disposal.`;
+  const metaDescription =
+    city.metaDescription ??
+    `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics. ISO certified & eco-friendly disposal.`;
 
   return {
     title: seoTitle,
     description: metaDescription,
-    keywords: `e-waste recycling ${city.name}, electronic waste disposal ${city.name}, data destruction ${city.name}, IT equipment recycling ${city.name}, certified recycling ${city.name}, ${city.name} e-waste management`,
+    keywords: `Certified e-waste recycling in ${city.name}. We help you sell old electronics and IT assets responsibly with secure data destruction and free pickup.`,
     openGraph: {
       title: seoTitle,
       description: metaDescription,
@@ -58,15 +59,24 @@ export default function CityPage({ params }: { params: { slug: string } }) {
 
   return (
     <main className="min-h-screen bg-background">
-      <Hero 
+      <Hero
         cityName={city.name}
+        heroTitle={city.heroTitle}
         cityDescription={city.description}
+        heroSubdescription={city.heroSubdescription}
         heroImage={city.heroImage}
         stats={city.stats}
       />
-      <Services 
+      <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
+        <p className="mx-auto max-w-3xl text-center text-sm sm:text-base text-muted-foreground leading-relaxed">
+          {city.bridgeParagraph ??
+            `At SP Recycling, we make it easy to clear out your clutter. Whether you want to sell old electronics in ${city.name} for the best price or need certified e-waste recycling for your office, we provide a one-stop solution with free doorstep pickup.`}
+        </p>
+      </section>
+      <Services
         cityName={city.name}
         services={city.services}
+        servicesBlurb={city.servicesBlurb}
       />
       <EnvironmentalImpact />
       <WhyChooseUs />

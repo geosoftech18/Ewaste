@@ -89,6 +89,7 @@ const serviceCategories = [
 
 interface ServicesProps {
   cityName?: string;
+  servicesBlurb?: string;
   services?: {
     title: string;
     items: Array<{
@@ -101,6 +102,7 @@ interface ServicesProps {
 
 export function Services({ 
   cityName = "Hyderabad",
+  servicesBlurb,
   services = {
     title: "What You Can Recycle",
     items: [
@@ -130,12 +132,18 @@ export function Services({
     <section id="services" className="py-20 sm:py-32 bg-background">
       <div className="container  mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in-up">
+        <div className="text-center mb-10 animate-fade-in-up">
           <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold text-foreground mb-4">{services.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             We handle safe, eco-friendly disposal of a wide range of electronic waste and equipment in {cityName}
           </p>
         </div>
+
+        {servicesBlurb && (
+          <p className="mx-auto mb-10 max-w-4xl rounded-xl border border-border/70 bg-muted/30 px-5 py-5 text-center text-base sm:text-lg text-foreground/90 leading-relaxed animate-fade-in-up">
+            {servicesBlurb}
+          </p>
+        )}
 
         {/* Category Tabs */}
         <div className="mb-12 animate-fade-in-up">

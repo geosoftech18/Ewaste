@@ -37,6 +37,11 @@ export function FAQ() {
       answer:
         "For bulk quantities (10+ devices), pickup is completely free. For smaller quantities, we offer affordable rates. Contact us for a custom quote based on your needs.",
     },
+    {
+      question: "Our services cover both commercial and residential scrap needs in Hyderabad.",
+      answer:
+        "We take it all. SP Recycling stands as a heavyweight commercial waste specialist in the region. We focus on buying up old office desktops, server racks, networking gear, and heavy electronic machinery from businesses, academic institutions, and factories. Every transaction comes with proper legal paperwork and pricing that makes sense for your bottom line.",
+    },
   ]
 
   return (

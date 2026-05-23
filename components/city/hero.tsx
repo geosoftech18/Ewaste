@@ -8,7 +8,9 @@ import { useState } from "react";
 
 interface HeroProps {
   cityName?: string;
+  heroTitle?: string;
   cityDescription?: string;
+  heroSubdescription?: string;
   heroImage?: string;
   stats?: {
     totalPickups: string;
@@ -18,8 +20,10 @@ interface HeroProps {
 }
 
 export function Hero({ 
-  cityName = "Hyderabad", 
+  cityName = "Hyderabad",
+  heroTitle,
   cityDescription = "SP Recycling Pvt Ltd pioneers sustainable e-waste management in Hyderabad. Our cutting-edge facility ensures maximum material recovery with zero environmental impact.",
+  heroSubdescription,
   heroImage = "/city/e-waste-recycling-facility-with-circuit-boards-and.jpg",
   stats = {
     totalPickups: "2,500+",
@@ -50,15 +54,25 @@ export function Hero({
             </div>
 
             <h1 className="text-3xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-foreground mb-6">
-              E-Waste Recycling in{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
-                {cityName}
-              </span>
+              {heroTitle ?? (
+                <>
+                  E-Waste Recycling in{" "}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+                    {cityName}
+                  </span>
+                </>
+              )}
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
               {cityDescription}
             </p>
+            {heroSubdescription && (
+              <p className="text-base text-muted-foreground mb-8 leading-relaxed">
+                {heroSubdescription}
+              </p>
+            )}
+            {!heroSubdescription && <div className="mb-4" />}
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground group" onClick={() => setPickupModalOpen(true)}>
