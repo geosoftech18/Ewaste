@@ -35,7 +35,7 @@ export default function CTA() {
             <Mail className="w-5 h-5 text-accent flex-shrink-0" />
             <div className="text-left">
               <p className="text-sm text-white/70">Email us</p>
-              <p className="text-white font-semibold">sprecycling563@gmail.com</p>
+              <p className="text-white font-semibold">siliconplanetrecycling@gmail.com</p>
             </div>
           </div>
         </div>

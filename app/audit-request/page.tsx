@@ -4,6 +4,9 @@ import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
+import { getPhoneValidationError } from "@/lib/phone-validation"
+import { cn } from "@/lib/utils"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import {
@@ -144,10 +147,8 @@ export default function AuditRequestPage() {
         newErrors.workEmail = "Work email is required"
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.workEmail))
         newErrors.workEmail = "Invalid email format"
-      if (!formData.phoneNumber.trim())
-        newErrors.phoneNumber = "Phone number is required"
-      else if (!/^[+]?[0-9]{10}$/.test(formData.phoneNumber.replace(/\D/g, "")))
-        newErrors.phoneNumber = "Please enter a valid 10 digit phone number"
+      const phoneError = getPhoneValidationError(formData.phoneNumber)
+      if (phoneError) newErrors.phoneNumber = phoneError
       if (!formData.jobTitle.trim())
         newErrors.jobTitle = "Job title is required"
     } else if (currentStep === 3) {
@@ -539,14 +540,11 @@ export default function AuditRequestPage() {
                     <Label htmlFor="phoneNumber" className="text-gray-700">
                       Phone Number <span className="text-red-500">*</span>
                     </Label>
-                    <Input
+                    <PhoneInput
                       id="phoneNumber"
                       name="phoneNumber"
-                      type="tel"
-                      placeholder="10 digit phone number"
                       value={formData.phoneNumber}
-                      onChange={(e) => {
-                        const value = e.target.value.replace(/[^\d+]/g, "")
+                      onChange={(value) => {
                         setFormData((prev) => ({ ...prev, phoneNumber: value }))
                         if (errors.phoneNumber) {
                           setErrors((prev) => {
@@ -556,9 +554,9 @@ export default function AuditRequestPage() {
                           })
                         }
                       }}
-                      className={`mt-1 h-11 ${
-                        errors.phoneNumber ? "border-red-500" : ""
-                      }`}
+                      placeholder="Enter phone number"
+                      className={cn("mt-1", errors.phoneNumber && "phone-input-field--error")}
+                      inputClassName={cn("h-11", errors.phoneNumber && "border-red-500")}
                     />
                     {errors.phoneNumber && (
                       <p className="text-red-500 text-sm mt-1">

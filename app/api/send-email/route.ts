@@ -1,16 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import * as brevo from '@getbrevo/brevo'
-
-// Initialize Brevo client
-const apiInstance = new brevo.TransactionalEmailsApi()
-
-// Set API key
-if (process.env.BREVO_API_KEY) {
-  apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY)
-}
+import { sendBrevoTransactionalEmail } from '@/lib/brevo-client'
 
 // Owner's email address (where inquiries will be sent)
-const OWNER_EMAIL = process.env.OWNER_EMAIL || 'sprecycling563@gmail.com'
+const OWNER_EMAIL = process.env.OWNER_EMAIL || 'siliconplanetrecycling@gmail.com'
 const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@sprecycling.com'
 const FROM_NAME = process.env.FROM_NAME || 'S P Recycling'
 
@@ -110,16 +102,14 @@ export async function POST(request: NextRequest) {
         )
     }
 
-    // Create email send request for Brevo (Owner notification)
-    const sendSmtpEmail = new brevo.SendSmtpEmail()
-    sendSmtpEmail.subject = subject
-    sendSmtpEmail.htmlContent = htmlContent
-    sendSmtpEmail.textContent = htmlContent.replace(/<[^>]*>/g, '') // Plain text version
-    sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL }
-    sendSmtpEmail.to = [{ email: OWNER_EMAIL, name: 'S P Recycling Team' }]
-
-    // Send owner notification email
-    const result = await apiInstance.sendTransacEmail(sendSmtpEmail)
+    // Send owner notification email via Brevo
+    const result = await sendBrevoTransactionalEmail({
+      subject,
+      htmlContent,
+      textContent: htmlContent.replace(/<[^>]*>/g, ''),
+      sender: { name: FROM_NAME, email: FROM_EMAIL },
+      to: [{ email: OWNER_EMAIL, name: 'S P Recycling Team' }],
+    })
 
     // Send thank you email to customer for quick-pickup, pickup-form, city-pickup-request, instant-pickup, and final-lead types
     if ((type === 'quick-pickup' || type === 'pickup-form' || type === 'city-pickup-request' || type === 'instant-pickup' || type === 'final-lead') && data.email) {
@@ -160,15 +150,13 @@ export async function POST(request: NextRequest) {
           thankYouSubject = 'Thank You for Your Secure Compliance Consultation Request - S P Recycling'
         }
 
-        const customerEmail = new brevo.SendSmtpEmail()
-        customerEmail.subject = thankYouSubject
-        customerEmail.htmlContent = thankYouHtml
-        customerEmail.textContent = thankYouHtml.replace(/<[^>]*>/g, '')
-        customerEmail.sender = { name: FROM_NAME, email: FROM_EMAIL }
-        customerEmail.to = [{ email: data.email, name: data.fullName || data.name }]
-
-        // Send thank you email to customer
-        await apiInstance.sendTransacEmail(customerEmail)
+        await sendBrevoTransactionalEmail({
+          subject: thankYouSubject,
+          htmlContent: thankYouHtml,
+          textContent: thankYouHtml.replace(/<[^>]*>/g, ''),
+          sender: { name: FROM_NAME, email: FROM_EMAIL },
+          to: [{ email: data.email, name: data.fullName || data.name }],
+        })
       } catch (customerEmailError: any) {
         // Log error but don't fail the request if customer email fails
         console.error('Error sending customer thank you email:', customerEmailError)
@@ -179,7 +167,7 @@ export async function POST(request: NextRequest) {
       { 
         success: true, 
         message: 'Email sent successfully',
-        messageId: result.body?.messageId || 'sent'
+        messageId: result.messageId || 'sent'
       },
       { status: 200 }
     )

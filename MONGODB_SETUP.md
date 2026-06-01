@@ -6,6 +6,23 @@
 2. Node.js and npm installed
 3. Access to project environment variables
 
+## Local dev: blogs not loading (`ReplicaSetNoPrimary` / IP whitelist)
+
+If `/api/blog` returns **500** and the terminal shows `Could not connect to any servers` or `ReplicaSetNoPrimary`:
+
+1. Open [MongoDB Atlas → Network Access](https://cloud.mongodb.com/v2#/security/network/accessList)
+2. Click **Add IP Address** → **Add Current IP Address** (or `0.0.0.0/0` **only** for temporary local testing)
+3. Wait 1–2 minutes for Atlas to apply the rule
+4. Restart `npm run dev`
+
+Your home IP changes when you switch networks (Wi‑Fi, mobile hotspot) — add the new IP again if blogs stop loading.
+
+Optional in `.env` (Windows SSL issues only, same as Brevo):
+
+```env
+MONGODB_TLS_SKIP_VERIFY=true
+```
+
 ## Setup Steps
 
 ### 1. Create MongoDB Database
@@ -26,7 +43,7 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/sprecycling?retr
 
 # Brevo Email Configuration
 BREVO_API_KEY=your_brevo_api_key
-OWNER_EMAIL=sprecycling563@gmail.com
+OWNER_EMAIL=siliconplanetrecycling@gmail.com
 FROM_EMAIL=noreply@sprecycling.com
 FROM_NAME=S P Recycling
 

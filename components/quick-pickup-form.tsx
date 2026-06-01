@@ -20,12 +20,14 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
+import { getPhoneValidationError, isPhoneValid } from "@/lib/phone-validation"
+import { cn } from "@/lib/utils"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 
 const VALIDATION_RULES = {
-  PHONE_REGEX: /^\+91[6-9][0-9]{9}$/,
   EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
   MAX_FILES: 5,
@@ -60,7 +62,7 @@ interface TouchedFields {
 export function QuickPickupForm() {
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
-    phone: "+91",
+    phone: "",
     email: "",
     itemType: "",
     address: "",
@@ -93,7 +95,7 @@ export function QuickPickupForm() {
     const requiredFields = ["fullName", "phone","email", "itemType", "address",]
     const filledFields = requiredFields.filter((field) => {
       const value = formData[field as keyof FormData]
-      if (field === "phone") return value !== "+91" && value.length > 3
+      if (field === "phone") return isPhoneValid(String(value))
       return value && value.toString().trim().length > 0
     })
     setFormProgress(Math.round((filledFields.length / requiredFields.length) * 100))
@@ -114,13 +116,7 @@ export function QuickPickupForm() {
         break
 
       case "phone":
-        if (!value || value === "+91") {
-          return "Phone number is required"
-        }
-        if (typeof value === "string" && !VALIDATION_RULES.PHONE_REGEX.test(value)) {
-          return "Enter valid 10-digit mobile number starting with 6-9"
-        }
-        break
+        return getPhoneValidationError(typeof value === "string" ? value : "")
 
       case "email":
         if (!value || (typeof value === "string" && !value.trim())) {
@@ -229,7 +225,7 @@ export function QuickPickupForm() {
       setShowSuccess(true)
       setFormData({
         fullName: "",
-        phone: "+91",
+        phone: "",
         email: "",
         itemType: "",
         address: "",
@@ -251,26 +247,7 @@ export function QuickPickupForm() {
     }
   }
 
-  const handlePhoneChange = (value: string) => {
-    // Ensure +91 prefix
-    if (!value.startsWith("+91")) {
-      value = "+91" + value.replace(/^\+91/, "")
-    }
-    // Only allow numbers after +91
-    const cleaned = value.replace(/[^\d+]/g, "")
-    if (cleaned.length <= 13) {
-      // +91 + 10 digits
-      setFormData({ ...formData, phone: cleaned })
-      if (touched.phone) {
-        const error = validateField("phone", cleaned)
-        setErrors({ ...errors, phone: error })
-      }
-    }
-  }
 
-  
-
- 
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault()
@@ -289,6 +266,9 @@ export function QuickPickupForm() {
   }
 
   const isFieldValid = (fieldName: string): boolean => {
+    if (fieldName === "phone") {
+      return touched.phone && !errors.phone && isPhoneValid(formData.phone)
+    }
     return touched[fieldName] && !errors[fieldName as keyof FormErrors] && !!formData[fieldName as keyof FormData]
   }
 
@@ -421,26 +401,34 @@ export function QuickPickupForm() {
                     Phone Number <span className="text-red-500">*</span>
                   </Label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none" />
-                    <Input
+                    <PhoneInput
                       id="phone"
-                      type="tel"
-                      placeholder="+91 XXXXXXXXXX"
+                      name="phone"
                       value={formData.phone}
-                      onChange={(e) => handlePhoneChange(e.target.value)}
+                      onChange={(value) => {
+                        setFormData({ ...formData, phone: value })
+                        if (touched.phone) {
+                          const error = validateField("phone", value)
+                          setErrors({ ...errors, phone: error })
+                        }
+                      }}
                       onBlur={() => handleBlur("phone")}
-                      className={`pl-10 pr-10 h-11 transition-all ${
-                        errors.phone && touched.phone
-                          ? "border-red-500 focus:border-red-500"
-                          : isFieldValid("phone")
-                            ? "border-green-500"
-                            : ""
-                      }`}
+                      placeholder="Enter phone number"
+                      className={cn(
+                        "pr-10",
+                        errors.phone && touched.phone && "phone-input-field--error",
+                        isFieldValid("phone") && "phone-input-field--valid"
+                      )}
+                      inputClassName={cn(
+                        "h-11 transition-all",
+                        errors.phone && touched.phone && "border-red-500",
+                        isFieldValid("phone") && "border-green-500"
+                      )}
                       aria-invalid={!!errors.phone && touched.phone}
                       aria-describedby={errors.phone ? "phone-error" : undefined}
                     />
                     {isFieldValid("phone") && (
-                      <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
+                      <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500 pointer-events-none z-10" />
                     )}
                   </div>
                   {errors.phone && touched.phone && (

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import dbConnect from '@/lib/mongodb'
+import { getMongoConnectionHint } from '@/lib/mongodb-errors'
 import Blog from '@/lib/models/blog'
 
 export async function GET(request: NextRequest) {
@@ -32,11 +33,15 @@ export async function GET(request: NextRequest) {
       success: true,
       data: blogs,
     })
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Error fetching blogs:', error)
+    const hint = getMongoConnectionHint(error)
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to fetch blogs' },
-      { status: 500 }
+      {
+        success: false,
+        error: hint ?? (error instanceof Error ? error.message : 'Failed to fetch blogs'),
+      },
+      { status: hint ? 503 : 500 }
     )
   }
 }

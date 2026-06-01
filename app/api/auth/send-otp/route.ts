@@ -1,16 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { randomInt } from 'crypto'
-import * as brevo from '@getbrevo/brevo'
+import { sendBrevoTransactionalEmail } from '@/lib/brevo-client'
 import { generateAdminLoginOtpEmail } from '@/lib/email-templates'
 import { otpStore } from '@/lib/otp-store'
-
-// Initialize Brevo client
-const apiInstance = new brevo.TransactionalEmailsApi()
-
-// Set API key
-if (process.env.BREVO_API_KEY) {
-  apiInstance.setApiKey(brevo.TransactionalEmailsApiApiKeys.apiKey, process.env.BREVO_API_KEY)
-}
 
 const FROM_EMAIL = process.env.FROM_EMAIL || 'noreply@sprecycling.com'
 const FROM_NAME = process.env.FROM_NAME || 'S P Recycling'
@@ -61,16 +53,15 @@ export async function POST(request: NextRequest) {
 
     // Send OTP via email using Brevo
     try {
-      const sendSmtpEmail = new brevo.SendSmtpEmail()
-      sendSmtpEmail.subject = `🔐 Admin Login Verification Code - ${otp}`
-      sendSmtpEmail.htmlContent = htmlContent
-      sendSmtpEmail.textContent = htmlContent.replace(/<[^>]*>/g, '')
-      sendSmtpEmail.sender = { name: FROM_NAME, email: FROM_EMAIL }
-      sendSmtpEmail.to = [{ email: email, name: 'Admin' }]
+      const result = await sendBrevoTransactionalEmail({
+        subject: `🔐 Admin Login Verification Code - ${otp}`,
+        htmlContent,
+        textContent: htmlContent.replace(/<[^>]*>/g, ''),
+        sender: { name: FROM_NAME, email: FROM_EMAIL },
+        to: [{ email, name: 'Admin' }],
+      })
 
-      const result = await apiInstance.sendTransacEmail(sendSmtpEmail)
-
-      console.log('OTP email sent successfully:', result.body?.messageId)
+      console.log('OTP email sent successfully:', result.messageId)
 
       return NextResponse.json({
         success: true,
@@ -78,6 +69,19 @@ export async function POST(request: NextRequest) {
       })
     } catch (emailError) {
       console.error('Error sending email via Brevo:', emailError)
+
+      const err = emailError as Error & { isIpRestriction?: boolean }
+      if (err.isIpRestriction) {
+        return NextResponse.json(
+          {
+            success: false,
+            error:
+              'Brevo blocked this request because your IP is not authorized. Open Brevo → Security → Authorized IPs, add your current IP or disable IP restriction, then try again.',
+          },
+          { status: 403 }
+        )
+      }
+
       return NextResponse.json(
         { success: false, error: 'Failed to send OTP email' },
         { status: 500 }

@@ -6,7 +6,9 @@ import { useState } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Label } from "@/components/ui/label"
+import { getPhoneValidationError } from "@/lib/phone-validation"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
@@ -56,16 +58,12 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
           delete newErrors.fullName
         }
         break
-      case "phone":
-        const phoneRegex = /^[0-9]{10}$/
-        if (!value) {
-          newErrors.phone = "Phone number is required"
-        } else if (!phoneRegex.test(value.replace(/^\+91/, ""))) {
-          newErrors.phone = "Please enter a valid 10-digit phone number"
-        } else {
-          delete newErrors.phone
-        }
+      case "phone": {
+        const phoneError = getPhoneValidationError(value)
+        if (phoneError) newErrors.phone = phoneError
+        else delete newErrors.phone
         break
+      }
       case "email":
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
         if (!value.trim()) {
@@ -124,8 +122,6 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
 
     // Validate all required fields
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    const phoneRegex = /^[0-9]{10}$/
-    
     // Check for validation errors
     const validationErrors: Record<string, string> = {}
     
@@ -133,9 +129,8 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
       validationErrors.fullName = "Full name is required"
     }
     
-    if (!formData.phone || !phoneRegex.test(formData.phone.replace(/^\+91/, ""))) {
-      validationErrors.phone = "Please enter a valid 10-digit phone number"
-    }
+    const phoneError = getPhoneValidationError(formData.phone)
+    if (phoneError) validationErrors.phone = phoneError
     
     if (!formData.email?.trim() || !emailRegex.test(formData.email.trim())) {
       validationErrors.email = "Please enter a valid email address"
@@ -272,16 +267,15 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
                 <Label htmlFor="phone">
                   Phone Number <span className="text-red-500">*</span>
                 </Label>
-                <Input
+                <PhoneInput
                   id="phone"
-                  type="tel"
-                  placeholder="10-digit mobile number"
+                  name="phone"
                   value={formData.phone}
-                  onChange={(e) => {
-                    const value = e.target.value.replace(/\D/g, "").slice(0, 10)
-                    handleInputChange("phone", value)
-                  }}
-                  className={cn("h-11", errors.phone && "border-red-500")}
+                  onChange={(value) => handleInputChange("phone", value)}
+                  placeholder="Enter mobile number"
+                  className={cn(errors.phone && "phone-input-field--error")}
+                  inputClassName={cn("h-11", errors.phone && "border-red-500")}
+                  aria-invalid={!!errors.phone}
                 />
                 {errors.phone && <p className="text-sm text-red-500">{errors.phone}</p>}
               </div>

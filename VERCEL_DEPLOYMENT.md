@@ -14,7 +14,7 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/sprecycling?retr
 
 # Brevo Email Configuration
 BREVO_API_KEY=your_brevo_api_key_here
-OWNER_EMAIL=sprecycling563@gmail.com
+OWNER_EMAIL=siliconplanetrecycling@gmail.com
 FROM_EMAIL=noreply@sprecycling.com
 FROM_NAME=S P Recycling
 

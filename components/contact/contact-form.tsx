@@ -5,6 +5,8 @@ import type React from "react"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { PhoneInput } from "@/components/ui/phone-input"
+import { getPhoneValidationError } from "@/lib/phone-validation"
 import { Textarea } from "@/components/ui/textarea"
 import {
   User,
@@ -44,8 +46,8 @@ export default function ContactForm() {
       if (!formData.fullName.trim()) newErrors.fullName = "Full name is required"
       if (!formData.email.trim()) newErrors.email = "Email is required"
       else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format"
-      if (!formData.mobile.trim()) newErrors.mobile = "Mobile number is required"
-      else if (!/^\d{10}$/.test(formData.mobile.replace(/\D/g, ""))) newErrors.mobile = "Mobile must be 10 digits"
+      const mobileError = getPhoneValidationError(formData.mobile)
+      if (mobileError) newErrors.mobile = mobileError
     } else if (currentStep === 2) {
       if (!formData.city) newErrors.city = "Please select a city"
       if (!formData.serviceType) newErrors.serviceType = "Please select a service type"
@@ -274,17 +276,20 @@ export default function ContactForm() {
                       <Phone className="w-4 h-4 text-emerald-600" />
                       Mobile Number *
                     </label>
-                    <Input
-                      type="tel"
+                    <PhoneInput
                       name="mobile"
                       value={formData.mobile}
-                      onChange={handleChange}
-                      placeholder="9999999999"
-                      className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 hover:border-emerald-300 focus:shadow-lg ${
+                      onChange={(value) =>
+                        setFormData((prev) => ({ ...prev, mobile: value }))
+                      }
+                      placeholder="Enter phone number"
+                      className={errors.mobile ? "phone-input-field--error" : undefined}
+                      inputClassName={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 hover:border-emerald-300 focus:shadow-lg ${
                         errors.mobile
                           ? "border-red-500 focus:border-red-500"
                           : "border-gray-200 focus:border-emerald-500"
                       }`}
+                      aria-invalid={!!errors.mobile}
                     />
                     {errors.mobile && (
                       <div className="flex items-center gap-1 mt-2 text-red-600 text-sm">

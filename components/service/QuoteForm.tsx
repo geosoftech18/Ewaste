@@ -1,6 +1,7 @@
 "use client"
 import { useState } from 'react';
 import { Send, Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
+import { PhoneInput } from '@/components/ui/phone-input';
 
 export default function QuoteForm() {
   const [formData, setFormData] = useState({
@@ -63,15 +64,13 @@ export default function QuoteForm() {
                 <label htmlFor="phone" className="block text-white font-medium mb-2">
                   Phone Number
                 </label>
-                <input
-                  type="tel"
+                <PhoneInput
                   id="phone"
                   name="phone"
                   value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  placeholder="+91 XXXXXXXXXX"
+                  onChange={(value) => setFormData({ ...formData, phone: value })}
+                  placeholder="Enter phone number"
+                  inputClassName="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
 
@@ -157,7 +156,7 @@ export default function QuoteForm() {
                 </a>
 
                 <a
-                  href="mailto:sprecycling563@gmail.com"
+                  href="mailto:siliconplanetrecycling@gmail.com"
                   className="flex items-center gap-4 p-4 bg-white/5 hover:bg-white/10 rounded-lg transition-all duration-200 group"
                 >
                   <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -165,7 +164,7 @@ export default function QuoteForm() {
                   </div>
                   <div>
                     <p className="text-gray-400 text-sm">Email Us</p>
-                    <p className="text-white font-semibold">sprecycling563@gmail.com</p>
+                    <p className="text-white font-semibold">siliconplanetrecycling@gmail.com</p>
                   </div>
                 </a>
 

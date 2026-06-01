@@ -4,7 +4,9 @@ import { useState } from 'react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { PhoneInput } from '@/components/ui/phone-input'
 import { Label } from '@/components/ui/label'
+import { isPhoneValid } from '@/lib/phone-validation'
 import { Loader, CheckCircle2 } from 'lucide-react'
 
 interface InstantPickupModalProps {
@@ -34,9 +36,8 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
       return
     }
 
-    const cleanedNumber = number.replace(/[\s\-\(\)]/g, '')
-    if (!/^[+]?[0-9]{10}$/.test(cleanedNumber)) {
-      setError('Please enter a valid 10 digit phone number')
+    if (!isPhoneValid(number)) {
+      setError('Please enter a valid phone number')
       return
     }
 
@@ -52,7 +53,7 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
           type: 'instant-pickup',
           data: {
             fullName: name.trim(),
-            phone: cleanedNumber,
+            phone: number,
           },
         }),
       })
@@ -139,18 +140,14 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
               <Label htmlFor="instant-number">
                 Contact Number <span className="text-red-500">*</span>
               </Label>
-              <Input
+              <PhoneInput
                 id="instant-number"
-                type="tel"
-                placeholder="10 digit phone number"
+                name="number"
                 value={number}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/[^\d+]/g, '')
-                  setNumber(value)
-                }}
+                onChange={setNumber}
                 disabled={isSubmitting}
-                className="h-11"
-                required
+                placeholder="Enter phone number"
+                inputClassName="h-11"
               />
             </div>
 

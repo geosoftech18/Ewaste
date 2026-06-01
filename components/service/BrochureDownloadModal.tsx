@@ -10,7 +10,9 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PhoneInput } from '@/components/ui/phone-input';
 import { Label } from '@/components/ui/label';
+import { isPhoneValid } from '@/lib/phone-validation';
 import { Download, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface BrochureDownloadModalProps {
@@ -33,8 +35,8 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
       setSubmitError('Name is required');
       return false;
     }
-    if (!formData.phone.trim()) {
-      setSubmitError('Phone number is required');
+    if (!isPhoneValid(formData.phone)) {
+      setSubmitError('Please enter a valid phone number');
       return false;
     }
     if (!formData.email.trim()) {
@@ -152,18 +154,14 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
               <Label htmlFor="brochure-phone">
                 Phone Number <span className="text-red-500">*</span>
               </Label>
-              <Input
+              <PhoneInput
                 id="brochure-phone"
-                type="tel"
-                required
+                name="phone"
                 value={formData.phone}
-                onChange={(e) => {
-                  const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-                  setFormData({ ...formData, phone: value });
-                }}
-                placeholder="10-digit mobile number"
+                onChange={(value) => setFormData({ ...formData, phone: value })}
+                placeholder="Enter phone number"
                 disabled={isSubmitting}
-                className="w-full"
+                inputClassName="w-full h-10"
               />
             </div>
 

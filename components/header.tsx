@@ -120,11 +120,11 @@ export function Header() {
                 <span>+91 99499 01238</span>
               </a>
               <a
-                href="mailto:sprecycling563@gmail.com"
+                href="mailto:siliconplanetrecycling@gmail.com"
                 className="flex items-center gap-1 hover:text-green-300 transition-colors"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>sprecycling563@gmail.com</span>
+                <span>siliconplanetrecycling@gmail.com</span>
               </a>
               <a
                 href="https://wa.me/919949901238"
@@ -425,11 +425,11 @@ export function Header() {
                         <span>+91 99499 01238</span>
                       </a>
                       <a
-                        href="mailto:sprecycling563@gmail.com"
+                        href="mailto:siliconplanetrecycling@gmail.com"
                         className="flex items-center gap-2 text-gray-600 hover:text-[#074E3B]"
                       >
                         <Mail className="w-4 h-4" />
-                        <span>sprecycling563@gmail.com</span>
+                        <span>siliconplanetrecycling@gmail.com</span>
                       </a>
                       <a
                         href="https://wa.me/919949901238"

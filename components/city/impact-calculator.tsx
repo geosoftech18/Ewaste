@@ -21,6 +21,8 @@ import {
   Lock,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { PhoneInput } from "@/components/ui/phone-input"
+import { getPhoneValidationError } from "@/lib/phone-validation"
 
 interface EquipmentCategory {
   id: string
@@ -204,9 +206,8 @@ export function ImpactCalculator() {
     if (!formData.email.trim()) newErrors.email = "Email is required"
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format"
 
-    if (!formData.phone.trim()) newErrors.phone = "Phone number is required"
-    else if (!/^[0-9]{10}$/.test(formData.phone.replace(/\D/g, "")))
-      newErrors.phone = "Invalid phone number (10 digits required)"
+    const phoneError = getPhoneValidationError(formData.phone)
+    if (phoneError) newErrors.phone = phoneError
 
     if (!formData.address.trim()) newErrors.address = "Address is required"
     if (!formData.city.trim()) newErrors.city = "City is required"
@@ -438,13 +439,13 @@ export function ImpactCalculator() {
 
                 <div>
                   <label className="block text-sm font-semibold text-foreground mb-2">Phone Number *</label>
-                  <input
-                    type="tel"
+                  <PhoneInput
                     value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    placeholder="+91 XXXXX XXXXX"
-                    className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    onChange={(value) => setFormData({ ...formData, phone: value })}
+                    placeholder="Enter phone number"
                     disabled={loading}
+                    inputClassName="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    aria-invalid={!!errors.phone}
                   />
                   {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone}</p>}
                 </div>

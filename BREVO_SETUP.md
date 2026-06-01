@@ -47,7 +47,9 @@ Create a `.env.local` file in the root of your project (if it doesn't exist) and
 ```env
 # Brevo Configuration
 BREVO_API_KEY=your_brevo_api_key_here
-OWNER_EMAIL=sprecycling563@gmail.com
+# Optional (local dev only, if you see UNABLE_TO_VERIFY_LEAF_SIGNATURE on Windows):
+# BREVO_TLS_SKIP_VERIFY=true
+OWNER_EMAIL=siliconplanetrecycling@gmail.com
 FROM_EMAIL=noreply@sprecycling.com
 FROM_NAME=S P Recycling
 ```
@@ -124,6 +126,20 @@ All emails include:
 
 **Error: "Invalid sender email"**
 - Solution: The sender email must be verified in Brevo. Go to Senders and verify it.
+
+**Error: `unrecognised IP address` / `authorised_ips`**
+- Cause: Brevo **Authorized IPs** security is enabled and your current IP is not on the allowlist.
+- **Fix (choose one):**
+  1. Go to [Brevo → Security → Authorized IPs](https://app.brevo.com/security/authorised_ips) and add your current public IP (IPv4 and IPv6 if shown in the error).
+  2. Or disable IP restriction for development (less secure; use only if you understand the risk).
+- After updating Brevo, retry OTP — no code change required.
+
+**Error: `UNABLE_TO_VERIFY_LEAF_SIGNATURE` or `unable to verify the first certificate` (common on Windows)**
+- Cause: Local SSL inspection (antivirus, corporate proxy) or outdated Node CA certificates blocking HTTPS to `api.brevo.com`.
+- **Local dev:** TLS verification is skipped automatically when `NODE_ENV` is not `production`.
+- **Windows / proxy issues:** set `BREVO_TLS_SKIP_VERIFY=true` in `.env` and **do not** set `BREVO_TLS_STRICT=true` at the same time (strict mode forces verification back on).
+- **To force strict TLS in dev** (only if certs work on your machine): set `BREVO_TLS_STRICT=true` and omit `BREVO_TLS_SKIP_VERIFY`.
+- **Production:** TLS verification is always enforced. Do not deploy with certificate checks disabled.
 
 ### Testing Locally
 

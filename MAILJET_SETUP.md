@@ -41,7 +41,7 @@ Create a `.env.local` file in the root of your project (if it doesn't exist) and
 # Mailjet Configuration
 MJ_APIKEY_PUBLIC=your_mailjet_api_key_public
 MJ_APIKEY_PRIVATE=your_mailjet_secret_key
-OWNER_EMAIL=sprecycling563@gmail.com
+OWNER_EMAIL=siliconplanetrecycling@gmail.com
 FROM_EMAIL=noreply@sprecycling.com
 FROM_NAME=S P Recycling
 ```

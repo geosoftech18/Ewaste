@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Shield, ArrowRight, CheckCircle2, Award, TrendingUp, Users, Lock, Fingerprint, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 interface FormData {
   fullName: string;
@@ -296,16 +297,14 @@ export default function FinalLeadSection() {
                       Phone Number
                     </label>
                     <div className="relative group/input">
-                      <input
-                        type="tel"
+                      <PhoneInput
                         name="phone"
                         value={formData.phone}
-                        onChange={handleChange}
+                        onChange={(value) => setFormData((prev) => ({ ...prev, phone: value }))}
                         onFocus={() => setFocusedField('phone')}
                         onBlur={() => setFocusedField(null)}
-                        placeholder="+91 00000 00000"
-                        required
-                        className="w-full h-[50px] sm:h-[58px] px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-white/[0.06] border-2 border-white/10 text-white text-sm sm:text-base placeholder:text-white/50 focus:border-emerald-500 focus:bg-white/[0.08] focus:outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300 hover:border-white/20"
+                        placeholder="Enter phone number"
+                        inputClassName="w-full h-[50px] sm:h-[58px] px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-white/[0.06] border-2 border-white/10 text-white text-sm sm:text-base placeholder:text-white/50 focus:border-emerald-500 focus:bg-white/[0.08] focus:outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300 hover:border-white/20"
                       />
                       {focusedField === 'phone' && (
                         <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />

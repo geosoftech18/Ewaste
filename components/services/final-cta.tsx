@@ -61,7 +61,7 @@ export function FinalCTA({ serviceName }: FinalCTAProps) {
           </div>
           <div className="flex flex-col items-center gap-2 p-4 bg-white/10 backdrop-blur-sm rounded-lg">
             <Mail className="h-6 w-6" />
-            <span className="font-semibold">sprecycling563@gmail.com</span>
+            <span className="font-semibold">siliconplanetrecycling@gmail.com</span>
             <span className="text-sm text-white/80">24hr response time</span>
           </div>
         </div>

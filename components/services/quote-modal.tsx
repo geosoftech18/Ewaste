@@ -9,7 +9,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Input } from '@/components/ui/input'
+import { PhoneInput } from '@/components/ui/phone-input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Upload } from 'lucide-react';
@@ -105,13 +106,12 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
 
           <div className="space-y-2">
             <Label htmlFor="phone">Phone Number *</Label>
-            <Input
+            <PhoneInput
               id="phone"
-              type="tel"
-              required
+              name="phone"
               value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              placeholder="+91 98765 43210"
+              onChange={(value) => setFormData({ ...formData, phone: value })}
+              placeholder="Enter phone number"
               disabled={isSubmitting}
             />
           </div>

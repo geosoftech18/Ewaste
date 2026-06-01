@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Phone, MessageCircle, ArrowRight, CheckCircle2, Shield } from "lucide-react";
+import { PhoneInput } from "@/components/ui/phone-input";
 
 export default function StrongCTASection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -330,18 +331,16 @@ export default function StrongCTASection() {
                         >
                           Phone
                         </label>
-                        <input
-                          type="tel"
+                        <PhoneInput
                           name="phone"
                           value={formData.phone}
-                          onChange={handleInputChange}
+                          onChange={(value) =>
+                            setFormData((prev) => ({ ...prev, phone: value }))
+                          }
                           onFocus={() => setFocusedField("phone")}
                           onBlur={() => setFocusedField(null)}
-                          required
-                          className="w-full h-14 bg-white/15 border border-white/30 rounded-xl px-4 pt-6 pb-2
-                            text-white placeholder-white/50 outline-none
-                            focus:border-emerald-400 focus:shadow-[0_0_20px_rgba(31,164,99,0.3)]
-                            transition-all duration-300"
+                          placeholder=" "
+                          inputClassName="w-full h-14 bg-white/15 border border-white/30 rounded-xl px-4 pt-6 pb-2 text-white placeholder-white/50 outline-none focus:border-emerald-400 focus:shadow-[0_0_20px_rgba(31,164,99,0.3)] transition-all duration-300"
                         />
                       </div>
                     </div>

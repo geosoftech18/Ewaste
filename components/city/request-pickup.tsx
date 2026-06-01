@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState } from "react"
+import { PhoneInput } from "@/components/ui/phone-input"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Mail, Phone, MapPin, Loader2, CheckCircle2, AlertCircle } from "lucide-react"
@@ -119,7 +120,7 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">Email</h4>
-                  <p className="text-muted-foreground">sprecycling563@gmail.com</p>
+                  <p className="text-muted-foreground">siliconplanetrecycling@gmail.com</p>
                 </div>
               </div>
 
@@ -173,14 +174,14 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground mb-2">Phone Number</label>
-                  <input
-                    type="tel"
+                  <PhoneInput
                     name="phone"
                     value={formData.phone}
-                    onChange={handleChange}
-                    placeholder="+91 XXXX XXXX XX"
-                    className="w-full px-4 py-2 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
-                    required
+                    onChange={(value) =>
+                      setFormData((prev) => ({ ...prev, phone: value }))
+                    }
+                    placeholder="Enter phone number"
+                    inputClassName="w-full px-4 py-2 rounded-lg border border-input bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50"
                   />
                 </div>
               </div>

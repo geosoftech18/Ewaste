@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { X, Phone, MessageCircle, CheckCircle2 } from 'lucide-react'
+import { PhoneInput } from '@/components/ui/phone-input'
+import { getPhoneValidationError } from '@/lib/phone-validation'
 
 const COMPANY_WHATSAPP = '9949901238'
 const COMPANY_PHONE = '+91 9949901238'
@@ -62,12 +64,9 @@ export default function EWastePopup() {
       isValid = false
     }
 
-    const cleanedPhone = formData.contactNumber.replace(/[\s\-\(\)]/g, '')
-    if (!cleanedPhone) {
-      newErrors.contactNumber = 'Contact number is required'
-      isValid = false
-    } else if (!/^[+]?[0-9]{10,15}$/.test(cleanedPhone)) {
-      newErrors.contactNumber = 'Please enter a valid 10 digit phone number'
+    const contactError = getPhoneValidationError(formData.contactNumber)
+    if (contactError) {
+      newErrors.contactNumber = contactError
       isValid = false
     }
 
@@ -83,8 +82,6 @@ export default function EWastePopup() {
     setIsSubmitting(true)
 
     try {
-      const cleanedPhone = formData.contactNumber.replace(/[\s\-\(\)]/g, '')
-
       // Send email to owner
       const response = await fetch('/api/send-email', {
         method: 'POST',
@@ -95,7 +92,7 @@ export default function EWastePopup() {
           type: 'ewaste-popup',
           data: {
             name: formData.name.trim(),
-            contactNumber: cleanedPhone,
+            contactNumber: formData.contactNumber,
           },
         }),
       })
@@ -261,18 +258,16 @@ export default function EWastePopup() {
                   </div>
 
                   <div>
-                    <input
-                      type="tel"
-                      placeholder="Contact Number "
+                    <PhoneInput
                       value={formData.contactNumber}
-                      onChange={(e) => handleInputChange('contactNumber', e.target.value)}
-                      className={`w-full px-4 py-3 rounded-lg border ${
+                      onChange={(value) => handleInputChange('contactNumber', value)}
+                      placeholder="Enter phone number"
+                      className={errors.contactNumber ? 'phone-input-field--error' : undefined}
+                      inputClassName={`w-full px-4 py-3 rounded-lg border ${
                         errors.contactNumber
                           ? 'border-red-300 bg-red-50'
                           : 'border-gray-300'
-                      } focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition-all`}
-                      inputMode="numeric"
-                      aria-label="Contact Number"
+                      }`}
                       aria-invalid={!!errors.contactNumber}
                       aria-describedby={errors.contactNumber ? 'phone-error' : undefined}
                     />

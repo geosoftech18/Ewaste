@@ -786,3 +786,74 @@
 .animate-fadeIn {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* International phone input (react-phone-number-input) */
+.phone-input-field {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.phone-input-field .PhoneInputCountry {
+  margin-right: 0.25rem;
+}
+
+.phone-input-field .PhoneInputCountrySelect {
+  max-height: 12rem;
+}
+
+.phone-input-field .PhoneInputCountryIcon {
+  width: 1.5rem;
+  height: 1rem;
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+.phone-input-field .PhoneInputCountrySelectArrow {
+  opacity: 0.55;
+  margin-left: 0.25rem;
+}
+
+.phone-input-number,
+.phone-input-field .PhoneInputInput {
+  flex: 1;
+  min-width: 0;
+  height: 2.75rem;
+  border-radius: calc(var(--radius) - 2px);
+  border: 1px solid var(--border);
+  background: transparent;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--foreground);
+  outline: none;
+  transition: color 0.15s, box-shadow 0.15s, border-color 0.15s;
+}
+
+.phone-input-number:focus,
+.phone-input-field .PhoneInputInput:focus {
+  border-color: var(--ring);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--ring) 50%, transparent);
+}
+
+.phone-input-number[aria-invalid='true'],
+.phone-input-field .PhoneInputInput[aria-invalid='true'] {
+  border-color: var(--destructive);
+}
+
+.phone-input-field.phone-input-field--error .phone-input-number,
+.phone-input-field.phone-input-field--error .PhoneInputInput {
+  border-color: var(--destructive);
+}
+
+.phone-input-field--sm .phone-input-number,
+.phone-input-field--sm .PhoneInputInput {
+  height: 2.25rem;
+}
+
+.phone-input-field--lg .phone-input-number,
+.phone-input-field--lg .PhoneInputInput {
+  height: 3rem;
+}
