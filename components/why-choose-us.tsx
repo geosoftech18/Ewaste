@@ -113,7 +113,7 @@ export function WhyChooseUs() {
             Why Choose S P Recycling Pvt Ltd?
           </h2>
           <p className="text-lg md:text-lg text-gray-600 max-w-4xl mx-auto">
-          Businesses and homes trust us to handle electronics responsibly, with secure data destruction and complete asset recovery. Recovery of batteries and circuit boards for the city’s IT and electric-vehicle sectors supports responsible waste management.
+          Businesses and homes trust us to handle electronics responsibly, with secure data destruction and complete asset recovery. Recovery of batteries and circuit boards for the city’s IT and <a href="https://www.sprecycling.in/blog/the-environmental-impact-of-e-waste-why-responsible-recycling-matters-in-hyderabad" className="text-blue-500">electric-vehicle</a> sectors supports responsible waste management.
            WEEE handling enables end-to-end disposal for the region and beyond. EVs are increasingly part of a cleaner transport shift and smarter asset planning, underscoring the importance of effective recovery processes for sustainable growth.
           </p>
         </div>

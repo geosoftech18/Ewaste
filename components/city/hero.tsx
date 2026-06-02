@@ -10,6 +10,7 @@ interface HeroProps {
   cityName?: string;
   heroTitle?: string;
   cityDescription?: string;
+  cityDescriptionHtml?: string;
   heroSubdescription?: string;
   heroImage?: string;
   stats?: {
@@ -23,6 +24,7 @@ export function Hero({
   cityName = "Hyderabad",
   heroTitle,
   cityDescription = "SP Recycling Pvt Ltd pioneers sustainable e-waste management in Hyderabad. Our cutting-edge facility ensures maximum material recovery with zero environmental impact.",
+  cityDescriptionHtml,
   heroSubdescription,
   heroImage = "/city/e-waste-recycling-facility-with-circuit-boards-and.jpg",
   stats = {
@@ -64,9 +66,16 @@ export function Hero({
               )}
             </h1>
 
-            <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
-              {cityDescription}
-            </p>
+            {cityDescriptionHtml ? (
+              <p
+                className="text-lg text-muted-foreground mb-4 leading-relaxed [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-primary/90"
+                dangerouslySetInnerHTML={{ __html: cityDescriptionHtml }}
+              />
+            ) : (
+              <p className="text-lg text-muted-foreground mb-4 leading-relaxed">
+                {cityDescription}
+              </p>
+            )}
             {heroSubdescription && (
               <p className="text-base text-muted-foreground mb-8 leading-relaxed">
                 {heroSubdescription}

@@ -63,6 +63,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
         cityName={city.name}
         heroTitle={city.heroTitle}
         cityDescription={city.description}
+        cityDescriptionHtml={city.descriptionHtml}
         heroSubdescription={city.heroSubdescription}
         heroImage={city.heroImage}
         stats={city.stats}
