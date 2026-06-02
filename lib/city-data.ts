@@ -52,7 +52,7 @@ export const cityData: Record<string, CityData> = {
     description:
     "Clearing out office tech clutter or home gadgets shouldn't be a headache. Whether you need corporate-grade e-waste recycling in Hyderabad with certified data destruction, or you are simply looking for trusted scrap buyers in Hyderabad to offload bulk hardware, SP Recycling has you covered.",
   descriptionHtml:
-      "Clearing out office tech clutter or home gadgets shouldn't be a headache. Whether you need corporate-grade <a href='/blog/the-ultimate-guide-to-recycling-old-electronics-in-hyderabad'>e-waste recycling in Hyderabad</a> with certified data destruction, or you are simply looking for trusted <a href='/blog/the-ultimate-guide-to-recycling-old-electronics-in-hyderabad'>scrap buyers in Hyderabad</a> to offload bulk hardware, SP Recycling has you covered.",
+      "Clearing out office tech clutter or home gadgets shouldn't be a headache. Whether you need corporate-grade <a href='/blog/the-ultimate-guide-to-recycling-old-electronics-in-hyderabad'>e-waste recycling in Hyderabad</a> with certified data destruction, or you are simply looking for trusted <a href='/blog/selling-broken-electronics-in-hyderabad-is-it-possible-and-where-to-go'>scrap buyers in Hyderabad</a> to offload bulk hardware, SP Recycling has you covered.",
     heroSubdescription:
       'We make it incredibly easy to sell old electronics in Hyderabad for the best value. From legacy servers and outdated office laptops to old home appliances, our team handles the heavy lifting with free doorstep pickup across major tech hubs like HITEC City, Madhapur, and Gachibowli. Turn your old, retired electronic scrap into clean space today—responsibly, safely, and transparently.',
     bridgeParagraph:
