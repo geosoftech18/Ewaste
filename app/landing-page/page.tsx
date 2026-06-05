@@ -476,7 +476,7 @@ function TrustBadge({ icon, number, label, delay }: { icon: React.ReactNode; num
           {icon}
         </div>
         <div className="text-white font-black text-xl sm:text-2xl md:text-3xl mb-1 sm:mb-2 group-hover:text-[#1FA463] transition-colors duration-300">{displayValue}</div>
-        <div className="text-white/70 text-[10px] sm:text-xs font-bold uppercase tracking-wider">{label}</div>
+        <div className="text-white/80 text-[10px] sm:text-xs font-bold uppercase tracking-wider">{label}</div>
       </div>
     </div>
   )
