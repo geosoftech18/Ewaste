@@ -142,6 +142,19 @@ export const cityData: Record<string, CityData> = {
         question: 'Our services cover both commercial and residential scrap needs in Hyderabad.',
         answer: 'We take it all. SP Recycling stands as a heavyweight commercial waste specialist in the region. We focus on buying up old office desktops, server racks, networking gear, and heavy electronic machinery from businesses, academic institutions, and factories. Every transaction comes with proper legal paperwork and pricing that makes sense for your bottom line.'
       },
+      {
+        question: 'Which tech hubs and residential sectors in West Hyderabad and the Cyberabad corridor qualify for scheduled corporate and household e-waste collection?',
+        answer: 'Our specialized green logistics network provides comprehensive, on-demand electronic waste collection across the entire western tech corridor and its surrounding commuter neighborhoods. For corporate IT offices, data centers, and enterprise tech parks located within Hitech City, Madhapur, Gachibowli, Kondapur, Jubilee Hills, Banjara Hills, Manikonda, Nallagandla, and Shaikpet, we offer certified asset auditing, bulk infrastructure decommissioning, and safe server room disposal. \n\nTo serve working professionals who need an eco-friendly way to clear out residential gadgets—ranging from old laptops and lithium batteries to dead smartphones—we run frequent doorstep collection routes through high-density residential developments in:\n\n Kukatpally, KPHB Colony, Nizampet, Hydernagar, and Miyapur\nMoosapet, Moti Nagar, Fathenagar, and Balanagar\nYousufguda, Borabanda, Srinagar Colony, Erragadda, and Sanathnagar\nSerilingampalle, Ameerpet, sr nagar, and Balkampet\n\nWhether you are coordinating an industrial electronics pickup at an assembly unit in Patancheru or R.C.Puram, or simply dropping off old home chargers from Tolichowki, Langar Houz, or Mehdipatnam, every single piece of scrap hardware is safely rerouted away from local municipal landfills and sent straight to authorized, pollution-control-board-compliant processing yards.'
+      },
+      {
+        question: 'How can industrial zones, business hubs, and residential communities across East and North Hyderabad (including Secunderabad) safely recycle bulk electronic scrap?',
+        answer: ' Industrial plants, educational institutions, and residential neighborhoods across the eastern and northern suburban areas can easily schedule systematic eco-compliance recycling through our localized pick-up channels. For heavy industrial belts, manufacturing corridors, and warehouse hubs situated in Cherlapally, Mallapur, Moula-Ali, Nacharam, and ECIL, we handle large-scale commercial electronic scrap, obsolete circuit boards, and defunct laboratory hardware. \n\nFor dense commercial centers, prominent educational zones, and long-standing residential suburbs, our routine collection trucks systematically cover:\n\n Uppal, Habsiguda, Ramanthapur, Tarnaka, and Padmarao Nagar\nAlwal, Yapral, Sainikpuri, Safilguda, and As rao nagar\nMalkajgiri, Neredmet, Marredpally, Begumpet, and Secunderabad\n\nLocal businesses and retail setups operating near busy commercial sectors like Panjagutta, Somajiguda, Ashok Nagar, Musheerabad, Ramnagar, and Gandhinagar can also utilize our quick-response collection vehicles. We ensure that all corporate electronics are recycled with full verification, preventing toxic heavy metals from contaminating urban ecosystems while ensuring old IT investments are handled with complete environmental accountability.'
+      },
+      {
+        question: ' What eco-friendly disposal routes does S P Recycling provide for businesses and residents in Central, Southern, and Eastern Hyderabad neighborhoods?',
+        answer: ' SP Recycling’ certified e-waste recovery operations extend deeply into the traditional commercial districts, core residential clusters, and expanding southern corridors of the city. For corporate outfits, healthcare centers, and trading firms operating out of busy business areas like Abids, Koti, Nampally, Sultan Bazar, Kachiguda, Barkatpura, Narayanaguda, and Himayat Nagar, we offer secure data sanitization alongside verified hardware disposal.\n\n Dilsukhnagar, L B Nagar, Kothapet, Saroornagar, and Karmanghat\n Vanasthalipuram, Hayathnagar, Bn reddy nagar, and Hasthinapuram\n Nagole, Moosarambagh, Saidabad, Champapet, and Malakpet\n Santosh nagar, Balapur, Jillelaguda, Meerpet, and Nadergul\nNagole, Moosarambagh, Saidabad, Champapet, and Malakpet\nSantosh nagar, Balapur, Jillelaguda, Meerpet, and Nadergul\nSantosh nagar, Balapur, Jillelaguda, Meerpet, and Nadergul\n\nFurthermore, our regular collection drives actively cover high-density markets and heritage sectors around Charminar, Ghansi Bazar, Begum Bazar, Osmangunj, Chaderghat, and Chikkadpally, stretching out seamlessly to Mettuguda, Amberpet, Red Hills, Mallepally, Masab Tank, and Rtc x Roads. From safely discarding household appliances in Vijayanagar Colony, Humain nagar, and Ziaguda to handling commercial hardware updates in Attapur, Rajendra Nagar, Bandlaguda, and Shamshabad, S P Recycling provides every neighborhood with a reliable, certified pathway to meet environmental safety norms effortlessly.'
+      },
+     
     ]
   },
   'mumbai': {
@@ -281,8 +294,10 @@ export const cityData: Record<string, CityData> = {
   'bangalore': {
     slug: 'bangalore',
     name: 'Bangalore',
-    title: 'E-Waste Recycling Services in Bangalore',
+    title: 'E-Waste Recycling & Certified Scrap Buyers in Bangalore: Sell Old Electronics Fast ',
     description: 'Laptops, servers, and networking gear are securely recycled with data destruction and complete asset recovery, while battery and circuit-board recovery for the city’s IT and EV sectors plays a crucial role in responsible waste management. WEEE handling supports end-to-end disposal for the region and beyond. EVs are increasingly part of the transition to cleaner transport and smarter asset planning, highlighting the importance of effective recovery processes for sustainable growth.',
+   metaTitle: 'E-Waste Recycling & Certified Scrap Buyers in Bangalore | SP Recycling ',
+   metaDescription: 'Secure corporate e-waste recycling and certified IT asset disposal in Bangalore. Get free doorstep pickup across Whitefield, Electronic City, and Koramangala. 100% data destruction guaranteed.  ',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '13.6M',
     wasteCollection: 680,
@@ -342,6 +357,22 @@ export const cityData: Record<string, CityData> = {
       {
         question: 'Do you handle data center equipment?',
         answer: 'Yes, we specialize in large-scale data center equipment disposal with enhanced security protocols.'
+      },
+      {
+        question: 'How can businesses responsibly sell old electronics in Bangalore? ',
+        answer: "SP Recycling simplifies corporate asset liquidation. Every single commercial pickup follows strict environmental and data protection workflows: multi-pass software overwriting or physical destruction for all data-bearing drives, eco-friendly processing at an authorized facility, and full audit documentation. We provide doorstep collection across Bangalore's commercial corridors. High-value infrastructure like enterprise servers and corporate laptops qualify for buyback rewards after an official inventory assessment.  "
+      },
+      {
+        question: 'Do you purchase bulk electronic scrap from IT companies? ',
+        answer: 'Yes, we specialize in high-volume commercial purchasing. We buy electronic scrap based on current commodity markets and asset market values. We regularly purchase bulk computers, server infrastructure, networking switches, UPS systems, and storage arrays from tech parks, research facilities, and corporate offices across Bangalore, providing official transaction manifests and clean settlements. '
+      },
+      {
+        question: 'What geographical areas across Bangalore do you cover?  ',
+        answer: 'We provide comprehensive logistical coverage throughout the entire Bruhat Bengaluru Mahanagara Palike (BBMP) metropolitan area and adjacent industrial zones. Our collection trucks operate daily across Whitefield, Electronic City, Koramangala, Indiranagar, Mahadevapura, Bellandur, Marathahalli, Manyata Tech Park, Hebbal, and Peenya Industrial Area.  '
+      },
+      {
+        question: 'Do you provide authenticated Data Destruction Certificates?  ',
+        answer: 'Absolutely. For every project involving storage media like hard disks, solid-state drives, or backup tapes, we execute rigorous data sanitization. Once the destruction or shredding process is complete, we issue an official, audit-ready Data Destruction Certificate detailing the serial numbers of the processed devices for your corporate compliance records.  '
       }
     ]
   },

@@ -78,7 +78,7 @@ export default function FAQ({ faqs: customFaqs }: FAQProps) {
                 }`}
               >
                 <div className="px-6 pb-5 pt-2">
-                  <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">{faq.answer}</p>
                 </div>
               </div>
             </div>

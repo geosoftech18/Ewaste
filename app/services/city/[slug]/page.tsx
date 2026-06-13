@@ -71,7 +71,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
         <p className="mx-auto max-w-3xl text-center text-sm sm:text-base text-muted-foreground leading-relaxed">
           {city.bridgeParagraph ??
-            `At SP Recycling, we make it easy to clear out your clutter. Whether you want to sell old electronics in ${city.name} for the best price or need certified e-waste recycling for your office, we provide a one-stop solution with free doorstep pickup.`}
+            `At SP Recycling, we take the complexity out of corporate environmental responsibility. If you need to secure the best commercial value for bulk IT scrap in  ${city.name} or require a fully certified office clearance, our specialized disposal workflow starts right at your facility door. `}
         </p>
       </section>
       <Services
@@ -83,7 +83,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <WhyChooseUs />
       <WorkingProcess />
       <TestimonialsSection />
-      <ImpactCalculator />
+      <ImpactCalculator cityName={city.name} />
       <Certifications />
       <FAQ faqs={city.faqs} />
       <RequestPickup cityName={city.name} />

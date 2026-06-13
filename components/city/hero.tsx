@@ -58,10 +58,11 @@ export function Hero({
             <h1 className="text-3xl sm:text-5xl lg:text-5xl font-bold tracking-tight text-foreground mb-6">
               {heroTitle ?? (
                 <>
-                  E-Waste Recycling in{" "}
+                 E-Waste Recycling & Certified Scrap Buyers in {" "}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
                     {cityName}
                   </span>
+                 {" "} : Sell Old Electronics Fast 
                 </>
               )}
             </h1>

@@ -126,7 +126,7 @@ interface FormData {
   selectedCategories: Record<string, number>
 }
 
-export function ImpactCalculator() {
+export function ImpactCalculator({ cityName }: { cityName: string }) {
   const carouselRef = useRef<HTMLDivElement>(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [formData, setFormData] = useState<FormData>({
@@ -134,7 +134,7 @@ export function ImpactCalculator() {
     email: "",
     phone: "",
     address: "",
-    city: "Hyderabad",
+    city: cityName,
     zipCode: "",
     selectedCategories: {},
   })
@@ -278,7 +278,7 @@ export function ImpactCalculator() {
           Calculate Your Impact & Get Value for Your Devices
           </h2>
           <p className="text-lg text-muted-foreground">
-          Select your equipment categories to see your environmental contribution and get a quote to sell old electronics in Hyderabad. Schedule a convenient pickup today!
+          Select your equipment categories below to calculate your carbon offset footprint and secure an immediate commercial quote to sell old electronics in {cityName}. Schedule an on-site evaluation today! 
           </p>
         </div>
 
@@ -345,7 +345,7 @@ export function ImpactCalculator() {
 
             <p className="mt-4 text-xs text-muted-foreground/80 leading-relaxed max-w-3xl">
               <span className="font-medium text-muted-foreground">Note:</span> Higher quantities of IT assets and
-              consumer electronics may qualify for cash-back or buyback rewards. Our electronic scrap buyers in Hyderabad
+              consumer electronics may qualify for cash-back or buyback rewards. Our electronic scrap buyers in {cityName}
               will provide a final valuation upon inspection.
             </p>
           </div>
@@ -456,7 +456,7 @@ export function ImpactCalculator() {
                     type="text"
                     value={formData.city}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    placeholder="Hyderabad"
+                    placeholder={cityName}
                     className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
                     disabled={loading}
                   />

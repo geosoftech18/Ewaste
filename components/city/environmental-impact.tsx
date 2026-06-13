@@ -95,7 +95,7 @@ export function EnvironmentalImpact() {
         <div className="text-center mb-16 animate-fade-in-up">
           <h2 className="text-2xl sm:text-5xl font-bold text-foreground mb-4">Our Environmental Impact</h2>
           <p className="text-lg text-muted-foreground max-w-4xl mx-auto">
-          Together, we're making a real difference for our planet. See the positive impact of responsible electronics recovery and asset recycling.
+          Every commercial device diverted from a landfill directly protects our local ecosystem. By choosing a KSPCB-compliant partner, you directly prevent hazardous heavy metals from entering regional water tables and contribute to clean resource circles. 
           </p>
          
         </div>
