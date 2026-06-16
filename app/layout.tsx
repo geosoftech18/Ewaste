@@ -29,6 +29,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+
+      
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-CX5GEHH56C"></script>
+<Script id="google-analytics" strategy="afterInteractive">
+  {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-CX5GEHH56C');
+  `}
+</Script>
+
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
