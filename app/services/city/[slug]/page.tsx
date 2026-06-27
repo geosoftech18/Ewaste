@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { Header } from "@/components/city/header"
 import { WhyChooseUs } from "@/components/why-choose-us"
+import { HyderabadWhyChooseUs } from "@/components/city/hyderabad-why-choose-us"
 import { CTA } from "@/components/city/cta"
 import { Hero } from "@/components/city/hero"
 import { Services } from "@/components/city/services"
@@ -80,7 +81,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
         servicesBlurb={city.servicesBlurb}
       />
       <EnvironmentalImpact />
-      <WhyChooseUs />
+      {city.slug === "hyderabad" ? <HyderabadWhyChooseUs /> : <WhyChooseUs />}
       <WorkingProcess />
       <TestimonialsSection />
       <ImpactCalculator cityName={city.name} />

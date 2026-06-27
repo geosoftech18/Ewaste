@@ -4,6 +4,7 @@ import { VideoHero } from "@/components/video-hero"
 import { HeroSlider } from "@/components/hero-slider"
 import { TrustStrip } from "@/components/trust-strip"
 import { ServicesGrid } from "@/components/services-grid"
+import { ScrapTypesSection } from "@/components/scrap-types-section"
 import { ProcessSteps } from "@/components/process-steps"
 import { WhyChooseUs } from "@/components/why-choose-us"
 import { CertificationsCompliance } from "@/components/certifications-compliance"
@@ -41,6 +42,7 @@ export default function Home() {
       {/* <HeroSlider /> */}
       <TrustStrip />
       <ServicesGrid />
+      <ScrapTypesSection />
       <ProcessSteps />
       <WhyChooseUs />
       <CertificationsCompliance />

@@ -9,6 +9,7 @@ import { Suspense } from "react"
 import { Toaster } from "@/components/ui/sonner"
 import { Header } from "@/components/header"
 import Footer from "@/components/contact/footer"
+import FooterHighlights from "@/components/footer-highlights"
 
 export const metadata: Metadata = {
   title: "E-Waste Recycling Services in India | SP Recycling",
@@ -79,6 +80,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </Suspense>
         <Analytics />
         <Toaster />
+       <FooterHighlights />
        <Footer />
       </body>
     </html>
