@@ -200,13 +200,12 @@ export function ServicesGrid() {
           ))}
         </div>
 
-        {/* Desktop/Tablet Grid */}
+        {/* Desktop/Tablet Grid — article + specific links (not whole-card <a>) so crawlers get clean text vs link text */}
         <div className="hidden md:grid md:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto">
           {filteredServices.map((service, index) => (
-            <Link
+            <article
               key={service.id}
-              href={service.link}
-              className={`group relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 cursor-pointer border border-gray-200/50 ${
+              className={`group relative bg-white/80 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 border border-gray-200/50 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
               }`}
               style={{
@@ -216,7 +215,7 @@ export function ServicesGrid() {
               onMouseLeave={() => setHoveredCard(null)}
             >
               {/* Image Container */}
-              <div className="relative h-64 overflow-hidden">
+              <Link href={service.link} className="relative block h-64 overflow-hidden" aria-label={service.title}>
                 <Image
                   src={service.image}
                   alt={service.title}
@@ -235,12 +234,14 @@ export function ServicesGrid() {
                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
                   <span className="text-sm font-semibold text-gray-800">{service.clients} Clients</span>
                 </div>
-              </div>
+              </Link>
 
               {/* Content */}
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-gray-900 mb-4 group-hover:text-emerald-600 transition-colors">
-                  {service.title}
+                  <Link href={service.link} className="hover:text-emerald-600">
+                    {service.title}
+                  </Link>
                 </h3>
                 <p className="text-gray-600 leading-relaxed mb-6 line-clamp-3">
                   {service.description}
@@ -258,10 +259,13 @@ export function ServicesGrid() {
 
                 {/* CTA */}
                 <div className="flex items-center justify-between">
-                  <div className="text-emerald-600 font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
+                  <Link
+                    href={service.link}
+                    className="text-emerald-600 font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
+                  >
                     Learn More
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
+                  </Link>
                   <div className="flex items-center gap-1">
                     <Shield className="w-4 h-4 text-emerald-500" />
                     <span className="text-xs text-gray-500">Certified</span>
@@ -270,8 +274,8 @@ export function ServicesGrid() {
               </div>
 
               {/* Hover Effect Overlay */}
-              <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-            </Link>
+              <div className={`absolute inset-0 bg-gradient-to-r ${service.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none`}></div>
+            </article>
           ))}
         </div>
 
@@ -289,9 +293,9 @@ export function ServicesGrid() {
             >
               {filteredServices.map((service) => (
                 <div key={service.id} className="w-full flex-shrink-0 px-4">
-                  <div className="bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl border border-gray-200/50">
+                  <article className="bg-white/90 backdrop-blur-sm rounded-3xl overflow-hidden shadow-xl border border-gray-200/50">
                     {/* Image */}
-                    <div className="relative h-48 overflow-hidden">
+                    <Link href={service.link} className="relative block h-48 overflow-hidden" aria-label={service.title}>
                       <Image
                         src={service.image}
                         alt={service.title}
@@ -305,11 +309,13 @@ export function ServicesGrid() {
                         <Star className="w-4 h-4 text-yellow-500 fill-current" />
                         <span className="text-sm font-semibold text-gray-800">{service.rating}</span>
                       </div>
-                    </div>
+                    </Link>
 
                     {/* Content */}
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                        <Link href={service.link}>{service.title}</Link>
+                      </h3>
                       <p className="text-gray-600 leading-relaxed mb-4 text-sm line-clamp-3">
                         {service.description}
                       </p>
@@ -326,17 +332,20 @@ export function ServicesGrid() {
 
                       {/* CTA */}
                       <div className="flex items-center justify-between">
-                        <div className="text-emerald-600 font-semibold flex items-center gap-2 text-sm">
+                        <Link
+                          href={service.link}
+                          className="text-emerald-600 font-semibold flex items-center gap-2 text-sm"
+                        >
                           Learn More
                           <ArrowRight className="w-4 h-4" />
-                        </div>
+                        </Link>
                         <div className="flex items-center gap-1">
                           <Shield className="w-3 h-3 text-emerald-500" />
                           <span className="text-xs text-gray-500">Certified</span>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </article>
                 </div>
               ))}
             </div>

@@ -74,8 +74,9 @@ export default function FAQ({ faqs: customFaqs }: FAQProps) {
 
               <div
                 className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? 'max-h-96' : 'max-h-0'
+                  openIndex === index ? 'max-h-[2000px]' : 'max-h-0'
                 }`}
+                // Keep answers in the HTML for crawlers; collapse only visually for users.
               >
                 <div className="px-6 pb-5 pt-2">
                   <p className="text-gray-700 leading-relaxed whitespace-pre-line">{faq.answer}</p>

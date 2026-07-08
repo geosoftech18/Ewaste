@@ -3,13 +3,16 @@
 import { useEffect, useState, useRef } from "react"
 import { Leaf, Zap, Droplets, Recycle } from "lucide-react"
 
+const IMPACT_TARGETS = {
+  ewaste: 2500,
+  energy: 45000,
+  water: 125000,
+  materials: 890,
+} as const
+
 export function EnvironmentalImpact() {
-  const [counts, setCounts] = useState({
-    ewaste: 0,
-    energy: 0,
-    water: 0,
-    materials: 0,
-  })
+  // SSR starts at final values so crawlers never see "0+". Animation resets to 0 once in view.
+  const [counts, setCounts] = useState({ ...IMPACT_TARGETS })
   const [hasAnimated, setHasAnimated] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
@@ -19,13 +22,7 @@ export function EnvironmentalImpact() {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !hasAnimated) {
             setHasAnimated(true)
-            
-            const targets = {
-              ewaste: 2500,
-              energy: 45000,
-              water: 125000,
-              materials: 890,
-            }
+            setCounts({ ewaste: 0, energy: 0, water: 0, materials: 0 })
 
             const duration = 2000
             const steps = 60
@@ -37,10 +34,10 @@ export function EnvironmentalImpact() {
               const progress = currentStep / steps
 
               setCounts({
-                ewaste: Math.floor(targets.ewaste * progress),
-                energy: Math.floor(targets.energy * progress),
-                water: Math.floor(targets.water * progress),
-                materials: Math.floor(targets.materials * progress),
+                ewaste: Math.floor(IMPACT_TARGETS.ewaste * progress),
+                energy: Math.floor(IMPACT_TARGETS.energy * progress),
+                water: Math.floor(IMPACT_TARGETS.water * progress),
+                materials: Math.floor(IMPACT_TARGETS.materials * progress),
               })
 
               if (currentStep >= steps) clearInterval(interval)
@@ -66,24 +63,28 @@ export function EnvironmentalImpact() {
     {
       icon: Recycle,
       value: `${counts.ewaste}+`,
+      finalValue: `${IMPACT_TARGETS.ewaste}+`,
       label: "Tons of E-Waste Recycled",
       color: "from-emerald-500 to-teal-500",
     },
     {
       icon: Zap,
       value: `${counts.energy}+`,
+      finalValue: `${IMPACT_TARGETS.energy}+`,
       label: "MWh Energy Saved",
       color: "from-yellow-500 to-orange-500",
     },
     {
       icon: Droplets,
       value: `${counts.water}+`,
+      finalValue: `${IMPACT_TARGETS.water}+`,
       label: "Liters of Water Conserved",
       color: "from-blue-500 to-cyan-500",
     },
     {
       icon: Leaf,
       value: `${counts.materials}+`,
+      finalValue: `${IMPACT_TARGETS.materials}+`,
       label: "Tons of Materials Recovered",
       color: "from-green-500 to-emerald-500",
     },
@@ -114,8 +115,11 @@ export function EnvironmentalImpact() {
                   <div className={`inline-flex p-3 rounded-lg bg-gradient-to-br ${stat.color} mb-4`}>
                     <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <div className="text-2xl sm:text-4xl font-bold text-primary mb-2">{stat.value}</div>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+                  <span className="sr-only">{stat.finalValue} {stat.label}</span>
+                  <div className="text-2xl sm:text-4xl font-bold text-primary mb-2" aria-hidden="true">
+                    {stat.value}
+                  </div>
+                  <p className="text-sm text-muted-foreground" aria-hidden="true">{stat.label}</p>
                 </div>
               </div>
             )
@@ -124,7 +128,7 @@ export function EnvironmentalImpact() {
 
         <div className="mt-16 p-8 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20">
           <p className="text-center text-foreground text-lg">
-            <span className="font-semibold">Every device recycled matters.</span> By choosing SP Recycling, you're
+            <span className="font-semibold">Every device recycled matters.</span> By choosing SP Recycling, you&apos;re
             preventing toxic materials from entering landfills and recovering valuable resources for future use.
           </p>
         </div>

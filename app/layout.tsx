@@ -12,6 +12,9 @@ import Footer from "@/components/contact/footer"
 import FooterHighlights from "@/components/footer-highlights"
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sprecycling.in"
+  ),
   title: "E-Waste Recycling Services in India | SP Recycling",
   description: "ISO Certified E-Waste Recycling | Secure Data Destruction | 100% Eco-Friendly",
   generator: "geosoft tech private limited",
