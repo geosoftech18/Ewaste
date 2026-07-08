@@ -30,8 +30,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Fixed production origin (apex → www is handled in middleware).
+  // <base> lets pasted View Source on html.onlineviewer.net load /_next CSS
+  // from your live domain. On the live www site, base origin === page origin,
+  // so client navigation keeps working (unlike next.config assetPrefix).
+  const siteUrl = "https://www.sprecycling.in"
+  const emitHtmlBase =
+    process.env.VERCEL_ENV === "production" ||
+    process.env.EMIT_HTML_BASE === "true" ||
+    (process.env.NODE_ENV === "production" && !process.env.VERCEL)
+
   return (
     <html lang="en">
+      <head>
+        {emitHtmlBase ? <base href={`${siteUrl}/`} /> : null}
+      </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
 
       
