@@ -44,6 +44,44 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {emitHtmlBase ? <base href={`${siteUrl}/`} /> : null}
+        <Script id="viewer-asset-fix" strategy="beforeInteractive">
+          {`(function () {
+  try {
+    var host = location.hostname || "";
+    if (
+      host === "www.sprecycling.in" ||
+      host === "sprecycling.in" ||
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      /\\.vercel\\.app$/.test(host)
+    ) {
+      return;
+    }
+    var origin = "https://www.sprecycling.in";
+    if (!document.querySelector("base[data-sp-viewer-base]")) {
+      var base = document.createElement("base");
+      base.href = origin + "/";
+      base.setAttribute("data-sp-viewer-base", "1");
+      document.head.insertBefore(base, document.head.firstChild);
+    }
+    function toAbs(url) {
+      if (!url) return url;
+      if (/^(https?:)?\\/\\//i.test(url) || /^data:|^blob:/i.test(url)) return url;
+      return url.charAt(0) === "/" ? origin + url : origin + "/" + url;
+    }
+    function rewrite(root) {
+      var nodes = root.querySelectorAll("link[href],script[src],img[src],source[src],video[poster]");
+      nodes.forEach(function (el) {
+        var attr = el.hasAttribute("href") ? "href" : el.hasAttribute("poster") ? "poster" : "src";
+        var current = el.getAttribute(attr);
+        var next = toAbs(current);
+        if (next && next !== current) el.setAttribute(attr, next);
+      });
+    }
+    rewrite(document);
+  } catch (e) {}
+})();`}
+        </Script>
       </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
 
@@ -82,7 +120,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           src="https://www.googletagmanager.com/gtag/js?id=AW-17277789168"
           strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-ads-conversion" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
