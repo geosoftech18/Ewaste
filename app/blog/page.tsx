@@ -95,7 +95,7 @@ export default function BlogPage() {
                     <img
                       src={post.featuredImage}
                       alt={post.title}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                      className="w-full h-48 object-cover "
                     />
                   ) : (
                     <div className="w-full h-48 bg-gradient-to-br from-emerald-100 to-emerald-200 flex items-center justify-center">
