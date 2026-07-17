@@ -12,6 +12,9 @@ import { ServiceFAQ } from '@/components/services/service-faq';
 import { RelatedCaseStudies } from '@/components/services/related-case-studies';
 import { FinalCTA } from '@/components/services/final-cta';
 import { getServiceData, getAllServiceSlugs } from '@/lib/service-data';
+import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
+import { JsonLd, serviceJsonLd } from '@/components/seo/structured-data';
+import { ServiceCities } from '@/components/city/service-cities';
 
 export async function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({
@@ -32,6 +35,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${service.title} | Professional E-Waste Recycling | SP Recycling`,
     description: `${service.subtitle} ISO certified, secure data destruction, eco-friendly disposal. Get free quotes and same-day pickup across major cities in India.`,
     keywords: `${service.title.toLowerCase()}, e-waste recycling, electronic waste disposal, data destruction, certified recycling, ${service.title.toLowerCase()} services`,
+    ...canonicalMetadata(`/services/${params.slug}`),
     openGraph: {
       title: `${service.title} | Professional E-Waste Recycling Services`,
       description: service.subtitle,
@@ -49,6 +53,18 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
 
   return (
     <main className="min-h-screen">
+      <BreadcrumbJsonLd pathname={`/services/${params.slug}`} />
+      <JsonLd
+        id={`service-jsonld-${params.slug}`}
+        data={serviceJsonLd({
+          name: service.title,
+          description: service.subtitle || service.summary,
+          path: `/services/${params.slug}`,
+          image: service.heroImage,
+          serviceType: 'E-Waste Recycling',
+          faqs: service.faqs,
+        })}
+      />
       <HeroSection
         title={service.title}
         subtitle={service.subtitle}
@@ -94,6 +110,8 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
       <ServiceFAQ faqs={service.faqs} />
 
       <RelatedCaseStudies caseStudies={service.caseStudies} />
+
+      <ServiceCities />
 
       <FinalCTA serviceName={service.title} />
     </main>

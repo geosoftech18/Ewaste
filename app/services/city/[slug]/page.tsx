@@ -14,8 +14,8 @@ import { RequestPickup } from "@/components/city/request-pickup"
 import { ServiceCities } from "@/components/city/service-cities"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import { getCityData, getAllCitySlugs, type CityData } from '@/lib/city-data';
-
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.sprecycling.in';
+import { SITE_URL, absoluteUrl } from '@/lib/seo';
+import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
 
 export async function generateStaticParams() {
   return getAllCitySlugs().map((slug) => ({
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     city.metaDescription ??
     `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics. ISO certified & eco-friendly disposal.`;
 
-  const canonicalPath = `/services/city/${city.slug}`;
+  const pageUrl = absoluteUrl(`/services/city/${city.slug}`);
 
   return {
     title: seoTitle,
@@ -51,9 +51,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       'certified data destruction',
       'free e-waste pickup',
     ],
-    alternates: {
-      canonical: canonicalPath,
-    },
+    ...canonicalMetadata(`/services/city/${city.slug}`),
     robots: {
       index: true,
       follow: true,
@@ -67,7 +65,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: seoTitle,
       description: metaDescription,
-      url: canonicalPath,
+      url: pageUrl,
       siteName: 'SP Recycling',
       images: [
         {
@@ -142,35 +140,7 @@ function CityJsonLd({ city }: { city: CityData }) {
           },
         })),
       },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          {
-            '@type': 'ListItem',
-            position: 1,
-            name: 'Home',
-            item: SITE_URL,
-          },
-          {
-            '@type': 'ListItem',
-            position: 2,
-            name: 'Services',
-            item: `${SITE_URL}/services`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 3,
-            name: 'Cities',
-            item: `${SITE_URL}/services/city`,
-          },
-          {
-            '@type': 'ListItem',
-            position: 4,
-            name: city.name,
-            item: pageUrl,
-          },
-        ],
-      },
+      // BreadcrumbList is emitted via <BreadcrumbJsonLd /> below.
     ],
   };
 
@@ -191,6 +161,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
 
   return (
     <main className="min-h-screen bg-background">
+      <BreadcrumbJsonLd pathname={`/services/city/${city.slug}`} />
       <CityJsonLd city={city} />
       <Hero
         cityName={city.name}

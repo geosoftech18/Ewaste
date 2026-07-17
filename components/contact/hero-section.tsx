@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button"
 import { MessageCircle, Phone } from "lucide-react"
 import { PickupFormModal } from "@/components/pickup-form-modal"
 import { useState } from "react"
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
 
 export default function HeroSection() {
   const [pickupModalOpen, setPickupModalOpen] = useState(false)
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-900 flex items-center justify-center">
+      <BreadcrumbNav variant="light" />
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>

@@ -16,6 +16,7 @@ import FinalLeadSection from '@/components/landing-page/FinalLeadSection'
 import { InstantPickupModal } from '@/components/instant-pickup-modal'
 import { useRouter } from 'next/navigation'
 import EWastePopup from '@/components/EWastePopup'
+import { BreadcrumbNav } from '@/components/seo/breadcrumb-nav'
 
 export default function Home() {
   const [scrolled, setScrolled] = useState(false)
@@ -97,7 +98,8 @@ export default function Home() {
           </div>
         </nav> */}
 
-        <section className="max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 pt-20 sm:pt-32 md:pt-30 pb-16 sm:pb-24 md:pb-[100px] lg:pb-[140px]">
+        <section className="relative max-w-[1400px] mx-auto px-4 sm:px-6 md:px-8 pt-20 sm:pt-32 md:pt-30 pb-16 sm:pb-24 md:pb-[100px] lg:pb-[140px]">
+          <BreadcrumbNav variant="light" className="!top-4 sm:!top-6" />
           {/* Mobile-only Image Section - appears first on mobile */}
           <div className="lg:hidden mb-8">
             <div className="relative animate-fadeInRight">

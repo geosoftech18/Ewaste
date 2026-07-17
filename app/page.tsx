@@ -13,6 +13,7 @@ import { ClientsCarousel } from "@/components/clients-carousel"
 import { TestimonialsSection } from "@/components/testimonials-section"
 import EWastePopup from "@/components/EWastePopup"
 import dynamic from "next/dynamic"
+import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
 
 const InteractiveIndiaMap = dynamic(() => import("@/components/about/InteractiveIndiaMap"), {
   ssr: false,
@@ -28,6 +29,7 @@ export const metadata: Metadata = {
   title: "E-Waste Recycling Services in India | SP Recycling Pvt Ltd - Certified & Eco-Friendly",
   description: "Professional e-waste recycling services across India. ISO certified, secure data destruction, 100% eco-friendly disposal. Serving Hyderabad, Mumbai, Delhi, Bangalore, Chennai, Pune & more. Get cash for old electronics, corporate bulk processing, and certified data destruction certificates.",
   keywords: "e-waste recycling, electronic waste disposal, data destruction, IT equipment recycling, certified recycling, eco-friendly disposal, Hyderabad, Mumbai, Delhi, Bangalore",
+  ...canonicalMetadata('/'),
   openGraph: {
     title: "E-Waste Recycling Services in India | SP Recycling Pvt Ltd",
     description: "Professional e-waste recycling services across India. ISO certified, secure data destruction, 100% eco-friendly disposal.",
@@ -38,6 +40,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <BreadcrumbJsonLd pathname="/" />
       <VideoHero />
       {/* <HeroSlider /> */}
       <TrustStrip />

@@ -10,11 +10,12 @@ import { Toaster } from "@/components/ui/sonner"
 import { Header } from "@/components/header"
 import Footer from "@/components/contact/footer"
 import FooterHighlights from "@/components/footer-highlights"
+import { SITE_URL } from "@/lib/seo"
+import { PageSeo } from "@/components/seo/page-seo"
+import { OrganizationJsonLd } from "@/components/seo/organization-json-ld"
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL || "https://www.sprecycling.in"
-  ),
+  metadataBase: new URL(SITE_URL),
   title: "E-Waste Recycling Services in India | SP Recycling",
   description: "ISO Certified E-Waste Recycling | Secure Data Destruction | 100% Eco-Friendly",
   generator: "geosoft tech private limited",
@@ -34,7 +35,6 @@ export default function RootLayout({
   // <base> lets pasted View Source on html.onlineviewer.net load /_next CSS
   // from your live domain. On the live www site, base origin === page origin,
   // so client navigation keeps working (unlike next.config assetPrefix).
-  const siteUrl = "https://www.sprecycling.in"
   const emitHtmlBase =
     process.env.VERCEL_ENV === "production" ||
     process.env.EMIT_HTML_BASE === "true" ||
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {emitHtmlBase ? <base href={`${siteUrl}/`} /> : null}
+        {emitHtmlBase ? <base href={`${SITE_URL}/`} /> : null}
         <Script id="viewer-asset-fix" strategy="beforeInteractive">
           {`(function () {
   try {
@@ -129,6 +129,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           `}
         </Script>
         <Suspense fallback={<div>Loading...</div>}>
+        <OrganizationJsonLd />
+        <PageSeo />
         <Header />
         {children}
         </Suspense>

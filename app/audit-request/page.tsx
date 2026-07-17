@@ -33,6 +33,7 @@ import {
   Loader,
   Shield,
 } from "lucide-react"
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
 
 interface FormData {
   // Company Information
@@ -294,7 +295,8 @@ export default function AuditRequestPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-gradient-to-br from-emerald-50 via-white to-teal-50 py-12 px-4 sm:px-6 lg:px-8">
+      <BreadcrumbNav variant="dark" />
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">

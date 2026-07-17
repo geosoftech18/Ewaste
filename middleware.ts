@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
 /**
- * Keep one canonical host in production.
- * This avoids host-mismatch edge cases with absolute URLs in copied HTML.
+ * Permanent redirect: https://sprecycling.in → https://www.sprecycling.in
+ * Preserves path + query (e.g. /services/city/hyderabad?x=1).
  */
 export function middleware(request: NextRequest) {
   const host = request.headers.get('host')?.split(':')[0]?.toLowerCase() || ''
@@ -11,14 +11,16 @@ export function middleware(request: NextRequest) {
   if (host === 'sprecycling.in') {
     const url = request.nextUrl.clone()
     url.protocol = 'https'
-    url.host = 'www.sprecycling.in'
+    url.hostname = 'www.sprecycling.in'
+    // Drop accidental default port if present
+    url.port = ''
     return NextResponse.redirect(url, 308)
   }
+
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|css|js|woff2?)$).*)',
-  ],
+  // Run on all routes so apex never serves mixed www/non-www assets
+  matcher: ['/:path*'],
 }

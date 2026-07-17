@@ -5,6 +5,7 @@ import { ArrowRight, Leaf } from "lucide-react"
 import { useRouter } from "next/navigation";
 import { PickupFormModal } from "../pickup-form-modal";
 import { useState } from "react";
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav";
 
 interface HeroProps {
   cityName?: string;
@@ -36,7 +37,8 @@ export function Hero({
   const router = useRouter();
   const [pickupModalOpen, setPickupModalOpen] = useState(false);
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 py-10 sm:py-32 lg:py-20">
+    <section className="relative overflow-hidden bg-gradient-to-br from-background via-background to-primary/5 pt-14 pb-10 sm:pt-24 sm:pb-32 lg:pt-20 lg:pb-20">
+      <BreadcrumbNav variant="dark" />
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-primary/10 blur-3xl animate-float" />

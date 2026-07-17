@@ -848,6 +848,42 @@
   border-color: var(--destructive);
 }
 
+/* Dark / glass forms (e.g. QuoteForm) — beats default light input styles */
+.phone-input-field.phone-input-field--on-dark {
+  width: 100%;
+}
+
+.phone-input-field.phone-input-field--on-dark .phone-input-number,
+.phone-input-field.phone-input-field--on-dark .PhoneInputInput {
+  height: auto;
+  min-height: 3rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  background: rgb(255 255 255 / 0.1);
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  color: #fff;
+}
+
+.phone-input-field.phone-input-field--on-dark .phone-input-number::placeholder,
+.phone-input-field.phone-input-field--on-dark .PhoneInputInput::placeholder {
+  color: rgb(156 163 175);
+}
+
+.phone-input-field.phone-input-field--on-dark .phone-input-number:focus,
+.phone-input-field.phone-input-field--on-dark .PhoneInputInput:focus {
+  border-color: transparent;
+  box-shadow: 0 0 0 2px #10b981;
+  outline: none;
+}
+
+.phone-input-field.phone-input-field--on-dark .PhoneInputCountrySelectArrow {
+  color: #fff;
+  opacity: 0.7;
+}
+
 .phone-input-field--sm .phone-input-number,
 .phone-input-field--sm .PhoneInputInput {
   height: 2.25rem;

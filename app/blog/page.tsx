@@ -13,6 +13,7 @@ import {
   Tag,
   ArrowRight
 } from 'lucide-react'
+import { BreadcrumbNav } from '@/components/seo/breadcrumb-nav'
 
 interface BlogPost {
   _id: string
@@ -53,14 +54,15 @@ export default function BlogPage() {
   return (
     <>
 
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-50 p-4 md:p-8">
+    <div className="relative min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-50 p-4 md:p-8">
+      <BreadcrumbNav variant="dark" />
 
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8"
+          className="text-center mb-8 pt-10"
         >
           <h1 className="text-4xl md:text-5xl font-bold text-emerald-700 mb-4">
              Blog Posts

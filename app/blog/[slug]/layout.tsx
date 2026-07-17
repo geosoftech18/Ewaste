@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import dbConnect from '@/lib/mongodb'
 import Blog from '@/lib/models/blog'
+import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld'
+import { ArticleJsonLd } from '@/components/seo/article-json-ld'
 
 type MetadataProps = {
   params: { slug: string }
@@ -17,6 +19,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
       return {
         title: 'Post Not Found | SP Recycling',
         description: 'The blog post you are looking for could not be found.',
+        ...canonicalMetadata(`/blog/${slug}`),
       }
     }
 
@@ -31,6 +34,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
     const base: Metadata = {
       title,
       description,
+      ...canonicalMetadata(`/blog/${slug}`),
       openGraph: {
         title,
         description,
@@ -53,10 +57,23 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
     return {
       title: 'Blog | SP Recycling',
       description: 'E-waste recycling insights and news from SP Recycling.',
+      ...canonicalMetadata(`/blog/${slug}`),
     }
   }
 }
 
-export default function BlogPostSlugLayout({ children }: { children: React.ReactNode }) {
-  return children
+export default function BlogPostSlugLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode
+  params: { slug: string }
+}) {
+  return (
+    <>
+      <BreadcrumbJsonLd pathname={`/blog/${params.slug}`} />
+      <ArticleJsonLd slug={params.slug} />
+      {children}
+    </>
+  )
 }

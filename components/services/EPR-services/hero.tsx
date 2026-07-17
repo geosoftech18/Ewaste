@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useState, useEffect } from "react"
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
 
 function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({
@@ -59,6 +60,7 @@ function CountdownTimer() {
 export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary/95 to-primary/90">
+      <BreadcrumbNav variant="light" />
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 right-20 w-72 h-72 bg-accent rounded-full blur-3xl animate-float-slow animate-pulse-glow"></div>
         <div

@@ -5,11 +5,14 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Shield, Battery, Package, Car } from 'lucide-react';
 import { getAllEPRServices } from '@/lib/epr-service-data';
+import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
+import { BreadcrumbNav } from '@/components/seo/breadcrumb-nav';
 
 export const metadata: Metadata = {
   title: 'EPR Compliance Solutions in India | Trusted SP Recycling',
   description: 'Comprehensive EPR compliance solutions for Electronics, Battery, Packaging, and Automotive sectors. Complete EPR registration, documentation, and regulatory compliance support for manufacturers, importers, and brand owners in India.',
   keywords: 'EPR compliance, extended producer responsibility, EPR registration, EPR compliance services, regulatory compliance, environmental compliance, electronics EPR, battery EPR, packaging EPR',
+  ...canonicalMetadata('/services/EPR-compliance'),
   openGraph: {
     title: 'EPR Compliance Solutions | Extended Producer Responsibility Services',
     description: 'Complete EPR registration, documentation, and regulatory compliance support for manufacturers, importers, and brand owners.',
@@ -29,9 +32,11 @@ export default function EPRCompliancePage() {
 
   return (
     <main className="min-h-screen bg-background">
+      <BreadcrumbJsonLd pathname="/services/EPR-compliance" />
       {/* Hero Section */}
       <section className="py-20 sm:py-32 bg-gradient-to-br from-primary/5 to-accent/5">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <BreadcrumbNav variant="light" />
           <div className="text-center max-w-4xl mx-auto">
             <Badge className="mb-4 bg-primary/10 text-primary hover:bg-primary/20">
               EPR Compliance Solutions

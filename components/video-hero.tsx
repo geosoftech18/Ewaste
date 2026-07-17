@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { useEffect, useRef, useState } from "react"
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
 
 export function VideoHero() {
   const iframeRef = useRef<HTMLIFrameElement>(null)
@@ -42,6 +43,7 @@ export function VideoHero() {
 
   return (
     <section className="relative w-full h-[40vh] min-h-[250px] md:h-[90vh] md:min-h-[600px] overflow-hidden">
+      <BreadcrumbNav variant="light" />
       {/* YouTube Video Background */}
       <div className="absolute inset-0 w-full h-full bg-black">
         <iframe

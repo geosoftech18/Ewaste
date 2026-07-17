@@ -3,13 +3,15 @@
 import { useState, useRef } from "react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Cpu, Smartphone, Zap, Pill, Wrench, Trash2, CheckCircle2, AlertCircle, ChevronLeft, ChevronRight } from "lucide-react"
+import { Cpu, Smartphone, Zap, Pill, Wrench, Trash2, CheckCircle2, AlertCircle, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react"
 import { PickupFormModal } from "../pickup-form-modal"
+import Link from "next/link"
 
 const serviceCategories = [
   {
     id: "it",
     name: "IT & Telecom",
+    href: "/services/it-telecom",
     icon: Cpu,
     color: "from-blue-500 to-cyan-500",
     items: [
@@ -23,6 +25,7 @@ const serviceCategories = [
   {
     id: "consumer",
     name: "Consumer Electronics",
+    href: "/services/consumer-electronics",
     icon: Smartphone,
     color: "from-purple-500 to-pink-500",
     items: [
@@ -36,6 +39,7 @@ const serviceCategories = [
   {
     id: "appliances",
     name: "Large Appliances",
+    href: "/services/electronic-waste-recycle",
     icon: Zap,
     color: "from-orange-500 to-red-500",
     items: [
@@ -49,6 +53,7 @@ const serviceCategories = [
   {
     id: "medical",
     name: "Medical Devices",
+    href: "/services/electronic-waste-recycle",
     icon: Pill,
     color: "from-green-500 to-emerald-500",
     items: [
@@ -62,6 +67,7 @@ const serviceCategories = [
   {
     id: "industrial",
     name: "Industrial Tools",
+    href: "/services/electronic-waste-recycle",
     icon: Wrench,
     color: "from-yellow-500 to-amber-500",
     items: [
@@ -75,6 +81,7 @@ const serviceCategories = [
   {
     id: "data",
     name: "Data Destruction",
+    href: "/services/data-destruction",
     icon: Trash2,
     color: "from-red-500 to-rose-500",
     items: [
@@ -264,7 +271,7 @@ export function Services({
             </div>
 
             {/* CTA Button */}
-            <div className="text-center">
+            <div className="text-center flex flex-col sm:flex-row gap-3 justify-center items-center">
               <Button
                 size="lg"
                 onClick={() => setPickupModalOpen(true)}
@@ -272,6 +279,19 @@ export function Services({
               >
                 Schedule Pickup in {cityName}
               </Button>
+              {activeService.href && (
+                <Button
+                  asChild
+                  size="lg"
+                  variant="outline"
+                  className="border-primary text-primary hover:bg-primary/5"
+                >
+                  <Link href={activeService.href}>
+                    Explore {activeService.name}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              )}
             </div>
           </div>
         )}

@@ -18,6 +18,8 @@ import {
   MessageCircle,
   BookOpen
 } from 'lucide-react'
+import { BreadcrumbNav } from '@/components/seo/breadcrumb-nav'
+import { BlogRelatedInternalLinks } from '@/components/seo/blog-related-internal-links'
 
 interface BlogPost {
   _id?: string
@@ -272,7 +274,8 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
   return (
     <>
    
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-50">
+    <div className="relative min-h-screen bg-gradient-to-br from-emerald-50 via-white to-emerald-50">
+      <BreadcrumbNav variant="dark" className="!top-20 sm:!top-24" />
       {/* Header */}
       <div className="border-b border-gray-200 bg-white/80 backdrop-blur-sm sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-6">
@@ -656,6 +659,8 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
             </div>
           </motion.div>
         )}
+
+        <BlogRelatedInternalLinks />
       </div>
     </div>
     </>

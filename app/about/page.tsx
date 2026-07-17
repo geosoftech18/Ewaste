@@ -8,6 +8,7 @@ import { EWasteJourney } from "@/components/about/ewaste-journey"
 import { JourneyCarousel } from "@/components/about/journey-carousel"
 import dynamic from "next/dynamic"
 import JourneySection from "@/components/about/journey-section"
+import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
 
 const InteractiveIndiaMap = dynamic(() => import("@/components/about/InteractiveIndiaMap"), {
   ssr: false,
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
   title: "Trusted E-Waste Recycler in India | SP Recycling",
   description: "Learn about SP Recycling, a leading ISO certified e-waste recycling company in India. Our mission, vision, team, and presence across major cities. We provide professional, eco-friendly electronic waste disposal and data destruction services with 100% compliance.",
   keywords: "about e-waste recycling company, SP Recycling, ISO certified recycling, e-waste management company India, recycling company profile",
+  ...canonicalMetadata('/about'),
   openGraph: {
     title: "About SP Recycling Pvt Ltd | Leading E-Waste Recycling Company",
     description: "ISO certified e-waste recycling company providing professional, eco-friendly electronic waste disposal across India.",
@@ -33,6 +35,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <main>
+      <BreadcrumbJsonLd pathname="/about" />
       <AboutHero />
 
       <MissionVision />

@@ -5,6 +5,7 @@ import { Calendar, MessageSquare } from 'lucide-react';
 import { useState } from 'react';
 import { QuoteModal } from './quote-modal';
 import { PickupFormModal } from '../pickup-form-modal';
+import { BreadcrumbNav } from '@/components/seo/breadcrumb-nav';
 
 interface HeroSectionProps {
   title: string;
@@ -19,6 +20,7 @@ export function HeroSection({ title, subtitle, backgroundImage }: HeroSectionPro
   return (
     <>
       <section className="relative h-[600px] flex items-center justify-center overflow-hidden">
+        <BreadcrumbNav variant="light" />
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${backgroundImage})` }}

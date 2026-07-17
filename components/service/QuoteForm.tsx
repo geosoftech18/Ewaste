@@ -70,7 +70,8 @@ export default function QuoteForm() {
                   value={formData.phone}
                   onChange={(value) => setFormData({ ...formData, phone: value })}
                   placeholder="Enter phone number"
-                  inputClassName="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="phone-input-field--on-dark"
+                  inputClassName="w-full px-4 py-3 rounded-lg text-white bg-white/10 border border-white/20 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 />
               </div>
 

@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Recycle, Users, Sprout, BookOpen, Building2, Globe, ArrowRight, CheckCircle2, Leaf, Heart, Target } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { BreadcrumbNav } from '@/components/seo/breadcrumb-nav';
 
 // Animated Counter Component
 function AnimatedCounter({ 
@@ -175,6 +176,7 @@ export default function Home() {
     <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
       <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <section className="relative overflow-hidden bg-gradient-to-br from-emerald-600 via-teal-600 to-green-700 text-white md:py-24 py-12 px-6">
+          <BreadcrumbNav variant="light" />
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTMwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-20"></div>
 
           <div className="max-w-7xl mx-auto relative z-10">

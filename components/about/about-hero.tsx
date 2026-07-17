@@ -6,11 +6,13 @@ import { Button } from "@/components/ui/button"
 import { ArrowRight, Calendar } from "lucide-react"
 import { PickupFormModal } from "../pickup-form-modal"
 import { useState } from "react"
+import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
 
 export function AboutHero() {
   const [pickupModalOpen, setPickupModalOpen] = useState(false)
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-background via-background to-muted/30">
+      <BreadcrumbNav variant="dark" />
       {/* Animated background particles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {[...Array(20)].map((_, i) => (

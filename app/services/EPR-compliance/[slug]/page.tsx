@@ -10,6 +10,9 @@ import PWMTimeline from '@/components/services/EPR-services/pwm-timeline';
 import CTA from '@/components/services/EPR-services/cta';
 import Footer from '@/components/services/EPR-services/footer';
 import { getEPRServiceData, getAllEPRServiceSlugs } from '@/lib/epr-service-data';
+import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
+import { JsonLd, serviceJsonLd } from '@/components/seo/structured-data';
+import { ServiceCities } from '@/components/city/service-cities';
 
 export async function generateStaticParams() {
   return getAllEPRServiceSlugs().map((slug) => ({
@@ -30,6 +33,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: `${service.title} | EPR Compliance in India | SP Recycling`,
     description: `${service.subtitle} Complete EPR registration, documentation, and compliance support for manufacturers, importers, and brand owners. Regulatory compliance made easy.`,
     keywords: `${service.title.toLowerCase()}, EPR compliance, extended producer responsibility, EPR registration, regulatory compliance, environmental compliance, ${service.title.toLowerCase()} services`,
+    ...canonicalMetadata(`/services/EPR-compliance/${params.slug}`),
     openGraph: {
       title: `${service.title} | EPR Compliance Solutions - SP Recycling`,
       description: service.subtitle,
@@ -48,6 +52,17 @@ export default function EPRServiceDetailPage({ params }: { params: { slug: strin
 
   return (
     <main className="min-h-screen">
+      <BreadcrumbJsonLd pathname={`/services/EPR-compliance/${params.slug}`} />
+      <JsonLd
+        id={`epr-service-jsonld-${params.slug}`}
+        data={serviceJsonLd({
+          name: service.title,
+          description: service.subtitle,
+          path: `/services/EPR-compliance/${params.slug}`,
+          image: service.heroImage,
+          serviceType: 'EPR Compliance',
+        })}
+      />
       <HeroSection 
         title={service.title}
         subtitle={service.subtitle}
@@ -65,7 +80,7 @@ export default function EPRServiceDetailPage({ params }: { params: { slug: strin
 
       <Partners />
 
-     
+      <ServiceCities />
 
       <CTA />
 

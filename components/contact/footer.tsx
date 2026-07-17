@@ -36,13 +36,20 @@ export default function Footer() {
           <div className="animate-fade-in animation-delay-200 border-l-2 border-white pl-4 sm:border-l-0 sm:pl-0">
             <h4 className="text-white text-lg font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              {["Home", "About Us", "Services","Social Impact","Contact Us"].map((link, index) => (
-                <li key={index}>
+              {[
+                { label: "Home", href: "/" },
+                { label: "About Us", href: "/about" },
+                { label: "Services", href: "/services" },
+                { label: "Social Impact", href: "/social-impact" },
+                { label: "Blog", href: "/blog" },
+                { label: "Contact Us", href: "/contact" },
+              ].map((link) => (
+                <li key={link.href}>
                   <a
-                    href={link === "Home" ? "/" : link === "About Us" ? "/about" : link === "Services" ? "/services" : link === "Social Impact" ? "/social-impact" : "/contact"}
+                    href={link.href}
                     className="hover:text-emerald-400 transition-all duration-300 hover:translate-x-2 inline-block"
                   >
-                    {link}
+                    {link.label}
                   </a>
                 </li>
               ))}
@@ -53,13 +60,20 @@ export default function Footer() {
           <div className="animate-fade-in animation-delay-400 border-l-2 border-white pl-4 sm:border-l-0 sm:pl-0">
             <h4 className="text-white text-lg font-bold mb-4">Services</h4>
             <ul className="space-y-2 text-sm">
-              {["E-Waste Pickup", "IT & Telecom Equipment", "Sustainable Waste Solutions", "EPR Compliance Solutions"].map((service, index) => (
-                <li key={index}>
+              {[
+                { label: "E-Waste Recycling", href: "/services/electronic-waste-recycle" },
+                { label: "IT & Telecom Equipment", href: "/services/it-telecom" },
+                { label: "Consumer Electronics", href: "/services/consumer-electronics" },
+                { label: "Data Destruction", href: "/services/data-destruction" },
+                { label: "Sustainable Waste Solutions", href: "/services/Sustainable-Waste-Solutions" },
+                { label: "EPR Compliance", href: "/services/EPR-Compliance-Solutions" },
+              ].map((service) => (
+                <li key={service.href}>
                   <a
-                    href={service === "E-Waste Pickup" ? "/services/electronic-waste-recycle" : service === "IT & Telecom Equipment" ? "/services/it-telecom" : service === "Sustainable Waste Solutions" ? "/services/Sustainable-Waste-Solutions" : service === "EPR Compliance Solutions" ? "/services/EPR-Compliance-Solutions" : "/services/data-destruction"}
+                    href={service.href}
                     className="hover:text-emerald-400 transition-all duration-300 hover:translate-x-2 inline-block"
                   >
-                    {service}
+                    {service.label}
                   </a>
                 </li>
               ))}
@@ -69,13 +83,25 @@ export default function Footer() {
           <div className="animate-fade-in animation-delay-400 border-l-2 border-white pl-4 sm:border-l-0 sm:pl-0">
             <h4 className="text-white text-lg font-bold mb-4">Cities We Serve</h4>
             <ul className="space-y-2 text-sm">
-              {["Hyderabad", "Delhi", "Mumbai", "Bangalore", "Chennai","Pune","Andhra-Pradesh"].map((city, index) => (
-                <li key={index}>
-                  <a href={`/services/city/${city.toLowerCase()}`} className="hover:text-emerald-400 transition-all duration-300 hover:translate-x-2 inline-block">
-                    {city}
+              {[
+                { label: "Hyderabad", slug: "hyderabad" },
+                { label: "Delhi", slug: "delhi" },
+                { label: "Mumbai", slug: "mumbai" },
+                { label: "Bangalore", slug: "bangalore" },
+                { label: "Chennai", slug: "chennai" },
+                { label: "Pune", slug: "pune" },
+                { label: "Andhra Pradesh", slug: "andhra-pradesh" },
+                { label: "Gujarat", slug: "gujarat" },
+              ].map((city) => (
+                <li key={city.slug}>
+                  <a
+                    href={`/services/city/${city.slug}`}
+                    className="hover:text-emerald-400 transition-all duration-300 hover:translate-x-2 inline-block"
+                  >
+                    {city.label}
                   </a>
                 </li>
-              ))} 
+              ))}
             </ul>
           </div>
 

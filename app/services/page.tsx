@@ -12,11 +12,13 @@ import FAQ from '@/components/service/FAQ';
 import QuoteForm from '@/components/service/QuoteForm';
 import Footer from '@/components/service/Footer';
 import { ServicesGrid } from '@/components/services-grid';
+import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
 
 export const metadata: Metadata = {
   title: "E-Waste Recycling Services Across India | SP Recycling",
   description: "Comprehensive e-waste recycling services including IT equipment, consumer electronics, batteries, printers, and data destruction. ISO certified, secure, eco-friendly disposal across India. Get free quotes and same-day pickup.",
   keywords: "e-waste recycling services, electronic waste disposal, IT equipment recycling, data destruction services, battery recycling, printer recycling, consumer electronics recycling",
+  ...canonicalMetadata('/services'),
   openGraph: {
     title: "E-Waste Recycling Services in India | SP Recycling",
     description: "Comprehensive e-waste recycling services including IT equipment, consumer electronics, batteries, and data destruction. ISO certified and eco-friendly.",
@@ -72,6 +74,7 @@ const services = [
 export default function Home() {
   return (
     <div className="min-h-screen">
+      <BreadcrumbJsonLd pathname="/services" />
       {/* <section className="relative py-20 px-6 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 overflow-hidden">
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
