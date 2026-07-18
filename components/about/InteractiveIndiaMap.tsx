@@ -14,7 +14,7 @@ const createCityIcon = (isActive: boolean, isCompleted: boolean) => {
   return L.divIcon({
     className: 'custom-city-marker',
     html: `
-      <div style="
+      <div aria-hidden="true" style="
         width: ${size}px;
         height: ${size}px;
         background-color: ${color};
@@ -33,7 +33,7 @@ const createTruckIcon = (isMoving: boolean = false) => {
   return L.divIcon({
     className: 'custom-truck-marker',
     html: `
-      <div style="
+      <div aria-hidden="true" style="
         background-color: #10b981;
         padding: 8px;
         border-radius: 50%;
@@ -44,7 +44,7 @@ const createTruckIcon = (isMoving: boolean = false) => {
         justify-content: center;
         ${isMoving ? 'animation: truckBounce 0.8s ease-in-out infinite;' : ''}
       ">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" aria-hidden="true">
           <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
           <path d="M15 18H9"></path>
           <path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"></path>
@@ -196,7 +196,11 @@ export default function InteractiveIndiaMap() {
           </p>
         </div>
 
-        <div className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] rounded-3xl overflow-hidden shadow-2xl border-4 border-emerald-100 bg-white">
+        <div
+          className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[700px] rounded-3xl overflow-hidden shadow-2xl border-4 border-emerald-100 bg-white"
+          role="region"
+          aria-label="Live e-waste collection map across major Indian cities"
+        >
           <div className="india-map-spotlight" />
           <MapContainer
             center={INDIA_MAP_BOUNDS.center}
@@ -226,9 +230,20 @@ export default function InteractiveIndiaMap() {
 
               return (
                 <Marker
-                  key={`${city.name}-${index}`}
+                  key={`${city.name}-${index}-${isActive}-${isCompleted}`}
                   position={[city.lat, city.lng]}
                   icon={createCityIcon(isActive, isCompleted)}
+                  title={`${city.name} e-waste collection stop`}
+                  alt={`${city.name} e-waste collection stop`}
+                  eventHandlers={{
+                    add: (e) => {
+                      const el = (e.target as L.Marker).getElement()
+                      if (el) {
+                        el.setAttribute('aria-label', `${city.name} e-waste collection stop`)
+                        el.setAttribute('role', 'button')
+                      }
+                    },
+                  }}
                 >
                   <Popup>
                     <div className="text-center p-2">
@@ -252,7 +267,21 @@ export default function InteractiveIndiaMap() {
               );
             })}
 
-            <Marker position={truckPosition} icon={createTruckIcon(isTruckMoving)}>
+            <Marker
+              position={truckPosition}
+              icon={createTruckIcon(isTruckMoving)}
+              title="E-waste collection truck"
+              alt="E-waste collection truck"
+              eventHandlers={{
+                add: (e) => {
+                  const el = (e.target as L.Marker).getElement()
+                  if (el) {
+                    el.setAttribute('aria-label', 'E-waste collection truck')
+                    el.setAttribute('role', 'button')
+                  }
+                },
+              }}
+            >
               <Popup>
                 <div className="text-center p-2">
                   <h3 className="font-bold text-lg text-emerald-600">Collection Truck</h3>

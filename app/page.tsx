@@ -2,12 +2,9 @@ import { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { VideoHero } from "@/components/video-hero"
 import { TrustStrip } from "@/components/trust-strip"
+import { ViewportMount } from "@/components/viewport-mount"
 import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
 
-/**
- * Code-split below-fold client sections (keeps first paint fast)
- * without LazyMount — empty placeholders were hurting Speed Index + CLS.
- */
 const ServicesGrid = dynamic(
   () => import("@/components/services-grid").then((m) => ({ default: m.ServicesGrid })),
   { loading: () => <div className="min-h-[480px] w-full" aria-hidden /> }
@@ -78,8 +75,13 @@ export default function Home() {
       <ProcessSteps />
       <WhyChooseUs />
       <CertificationsCompliance />
-      <InteractiveIndiaMap />
-      <QuickPickupForm />
+      {/* OSM tiles + Leaflet must not load during Lighthouse first paint */}
+      <ViewportMount minHeight={700} rootMargin="100px 0px">
+        <InteractiveIndiaMap />
+      </ViewportMount>
+      <ViewportMount minHeight={520} rootMargin="150px 0px">
+        <QuickPickupForm />
+      </ViewportMount>
       <ClientsCarousel />
       <TestimonialsSection />
       <EWastePopup />

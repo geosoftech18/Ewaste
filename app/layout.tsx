@@ -43,8 +43,9 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {emitHtmlBase ? <base href={`${SITE_URL}/`} /> : null}
-        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
-        <link rel="dns-prefetch" href="https://www.youtube.com" />
+        {/* LCP poster — first-party, no unused preconnect to i.ytimg */}
+        <link rel="preload" as="image" href="/hero/video-poster.jpg" fetchPriority="high" />
+        <link rel="dns-prefetch" href="https://www.youtube-nocookie.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         {/* Viewer-only rewrite — must not block live LCP/FCP */}
         <Script id="viewer-asset-fix" strategy="lazyOnload">
@@ -88,20 +89,7 @@ export default function RootLayout({
       </head>
       <body className={`font-sans ${GeistSans.variable}`}>
 
-        {/* Marketing tags after load — same tracking, less TBT on first paint */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-CX5GEHH56C"
-          strategy="lazyOnload"
-        />
-        <Script id="google-analytics" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CX5GEHH56C');
-          `}
-        </Script>
-
+        {/* Single tag container — GTM should own GA + Ads (avoids duplicate gtag downloads) */}
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WHV8BTC3"
@@ -116,18 +104,6 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-WHV8BTC3');`}
-        </Script>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-17277789168"
-          strategy="lazyOnload"
-        />
-        <Script id="google-ads-conversion" strategy="lazyOnload">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'AW-17277789168');
-          `}
         </Script>
         <Suspense fallback={<div>Loading...</div>}>
           <OrganizationJsonLd />

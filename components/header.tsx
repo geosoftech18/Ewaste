@@ -303,15 +303,21 @@ export function Header() {
 
             {/* Desktop CTA */}
             <div className="hidden lg:flex items-center gap-3">
-              <a href="tel:+919949901238" aria-label="Call us">
-                <Button variant="ghost" size="icon" className="text-[#074E3B]">
-                  <Phone className="w-5 h-5" />
-                </Button>
+              <a
+                href="tel:+919949901238"
+                aria-label="Call SP Recycling at +91 99499 01238"
+                className="inline-flex items-center justify-center size-9 rounded-md text-[#074E3B] hover:bg-accent hover:text-accent-foreground"
+              >
+                <Phone className="w-5 h-5" aria-hidden />
               </a>
-              <a href="https://wa.me/919949901238" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-                <Button variant="ghost" size="icon" className="text-[#25D366]">
-                  <MessageCircle className="w-5 h-5" />
-                </Button>
+              <a
+                href="https://wa.me/919949901238"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Chat on WhatsApp with SP Recycling"
+                className="inline-flex items-center justify-center size-9 rounded-md text-[#25D366] hover:bg-accent hover:text-accent-foreground"
+              >
+                <MessageCircle className="w-5 h-5" aria-hidden />
               </a>
               <Button 
                 onClick={() => setPickupModalOpen(true)}
@@ -324,8 +330,8 @@ export function Header() {
             {/* Mobile Menu */}
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
               <SheetTrigger asChild className="lg:hidden">
-                <Button variant="ghost" className="!w-20 !h-20 !p-2">
-                  <Menu className="!w-8 !h-8" />
+                <Button variant="ghost" className="!w-20 !h-20 !p-2" aria-label="Open navigation menu">
+                  <Menu className="!w-8 !h-8" aria-hidden />
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-full sm:w-80 p-4">

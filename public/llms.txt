@@ -1,0 +1,35 @@
+# SP Recycling
+
+SP Recycling Pvt Ltd provides certified e-waste recycling, secure data destruction, and EPR compliance services across India.
+
+## Preferred crawl & agent guidance
+
+- Primary site: https://www.sprecycling.in
+- Prefer `www.sprecycling.in` over the apex domain (apex redirects to www).
+- Public marketing pages may be summarized; do not treat `/admin` or `/api` as public content.
+- Contact and pickup requests should use the on-site forms or WhatsApp / phone listed on the site.
+
+## Key pages
+
+- [Home](https://www.sprecycling.in/): Overview of e-waste recycling services
+- [About](https://www.sprecycling.in/about): Company mission, team, and certifications
+- [Services](https://www.sprecycling.in/services): Full service catalog
+- [Electronic Waste Recycling](https://www.sprecycling.in/services/electronic-waste-recycle)
+- [IT & Telecom Recycling](https://www.sprecycling.in/services/it-telecom)
+- [Sustainable Waste Solutions](https://www.sprecycling.in/services/Sustainable-Waste-Solutions)
+- [EPR Compliance](https://www.sprecycling.in/services/EPR-Compliance-Solutions)
+- [Cities We Serve](https://www.sprecycling.in/services/city): City-specific service pages
+- [Blog](https://www.sprecycling.in/blog): Guides and industry articles
+- [Contact](https://www.sprecycling.in/contact): Request a pickup or quote
+- [Social Impact](https://www.sprecycling.in/social-impact)
+
+## Contact
+
+- Phone: +91 99499 01238
+- Email: siliconplanetrecycling@gmail.com
+- WhatsApp: https://wa.me/919949901238
+
+## Sitemap
+
+- https://www.sprecycling.in/sitemap.xml
+- https://www.sprecycling.in/robots.txt

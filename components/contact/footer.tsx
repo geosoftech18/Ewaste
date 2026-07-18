@@ -20,13 +20,23 @@ export default function Footer() {
               Leading e-waste recycling solutions for a sustainable future.
             </p>
             <div className="flex gap-4">
-              {[Facebook, Linkedin, Twitter, Youtube].map((Icon, index) => (
+              {(
+                [
+                  { Icon: Facebook, label: "SP Recycling on Facebook", href: "https://www.facebook.com/" },
+                  { Icon: Linkedin, label: "SP Recycling on LinkedIn", href: "https://www.linkedin.com/" },
+                  { Icon: Twitter, label: "SP Recycling on X (Twitter)", href: "https://twitter.com/" },
+                  { Icon: Youtube, label: "SP Recycling on YouTube", href: "https://www.youtube.com/" },
+                ] as const
+              ).map(({ Icon, label, href }) => (
                 <a
-                  key={index}
-                  href="#"
-                  className="hover:text-emerald-400  transition-all duration-300 transform hover:scale-125 hover:rotate-12"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="hover:text-emerald-400 transition-all duration-300 transform hover:scale-125 hover:rotate-12"
                 >
-                  <Icon className="w-5 h-5" />
+                  <Icon className="w-5 h-5" aria-hidden />
                 </a>
               ))}
             </div>
