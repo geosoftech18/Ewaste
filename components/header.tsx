@@ -7,7 +7,6 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Phone, Mail, Menu, Facebook, Linkedin, Twitter, Instagram, MessageCircle, ChevronDown, MapPin, Sparkles } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
 
 const PickupFormModal = dynamic(
   () => import("@/components/pickup-form-modal").then((m) => ({ default: m.PickupFormModal })),
@@ -211,14 +210,9 @@ export function Header() {
                         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#10B981] group-hover:w-full transition-all duration-300" />
                       </div>
                       
-                      {/* Dropdown Menu */}
-                      <AnimatePresence>
-                        {citiesDropdownOpen && (
-                          <motion.div 
-                            initial={{ opacity: 0, y: -10, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
+                      {/* Dropdown Menu — CSS only (no framer-motion on critical path) */}
+                      {citiesDropdownOpen && (
+                          <div 
                             className="absolute top-full left-0 mt-3 w-96 bg-gradient-to-br from-white via-green-50/30 to-emerald-50/20 rounded-2xl shadow-2xl border border-emerald-100/50 backdrop-blur-sm py-4 z-[1001] overflow-hidden"
                             onMouseEnter={() => setCitiesDropdownOpen(true)}
                             onMouseLeave={() => setCitiesDropdownOpen(false)}
@@ -252,14 +246,9 @@ export function Header() {
                             
                             {/* Cities Grid */}
                             <div className="relative grid grid-cols-2 gap-2 px-4 py-3">
-                              {cities.map((city, index) => (
-                                <motion.div
-                                  key={city.slug}
-                                  initial={{ opacity: 0, x: -10 }}
-                                  animate={{ opacity: 1, x: 0 }}
-                                  transition={{ delay: index * 0.05, duration: 0.2 }}
-                                >
+                              {cities.map((city) => (
                                   <Link
+                                    key={city.slug}
                                     href={`/services/city/${city.slug}`}
                                     className="group relative block px-4 py-3 text-sm font-medium text-gray-700 hover:text-[#074E3B] rounded-xl transition-all duration-300 overflow-hidden"
                                   >
@@ -281,7 +270,6 @@ export function Header() {
                                     {/* Shine effect on hover */}
                                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 rounded-xl" />
                                   </Link>
-                                </motion.div>
                               ))}
                             </div>
                             
@@ -293,9 +281,8 @@ export function Header() {
                                 <Sparkles className="w-3 h-3 text-emerald-500" />
                               </div>
                             </div>
-                          </motion.div>
+                          </div>
                         )}
-                      </AnimatePresence>
                     </div>
                   )
                 }
@@ -364,24 +351,12 @@ export function Header() {
                                 className={`w-4 h-4 text-emerald-600 transform transition-transform duration-200 ${mobileCitiesOpen ? 'rotate-180' : ''}`}
                               />
                             </button>
-                            <AnimatePresence>
-                              {mobileCitiesOpen && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.3 }}
-                                  className="overflow-hidden"
-                                >
+                            {mobileCitiesOpen && (
+                                <div className="overflow-hidden">
                                   <div className="pl-4 pr-2 py-3 grid grid-cols-2 gap-2 bg-gradient-to-br from-green-50/50 to-emerald-50/30 rounded-lg border border-emerald-100/50">
-                                    {cities.map((city, index) => (
-                                      <motion.div
-                                        key={city.slug}
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: index * 0.05 }}
-                                      >
+                                    {cities.map((city) => (
                                         <Link
+                                          key={city.slug}
                                           href={`/services/city/${city.slug}`}
                                           onClick={() => {
                                             setMobileMenuOpen(false)
@@ -400,12 +375,10 @@ export function Header() {
                                             <span className="flex-1">{city.name}</span>
                                           </div>
                                         </Link>
-                                      </motion.div>
                                     ))}
                                   </div>
-                                </motion.div>
+                                </div>
                               )}
-                            </AnimatePresence>
                           </div>
                         )
                       }

@@ -1,10 +1,14 @@
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { VideoHero } from "@/components/video-hero"
-import { TrustStrip } from "@/components/trust-strip"
 import { LazyMount } from "@/components/lazy-mount"
 import { DelayedMount } from "@/components/delayed-mount"
 import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
+
+const TrustStrip = dynamic(
+  () => import("@/components/trust-strip").then((m) => ({ default: m.TrustStrip })),
+  { loading: () => <div className="min-h-[88px] w-full" aria-hidden /> }
+)
 
 /** Below-fold sections — split JS so TBT/LCP aren't blocked by heavy client bundles */
 const ServicesGrid = dynamic(
@@ -79,11 +83,21 @@ export default function Home() {
       <BreadcrumbJsonLd pathname="/" />
       <VideoHero />
       <TrustStrip />
-      <ServicesGrid />
-      <ScrapTypesSection />
-      <ProcessSteps />
-      <WhyChooseUs />
-      <CertificationsCompliance />
+      <LazyMount minHeight={480} rootMargin="320px 0px">
+        <ServicesGrid />
+      </LazyMount>
+      <LazyMount minHeight={520} rootMargin="280px 0px">
+        <ScrapTypesSection />
+      </LazyMount>
+      <LazyMount minHeight={400} rootMargin="280px 0px">
+        <ProcessSteps />
+      </LazyMount>
+      <LazyMount minHeight={480} rootMargin="260px 0px">
+        <WhyChooseUs />
+      </LazyMount>
+      <LazyMount minHeight={400} rootMargin="260px 0px">
+        <CertificationsCompliance />
+      </LazyMount>
       {/* Heavy interactive / below-fold — mount near viewport to cut unused JS & long tasks */}
       <LazyMount minHeight={700} rootMargin="200px 0px">
         <InteractiveIndiaMap />

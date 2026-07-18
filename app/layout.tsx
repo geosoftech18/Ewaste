@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
-import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
 import "./globals.css"
 import { Suspense } from "react"
@@ -12,6 +11,7 @@ import FooterHighlights from "@/components/footer-highlights"
 import { SITE_URL } from "@/lib/seo"
 import { PageSeo } from "@/components/seo/page-seo"
 import { OrganizationJsonLd } from "@/components/seo/organization-json-ld"
+import { DeferredAnalytics } from "@/components/deferred-analytics"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -135,7 +135,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           <Header />
           {children}
         </Suspense>
-        <Analytics />
+        <DeferredAnalytics />
         <Toaster />
         <FooterHighlights />
         <Footer />

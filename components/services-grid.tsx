@@ -19,6 +19,7 @@ interface Service {
   category: ServiceCategory[]
   rating: number
   clients: string
+  ctaText: string
 }
 
 const services: Service[] = [
@@ -32,7 +33,8 @@ const services: Service[] = [
     link: "/services/electronic-waste-recycle",
     category: ["All", "Residential", "Corporate"],
     rating: 4.9,
-    clients: "500+"
+    clients: "500+",
+    ctaText: "Explore e-waste recycling",
   },
   {
     id: "it-telecom",
@@ -44,7 +46,8 @@ const services: Service[] = [
     link: "/services/it-telecom",
     category: ["All", "Corporate"],
     rating: 4.8,
-    clients: "300+"
+    clients: "300+",
+    ctaText: "Explore IT & telecom recycling",
   },
   {
     id: "Sustainable-Waste-Solutions",
@@ -56,7 +59,8 @@ const services: Service[] = [
     link: "/services/Sustainable-Waste-Solutions",
     category: ["All", "Corporate"],
     rating: 4.7,
-    clients: "200+"
+    clients: "200+",
+    ctaText: "Explore sustainable waste solutions",
   },
   {
     id: "EPR-Compliance-Solutions",
@@ -68,7 +72,8 @@ const services: Service[] = [
     link: "/services/EPR-Compliance-Solutions",
     category: ["All", "Residential", "Corporate"],
     rating: 4.9,
-    clients: "400+"
+    clients: "400+",
+    ctaText: "Explore EPR compliance solutions",
   },
 ]
 
@@ -221,7 +226,7 @@ export function ServicesGrid() {
                   alt={service.title}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  quality={75}
+                  quality={60}
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-20 group-hover:opacity-0 transition-opacity duration-300`}></div>
@@ -265,8 +270,8 @@ export function ServicesGrid() {
                     href={service.link}
                     className="text-emerald-600 font-semibold flex items-center gap-2 group-hover:gap-3 transition-all"
                   >
-                    Learn More
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    {service.ctaText}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform shrink-0" />
                   </Link>
                   <div className="flex items-center gap-1">
                     <Shield className="w-4 h-4 text-emerald-500" />
@@ -303,7 +308,7 @@ export function ServicesGrid() {
                         alt={service.title}
                         fill
                         sizes="100vw"
-                        quality={70}
+                        quality={55}
                         className="object-cover"
                       />
                       <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-20`}></div>
@@ -340,8 +345,8 @@ export function ServicesGrid() {
                           href={service.link}
                           className="text-emerald-600 font-semibold flex items-center gap-2 text-sm"
                         >
-                          Learn More
-                          <ArrowRight className="w-4 h-4" />
+                          {service.ctaText}
+                          <ArrowRight className="w-4 h-4 shrink-0" />
                         </Link>
                         <div className="flex items-center gap-1">
                           <Shield className="w-3 h-3 text-emerald-500" />
