@@ -26,7 +26,7 @@ export default function EWastePopup() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsVisible(true)
-    }, 5500)
+    }, 9000)
 
     return () => clearTimeout(timer)
   }, [])

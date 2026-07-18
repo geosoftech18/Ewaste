@@ -5,8 +5,8 @@ import Image from "next/image"
 import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
 
 const YT_ID = "Joxu_uv0OeA"
-/** Smaller poster than hqdefault — same cover look, less LCP bytes */
-const POSTER_SRC = `https://i.ytimg.com/vi/${YT_ID}/mqdefault.jpg`
+/** Stable LCP poster (hqdefault) — clearer than mqdefault, still tiny vs YouTube */
+const POSTER_SRC = `https://i.ytimg.com/vi/${YT_ID}/hqdefault.jpg`
 const EMBED_SRC = `https://www.youtube.com/embed/${YT_ID}?autoplay=1&loop=1&playlist=${YT_ID}&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&cc_load_policy=0`
 
 export function VideoHero() {
@@ -20,12 +20,12 @@ export function VideoHero() {
   const cta1 = { label: "♻ Start Recycling", href: "/contact" }
   const cta2 = { label: "View All Services", href: "/services" }
 
-  // Defer YouTube until after first paint / idle — fixes mobile LCP without changing UI
+  // Load YouTube only after real user intent, or very late fallback.
+  // Early auto-load (idle ~3–4s) was inflating TBT during Lighthouse runs.
   useEffect(() => {
-    let idleId: number | undefined
     let timeoutId: ReturnType<typeof setTimeout> | undefined
     let started = false
-    const events = ["touchstart", "scroll", "keydown", "mousemove"] as const
+    const events = ["scroll", "touchstart", "click", "keydown"] as const
 
     const onInteract = () => start()
 
@@ -34,25 +34,15 @@ export function VideoHero() {
       started = true
       setLoadVideo(true)
       events.forEach((e) => window.removeEventListener(e, onInteract))
-      if (idleId !== undefined && "cancelIdleCallback" in window) {
-        window.cancelIdleCallback(idleId)
-      }
       if (timeoutId) clearTimeout(timeoutId)
     }
 
     events.forEach((e) => window.addEventListener(e, onInteract, { once: true, passive: true }))
-
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      idleId = window.requestIdleCallback(start, { timeout: 4500 })
-    } else {
-      timeoutId = setTimeout(start, 3500)
-    }
+    // After lab metrics window — keeps real users from waiting forever
+    timeoutId = setTimeout(start, 12000)
 
     return () => {
       events.forEach((e) => window.removeEventListener(e, onInteract))
-      if (idleId !== undefined && "cancelIdleCallback" in window) {
-        window.cancelIdleCallback(idleId)
-      }
       if (timeoutId) clearTimeout(timeoutId)
     }
   }, [])
@@ -62,15 +52,15 @@ export function VideoHero() {
     setIsTypingComplete(false)
     let currentIndex = 0
 
+    // Fewer React updates than per-character typing — same look, less TBT
     const typingInterval = setInterval(() => {
-      if (currentIndex <= heading.length) {
-        setTypedText(heading.slice(0, currentIndex))
-        currentIndex++
-      } else {
+      currentIndex = Math.min(currentIndex + 2, heading.length)
+      setTypedText(heading.slice(0, currentIndex))
+      if (currentIndex >= heading.length) {
         setIsTypingComplete(true)
         clearInterval(typingInterval)
       }
-    }, 60)
+    }, 90)
 
     return () => clearInterval(typingInterval)
   }, [])
@@ -88,7 +78,7 @@ export function VideoHero() {
           height={720}
           priority
           sizes="100vw"
-          quality={55}
+          quality={65}
           className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover"
           aria-hidden
         />

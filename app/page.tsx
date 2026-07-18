@@ -1,16 +1,13 @@
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { VideoHero } from "@/components/video-hero"
-import { LazyMount } from "@/components/lazy-mount"
-import { DelayedMount } from "@/components/delayed-mount"
+import { TrustStrip } from "@/components/trust-strip"
 import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
 
-const TrustStrip = dynamic(
-  () => import("@/components/trust-strip").then((m) => ({ default: m.TrustStrip })),
-  { loading: () => <div className="min-h-[88px] w-full" aria-hidden /> }
-)
-
-/** Below-fold sections — split JS so TBT/LCP aren't blocked by heavy client bundles */
+/**
+ * Code-split below-fold client sections (keeps first paint fast)
+ * without LazyMount — empty placeholders were hurting Speed Index + CLS.
+ */
 const ServicesGrid = dynamic(
   () => import("@/components/services-grid").then((m) => ({ default: m.ServicesGrid })),
   { loading: () => <div className="min-h-[480px] w-full" aria-hidden /> }
@@ -49,14 +46,7 @@ const TestimonialsSection = dynamic(
 )
 const InteractiveIndiaMap = dynamic(() => import("@/components/about/InteractiveIndiaMap"), {
   ssr: false,
-  loading: () => (
-    <div className="w-full h-[700px] bg-gray-100 rounded-3xl flex items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-600 mx-auto mb-4" />
-        <p className="text-gray-600">Loading interactive map...</p>
-      </div>
-    </div>
-  ),
+  loading: () => <div className="w-full h-[700px] bg-gray-100" aria-hidden />,
 })
 const EWastePopup = dynamic(() => import("@/components/EWastePopup"), {
   ssr: false,
@@ -83,38 +73,16 @@ export default function Home() {
       <BreadcrumbJsonLd pathname="/" />
       <VideoHero />
       <TrustStrip />
-      <LazyMount minHeight={480} rootMargin="320px 0px">
-        <ServicesGrid />
-      </LazyMount>
-      <LazyMount minHeight={520} rootMargin="280px 0px">
-        <ScrapTypesSection />
-      </LazyMount>
-      <LazyMount minHeight={400} rootMargin="280px 0px">
-        <ProcessSteps />
-      </LazyMount>
-      <LazyMount minHeight={480} rootMargin="260px 0px">
-        <WhyChooseUs />
-      </LazyMount>
-      <LazyMount minHeight={400} rootMargin="260px 0px">
-        <CertificationsCompliance />
-      </LazyMount>
-      {/* Heavy interactive / below-fold — mount near viewport to cut unused JS & long tasks */}
-      <LazyMount minHeight={700} rootMargin="200px 0px">
-        <InteractiveIndiaMap />
-      </LazyMount>
-      <LazyMount minHeight={520} rootMargin="240px 0px">
-        <QuickPickupForm />
-      </LazyMount>
-      <LazyMount minHeight={360} rootMargin="240px 0px">
-        <ClientsCarousel />
-      </LazyMount>
-      <LazyMount minHeight={480} rootMargin="240px 0px">
-        <TestimonialsSection />
-      </LazyMount>
-      {/* Popup chunk after first paint; internal timer still controls when it appears */}
-      <DelayedMount delayMs={3500}>
-        <EWastePopup />
-      </DelayedMount>
+      <ServicesGrid />
+      <ScrapTypesSection />
+      <ProcessSteps />
+      <WhyChooseUs />
+      <CertificationsCompliance />
+      <InteractiveIndiaMap />
+      <QuickPickupForm />
+      <ClientsCarousel />
+      <TestimonialsSection />
+      <EWastePopup />
     </>
   )
 }
