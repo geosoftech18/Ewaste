@@ -7,7 +7,19 @@ import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb
 
 const ServicesGrid = dynamic(
   () => import("@/components/services-grid").then((m) => ({ default: m.ServicesGrid })),
-  { loading: () => <div className="min-h-[480px] w-full" aria-hidden /> }
+  {
+    loading: () => (
+      <section className="w-full bg-white py-16 min-h-[480px]" aria-hidden>
+        <div className="container mx-auto px-4">
+          <div className="h-10 w-72 max-w-full bg-emerald-50 rounded mx-auto mb-10" />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="h-64 rounded-2xl bg-gray-100" />
+            <div className="h-64 rounded-2xl bg-gray-100" />
+          </div>
+        </div>
+      </section>
+    ),
+  }
 )
 const ScrapTypesSection = dynamic(
   () => import("@/components/scrap-types-section").then((m) => ({ default: m.ScrapTypesSection })),
@@ -82,8 +94,12 @@ export default function Home() {
       <ViewportMount minHeight={520} rootMargin="150px 0px">
         <QuickPickupForm />
       </ViewportMount>
-      <ClientsCarousel />
-      <TestimonialsSection />
+      <ViewportMount minHeight={360} rootMargin="180px 0px">
+        <ClientsCarousel />
+      </ViewportMount>
+      <ViewportMount minHeight={480} rootMargin="180px 0px">
+        <TestimonialsSection />
+      </ViewportMount>
       <EWastePopup />
     </>
   )

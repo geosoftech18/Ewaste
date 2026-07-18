@@ -19,9 +19,9 @@ export function DeferredAnalytics() {
     const start = () => setReady(true)
 
     if ("requestIdleCallback" in window) {
-      idleId = window.requestIdleCallback(start, { timeout: 5000 })
+      idleId = window.requestIdleCallback(start, { timeout: 10000 })
     } else {
-      timeoutId = setTimeout(start, 3500)
+      timeoutId = setTimeout(start, 8000)
     }
 
     return () => {

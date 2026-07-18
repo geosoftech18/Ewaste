@@ -12,6 +12,7 @@ import { SITE_URL } from "@/lib/seo"
 import { PageSeo } from "@/components/seo/page-seo"
 import { OrganizationJsonLd } from "@/components/seo/organization-json-ld"
 import { DeferredAnalytics } from "@/components/deferred-analytics"
+import { DeferredGtm } from "@/components/deferred-gtm"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -88,24 +89,8 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`font-sans ${GeistSans.variable}`}>
-
-        {/* Single tag container — GTM should own GA + Ads (avoids duplicate gtag downloads) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-WHV8BTC3"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-        <Script id="google-tag-manager" strategy="lazyOnload">
-          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-WHV8BTC3');`}
-        </Script>
-        <Suspense fallback={<div>Loading...</div>}>
+        <DeferredGtm />
+        <Suspense fallback={null}>
           <OrganizationJsonLd />
           <PageSeo />
           <Header />

@@ -1,5 +1,3 @@
-"use client"
-
 import { Facebook, Linkedin, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
 

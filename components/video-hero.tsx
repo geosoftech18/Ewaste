@@ -1,16 +1,10 @@
-"use client"
+import { VideoHeroMedia } from "@/components/video-hero-media"
 
-import { useEffect, useState } from "react"
-import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
-
-const YT_ID = "Joxu_uv0OeA"
-/** Local poster — avoids /_next/image hop + third-party LCP delay */
-const POSTER_SRC = "/hero/video-poster.jpg"
-const EMBED_SRC = `https://www.youtube-nocookie.com/embed/${YT_ID}?autoplay=1&loop=1&playlist=${YT_ID}&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&cc_load_policy=0`
-
+/**
+ * Server Component hero — headline/CTAs in initial HTML (better Speed Index).
+ * Video iframe stays client-only and deferred.
+ */
 export function VideoHero() {
-  const [loadVideo, setLoadVideo] = useState(false)
-
   const heading = "Transforming E-Waste into Eco-Value"
   const highlight = "Eco-Value"
   const subheading = "E-Waste Recycling — Safe. Compliant. Eco-friendly."
@@ -21,48 +15,9 @@ export function VideoHero() {
   const before = highlightStart >= 0 ? heading.slice(0, highlightStart) : heading
   const after = highlightStart >= 0 ? heading.slice(highlightStart + highlight.length) : ""
 
-  // Do NOT bind scroll — Lighthouse scrolls and would load YouTube mid-audit (TBT/unused JS).
-  // Load on explicit click/tap in the hero, or a late fallback for real visitors.
-  useEffect(() => {
-    if (loadVideo) return
-    const timeoutId = window.setTimeout(() => setLoadVideo(true), 20000)
-    return () => window.clearTimeout(timeoutId)
-  }, [loadVideo])
-
   return (
     <section className="relative w-full h-[40vh] min-h-[250px] md:h-[90vh] md:min-h-[600px] overflow-hidden bg-black">
-      <BreadcrumbNav variant="light" />
-
-      <div className="absolute inset-0 w-full h-full bg-black">
-        {/* Native img = LCP without Next Image optimizer round-trip */}
-        <img
-          src={POSTER_SRC}
-          alt=""
-          width={1280}
-          height={720}
-          fetchPriority="high"
-          decoding="async"
-          className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover"
-          aria-hidden
-        />
-        {loadVideo ? (
-          <iframe
-            src={EMBED_SRC}
-            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2"
-            style={{ pointerEvents: "none", border: "none" }}
-            allow="autoplay; encrypted-media; accelerometer; gyroscope; picture-in-picture"
-            title="Hero Video"
-            loading="lazy"
-          />
-        ) : (
-          <button
-            type="button"
-            className="absolute inset-0 z-[6] cursor-pointer bg-transparent border-0 p-0"
-            aria-label="Play background video"
-            onClick={() => setLoadVideo(true)}
-          />
-        )}
-      </div>
+      <VideoHeroMedia />
 
       <div className="absolute inset-0 bg-gradient-to-b from-[#00996c]/30 via-[#00996c]/25 to-[#00996c]/35 z-10 pointer-events-none" />
 
