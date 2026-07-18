@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight, Star, Quote, Play, Building2, Home } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -364,9 +365,14 @@ export function TestimonialsSection({ testimonials: customTestimonials }: Testim
 
                   {/* Client Info */}
                   <div className="flex items-center gap-4 mb-4 mt-2">
-                    <img
+                    <Image
                       src={testimonial.image || "/placeholder.svg"}
                       alt={testimonial.name}
+                      width={64}
+                      height={64}
+                      loading="lazy"
+                      sizes="64px"
+                      quality={70}
                       className="w-16 h-16 rounded-full object-cover border-2 border-green-200"
                     />
                     <div className="flex-1">
@@ -461,9 +467,14 @@ export function TestimonialsSection({ testimonials: customTestimonials }: Testim
             <div className="space-y-6">
               {/* Client Info */}
               <div className="flex items-center gap-4">
-                <img
+                <Image
                   src={selectedTestimonial.image || "/placeholder.svg"}
                   alt={selectedTestimonial.name}
+                  width={80}
+                  height={80}
+                  loading="lazy"
+                  sizes="80px"
+                  quality={70}
                   className="w-20 h-20 rounded-full object-cover border-2 border-green-200"
                 />
                 <div className="flex-1">

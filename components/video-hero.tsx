@@ -1,25 +1,60 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
+import Image from "next/image"
 import { BreadcrumbNav } from "@/components/seo/breadcrumb-nav"
 
+const YT_ID = "Joxu_uv0OeA"
+/** Fast LCP poster — same frame look as video, tiny vs YouTube player */
+const POSTER_SRC = `https://i.ytimg.com/vi/${YT_ID}/hqdefault.jpg`
+const EMBED_SRC = `https://www.youtube.com/embed/${YT_ID}?autoplay=1&loop=1&playlist=${YT_ID}&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&cc_load_policy=0`
+
 export function VideoHero() {
-  const iframeRef = useRef<HTMLIFrameElement>(null)
   const [typedText, setTypedText] = useState("")
   const [isTypingComplete, setIsTypingComplete] = useState(false)
+  const [loadVideo, setLoadVideo] = useState(false)
 
   const heading = "Transforming E-Waste into Eco-Value"
   const highlight = "Eco-Value"
   const subheading = "E-Waste Recycling — Safe. Compliant. Eco-friendly."
-  const description = "Empowering homes and businesses with certified recycling that protects nature and reclaims valuable resources responsibly."
   const cta1 = { label: "♻ Start Recycling", href: "/contact" }
   const cta2 = { label: "Learn More", href: "/services" }
 
+  // Defer YouTube until after first paint / idle — fixes mobile LCP without changing UI
   useEffect(() => {
-    // Preload the iframe to minimize loading spinner
-    if (iframeRef.current) {
-      iframeRef.current.src = iframeRef.current.src
+    let idleId: number | undefined
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    let started = false
+    const events = ["touchstart", "scroll", "keydown", "mousemove"] as const
+
+    const onInteract = () => start()
+
+    function start() {
+      if (started) return
+      started = true
+      setLoadVideo(true)
+      events.forEach((e) => window.removeEventListener(e, onInteract))
+      if (idleId !== undefined && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId)
+      }
+      if (timeoutId) clearTimeout(timeoutId)
+    }
+
+    events.forEach((e) => window.addEventListener(e, onInteract, { once: true, passive: true }))
+
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(start, { timeout: 4500 })
+    } else {
+      timeoutId = setTimeout(start, 3500)
+    }
+
+    return () => {
+      events.forEach((e) => window.removeEventListener(e, onInteract))
+      if (idleId !== undefined && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId)
+      }
+      if (timeoutId) clearTimeout(timeoutId)
     }
   }, [])
 
@@ -42,30 +77,40 @@ export function VideoHero() {
   }, [])
 
   return (
-    <section className="relative w-full h-[40vh] min-h-[250px] md:h-[90vh] md:min-h-[600px] overflow-hidden">
+    <section className="relative w-full h-[40vh] min-h-[250px] md:h-[90vh] md:min-h-[600px] overflow-hidden bg-black">
       <BreadcrumbNav variant="light" />
-      {/* YouTube Video Background */}
+
+      {/* Background: poster first (LCP), then YouTube when idle / interaction */}
       <div className="absolute inset-0 w-full h-full bg-black">
-        <iframe
-          ref={iframeRef}
-          src="https://www.youtube.com/embed/Joxu_uv0OeA?autoplay=1&loop=1&playlist=Joxu_uv0OeA&mute=1&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&iv_load_policy=3&cc_load_policy=0&start=0&end=0"
-          className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2"
-          style={{
-            pointerEvents: "none",
-            border: "none",
-          }}
-          allow="autoplay; encrypted-media; accelerometer; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Hero Video"
+        <Image
+          src={POSTER_SRC}
+          alt=""
+          width={1280}
+          height={720}
+          priority
+          sizes="100vw"
+          quality={70}
+          className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover"
+          aria-hidden
         />
-        {/* Hide YouTube loading spinner with overlay */}
+        {loadVideo && (
+          <iframe
+            src={EMBED_SRC}
+            className="absolute top-1/2 left-1/2 w-[177.77777778vh] h-[56.25vw] min-w-full min-h-full -translate-x-1/2 -translate-y-1/2"
+            style={{
+              pointerEvents: "none",
+              border: "none",
+            }}
+            allow="autoplay; encrypted-media; accelerometer; gyroscope; picture-in-picture"
+            title="Hero Video"
+            loading="lazy"
+          />
+        )}
         <div className="absolute inset-0 bg-black/0 z-[5] pointer-events-none" />
       </div>
 
-      {/* Overlay Gradient - matching hero-slider style */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#00996c]/30 via-[#00996c]/25 to-[#00996c]/35 z-10" />
 
-      {/* Content */}
       <div className="relative z-20 h-full flex items-center justify-center px-4 ">
         <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
           <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 text-balance min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem]">
@@ -100,16 +145,12 @@ export function VideoHero() {
             <Button
               size="lg"
               variant="outline"
-                className="border-2 border-[#fdf697] text-white hover:bg-white hover:text-[#074E3B] px-4 py-4 md:px-8 md:py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 bg-transparent"
-                asChild
+              className="border-2 border-[#fdf697] text-white hover:bg-white hover:text-[#074E3B] px-4 py-4 md:px-8 md:py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 bg-transparent"
+              asChild
             >
               <a href={cta2.href || "#"}>{cta2.label}</a>
             </Button>
           </div>
-
-          {/* <div className="mt-8 md:mt-12">
-            <p className="text-white/80 text-sm md:text-base">{description}</p>
-          </div> */}
         </div>
       </div>
 
@@ -133,31 +174,21 @@ export function VideoHero() {
           display: inline-block;
           margin-left: 4px;
           animation: blink 1s step-end infinite;
-          color: #10B981;
+          color: #10b981;
           font-weight: 300;
         }
 
         @keyframes blink {
-          0%, 50% {
+          0%,
+          50% {
             opacity: 1;
           }
-          51%, 100% {
+          51%,
+          100% {
             opacity: 0;
           }
-        }
-
-        /* Hide YouTube loading spinner and controls */
-        iframe {
-          opacity: 1;
-          transition: opacity 0.3s ease-in;
-        }
-
-        /* Ensure video container doesn't show loading states */
-        section {
-          background: #000;
         }
       `}</style>
     </section>
   )
 }
-

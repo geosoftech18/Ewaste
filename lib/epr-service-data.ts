@@ -66,7 +66,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     slug: 'electronics-epr',
     title: 'Electronics EPR Compliance',
     subtitle: 'Comprehensive EPR compliance solutions for electronic products ensuring regulatory adherence and environmental responsibility.',
-    heroImage: '/services/EPR Compliance Solutions.png',
+    heroImage: '/services/EPR Compliance Solutions.jpg',
     summary: 'Our Electronics EPR services help manufacturers, importers, and brand owners comply with Extended Producer Responsibility regulations for electronic products.',
     benefits: [
       {
@@ -153,7 +153,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     ],
     galleryImages: [
       {
-        src: '/services/electronic waste.png',
+        src: '/services/electronic waste.jpg',
         alt: 'Electronics EPR Processing',
         type: 'process'
       }
@@ -212,7 +212,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     slug: 'battery-epr',
     title: 'Battery EPR Compliance',
     subtitle: 'Complete EPR compliance solutions for batteries ensuring proper disposal and environmental protection.',
-    heroImage: '/services/EPR Compliance Solutions.png',
+    heroImage: '/services/EPR Compliance Solutions.jpg',
     summary: 'Our Battery EPR services help manufacturers and importers comply with Extended Producer Responsibility regulations for various types of batteries.',
     benefits: [
       {
@@ -289,7 +289,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     hasDataSecurity: false,
     galleryImages: [
       {
-        src: '/services/electronic waste.png',
+        src: '/services/electronic waste.jpg',
         alt: 'Battery EPR Processing',
         type: 'process'
       }
@@ -348,7 +348,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     slug: 'packaging-epr',
     title: 'Packaging EPR Compliance',
     subtitle: 'Comprehensive EPR compliance solutions for packaging materials ensuring sustainable waste management.',
-    heroImage: '/services/EPR Compliance Solutions.png',
+    heroImage: '/services/EPR Compliance Solutions.jpg',
     summary: 'Our Packaging EPR services help manufacturers and brand owners comply with Extended Producer Responsibility regulations for packaging materials.',
     benefits: [
       {
@@ -425,7 +425,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     hasDataSecurity: false,
     galleryImages: [
       {
-        src: '/services/electronic waste.png',
+        src: '/services/electronic waste.jpg',
         alt: 'Packaging EPR Processing',
         type: 'process'
       }
@@ -484,7 +484,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     slug: 'automotive-epr',
     title: 'Automotive EPR Compliance',
     subtitle: 'Complete EPR compliance solutions for automotive products ensuring proper end-of-life vehicle management.',
-    heroImage: '/services/EPR Compliance Solutions.png',
+    heroImage: '/services/EPR Compliance Solutions.jpg',
     summary: 'Our Automotive EPR services help automotive manufacturers comply with Extended Producer Responsibility regulations for vehicles and automotive components.',
     benefits: [
       {
@@ -561,7 +561,7 @@ export const eprServiceData: Record<string, EPRServiceData> = {
     hasDataSecurity: false,
     galleryImages: [
       {
-        src: '/services/electronic waste.png',
+        src: '/services/electronic waste.jpg',
         alt: 'Automotive EPR Processing',
         type: 'process'
       }

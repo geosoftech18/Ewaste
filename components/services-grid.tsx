@@ -26,7 +26,7 @@ const services: Service[] = [
     id: "electronic-waste",
     title: "Electronic Waste Recycle",
     description: "Discarded electronics: a growing problem. Electronic Waste Recycling tackles this head-on. Focusing on the careful retrieval, handling, and repurposing of old tech. Our methods? They guarantee device recycling that respects the earth. Cutting down on dangerous waste while unlocking a second life for precious resources. Metals, resilient plastics, essential components—all get a chance to be reborn.",
-    image: "/services/electronic waste.png",
+    image: "/services/electronic waste.jpg",
     gradient: "from-emerald-500 to-teal-600",
     features: ["Safe Collection", "Data Destruction", "Certified Recycling", "Material Recovery"],
     link: "/services/electronic-waste-recycle",
@@ -38,7 +38,7 @@ const services: Service[] = [
     id: "it-telecom",
     title: "IT & Telecommunication Equipment",
     description: "The digital age hinges on IT & Telecommunication Equipment. Our services center around the mindful stewardship, renewal, and recycling of gadgets. Think computers, mighty servers, ever-present routers, and mobile devices. We pledge ironclad data protocols, resourceful reuse, and earth-conscious disposal. A truly sustainable, digitally interwoven tomorrow, secured.",
-    image: "/services/IT & Telecommunication.png",
+    image: "/services/IT & Telecommunication.jpg",
     gradient: "from-blue-500 to-indigo-600",
     features: ["Secure Data Handling", "Equipment Refurbishment", "Network Equipment", "Mobile Devices"],
     link: "/services/it-telecom",
@@ -50,7 +50,7 @@ const services: Service[] = [
     id: "Sustainable-Waste-Solutions",
     title: "Sustainable Waste Solutions",
     description: "Integrated Waste Management: picture it. Not just one-off actions, but a symphony of waste actions. Collection, meticulous sorting, forward-thinking recycling, and responsible disposal all dancing in harmony. Aim? Diminishing our footprint while coaxing maximum worth from castoffs. A future, pristine and lasting, for both communities and the corporate landscape.",
-    image: "/services/Sustainable Waste Solutions.png",
+    image: "/services/Sustainable Waste Solutions.jpg",
     gradient: "from-purple-500 to-pink-600",
     features: ["Waste Segregation", "Resource Recovery", "Environmental Impact", "Community Solutions"],
     link: "/services/Sustainable-Waste-Solutions",
@@ -62,7 +62,7 @@ const services: Service[] = [
     id: "EPR-Compliance-Solutions",
     title: "EPR Compliance Solutions",
     description: "Extended Producer Responsibility (EPR) Solutions shift the script. They empower makers and brands, instilling ownership for their products' total journey. From blueprint to the moment it's no longer wanted, our EPR services are your shield. Navigating rules, championing recycling that works, and fostering waste handling that's accountable. It is crafting an ecosystem, cleaner and more viable, for everyone.",
-    image: "/services/EPR Compliance Solutions.png",
+    image: "/services/EPR Compliance Solutions.jpg",
     gradient: "from-yellow-500 to-orange-600",
     features: ["Regulatory Compliance", "Lifecycle Management", "Brand Accountability", "Ecosystem Solutions"],
     link: "/services/EPR-Compliance-Solutions",
@@ -220,6 +220,8 @@ export function ServicesGrid() {
                   src={service.image}
                   alt={service.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  quality={75}
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-20 group-hover:opacity-0 transition-opacity duration-300`}></div>
@@ -300,6 +302,8 @@ export function ServicesGrid() {
                         src={service.image}
                         alt={service.title}
                         fill
+                        sizes="100vw"
+                        quality={70}
                         className="object-cover"
                       />
                       <div className={`absolute inset-0 bg-gradient-to-t ${service.gradient} opacity-20`}></div>

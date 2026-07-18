@@ -80,6 +80,7 @@
     "react-phone-number-input": "^3.4.16",
     "react-resizable-panels": "latest",
     "recharts": "latest",
+    "sharp": "^0.35.3",
     "sonner": "latest",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",

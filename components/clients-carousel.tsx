@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -352,9 +353,14 @@ export function ClientsCarousel() {
                 >
                   {/* Logo */}
                   <div className="relative aspect-[2/1] flex items-center justify-center">
-                    <img
+                    <Image
                       src={client.logo || "/placeholder.svg"}
                       alt={client.name}
+                      width={240}
+                      height={120}
+                      loading="lazy"
+                      sizes="(max-width: 768px) 40vw, 15vw"
+                      quality={70}
                       className="w-full h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
                     />
                   </div>

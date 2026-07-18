@@ -170,9 +170,10 @@ export function Header() {
               <Image
                 src="/S.P recycling.png"
                 alt="SP Recycling Pvt Ltd"
-                width={220}
-                height={220}
-                className="h-34 w-64 md:h-40 md:w-72"
+                width={288}
+                height={80}
+                sizes="(max-width: 768px) 256px, 288px"
+                className="h-34 w-64 md:h-40 md:w-72 object-contain"
                 priority
               />
             </Link>
