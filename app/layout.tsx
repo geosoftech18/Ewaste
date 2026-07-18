@@ -1,7 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { GeistSans } from "geist/font/sans"
-import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import Script from "next/script"
 import "./globals.css"
@@ -44,9 +43,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         {emitHtmlBase ? <base href={`${SITE_URL}/`} /> : null}
-        <link rel="preconnect" href="https://i.ytimg.com" />
+        <link rel="preconnect" href="https://i.ytimg.com" crossOrigin="" />
         <link rel="dns-prefetch" href="https://www.youtube.com" />
-        <Script id="viewer-asset-fix" strategy="beforeInteractive">
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        {/* Viewer-only rewrite — must not block live LCP/FCP */}
+        <Script id="viewer-asset-fix" strategy="lazyOnload">
           {`(function () {
   try {
     var host = location.hostname || "";
@@ -85,14 +86,14 @@ export default function RootLayout({
 })();`}
         </Script>
       </head>
-      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
+      <body className={`font-sans ${GeistSans.variable}`}>
 
-        {/* Analytics — single GA load; Ads deferred to cut TBT without removing tracking */}
+        {/* Marketing tags after load — same tracking, less TBT on first paint */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CX5GEHH56C"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -129,15 +130,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           `}
         </Script>
         <Suspense fallback={<div>Loading...</div>}>
-        <OrganizationJsonLd />
-        <PageSeo />
-        <Header />
-        {children}
+          <OrganizationJsonLd />
+          <PageSeo />
+          <Header />
+          {children}
         </Suspense>
         <Analytics />
         <Toaster />
-       <FooterHighlights />
-       <Footer />
+        <FooterHighlights />
+        <Footer />
       </body>
     </html>
   )

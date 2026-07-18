@@ -158,16 +158,18 @@ export function VideoHero() {
         @keyframes fade-in-up {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translate3d(0, 30px, 0);
           }
           to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0, 0, 0);
           }
         }
 
         .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out;
+          animation: fade-in-up 0.8s ease-out both;
+          will-change: transform, opacity;
+          transform: translateZ(0);
         }
 
         .typing-cursor {
@@ -176,6 +178,7 @@ export function VideoHero() {
           animation: blink 1s step-end infinite;
           color: #10b981;
           font-weight: 300;
+          will-change: opacity;
         }
 
         @keyframes blink {

@@ -341,7 +341,7 @@ export function ClientsCarousel() {
               }}
             >
               {/* Duplicate clients for infinite scroll */}
-              {[...filteredClients, ...filteredClients, ...filteredClients].map((client, index) => (
+              {[...filteredClients, ...filteredClients].map((client, index) => (
                 <motion.div
                   key={`${client.id}-${index}`}
                   onClick={() => setSelectedClient(client)}

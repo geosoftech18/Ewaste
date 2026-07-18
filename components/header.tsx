@@ -1,13 +1,18 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Phone, Mail, Menu, Facebook, Linkedin, Twitter, Instagram, MessageCircle, ChevronDown, MapPin, Sparkles } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { PickupFormModal } from "@/components/pickup-form-modal"
+
+const PickupFormModal = dynamic(
+  () => import("@/components/pickup-form-modal").then((m) => ({ default: m.PickupFormModal })),
+  { ssr: false }
+)
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -38,33 +43,43 @@ const socialLinks = [
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [showTopBar, setShowTopBar] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isNavFixed, setIsNavFixed] = useState(false)
   const [pickupModalOpen, setPickupModalOpen] = useState(false)
+  const [pickupModalLoaded, setPickupModalLoaded] = useState(false)
   const [citiesDropdownOpen, setCitiesDropdownOpen] = useState(false)
   const [mobileCitiesOpen, setMobileCitiesOpen] = useState(false)
 
   useEffect(() => {
+    if (pickupModalOpen) setPickupModalLoaded(true)
+  }, [pickupModalOpen])
+
+  useEffect(() => {
+    let ticking = false
+    let prevY = window.scrollY
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY
+      if (ticking) return
+      ticking = true
+      requestAnimationFrame(() => {
+        const currentScrollY = window.scrollY
 
-      // Hide top bar when scrolling down, show when scrolling up
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        setShowTopBar(false)
-      } else if (currentScrollY < lastScrollY) {
-        setShowTopBar(true)
-      }
+        if (currentScrollY > prevY && currentScrollY > 50) {
+          setShowTopBar(false)
+        } else if (currentScrollY < prevY) {
+          setShowTopBar(true)
+        }
 
-      // Fix navigation bar when scrolled past ticker height
-      setIsNavFixed(currentScrollY > 48) // 48px is ticker height
-      setIsScrolled(currentScrollY > 10)
-      setLastScrollY(currentScrollY)
+        setIsNavFixed(currentScrollY > 48)
+        setIsScrolled(currentScrollY > 10)
+        prevY = currentScrollY
+        ticking = false
+      })
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [lastScrollY])
+  }, [])
 
   // Scroll to top function
   const scrollToTop = () => {
@@ -95,6 +110,8 @@ export function Header() {
                   }
                   .ticker-scroll {
                     animation: scroll-ticker 10s linear infinite;
+                    will-change: transform;
+                    transform: translateZ(0);
                   }
                   .ticker-scroll:hover {
                     animation-play-state: paused;
@@ -470,17 +487,16 @@ export function Header() {
         href="https://wa.me/919949901238"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-125 z-50 animate-bounce"
+        className="fixed bottom-6 right-6 bg-emerald-500 hover:bg-emerald-600 text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition-transform duration-300 hover:scale-125 z-50 animate-bounce [transform:translateZ(0)] will-change-transform"
         aria-label="Chat on WhatsApp"
       >
         <MessageCircle className="w-6 h-6" />
       </a>
 
-      {/* Pickup Form Modal */}
-      <PickupFormModal 
-        open={pickupModalOpen} 
-        onOpenChange={setPickupModalOpen} 
-      />
+      {/* Pickup Form Modal — JS loaded only after first open */}
+      {pickupModalLoaded ? (
+        <PickupFormModal open={pickupModalOpen} onOpenChange={setPickupModalOpen} />
+      ) : null}
     </header>
   )
 }

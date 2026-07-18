@@ -6,11 +6,15 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // Drop legacy polyfills — modern evergreen targets (Legacy JavaScript audit)
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+  },
   images: {
-    // Enable optimizer (WebP/AVIF) — major win vs lighthouse "Improve image delivery"
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60 * 60 * 24 * 30,
     remotePatterns: [
       {
         protocol: 'https',
@@ -26,14 +30,13 @@ const nextConfig = {
       },
     ],
   },
-  // Slightly smaller client bundles
   experimental: {
     optimizePackageImports: ['lucide-react'],
   },
   async headers() {
     return [
       {
-        source: '/:all*(svg|jpg|jpeg|png|webp|avif|ico|woff2)',
+        source: '/:all*(svg|jpg|jpeg|png|webp|avif|ico|woff|woff2|ttf|otf)',
         headers: [
           {
             key: 'Cache-Control',
@@ -47,6 +50,15 @@ const nextConfig = {
           {
             key: 'Cache-Control',
             value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+      {
+        source: '/_next/image',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=2592000, stale-while-revalidate=86400',
           },
         ],
       },

@@ -2,6 +2,8 @@ import { Metadata } from "next"
 import dynamic from "next/dynamic"
 import { VideoHero } from "@/components/video-hero"
 import { TrustStrip } from "@/components/trust-strip"
+import { LazyMount } from "@/components/lazy-mount"
+import { DelayedMount } from "@/components/delayed-mount"
 import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
 
 /** Below-fold sections — split JS so TBT/LCP aren't blocked by heavy client bundles */
@@ -82,11 +84,23 @@ export default function Home() {
       <ProcessSteps />
       <WhyChooseUs />
       <CertificationsCompliance />
-      <InteractiveIndiaMap />
-      <QuickPickupForm />
-      <ClientsCarousel />
-      <TestimonialsSection />
-      <EWastePopup />
+      {/* Heavy interactive / below-fold — mount near viewport to cut unused JS & long tasks */}
+      <LazyMount minHeight={700} rootMargin="200px 0px">
+        <InteractiveIndiaMap />
+      </LazyMount>
+      <LazyMount minHeight={520} rootMargin="240px 0px">
+        <QuickPickupForm />
+      </LazyMount>
+      <LazyMount minHeight={360} rootMargin="240px 0px">
+        <ClientsCarousel />
+      </LazyMount>
+      <LazyMount minHeight={480} rootMargin="240px 0px">
+        <TestimonialsSection />
+      </LazyMount>
+      {/* Popup chunk after first paint; internal timer still controls when it appears */}
+      <DelayedMount delayMs={3500}>
+        <EWastePopup />
+      </DelayedMount>
     </>
   )
 }
