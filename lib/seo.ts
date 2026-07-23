@@ -30,7 +30,13 @@ function humanizeSegment(segment: string): string {
 export function absoluteUrl(path = '/'): string {
   if (!path || path === '/') return SITE_URL
   const normalized = path.startsWith('/') ? path : `/${path}`
-  return `${SITE_URL}${normalized.replace(/\/+$/, '')}`
+  const trimmed = normalized.replace(/\/+$/, '')
+  // Encode each segment so spaces / & in asset paths stay valid URLs
+  const encoded = trimmed
+    .split('/')
+    .map((segment, index) => (index === 0 ? '' : encodeURIComponent(segment)))
+    .join('/')
+  return `${SITE_URL}${encoded}`
 }
 
 /**

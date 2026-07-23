@@ -23,7 +23,9 @@ export function HeroSection({ title, subtitle, backgroundImage }: HeroSectionPro
         <BreadcrumbNav variant="light" />
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
+          style={{
+            backgroundImage: `url("${backgroundImage.replace(/"/g, '\\"')}")`,
+          }}
         >
           <div className="absolute inset-0 opacity-70 bg-gradient-to-r from-emerald-900/90 via-teal-900/85 to-slate-900/90" />
         </div>

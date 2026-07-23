@@ -8,7 +8,6 @@ import CategoriesManaged from '@/components/services/EPR-services/categories-man
 import Partners from '@/components/services/EPR-services/partners';
 import PWMTimeline from '@/components/services/EPR-services/pwm-timeline';
 import CTA from '@/components/services/EPR-services/cta';
-import Footer from '@/components/services/EPR-services/footer';
 import { getEPRServiceData, getAllEPRServiceSlugs } from '@/lib/epr-service-data';
 import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
 import { JsonLd, serviceJsonLd } from '@/components/seo/structured-data';

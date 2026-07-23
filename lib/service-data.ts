@@ -67,7 +67,7 @@ const servicesData: Record<string, ServiceData> = {
     slug: 'electronic-waste-recycle',
     title: 'Electronic Waste Recycling Services',
     subtitle: 'Eco-conscious disposal for electronics. We ensure safety, compliance, and proper certification.',
-    heroImage: '/services/electronic waste.jpg',
+    heroImage: '/services/electronic-waste.jpg',
     summary: 'We handle every type of e-waste responsibly — from collection to certified recycling — ensuring zero landfill and full compliance.',
     link: '#',
     benefits: [
@@ -258,7 +258,7 @@ const servicesData: Record<string, ServiceData> = {
     slug: 'it-telecom',
     title: 'IT & Telecom Equipment Recycling',
     subtitle: 'Specialized recycling services for IT infrastructure and telecommunications equipment',
-    heroImage: '/services/IT & Telecommunication.jpg',
+    heroImage: '/services/it-telecommunication.jpg',
     summary: 'Enterprise-grade recycling solutions for outdated IT and telecom equipment with complete audit trails and compliance documentation.',
     link: '#',
     benefits: [
@@ -476,7 +476,7 @@ const servicesData: Record<string, ServiceData> = {
     slug: 'Sustainable-Waste-Solutions',
     title: 'Sustainable Waste Solutions',
     subtitle: 'Integrated waste management for comprehensive recycling and environmental sustainability',
-    heroImage: '/services/Sustainable Waste Solutions.jpg',
+    heroImage: '/services/sustainable-waste-solutions.jpg',
     summary: 'Holistic approach to waste management that combines waste collection, segregation, recycling, and disposal into one efficient system, focusing on reducing environmental impact while maximizing resource recovery.',
     link: '#',
       benefits: [
@@ -656,7 +656,7 @@ const servicesData: Record<string, ServiceData> = {
     slug: 'EPR-Compliance-Solutions',
     title: 'EPR Compliance Solutions',
     subtitle: 'Extended Producer Responsibility services for manufacturers and brands',
-    heroImage: '/services/EPR Compliance Solutions.jpg',
+    heroImage: '/services/epr-compliance-solutions.jpg',
     summary: 'Comprehensive EPR solutions that empower manufacturers and brands to take accountability for the entire lifecycle of their products, ensuring regulatory compliance and responsible waste management.',
     link: '/blog/the-growing-crisis-of-e-waste-and-how-responsible-recycling-can-fix-it',
     benefits: [

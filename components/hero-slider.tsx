@@ -27,7 +27,7 @@ const slides: Slide[] = [
       "Empowering homes and businesses with certified recycling that protects nature and reclaims valuable resources responsibly.",
     cta1: { label: "♻ Start Recycling", href: "/contact" },
     cta2: { label: "Learn More", href: "/services" },
-    cardImage: "/services/electronic waste.jpg",
+    cardImage: "/services/electronic-waste.jpg",
     highlight: "Eco-Value",
   },
   {
@@ -38,7 +38,7 @@ const slides: Slide[] = [
       "Safe data destruction, responsible device recovery, and sustainable reuse for IT and telecom industries.",
     cta1: { label: "Schedule Pickup", href: "/contact" },
     cta2: { label: "View Services", href: "/service" },
-    cardImage: "/services/IT & Telecommunication.jpg",
+    cardImage: "/services/it-telecommunication.jpg",
     highlight: "E-Waste",
   },
   {
@@ -49,7 +49,7 @@ const slides: Slide[] = [
       "Integrating collection, segregation, and recycling to minimize waste footprint and maximize material recovery.",
     cta1: { label: "Explore Solutions", href: "/services" },
     cta2: { label: "Get Consultation", href: "/contact" },
-    cardImage: "/services/Sustainable Waste Solutions.jpg",
+    cardImage: "/services/sustainable-waste-solutions.jpg",
     highlight: "Waste Solutions",
   },
   {
@@ -60,7 +60,7 @@ const slides: Slide[] = [
       "Ensuring complete product lifecycle compliance with customized recycling and accountability programs.",
     cta1: { label: "Know More", href: "/services/EPR-compliance" },
     cta2: { label: "Partner With Us", href: "/contact" },
-    cardImage: "/services/EPR Compliance Solutions.jpg",
+    cardImage: "/services/epr-compliance-solutions.jpg",
     highlight: "EPR",
   },
   {
