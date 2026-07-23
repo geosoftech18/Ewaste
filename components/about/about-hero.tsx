@@ -174,7 +174,7 @@ export function AboutHero() {
                 {/* Placeholder for recycling illustration */}
                 <div className="relative z-10 w-full h-full flex items-center justify-center">
                   <Image
-                    src="city/e-waste-recycling-facility-with-circuit-boards-and.jpg"
+                    src="/city/e-waste-recycling-facility-with-circuit-boards-and.jpg"
                     alt="E-waste recycling illustration"
                     width={600}
                     height={600}

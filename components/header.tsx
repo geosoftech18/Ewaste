@@ -362,7 +362,28 @@ export function Header() {
         </div>
       </div>
 
-      {/* WhatsApp Floating Button */}
+      {/* Floating Call Button (left) */}
+      <div className="fixed bottom-6 left-6 z-50 flex flex-col items-center">
+        <div className="relative mb-2 call-label-reveal">
+          <span className="relative z-10 block text-xs font-bold tracking-wide text-white bg-[#2563eb]/90 px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap">
+            Call now
+          </span>
+          {/* Arrow pointing down to the button */}
+          <span
+            className="absolute left-1/2 -bottom-1.5 -translate-x-1/2 w-0 h-0 border-l-[7px] border-r-[7px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#2563eb]/90"
+            aria-hidden
+          />
+        </div>
+        <a
+          href="tel:+919949901238"
+          className="call-zoom-pulse bg-[#2563eb]/90 hover:bg-[#1d4ed8] text-white p-4 rounded-full shadow-lg hover:shadow-2xl z-50 [transform:translateZ(0)] will-change-transform"
+          aria-label="Call now 9949901238"
+        >
+          <Phone className="w-6 h-6" aria-hidden />
+        </a>
+      </div>
+
+      {/* WhatsApp Floating Button (right) */}
       <a
         href="https://wa.me/919949901238"
         target="_blank"

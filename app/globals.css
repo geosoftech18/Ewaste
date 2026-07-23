@@ -1,4 +1,4 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -783,6 +783,71 @@
   }
 }
 
+/* Floating call button â€” zoom in / zoom out */
+@keyframes call-zoom-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.call-zoom-pulse {
+  animation: call-zoom-pulse 1.2s ease-in-out infinite;
+}
+
+.call-zoom-pulse:hover {
+  animation: none;
+  transform: scale(1.12);
+}
+
+/* Soft bounce for the Call now label + arrow */
+@keyframes call-label-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.call-label-bounce {
+  animation: call-label-bounce 1.2s ease-in-out infinite;
+}
+
+/* Label rises out of the call button after a short delay */
+@keyframes call-label-reveal {
+  0%,
+  12% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.55);
+  }
+  28% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.04);
+  }
+  36% {
+    transform: translateY(0) scale(1);
+  }
+  68% {
+    transform: translateY(-4px) scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.call-label-reveal {
+  opacity: 0;
+  transform-origin: bottom center;
+  animation: call-label-reveal 4.5s ease-in-out 1.8s infinite;
+  will-change: transform, opacity;
+}
+
 .animate-fadeIn {
   animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -848,7 +913,7 @@
   border-color: var(--destructive);
 }
 
-/* Dark / glass forms (e.g. QuoteForm) — beats default light input styles */
+/* Dark / glass forms (e.g. QuoteForm) â€” beats default light input styles */
 .phone-input-field.phone-input-field--on-dark {
   width: 100%;
 }
