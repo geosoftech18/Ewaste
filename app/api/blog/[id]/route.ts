@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
+import mongoose from 'mongoose'
 import dbConnect from '@/lib/mongodb'
 import Blog from '@/lib/models/blog'
-import { ObjectId } from 'mongodb'
+
+const { ObjectId } = mongoose.Types
 
 export async function GET(
   request: NextRequest,
