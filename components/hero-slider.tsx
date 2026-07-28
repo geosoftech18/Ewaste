@@ -1,315 +1,298 @@
-"use client"
+'use client'
 
-import type React from "react"
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
+import { ChevronsRight, Phone, Star } from 'lucide-react'
 
-import { useState, useEffect, useCallback } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+const ACCENT = '#C8F542'
+const FOREST = '#0A2A22'
 
-interface Slide {
+type Slide = {
   id: number
   image: string
-  heading: string
+  eyebrow: string
+  line1: string
+  line2: string
+  highlight: string
+  line3?: string
   description: string
-  cta1: { label: string; href?: string }
-  cta2: { label: string; href?: string }
-  cardImage?: string
-  highlight?: string
+  ctaLabel: string
+  ctaHref: string
 }
 
 const slides: Slide[] = [
   {
     id: 1,
-    image: "/hero/1.jpg",
-    heading: "Transforming E-Waste into Eco-Value",
+    image: '/hero-slider/1.jpg',
+    eyebrow: 'ISO · CPCB Certified',
+    line1: 'Authorized E-Waste',
+    line2: 'Recycling Company in',
+    highlight: 'India',
+    
     description:
-      "Empowering homes and businesses with certified recycling that protects nature and reclaims valuable resources responsibly.",
-    cta1: { label: "♻ Start Recycling", href: "/contact" },
-    cta2: { label: "Learn More", href: "/services" },
-    cardImage: "/services/electronic-waste.jpg",
-    highlight: "Eco-Value",
+      'Recycle old computers, laptops, servers, mobile phones, printers, and other electronic waste through a certified recycling process. We provide secure collection, responsible recycling, data destruction, and EPR-compliant disposal for businesses, industries, institutions, and households across India.',
+    ctaLabel: 'Schedule Free Pickup',
+    ctaHref: '/contact',
   },
   {
     id: 2,
-    image: "/hero/2.jpg",
-    heading: "Secure, Certified E-Waste Recycling",
+    image: '/hero-slider/2.jpg',
+    eyebrow: 'Secure · Compliant · Traceable',
+    line1: 'Secure IT Asset',
+    line2: 'Disposal &',
+    highlight: 'Certified ',
+    line3: 'Data Destruction Services',
     description:
-      "Safe data destruction, responsible device recovery, and sustainable reuse for IT and telecom industries.",
-    cta1: { label: "Schedule Pickup", href: "/contact" },
-    cta2: { label: "View Services", href: "/service" },
-    cardImage: "/services/it-telecommunication.jpg",
-    highlight: "E-Waste",
+      'Dispose of outdated IT equipment safely with certified hard drive destruction, server disposal, laptop recycling, desktop recycling, and secure IT asset management. Protect confidential business information while ensuring environmentally responsible recycling.',
+    ctaLabel: 'Request Pickup',
+    ctaHref: '/contact',
   },
   {
     id: 3,
-    image: "/hero/3.jpg",
-    heading: "Sustainable Waste Solutions that Deliver Impact",
+    image: '/hero-slider/3.jpg',
+    eyebrow: 'Industrial Scrap Recycling',
+    line1: 'Metal Scrap Recycling',
+    line2: 'Industries & Manufacturing ',
+    highlight: 'Companies',
+    
     description:
-      "Integrating collection, segregation, and recycling to minimize waste footprint and maximize material recovery.",
-    cta1: { label: "Explore Solutions", href: "/services" },
-    cta2: { label: "Get Consultation", href: "/contact" },
-    cardImage: "/services/sustainable-waste-solutions.jpg",
-    highlight: "Waste Solutions",
+      'We purchase and recycle ferrous and non-ferrous metal scrap, including copper, aluminium, brass, stainless steel, iron, cables, industrial machinery, and manufacturing waste through safe and environmentally responsible recycling methods.',
+    ctaLabel: 'Sell Scrap Today',
+    ctaHref: '/contact',
   },
   {
     id: 4,
-    image: "/hero/4.jpg",
-    heading: "Future-Ready EPR & Brand Responsibility",
+    image: '/hero-slider/4.jpg',
+    eyebrow: 'EPR Compliance',
+    line1: 'EPR Compliance & Sustainable Waste ',
+    line2: 'Management',
+    highlight: 'Management',
+    line3: ' Solutions',
     description:
-      "Ensuring complete product lifecycle compliance with customized recycling and accountability programs.",
-    cta1: { label: "Know More", href: "/services/EPR-compliance" },
-    cta2: { label: "Partner With Us", href: "/contact" },
-    cardImage: "/services/epr-compliance-solutions.jpg",
-    highlight: "EPR",
+      'Support your Extended Producer Responsibility (EPR) obligations with collection, recycling, documentation, and environmentally compliant waste management solutions. We help manufacturers, importers, producers, and brand owners meet CPCB guidelines through certified recycling processes.',
+    ctaLabel: 'Explore EPR',
+    ctaHref: '/services/EPR-compliance',
   },
   {
     id: 5,
-    image: "/hero/5.jpg",
-    heading: "10+ Years of Sustainable Excellence",
+    image: '/hero-slider/5.jpg',
+    eyebrow: 'Nationwide Collection',
+    line1: 'Doorstep E-Waste',
+    line2: 'Pickup Across Major',
+    highlight: 'Cities',
+    line3: ' in India',
     description:
-      "Trusted by 500+ clients across 20+ industries with 99% satisfaction in e-waste recycling services.",
-    cta1: { label: "Join Us", href: "/about" },
-    cta2: { label: "Contact Now", href: "/contact" },
-    cardImage: "/placeholder.jpg",
-    highlight: "Sustainable Excellence",
+      'Book a convenient electronic waste pickup for offices, factories, schools, hospitals, residential societies, and homes. Our trained team collects electronic waste and transports it to certified recycling facilities for safe processing.',
+    ctaLabel: 'Book Pickup',
+    ctaHref: '/contact',
   },
 ]
 
+function PillCta({ href, label }: { href: string; label: string }) {
+  return (
+    <Link
+      href={href}
+      className="group inline-flex min-w-0 items-center rounded-full border-[3px] py-[2px] pl-5 pr-[2px] transition-transform duration-300 hover:scale-[1.02] sm:py-[3px] sm:pl-8 sm:pr-[3px]"
+      style={{
+        borderColor: ACCENT,
+        backgroundColor: FOREST,
+      }}
+    >
+      <span className="truncate pr-3 text-sm font-semibold tracking-wide text-white sm:pr-6 sm:text-[15px] md:text-base">
+        {label}
+      </span>
+      <span
+        className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full sm:h-12 sm:w-12 md:h-[52px] md:w-[52px]"
+        style={{ backgroundColor: ACCENT }}
+        aria-hidden
+      >
+        <span className="hero-cta-chevron flex items-center text-[#0A2A22]">
+          <ChevronsRight className="h-4 w-4 stroke-[2.75] sm:h-5 sm:w-5 md:h-6 md:w-6" />
+        </span>
+      </span>
+    </Link>
+  )
+}
+
 export function HeroSlider() {
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
-  const [isTransitioning, setIsTransitioning] = useState(false)
-  const [touchStart, setTouchStart] = useState(0)
-  const [touchEnd, setTouchEnd] = useState(0)
-  const [typedText, setTypedText] = useState("")
-  const [isTypingComplete, setIsTypingComplete] = useState(false)
+  const [current, setCurrent] = useState(0)
+  const [entered, setEntered] = useState(true)
 
   useEffect(() => {
-    const fullText = slides[currentSlide].heading
-    setTypedText("")
-    setIsTypingComplete(false)
-    let currentIndex = 0
+    const timer = setInterval(() => {
+      setEntered(false)
+      window.setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % slides.length)
+        setEntered(true)
+      }, 220)
+    }, 5500)
+    return () => clearInterval(timer)
+  }, [])
 
-    const typingInterval = setInterval(() => {
-      if (currentIndex <= fullText.length) {
-        setTypedText(fullText.slice(0, currentIndex))
-        currentIndex++
-      } else {
-        setIsTypingComplete(true)
-        clearInterval(typingInterval)
-      }
-    }, 60)
-
-    return () => clearInterval(typingInterval)
-  }, [currentSlide])
-
-  const nextSlide = useCallback(() => {
-    if (isTransitioning) return
-    setIsTransitioning(true)
-    setCurrentSlide((prev) => (prev + 1) % slides.length)
-    setTimeout(() => setIsTransitioning(false), 500)
-  }, [isTransitioning])
-
-  const prevSlide = useCallback(() => {
-    if (isTransitioning) return
-    setIsTransitioning(true)
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-    setTimeout(() => setIsTransitioning(false), 500)
-  }, [isTransitioning])
-
-  const goToSlide = (index: number) => {
-    if (isTransitioning) return
-    setIsTransitioning(true)
-    setCurrentSlide(index)
-    setTimeout(() => setIsTransitioning(false), 500)
-  }
-
-  useEffect(() => {
-    if (!isAutoPlaying) return
-
-    const interval = setInterval(() => {
-      nextSlide()
-    }, 6000)
-
-    return () => clearInterval(interval)
-  }, [isAutoPlaying, nextSlide])
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prevSlide()
-      if (e.key === "ArrowRight") nextSlide()
-    }
-
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [nextSlide, prevSlide])
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setTouchStart(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
-  }
-
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return
-
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > 50
-    const isRightSwipe = distance < -50
-
-    if (isLeftSwipe) nextSlide()
-    if (isRightSwipe) prevSlide()
-
-    setTouchStart(0)
-    setTouchEnd(0)
+  const goTo = (idx: number) => {
+    if (idx === current) return
+    setEntered(false)
+    window.setTimeout(() => {
+      setCurrent(idx)
+      setEntered(true)
+    }, 180)
   }
 
   return (
     <section
-      className="relative w-full h-[90vh] min-h-[600px] overflow-hidden"
-      onMouseEnter={() => setIsAutoPlaying(false)}
-      onMouseLeave={() => setIsAutoPlaying(true)}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      role="region"
+      className="relative w-full overflow-hidden"
+      style={{ backgroundColor: FOREST }}
       aria-label="Hero image slider"
       aria-live="polite"
     >
-      {slides.map((slide, index) => (
-        <div
-          key={slide.id}
-          className={`absolute  inset-0 transition-opacity duration-500 ease-in-out ${
-            index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
-          }`}
-          aria-hidden={index !== currentSlide}
-        >
-          <Image
-            src={slide.image || "/placeholder.svg"}
-            alt={slide.heading}
-            fill
-            priority={index === 0}
-            loading={index === 0 ? "eager" : "lazy"}
-            className="object-cover"
-            sizes="100vw"
-          />
-          <div className="absolute inset-0 bg-[#00996c] opacity-40" />
-        </div>
-      ))}
+      <div className="relative min-h-[600px] h-[min(92vh,780px)] w-full">
+        {slides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className="absolute inset-0 transition-opacity duration-700 ease-out"
+            style={{
+              opacity: idx === current ? 1 : 0,
+              pointerEvents: idx === current ? 'auto' : 'none',
+              zIndex: idx === current ? 1 : 0,
+            }}
+            aria-hidden={idx !== current}
+          >
+            {/* Right-side photo */}
+            <div className="absolute inset-0 md:left-[28%]">
+              <Image
+                src={slide.image}
+                alt={`${slide.line2} ${slide.highlight} ${slide.line3}`}
+                fill
+                priority={idx === 0}
+                sizes="100vw"
+                className="object-cover object-[center_30%] md:object-center"
+              />
+            </div>
 
-      <div className="relative z-20 h-full flex items-center justify-center px-4">
-        <div className="text-center max-w-4xl mx-auto animate-fade-in-up">
-          <h1 className="text-3xl md:text-5xl lg:text-5xl font-bold text-white mb-4 md:mb-6 text-balance min-h-[4rem] md:min-h-[5rem] lg:min-h-[6rem]">
-            <span className="inline-block">
-              {(() => {
-                const highlight = slides[currentSlide].highlight
-                if (highlight && typedText.includes(highlight)) {
-                  const parts = typedText.split(highlight)
-                  return (
-                    <>
-                      <span>{parts[0]}</span>
-                      <span className="text-[#4afaa5]">{highlight}</span>
-                      <span>{parts.slice(1).join(highlight)}</span>
-                    </>
+            {/* Dark forest green → photo gradient (matches reference) */}
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `
+                  linear-gradient(
+                    105deg,
+                    ${FOREST} 0%,
+                    ${FOREST} 42%,
+                    rgba(10, 42, 34, 0.92) 45%,
+                    rgba(10, 42, 34, 0.55) 65%,
+                    rgba(10, 42, 34, 0.15) 82%,
+                    transparent 100%
                   )
-                }
-                return typedText
-              })()}
-              <span className={`typing-cursor ${isTypingComplete ? "opacity-0" : ""}`}>|</span>
-            </span>
-          </h1>
-          <p className="text-lg md:text-xl lg:text-2xl text-white/90 mb-8 md:mb-10 text-pretty">
-            E-Waste Recycling — Safe. Compliant. Eco-friendly.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button
-              size="lg"
-              className="bg-[#10B981] hover:bg-[#059669] text-white px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl"
-              asChild
-            >
-              <a href={slides[currentSlide].cta1.href || "#"}>{slides[currentSlide].cta1.label}</a>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-[#074E3B] px-8 py-6 text-lg font-semibold transition-all duration-300 hover:scale-105 bg-transparent"
-              asChild
-            >
-              <a href={slides[currentSlide].cta2.href || "#"}>{slides[currentSlide].cta2.label}</a>
-            </Button>
-          </div>
+                `,
+              }}
+            />
+            {/* Mobile readability wash */}
+            <div
+              className="absolute inset-0 md:hidden"
+              style={{
+                background: `linear-gradient(180deg, ${FOREST} 0%, rgba(10,42,34,0.85) 45%, rgba(10,42,34,0.55) 100%)`,
+              }}
+            />
 
-          <div className="mt-8 md:mt-12">
-            <p className="text-white/80 text-sm md:text-base">{slides[currentSlide].description}</p>
+            {/* Content */}
+            <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-5 sm:px-8 lg:px-10">
+              <div
+                className={`max-w-2xl text-white transition-all duration-500 ease-out ${
+                  idx === current && entered
+                    ? 'translate-y-0 opacity-100'
+                    : 'translate-y-3 opacity-0'
+                }`}
+              >
+                {/* Rating badge */}
+                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm">
+                  <span className="text-sm font-bold text-white">4.9</span>
+                  <span className="flex items-center gap-0.5" aria-label="5 star rating">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-3.5 w-3.5 fill-amber-400 text-amber-400"
+                        aria-hidden
+                      />
+                    ))}
+                  </span>
+                  <span className="text-xs font-medium text-white/80 sm:text-sm">
+                    500+ Happy Clients
+                  </span>
+                </div>
+
+                <p
+                  className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] sm:text-sm"
+                  style={{ color: ACCENT }}
+                >
+                  {slide.eyebrow}
+                </p>
+
+                <h2 className="mb-5 text-[1.75rem] font-extrabold  leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.15rem]">
+                  <span className="block text-white">{slide.line1}</span>
+                  <span className="block text-white">
+                    {slide.line2}{' '}
+                    <span style={{ color: ACCENT }}>{slide.highlight}</span>
+                  </span>
+                  <span className="block text-white">{slide.line3}</span>
+              </h2>
+
+                <p className="mb-8 max-w-md text-sm leading-relaxed text-white/85 sm:text-base">
+                  {slide.description}
+                </p>
+
+                <div className="flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
+                  <PillCta href={slide.ctaHref} label={slide.ctaLabel} />
+
+                  <a
+                    href="tel:+919949901238"
+                    aria-label="Call SP Recycling at +91 99499 01238"
+                    className="inline-flex shrink-0 items-center gap-3.5 transition-opacity hover:opacity-90"
+                  >
+                    <span
+                      className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full shadow-[0_0_0_4px_rgba(200,245,66,0.18)] sm:h-12 sm:w-12 md:h-14 md:w-14"
+                      style={{ backgroundColor: ACCENT }}
+                    >
+                      <Phone className="h-5 w-5 text-[#0A2A22] md:h-6 md:w-6" strokeWidth={2.25} />
+                    </span>
+                    <span className="hidden leading-tight sm:block">
+                      <span className="block text-[11px] font-semibold uppercase tracking-[0.18em] text-white/75">
+                        Call us
+                      </span>
+                      <span className="block text-base font-bold text-white md:text-lg">
+                        +91 99499 01238
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
+        ))}
+
+        {/* Slide dots — bottom center on mobile, left vertical center on md+ */}
+        <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-row items-center gap-2.5 md:bottom-auto md:left-8 md:top-1/2 md:translate-x-0 md:-translate-y-1/2 md:flex-col">
+          {slides.map((slide, idx) => (
+            <button
+              key={slide.id}
+              type="button"
+              onClick={() => goTo(idx)}
+              aria-label={`Go to slide ${idx + 1}`}
+              aria-current={idx === current}
+              className={`rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#C8F542] ${
+                idx === current
+                  ? 'h-2.5 w-9 md:h-9 md:w-2.5'
+                  : 'h-2.5 w-2.5'
+              }`}
+              style={{
+                backgroundColor: idx === current ? ACCENT : 'rgba(255,255,255,0.45)',
+              }}
+            />
+          ))}
         </div>
       </div>
-
-      <button
-        onClick={prevSlide}
-        className="absolute md:block hidden left-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
-        aria-label="Previous slide"
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        onClick={nextSlide}
-        className="absolute md:block hidden right-4 top-1/2 -translate-y-1/2 z-30 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white p-3 rounded-full transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
-        aria-label="Next slide"
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
-
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex gap-3">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent ${
-              index === currentSlide ? "w-12 h-3 bg-[#10B981]" : "w-3 h-3 bg-white/50 hover:bg-white/80"
-            }`}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={index === currentSlide ? "true" : "false"}
-          />
-        ))}
-      </div>
-
-      <style jsx>{`
-        @keyframes fade-in-up {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        .animate-fade-in-up {
-          animation: fade-in-up 0.8s ease-out;
-        }
-
-        .typing-cursor {
-          display: inline-block;
-          margin-left: 4px;
-          animation: blink 1s step-end infinite;
-          color: #10B981;
-          font-weight: 300;
-        }
-
-        @keyframes blink {
-          0%, 50% {
-            opacity: 1;
-          }
-          51%, 100% {
-            opacity: 0;
-          }
-        }
-      `}</style>
     </section>
   )
 }
+
+export default HeroSlider

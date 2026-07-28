@@ -13,7 +13,15 @@ import FAQ from "@/components/service/FAQ"
 import { RequestPickup } from "@/components/city/request-pickup"
 import { ServiceCities } from "@/components/city/service-cities"
 import { TestimonialsSection } from "@/components/testimonials-section"
-import { getCityData, getAllCitySlugs, type CityData } from '@/lib/city-data';
+import {
+  getCityData,
+  getAllCitySlugs,
+  getCityBridgeParagraphHtml,
+  getCityFaqs,
+  getCityServicesBlurbHtml,
+  getLinkedCityServices,
+  type CityData,
+} from '@/lib/city-data';
 import { SITE_URL, absoluteUrl } from '@/lib/seo';
 import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
 
@@ -85,7 +93,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-function CityJsonLd({ city }: { city: CityData }) {
+function CityJsonLd({ city, faqs }: { city: CityData; faqs: CityData['faqs'] }) {
   const pageUrl = `${SITE_URL}/services/city/${city.slug}`;
   const description =
     city.metaDescription ??
@@ -131,7 +139,7 @@ function CityJsonLd({ city }: { city: CityData }) {
       {
         '@type': 'FAQPage',
         '@id': `${pageUrl}#faq`,
-        mainEntity: city.faqs.map((faq) => ({
+        mainEntity: faqs.map((faq) => ({
           '@type': 'Question',
           name: faq.question,
           acceptedAnswer: {
@@ -159,10 +167,15 @@ export default function CityPage({ params }: { params: { slug: string } }) {
     notFound();
   }
 
+  const bridgeParagraphHtml = getCityBridgeParagraphHtml(city);
+  const cityFaqs = getCityFaqs(city);
+  const servicesBlurbHtml = getCityServicesBlurbHtml(city);
+  const linkedServices = getLinkedCityServices(city);
+
   return (
     <main className="min-h-screen bg-background">
       <BreadcrumbJsonLd pathname={`/services/city/${city.slug}`} />
-      <CityJsonLd city={city} />
+      <CityJsonLd city={city} faqs={cityFaqs} />
       <Hero
         cityName={city.name}
         heroTitle={city.heroTitle}
@@ -173,15 +186,16 @@ export default function CityPage({ params }: { params: { slug: string } }) {
         stats={city.stats}
       />
       <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
-        <p className="mx-auto max-w-3xl text-center text-sm sm:text-base text-muted-foreground leading-relaxed">
-          {city.bridgeParagraph ??
-            `At SP Recycling, we take the complexity out of corporate environmental responsibility. If you need to secure the best commercial value for bulk IT scrap in  ${city.name} or require a fully certified office clearance, our specialized disposal workflow starts right at your facility door. `}
-        </p>
+        <p
+          className="mx-auto max-w-3xl text-center text-sm sm:text-base text-muted-foreground leading-relaxed [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-primary/85"
+          dangerouslySetInnerHTML={{ __html: bridgeParagraphHtml }}
+        />
       </section>
       <Services
         cityName={city.name}
-        services={city.services}
+        services={linkedServices}
         servicesBlurb={city.servicesBlurb}
+        servicesBlurbHtml={servicesBlurbHtml}
       />
       <EnvironmentalImpact />
       {city.slug === "hyderabad" ? <HyderabadWhyChooseUs /> : <WhyChooseUs />}
@@ -189,7 +203,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <TestimonialsSection />
       <ImpactCalculator cityName={city.name} />
       <Certifications />
-      <FAQ faqs={city.faqs} />
+      <FAQ faqs={cityFaqs} />
       <RequestPickup cityName={city.name} />
       <ServiceCities />
       <CTA />

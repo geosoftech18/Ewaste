@@ -10,8 +10,10 @@ export interface CityData {
   heroSubdescription?: string;
   /** Bridge copy shown below the hero */
   bridgeParagraph?: string;
+  bridgeParagraphHtml?: string;
   /** Prominent blurb above/below the services category tabs */
   servicesBlurb?: string;
+  servicesBlurbHtml?: string;
   /** Optional SEO title override */
   metaTitle?: string;
   /** Optional meta description override */
@@ -40,6 +42,7 @@ export interface CityData {
   faqs: Array<{
     question: string;
     answer: string;
+    answerHtml?: string;
   }>;
 }
 
@@ -645,6 +648,150 @@ export const cityData: Record<string, CityData> = {
     ]
   }
 };
+
+type LinkedServiceItem = CityData['services']['items'][number];
+
+const servicePageLinks = {
+  ewaste: '/services/electronic-waste-recycle',
+  itTelecom: '/services/it-telecom',
+  consumer: '/services/consumer-electronics',
+  dataDestruction: '/services/data-destruction',
+  epr: '/services/EPR-Compliance-Solutions',
+} as const;
+
+function linkLabel(href: string, label: string) {
+  return `<a href="${href}">${label}</a>`;
+}
+
+export function getCityBridgeParagraphHtml(city: CityData): string {
+  if (city.bridgeParagraphHtml) return city.bridgeParagraphHtml;
+  if (city.bridgeParagraph) {
+    return `${city.bridgeParagraph} Explore our ${linkLabel(
+      servicePageLinks.itTelecom,
+      'IT & telecom equipment recycling'
+    )}, ${linkLabel(
+      servicePageLinks.dataDestruction,
+      'data destruction services'
+    )}, and ${linkLabel(
+      servicePageLinks.ewaste,
+      'electronic waste recycling services'
+    )} for detailed process and compliance information.`;
+  }
+
+  return `At SP Recycling, we connect businesses and households in ${city.name} with certified ${linkLabel(
+    servicePageLinks.ewaste,
+    'electronic waste recycling services'
+  )}, secure ${linkLabel(
+    servicePageLinks.dataDestruction,
+    'data destruction services'
+  )}, and specialized ${linkLabel(
+    servicePageLinks.itTelecom,
+    'IT & telecom equipment recycling'
+  )} for compliant disposal and asset recovery.`;
+}
+
+export function getCityServicesBlurbHtml(city: CityData): string | undefined {
+  if (city.servicesBlurbHtml) return city.servicesBlurbHtml;
+  if (city.servicesBlurb) {
+    return `${city.servicesBlurb} Learn more about our ${linkLabel(
+      servicePageLinks.ewaste,
+      'electronic waste recycling'
+    )}, ${linkLabel(
+      servicePageLinks.consumer,
+      'consumer electronics recycling'
+    )}, and ${linkLabel(
+      servicePageLinks.epr,
+      'EPR compliance solutions'
+    )}.`;
+  }
+  return `Discover our ${linkLabel(
+    servicePageLinks.ewaste,
+    'electronic waste recycling services'
+  )}, ${linkLabel(
+    servicePageLinks.itTelecom,
+    'IT & telecom recycling'
+  )}, and ${linkLabel(
+    servicePageLinks.dataDestruction,
+    'data destruction services'
+  )} designed for organizations and households in ${city.name}.`;
+}
+
+function inferServiceHref(item: LinkedServiceItem): string | undefined {
+  const name = item.name.toLowerCase();
+
+  if (name.includes('data')) return servicePageLinks.dataDestruction;
+  if (
+    name.includes('it') ||
+    name.includes('telecom') ||
+    name.includes('server') ||
+    name.includes('infrastructure')
+  ) {
+    return servicePageLinks.itTelecom;
+  }
+  if (
+    name.includes('mobile') ||
+    name.includes('consumer') ||
+    name.includes('residential') ||
+    name.includes('gaming')
+  ) {
+    return servicePageLinks.consumer;
+  }
+  if (name.includes('epr')) return servicePageLinks.epr;
+  return servicePageLinks.ewaste;
+}
+
+export function getLinkedCityServices(city: CityData): CityData['services'] {
+  return {
+    ...city.services,
+    items: city.services.items.map((item) => {
+      if (item.descriptionHtml) return item;
+
+      const href = inferServiceHref(item);
+      if (!href) return item;
+
+      return {
+        ...item,
+        descriptionHtml: `${linkLabel(href, item.name)}: ${item.description}`,
+      };
+    }),
+  };
+}
+
+export function getCityFaqs(city: CityData): CityData['faqs'] {
+  return [
+    ...city.faqs,
+    {
+      question: `Which SP Recycling service page should I check before booking a pickup in ${city.name}?`,
+      answer: `Start with our electronic waste recycling services page for the full pickup workflow, then review IT & telecom recycling or data destruction if you have office assets, servers, or storage devices in ${city.name}.`,
+      answerHtml: `Start with our ${linkLabel(
+        servicePageLinks.ewaste,
+        'electronic waste recycling services'
+      )} page for the full pickup workflow, then review ${linkLabel(
+        servicePageLinks.itTelecom,
+        'IT & telecom recycling'
+      )} or ${linkLabel(
+        servicePageLinks.dataDestruction,
+        'data destruction services'
+      )} if you have office assets, servers, or storage devices in ${city.name}.`,
+    },
+    {
+      question: `Do you offer secure data wiping and destruction for corporate pickups in ${city.name}?`,
+      answer: `Yes. Businesses in ${city.name} can request secure data destruction for laptops, desktops, servers, hard drives, SSDs, and backup media before final recycling.`,
+      answerHtml: `Yes. Businesses in ${city.name} can request secure ${linkLabel(
+        servicePageLinks.dataDestruction,
+        'data destruction services'
+      )} for laptops, desktops, servers, hard drives, SSDs, and backup media before final recycling.`,
+    },
+    {
+      question: `Can brands and manufacturers in ${city.name} also get EPR support from SP Recycling?`,
+      answer: `Yes. If your organization in ${city.name} needs compliance support beyond pickup and recycling, we also provide EPR compliance solutions for documentation, channelization, and reporting.`,
+      answerHtml: `Yes. If your organization in ${city.name} needs compliance support beyond pickup and recycling, we also provide ${linkLabel(
+        servicePageLinks.epr,
+        'EPR compliance solutions'
+      )} for documentation, channelization, and reporting.`,
+    },
+  ];
+}
 
 export function getCityData(slug: string): CityData | null {
   return cityData[slug] || null;

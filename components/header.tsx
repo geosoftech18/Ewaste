@@ -5,7 +5,7 @@ import dynamic from "next/dynamic"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Phone, Mail, Menu, Facebook, Linkedin, Twitter, Instagram, MessageCircle, ChevronDown, MapPin, Sparkles } from "lucide-react"
+import { Phone, Mail, Menu, Facebook, Linkedin, Twitter, Instagram, MessageCircle, ChevronDown, MapPin, Sparkles, ChevronsRight } from "lucide-react"
 
 const PickupFormModal = dynamic(
   () => import("@/components/pickup-form-modal").then((m) => ({ default: m.PickupFormModal })),
@@ -314,21 +314,32 @@ export function Header() {
               >
                 <Phone className="w-5 h-5" aria-hidden />
               </a>
-              <a
-                href="https://wa.me/919949901238"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Chat on WhatsApp with SP Recycling"
-                className="inline-flex items-center justify-center size-9 rounded-md text-[#25D366] hover:bg-accent hover:text-accent-foreground"
+            
+              <button
+                type="button"
+                onClick={() => {
+                  setPickupModalLoaded(true)
+                  setPickupModalOpen(true)
+                }}
+                className="group inline-flex h-auto items-center rounded-full border-[3px] py-[3px] pl-7 pr-[3px] transition-transform duration-300 hover:scale-[1.02]"
+                style={{
+                  borderColor: "#C8F542",
+                  backgroundColor: "#074E3B",
+                }}
               >
-                <MessageCircle className="w-5 h-5" aria-hidden />
-              </a>
-              <Button 
-                onClick={() => setPickupModalOpen(true)}
-                className="bg-[#10B981] hover:bg-[#059669] text-white rounded-full px-6"
-              >
-                Schedule Pickup
-              </Button>
+                <span className="pr-5 text-sm font-semibold tracking-wide text-white">
+                  Schedule Pickup
+                </span>
+                <span
+                  className="relative flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full"
+                  style={{ backgroundColor: "#C8F542" }}
+                  aria-hidden
+                >
+                  <span className="hero-cta-chevron flex items-center text-[#0A2A22]">
+                    <ChevronsRight className="h-5 w-5 stroke-[2.75]" />
+                  </span>
+                </span>
+              </button>
             </div>
 
             {/* Mobile Menu — Sheet/Radix chunk only when opened (TBT) */}

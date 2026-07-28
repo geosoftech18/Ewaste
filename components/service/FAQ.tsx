@@ -6,6 +6,7 @@ interface FAQProps {
   faqs?: Array<{
     question: string;
     answer: string;
+    answerHtml?: string;
   }>;
 }
 
@@ -79,7 +80,14 @@ export default function FAQ({ faqs: customFaqs }: FAQProps) {
                 // Keep answers in the HTML for crawlers; collapse only visually for users.
               >
                 <div className="px-6 pb-5 pt-2">
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">{faq.answer}</p>
+                  {faq.answerHtml ? (
+                    <p
+                      className="text-gray-700 leading-relaxed whitespace-pre-line [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-primary/85"
+                      dangerouslySetInnerHTML={{ __html: faq.answerHtml }}
+                    />
+                  ) : (
+                    <p className="text-gray-700 leading-relaxed whitespace-pre-line">{faq.answer}</p>
+                  )}
                 </div>
               </div>
             </div>

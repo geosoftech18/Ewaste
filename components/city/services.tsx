@@ -96,6 +96,7 @@ const serviceCategories = [
 
 interface ServicesProps {
   cityName?: string;
+  servicesBlurbHtml?: string;
   servicesBlurb?: string;
   services?: {
     title: string;
@@ -109,6 +110,7 @@ interface ServicesProps {
 
 export function Services({ 
   cityName = "Hyderabad",
+  servicesBlurbHtml,
   servicesBlurb,
   services = {
     title: "What You Can Recycle",
@@ -146,9 +148,16 @@ export function Services({
           </p>
         </div>
 
-        {servicesBlurb && (
+        {(servicesBlurbHtml || servicesBlurb) && (
           <p className="mx-auto mb-10 max-w-4xl rounded-xl border border-border/70 bg-muted/30 px-5 py-5 text-center text-base sm:text-lg text-foreground/90 leading-relaxed animate-fade-in-up">
-            {servicesBlurb}
+            {servicesBlurbHtml ? (
+              <span
+                className="[&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-primary/85"
+                dangerouslySetInnerHTML={{ __html: servicesBlurbHtml }}
+              />
+            ) : (
+              servicesBlurb
+            )}
           </p>
         )}
 

@@ -1,9 +1,10 @@
 import { Metadata } from "next"
 import dynamic from "next/dynamic"
-import { VideoHero } from "@/components/video-hero"
+// import { VideoHero } from "@/components/video-hero"
 import { TrustStrip } from "@/components/trust-strip"
 import { ViewportMount } from "@/components/viewport-mount"
 import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
+import HeroSlider from "@/components/hero-slider"
 
 const ServicesGrid = dynamic(
   () => import("@/components/services-grid").then((m) => ({ default: m.ServicesGrid })),
@@ -80,7 +81,8 @@ export default function Home() {
   return (
     <>
       <BreadcrumbJsonLd pathname="/" />
-      <VideoHero />
+      <HeroSlider />
+      {/* <VideoHero /> */}
       <TrustStrip />
       <ServicesGrid />
       <ScrapTypesSection />
