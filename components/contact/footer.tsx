@@ -127,10 +127,10 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:siliconplanetrecycling@gmail.com"
+                  href="mailto:info@sprecycling.in"
                   className="hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-block"
                 >
-                  siliconplanetrecycling@gmail.com
+                  info@sprecycling.in
                 </a>
               </li>
               <li className="text-xs text-gray-500 mt-4">Thumkunta, Bibinagar, Telangana 500078</li>

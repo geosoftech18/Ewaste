@@ -140,11 +140,11 @@ export function Header() {
                 <span>+91 99499 01238</span>
               </a>
               <a
-                href="mailto:siliconplanetrecycling@gmail.com"
+                href="mailto:info@sprecycling.in"
                 className="flex items-center gap-1 hover:text-green-300 transition-colors"
               >
                 <Mail className="w-3.5 h-3.5" />
-                <span>siliconplanetrecycling@gmail.com</span>
+                <span>info@sprecycling.in</span>
               </a>
               <a
                 href="https://wa.me/919949901238"
