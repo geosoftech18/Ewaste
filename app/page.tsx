@@ -41,6 +41,13 @@ const CertificationsCompliance = dynamic(
     })),
   { loading: () => <div className="min-h-[400px] w-full" aria-hidden /> }
 )
+const LocationsWeServe = dynamic(
+  () =>
+    import("@/components/locations-we-serve").then((m) => ({
+      default: m.LocationsWeServe,
+    })),
+  { loading: () => <div className="min-h-[480px] w-full" aria-hidden /> }
+)
 const QuickPickupForm = dynamic(
   () => import("@/components/quick-pickup-form").then((m) => ({ default: m.QuickPickupForm })),
   { loading: () => <div className="min-h-[520px] w-full" aria-hidden /> }
@@ -89,6 +96,7 @@ export default function Home() {
       <ProcessSteps />
       <WhyChooseUs />
       <CertificationsCompliance />
+      <LocationsWeServe />
       {/* OSM tiles + Leaflet must not load during Lighthouse first paint */}
       <ViewportMount minHeight={700} rootMargin="100px 0px">
         <InteractiveIndiaMap />

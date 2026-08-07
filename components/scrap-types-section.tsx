@@ -33,7 +33,7 @@ const categories = [
     title: "Electronic Waste (E-Waste)",
     tagline: "Certified eco-safe disposal",
     intro:
-      "Old electronics are among the most hazardous materials when dumped in landfills, leaching toxic chemicals into soil and groundwater. Hand them over to us for certified, eco-safe disposal.",
+      "Old electronics are among the most hazardous materials when dumped in landfills, leaching toxic chemicals into soil and groundwater.",
     items: [
       "Mobile phones and tablets",
       "Laptops, desktops, and computer peripherals",
@@ -44,7 +44,7 @@ const categories = [
       "Networking equipment and accessories",
     ],
     footer:
-      "Whether it's a single old smartphone or an entire office worth of obsolete IT equipment, we'll take it off your hands — and pay you fairly for it.",
+      "Whether it's a single old smartphone or an entire office's worth of obsolete IT equipment, hand them over to us for certified, eco-safe disposal and get a fair deal.",
   },
   {
     id: "appliance",
@@ -89,7 +89,7 @@ const categories = [
     title: "Plastic Scrap",
     tagline: "Sorted & channelized",
     intro:
-      "Plastic waste is one of the most persistent environmental pollutants. SP Recycling ensures your plastic scrap is collected, sorted, and sent to the right recycling channels — keeping it out of drainage systems and open dumps.",
+      "Plastic waste is one of the most persistent environmental pollutants. SP Recycling ensures your plastic scrap is collected, sorted, and sent to the right recycling channels, keeping it out of drainage systems and open dumps.",
     items: [
       "Plastic furniture and storage units",
       "PVC pipes, sheets, and profiles",
@@ -186,18 +186,18 @@ export function ScrapTypesSection() {
           >
             <div className="inline-flex items-center gap-2 rounded-full bg-emerald-100 text-emerald-700 px-4 py-1.5 text-sm font-semibold mb-5">
               <Recycle className="w-4 h-4" />
-              What We Collect
+              What We Collect/Recycle
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-4xl font-bold text-gray-900 tracking-tight mb-5">
               Types of Scrap &amp;{" "}
               <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 bg-clip-text text-transparent">
                 E-Waste
               </span>{" "}
-              We Collect
+              We Collect/Recycle
             </h2>
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-              Not sure if what you have qualifies? Chances are, it does. SP Recycling accepts a broad range of materials
-              — from everyday household electronics to industrial-grade metal and plastic waste.
+            SP Recycling collects and responsibly recycles a wide range of electronic waste from homes, businesses, industries, educational institutions, healthcare facilities, and government organizations. 
+            Whether you're disposing of a single device or decommissioning an entire IT infrastructure, our certified recycling process ensures safe handling, secure data protection, and environmentally responsible material recovery.
             </p>
           </motion.div>
         </div>
@@ -346,7 +346,7 @@ export function ScrapTypesSection() {
               className="flex-shrink-0 bg-white text-emerald-700 hover:bg-emerald-50 font-bold px-8 py-6 rounded-2xl shadow-xl hover:scale-[1.02] transition-all duration-300 group/btn"
             >
               <Link href="/contact">
-                Get in Touch
+              Talk to Recycling Experts
                 <ArrowRight className="ml-2 w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
               </Link>
             </Button>

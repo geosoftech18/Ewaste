@@ -25,11 +25,11 @@ interface Service {
 const services: Service[] = [
   {
     id: "electronic-waste",
-    title: "Electronic Waste Recycle",
-    description: "Discarded electronics: a growing problem. Electronic Waste Recycling tackles this head-on. Focusing on the careful retrieval, handling, and repurposing of old tech. Our methods? They guarantee device recycling that respects the earth. Cutting down on dangerous waste while unlocking a second life for precious resources. Metals, resilient plastics, essential components—all get a chance to be reborn.",
+    title: "Electronic Waste Recycling Services",
+    description: "We are the best E-Waste Management and recycling company, experts in recycling and disposing of electrical and electronic waste as per statutory guidelines. Our team of expert professionals along with highly advanced technological recycling processing tools and infrastructure focuses of careful retrieval, handling, and repurposing of the tech and gadgets. Providing cost-effective and timely services to our customers.",
     image: "/services/electronic-waste.jpg",
     gradient: "from-emerald-500 to-teal-600",
-    features: ["Safe Collection", "Data Destruction", "Certified Recycling", "Material Recovery"],
+    features: ["Safe Collection", "Secure Data Destruction", "Certified Recycling", "Successful Material Recovery"],
     link: "/services/electronic-waste-recycle",
     category: ["All", "Residential", "Corporate"],
     rating: 4.9,
@@ -38,8 +38,8 @@ const services: Service[] = [
   },
   {
     id: "it-telecom",
-    title: "IT & Telecommunication Equipment",
-    description: "The digital age hinges on IT & Telecommunication Equipment. Our services center around the mindful stewardship, renewal, and recycling of gadgets. Think computers, mighty servers, ever-present routers, and mobile devices. We pledge ironclad data protocols, resourceful reuse, and earth-conscious disposal. A truly sustainable, digitally interwoven tomorrow, secured.",
+    title: "IT & Telecom Equipment Recycling",
+    description: "Our IT and Telecom equipment recycling services offer a sustainable solution to protect the environment while helping corporates and IT industries recover value from outdated assets. Our services are based around the expertise for renewal, and recycling of electronic gadgets. This includes computers, mighty servers, routers, and mobile devices. We pledge ironclad data protocols, resourceful reuse, and earth-conscious disposal for a sustainable, digital tomorrow.",
     image: "/services/it-telecommunication.jpg",
     gradient: "from-blue-500 to-indigo-600",
     features: ["Secure Data Handling", "Equipment Refurbishment", "Network Equipment", "Mobile Devices"],
@@ -52,7 +52,7 @@ const services: Service[] = [
   {
     id: "Sustainable-Waste-Solutions",
     title: "Sustainable Waste Solutions",
-    description: "Integrated Waste Management: picture it. Not just one-off actions, but a symphony of waste actions. Collection, meticulous sorting, forward-thinking recycling, and responsible disposal all dancing in harmony. Aim? Diminishing our footprint while coaxing maximum worth from castoffs. A future, pristine and lasting, for both communities and the corporate landscape.",
+    description: "SP Recycling's sustainable waste solutions services transform waste into valuable secondary resources. Our integrated waste management solutions ensure proper handling of potentially hazardous materials. From waste collection, meticulous sorting, forward-thinking recycling, and responsible disposal for companies of all sizes across a wide range of industries.",
     image: "/services/sustainable-waste-solutions.jpg",
     gradient: "from-purple-500 to-pink-600",
     features: ["Waste Segregation", "Resource Recovery", "Environmental Impact", "Community Solutions"],
@@ -65,7 +65,7 @@ const services: Service[] = [
   {
     id: "EPR-Compliance-Solutions",
     title: "EPR Compliance Solutions",
-    description: "Extended Producer Responsibility (EPR) Solutions shift the script. They empower makers and brands, instilling ownership for their products' total journey. From blueprint to the moment it's no longer wanted, our EPR services are your shield. Navigating rules, championing recycling that works, and fostering waste handling that's accountable. It is crafting an ecosystem, cleaner and more viable, for everyone.",
+    description: "We manage your entire Extended Producer Responsibility (EPR) process and ensure proper collection, segregation, and recycling of your product and packaging waste, helping plastic manufacturers and brand owners meet their EPR compliance obligations. \n\n An end-to-end EPR process that manages everything,  from EPR registration with CPCB to EPR filing and documentation with accuracy, traceability, and full transparency in line with the EPR Plastic Waste Management Rules 2016 and India’s broader plastic waste management framework.",
     image: "/services/epr-compliance-solutions.jpg",
     gradient: "from-yellow-500 to-orange-600",
     features: ["Regulatory Compliance", "Lifecycle Management", "Brand Accountability", "Ecosystem Solutions"],
@@ -176,7 +176,7 @@ export function ServicesGrid() {
             Our Services
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Professional E-Waste Recycling Solutions for Businesses & Individuals
+          Electronic waste deserves more than disposal- it deserves responsible recovery. At SP Recycling we offer Comprehensive Recycling Services for Businesses and Individuals to help them recycle electronic waste safely through compliant collection, secure data destruction, material recovery, and environmentally responsible recycling practices.
           </p>
         </div>
 

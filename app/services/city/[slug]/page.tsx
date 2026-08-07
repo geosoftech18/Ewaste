@@ -31,12 +31,16 @@ export async function generateStaticParams() {
   }));
 }
 
+/** Unknown city slugs must 404 (avoid soft/empty URLs that hurt indexing). */
+export const dynamicParams = false;
+
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const city = getCityData(params.slug);
 
   if (!city) {
     return {
       title: 'City Not Found | SP Recycling',
+      robots: { index: false, follow: false },
     };
   }
 
@@ -48,6 +52,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics. ISO certified & eco-friendly disposal.`;
 
   const pageUrl = absoluteUrl(`/services/city/${city.slug}`);
+  const imageUrl = absoluteUrl(city.heroImage);
 
   return {
     title: seoTitle,
@@ -68,6 +73,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
         follow: true,
         'max-image-preview': 'large',
         'max-snippet': -1,
+        'max-video-preview': -1,
       },
     },
     openGraph: {
@@ -77,7 +83,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       siteName: 'SP Recycling',
       images: [
         {
-          url: city.heroImage,
+          url: imageUrl,
           alt: `E-waste recycling services in ${city.name}`,
         },
       ],
@@ -88,13 +94,14 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       card: 'summary_large_image',
       title: seoTitle,
       description: metaDescription,
-      images: [city.heroImage],
+      images: [imageUrl],
     },
   };
 }
 
 function CityJsonLd({ city, faqs }: { city: CityData; faqs: CityData['faqs'] }) {
-  const pageUrl = `${SITE_URL}/services/city/${city.slug}`;
+  const pageUrl = absoluteUrl(`/services/city/${city.slug}`);
+  const imageUrl = absoluteUrl(city.heroImage);
   const description =
     city.metaDescription ??
     `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics.`;
@@ -108,6 +115,11 @@ function CityJsonLd({ city, faqs }: { city: CityData; faqs: CityData['faqs'] }) 
         url: pageUrl,
         name: city.metaTitle ?? city.title,
         description,
+        inLanguage: 'en-IN',
+        primaryImageOfPage: {
+          '@type': 'ImageObject',
+          url: imageUrl,
+        },
         isPartOf: {
           '@type': 'WebSite',
           name: 'SP Recycling',
@@ -123,6 +135,7 @@ function CityJsonLd({ city, faqs }: { city: CityData; faqs: CityData['faqs'] }) 
         name: `E-Waste Recycling in ${city.name}`,
         description,
         url: pageUrl,
+        image: imageUrl,
         serviceType: 'E-Waste Recycling',
         areaServed: {
           '@type': 'City',

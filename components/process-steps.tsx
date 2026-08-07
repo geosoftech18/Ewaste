@@ -9,19 +9,20 @@ const steps = [
   {
     number: 1,
     title: "Collect",
-    description: "E-waste from your place or business? We snag it, safely and with care.",
+    bulletPoints: [{title:"Schedule Collection",description:"Contact our team and share details of the material you wish to dispose of."},
+       {title:"Pickup & Documentation",description:"Our team collects the material from your location and provides the required documentation."}],
     icon: Truck,
   },
   {
     number: 2,
     title: "Recycle",
-    description: "We break it down, parts out. Eco-friendly methods, always.",
+    bulletPoints: [{title:"Secure Processing",description:"Assets are sorted, dismantled, refurbished, recycled, or processed according to industry standards."}],
     icon: Recycle,
   },
   {
     number: 3,
     title: "Reuse",
-    description: "Good bits get a new spin, lowering landfill, saving Earth.",
+    bulletPoints: [{title:"Certification & Reporting",description:"Receive recycling certificates, data destruction certificates, and compliance documentation where applicable."}],
     icon: RefreshCw,
   },
 ]
@@ -61,7 +62,7 @@ export function ProcessSteps() {
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">How We Work</h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Simple, transparent, and eco-friendly process from collection to reuse.
+          Efficient collection, secure processing, and sustainable recycling in every step.
           </p>
         </div>
 
@@ -141,8 +142,14 @@ export function ProcessSteps() {
                         {step.title}
                       </h3>
 
-                      {/* Description */}
-                      <p className="text-gray-600 leading-relaxed">{step.description}</p>
+                      {/* Bullet Points */}
+                      <ul className="text-gray-600 leading-relaxed">
+                        {step.bulletPoints.map((bulletPoint, index) => (
+                          <li key={index} className="mb-2">
+                            <span className="font-medium">{bulletPoint.title}:</span> {bulletPoint.description}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
 
                     {/* Arrow Decoration - Desktop Only */}

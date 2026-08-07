@@ -1,9 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import Link from 'next/link'
 import { ChevronsRight, Phone, Star } from 'lucide-react'
+
+const PickupFormModal = dynamic(
+  () => import('@/components/pickup-form-modal').then((m) => ({ default: m.PickupFormModal })),
+  { ssr: false }
+)
 
 const ACCENT = '#C8F542'
 const FOREST = '#0A2A22'
@@ -89,10 +94,11 @@ const slides: Slide[] = [
   },
 ]
 
-function PillCta({ href, label }: { href: string; label: string }) {
+function PillCta({ label, onClick }: { label: string; onClick: () => void }) {
   return (
-    <Link
-      href={href}
+    <button
+      type="button"
+      onClick={onClick}
       className="group inline-flex min-w-0 items-center rounded-full border-[3px] py-[2px] pl-5 pr-[2px] transition-transform duration-300 hover:scale-[1.02] sm:py-[3px] sm:pl-8 sm:pr-[3px]"
       style={{
         borderColor: ACCENT,
@@ -111,13 +117,24 @@ function PillCta({ href, label }: { href: string; label: string }) {
           <ChevronsRight className="h-4 w-4 stroke-[2.75] sm:h-5 sm:w-5 md:h-6 md:w-6" />
         </span>
       </span>
-    </Link>
+    </button>
   )
 }
 
 export function HeroSlider() {
   const [current, setCurrent] = useState(0)
   const [entered, setEntered] = useState(true)
+  const [pickupModalOpen, setPickupModalOpen] = useState(false)
+  const [pickupModalLoaded, setPickupModalLoaded] = useState(false)
+
+  useEffect(() => {
+    if (pickupModalOpen) setPickupModalLoaded(true)
+  }, [pickupModalOpen])
+
+  const openPickupModal = () => {
+    setPickupModalLoaded(true)
+    setPickupModalOpen(true)
+  }
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -242,7 +259,7 @@ export function HeroSlider() {
                 </p>
 
                 <div className="flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
-                  <PillCta href={slide.ctaHref} label={slide.ctaLabel} />
+                  <PillCta label={slide.ctaLabel} onClick={openPickupModal} />
 
                   <a
                     href="tel:+919949901238"
@@ -291,6 +308,10 @@ export function HeroSlider() {
           ))}
         </div>
       </div>
+
+      {pickupModalLoaded ? (
+        <PickupFormModal open={pickupModalOpen} onOpenChange={setPickupModalOpen} />
+      ) : null}
     </section>
   )
 }

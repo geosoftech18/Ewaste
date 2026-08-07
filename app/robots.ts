@@ -1,25 +1,19 @@
 import { MetadataRoute } from 'next'
+import { SITE_URL } from '@/lib/seo'
 
 export default function robots(): MetadataRoute.Robots {
-  // Get base URL from environment variable or use default
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 
-    (process.env.NODE_ENV === 'development' 
-      ? 'http://localhost:3000' 
-      : 'https://www.sprecycling.in')
-
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/admin/', // Disallow admin pages
-          '/api/', // Disallow API routes (optional, but good practice)
-          '/_next/', // Disallow Next.js internal files
-          '/static/', // Disallow static files if any
+          '/admin/',
+          '/api/',
+          '/_next/',
+          '/static/',
         ],
       },
-      // Allow specific bots to access everything
       {
         userAgent: 'Googlebot',
         allow: '/',
@@ -31,8 +25,8 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/admin/', '/api/'],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    sitemap: `${SITE_URL}/sitemap.xml`,
+    host: SITE_URL,
   }
 }
 

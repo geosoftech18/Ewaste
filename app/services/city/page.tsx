@@ -19,10 +19,21 @@ export const metadata: Metadata = {
   description: "Find professional e-waste recycling services in your city. We serve Hyderabad, Mumbai, Delhi, Bangalore, Chennai, Pune, Andhra Pradesh and more. Same-day pickup, certified data destruction, and eco-friendly disposal available.",
   keywords: "e-waste recycling by city, city-wise recycling services, Hyderabad e-waste, Mumbai e-waste, Delhi e-waste, Bangalore e-waste, Chennai e-waste, Pune e-waste, Andhra Pradesh e-waste",
   ...canonicalMetadata('/services/city'),
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   openGraph: {
     title: "E-Waste Recycling Services by City | SP Recycling",
     description: "Professional e-waste recycling services across major cities in India. Same-day pickup and certified disposal.",
     type: "website",
+    url: "https://www.sprecycling.in/services/city",
   },
 }
 

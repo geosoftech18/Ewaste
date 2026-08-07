@@ -1,39 +1,39 @@
 "use client"
 
-import { Users, Headphones, Shield, Lock, Recycle, Trophy } from "lucide-react"
+import {  Shield,  Truck, DollarSign, ShieldCheck, FileCheck } from "lucide-react"
 import { useEffect, useState, useRef } from "react"
 
 const features = [
   {
-    icon: Users,
-    title: "Expert & Experienced Team",
-    description: "A team that lives and breathes this work. Ten-plus years of experience. We handle all types of electronic waste with expertise and care.",
+    icon: Truck,
+    title: "Doorstep Pickup",
+    description: "Convenient collection from homes, offices, factories, and institutions.",
   },
   {
-    icon: Headphones,
-    title: "24/7 Customer Support",
-    description: "Questions? Need a pickup? Got urgent stuff? We're on it, always.",
+    icon: DollarSign,
+    title: "Fair Market Pricing",
+    description: "Transparent valuation with competitive rates.",
   },
   {
-    icon: Lock,
-    title: "100% Secure Data Destruction",
-    description: "Data storage gone? We obliterate it. Total secrecy, guaranteed.",
+    icon: ShieldCheck,
+    title: "Secure Data Destruction",
+    description: "Safe disposal of laptops, computers, servers, and storage devices.",
   },
   {
     icon: Shield,
-    title: "Same-Day Pickup Service",
-    description: "No waiting around. Schedule, and we're there, today. Quick, dependable. Across the city, when disposal can't wait.",
+    title: "Certified Recycling",
+    description: "CPCB-authorized recycling processes that meet environmental standards.",
   },
 
   {
-    icon: Recycle,
-    title: "Eco-Friendly Recycling",
-    description: "Landfill? Never. We recover, reuse, and ditch risky bits safely.",
+    icon: Truck,
+    title: "Bulk Collection",
+    description: "Ideal for businesses, IT companies, schools, hospitals, and industries.",
   },
   {
-    icon: Trophy,
-    title: "Proven Track Record",
-    description: "Across sectors, sky-high satisfaction, and pickups that add up.",
+    icon: FileCheck,
+    title: "Compliance Support",
+    description: "Recycling certificates and documentation for corporate customers.",
   },
 ]
 
