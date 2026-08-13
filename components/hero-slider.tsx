@@ -16,6 +16,7 @@ const FOREST = '#0A2A22'
 type Slide = {
   id: number
   image: string
+  mobileImage: string
   eyebrow: string
   line1: string
   line2: string
@@ -30,11 +31,12 @@ const slides: Slide[] = [
   {
     id: 1,
     image: '/hero-slider/1.jpg',
+    mobileImage: '/mobile-slider/1.jpg',
     eyebrow: 'ISO · CPCB Certified',
     line1: 'Authorized E-Waste',
     line2: 'Recycling Company in',
     highlight: 'India',
-    
+
     description:
       'Recycle old computers, laptops, servers, mobile phones, printers, and other electronic waste through a certified recycling process. We provide secure collection, responsible recycling, data destruction, and EPR-compliant disposal for businesses, industries, institutions, and households across India.',
     ctaLabel: 'Schedule Free Pickup',
@@ -43,6 +45,7 @@ const slides: Slide[] = [
   {
     id: 2,
     image: '/hero-slider/2.jpg',
+    mobileImage: '/mobile-slider/2.jpg',
     eyebrow: 'Secure · Compliant · Traceable',
     line1: 'Secure IT Asset',
     line2: 'Disposal &',
@@ -56,11 +59,12 @@ const slides: Slide[] = [
   {
     id: 3,
     image: '/hero-slider/3.jpg',
+    mobileImage: '/mobile-slider/3.jpg',
     eyebrow: 'Industrial Scrap Recycling',
     line1: 'Metal Scrap Recycling',
     line2: 'Industries & Manufacturing ',
     highlight: 'Companies',
-    
+
     description:
       'We purchase and recycle ferrous and non-ferrous metal scrap, including copper, aluminium, brass, stainless steel, iron, cables, industrial machinery, and manufacturing waste through safe and environmentally responsible recycling methods.',
     ctaLabel: 'Sell Scrap Today',
@@ -69,6 +73,7 @@ const slides: Slide[] = [
   {
     id: 4,
     image: '/hero-slider/4.jpg',
+    mobileImage: '/mobile-slider/4.jpg',
     eyebrow: 'EPR Compliance',
     line1: 'EPR Compliance & Sustainable Waste ',
     line2: 'Management',
@@ -82,6 +87,7 @@ const slides: Slide[] = [
   {
     id: 5,
     image: '/hero-slider/5.jpg',
+    mobileImage: '/mobile-slider/5.jpg',
     eyebrow: 'Nationwide Collection',
     line1: 'Doorstep E-Waste',
     line2: 'Pickup Across Major',
@@ -101,7 +107,7 @@ function PillCta({ label, onClick }: { label: string; onClick: () => void }) {
       onClick={onClick}
       className="group inline-flex min-w-0 items-center rounded-full border-[3px] py-[2px] pl-5 pr-[2px] transition-transform duration-300 hover:scale-[1.02] sm:py-[3px] sm:pl-8 sm:pr-[3px]"
       style={{
-        borderColor: ACCENT,
+        borderColor: ACCENT, 
         backgroundColor: FOREST,
       }}
     >
@@ -163,7 +169,7 @@ export function HeroSlider() {
       aria-label="Hero image slider"
       aria-live="polite"
     >
-      <div className="relative min-h-[600px] h-[min(92vh,780px)] w-full">
+      <div className="relative min-h-[420px] h-[min(58vh,480px)] w-full sm:min-h-[520px] sm:h-[min(72vh,640px)] md:min-h-[600px] md:h-[min(92vh,780px)]">
         {slides.map((slide, idx) => (
           <div
             key={slide.id}
@@ -175,21 +181,24 @@ export function HeroSlider() {
             }}
             aria-hidden={idx !== current}
           >
-            {/* Right-side photo */}
+            {/* Mobile: /mobile-slider · Desktop: /hero-slider */}
             <div className="absolute inset-0 md:left-[28%]">
-              <Image
-                src={slide.image}
-                alt={`${slide.line2} ${slide.highlight} ${slide.line3}`}
-                fill
-                priority={idx === 0}
-                sizes="100vw"
-                className="object-cover object-[center_30%] md:object-center"
-              />
+              <picture>
+                <source media="(max-width: 767px)" srcSet={slide.mobileImage} />
+                <Image
+                  src={slide.image}
+                  alt={`${slide.line2} ${slide.highlight} ${slide.line3 ?? ''}`}
+                  fill
+                  priority={idx === 0}
+                  sizes="(max-width: 767px) 100vw, 72vw"
+                  className="object-cover object-center"
+                />
+              </picture>
             </div>
 
-            {/* Dark forest green → photo gradient (matches reference) */}
+            {/* Dark forest green → photo gradient (desktop) */}
             <div
-              className="absolute inset-0"
+              className="absolute inset-0 hidden md:block"
               style={{
                 background: `
                   linear-gradient(
@@ -204,16 +213,16 @@ export function HeroSlider() {
                 `,
               }}
             />
-            {/* Mobile readability wash */}
+            {/* Mobile overlay — keeps text readable over the photo */}
             <div
-              className="absolute inset-0 md:hidden"
+              className="pointer-events-none absolute inset-0 z-[1] md:hidden"
               style={{
-                background: `linear-gradient(180deg, ${FOREST} 0%, rgba(10,42,34,0.85) 45%, rgba(10,42,34,0.55) 100%)`,
+                background: `linear-gradient(180deg, ${FOREST} 0%, rgba(10,42,34,0.42) 48%, rgba(10,42,34,0.38) 100%)`,
               }}
             />
 
             {/* Content */}
-            <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-5 sm:px-8 lg:px-10">
+            <div className="relative z-10 mx-auto flex h-full max-w-7xl items-center px-5 py-8 sm:px-8 sm:py-10 lg:px-10">
               <div
                 className={`max-w-2xl text-white transition-all duration-500 ease-out ${
                   idx === current && entered
@@ -222,7 +231,7 @@ export function HeroSlider() {
                 }`}
               >
                 {/* Rating badge */}
-                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm">
+                <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3.5 py-1.5 backdrop-blur-sm sm:mb-6">
                   <span className="text-sm font-bold text-white">4.9</span>
                   <span className="flex items-center gap-0.5" aria-label="5 star rating">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -239,13 +248,13 @@ export function HeroSlider() {
                 </div>
 
                 <p
-                  className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] sm:text-sm"
+                  className="mb-2 text-xs font-semibold uppercase tracking-[0.22em] sm:mb-3 sm:text-sm"
                   style={{ color: ACCENT }}
                 >
                   {slide.eyebrow}
                 </p>
 
-                <h2 className="mb-5 text-[1.75rem] font-extrabold  leading-[1.05] tracking-tight sm:text-5xl lg:text-[3.15rem]">
+                <h2 className="mb-5 text-[1.55rem] font-extrabold leading-[1.08] tracking-tight sm:mb-5 sm:text-5xl sm:leading-[1.05] lg:text-[3rem]">
                   <span className="block text-white">{slide.line1}</span>
                   <span className="block text-white">
                     {slide.line2}{' '}
@@ -254,11 +263,11 @@ export function HeroSlider() {
                   <span className="block text-white">{slide.line3}</span>
               </h2>
 
-                <p className="mb-8 max-w-md text-sm leading-relaxed text-white/85 sm:text-base">
+                <p className="mb-8 md:block hidden max-w-xl text-sm leading-relaxed text-white/85 sm:text-base">
                   {slide.description}
                 </p>
 
-                <div className="flex flex-row flex-nowrap items-center gap-3 sm:gap-5">
+                <div className="flex flex-row mt-8 flex-nowrap items-center gap-3 sm:gap-5">
                   <PillCta label={slide.ctaLabel} onClick={openPickupModal} />
 
                   <a
@@ -288,7 +297,7 @@ export function HeroSlider() {
         ))}
 
         {/* Slide dots — bottom center on mobile, left vertical center on md+ */}
-        <div className="absolute bottom-6 left-1/2 z-20 flex -translate-x-1/2 flex-row items-center gap-2.5 md:bottom-auto md:left-8 md:top-1/2 md:translate-x-0 md:-translate-y-1/2 md:flex-col">
+        <div className="absolute bottom-4 left-1/2 z-20 flex -translate-x-1/2 flex-row items-center gap-2.5 sm:bottom-6 md:bottom-auto md:left-8 md:top-1/2 md:translate-x-0 md:-translate-y-1/2 md:flex-col">
           {slides.map((slide, idx) => (
             <button
               key={slide.id}
