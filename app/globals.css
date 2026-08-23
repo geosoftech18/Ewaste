@@ -361,6 +361,30 @@
   display: none;  /* Safari and Chrome */
 }
 
+@keyframes scrap-types-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.scrap-types-marquee-track {
+  animation: scrap-types-marquee 55s linear infinite;
+  width: max-content;
+}
+
+.scrap-types-marquee-track.is-paused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scrap-types-marquee-track {
+    animation: none;
+  }
+}
+
 @keyframes shimmer {
   0% {
     background-position: -200% center;

@@ -17,6 +17,9 @@ type Slide = {
   id: number
   image: string
   mobileImage: string
+  /** Extra object-position classes when the asset has a baked-in edge gradient */
+  desktopImageClass?: string
+  mobileImageClass?: string
   eyebrow: string
   line1: string
   line2: string
@@ -30,8 +33,8 @@ type Slide = {
 const slides: Slide[] = [
   {
     id: 1,
-    image: '/hero-slider/1.jpg',
-    mobileImage: '/mobile-slider/1.jpg',
+    image: '/hero-slider/slide-1.jpg',
+    mobileImage: '/mobile-slider/slide-1.jpeg',
     eyebrow: 'ISO · CPCB Certified',
     line1: 'Authorized E-Waste',
     line2: 'Recycling Company in',
@@ -44,8 +47,8 @@ const slides: Slide[] = [
   },
   {
     id: 2,
-    image: '/hero-slider/2.jpg',
-    mobileImage: '/mobile-slider/2.jpg',
+    image: '/hero-slider/slide-2.jpg',
+    mobileImage: '/mobile-slider/slide-2.jpeg',
     eyebrow: 'Secure · Compliant · Traceable',
     line1: 'Secure IT Asset',
     line2: 'Disposal &',
@@ -58,8 +61,8 @@ const slides: Slide[] = [
   },
   {
     id: 3,
-    image: '/hero-slider/3.jpg',
-    mobileImage: '/mobile-slider/3.jpg',
+    image: '/hero-slider/slide-3.jpg',
+    mobileImage: '/mobile-slider/slide-3.jpeg',
     eyebrow: 'Industrial Scrap Recycling',
     line1: 'Metal Scrap Recycling',
     line2: 'Industries & Manufacturing ',
@@ -72,8 +75,8 @@ const slides: Slide[] = [
   },
   {
     id: 4,
-    image: '/hero-slider/4.jpg',
-    mobileImage: '/mobile-slider/4.jpg',
+    image: '/hero-slider/slide-4.jpg',
+    mobileImage: '/mobile-slider/slide-4.jpeg',
     eyebrow: 'EPR Compliance',
     line1: 'EPR Compliance & Sustainable Waste ',
     line2: 'Management',
@@ -84,20 +87,23 @@ const slides: Slide[] = [
     ctaLabel: 'Explore EPR',
     ctaHref: '/services/EPR-compliance',
   },
-  {
-    id: 5,
-    image: '/hero-slider/5.jpg',
-    mobileImage: '/mobile-slider/5.jpg',
-    eyebrow: 'Nationwide Collection',
-    line1: 'Doorstep E-Waste',
-    line2: 'Pickup Across Major',
-    highlight: 'Cities',
-    line3: ' in India',
-    description:
-      'Book a convenient electronic waste pickup for offices, factories, schools, hospitals, residential societies, and homes. Our trained team collects electronic waste and transports it to certified recycling facilities for safe processing.',
-    ctaLabel: 'Book Pickup',
-    ctaHref: '/contact',
-  },
+  // {
+  //   id: 5,
+  //   image: '/hero-slider/5.jpg',
+  //   mobileImage: '/mobile-slider/5.jpg',
+  //   // 5.jpg has a baked-in green/white edge gradient — shift crop to the clear area
+  //   desktopImageClass: 'object-[72%_center]',
+  //   mobileImageClass: 'object-[68%_center]',
+  //   eyebrow: 'Nationwide Collection',
+  //   line1: 'Doorstep E-Waste',
+  //   line2: 'Pickup Across Major',
+  //   highlight: 'Cities',
+  //   line3: ' in India',
+  //   description:
+  //     'Book a convenient electronic waste pickup for offices, factories, schools, hospitals, residential societies, and homes. Our trained team collects electronic waste and transports it to certified recycling facilities for safe processing.',
+  //   ctaLabel: 'Book Pickup',
+  //   ctaHref: '/contact',
+  // },
 ]
 
 function PillCta({ label, onClick }: { label: string; onClick: () => void }) {
@@ -148,8 +154,8 @@ export function HeroSlider() {
       window.setTimeout(() => {
         setCurrent((prev) => (prev + 1) % slides.length)
         setEntered(true)
-      }, 220)
-    }, 5500)
+      }, 180)
+    }, 5000)
     return () => clearInterval(timer)
   }, [])
 
@@ -181,33 +187,36 @@ export function HeroSlider() {
             }}
             aria-hidden={idx !== current}
           >
-            {/* Mobile: /mobile-slider · Desktop: /hero-slider */}
-            <div className="absolute inset-0 md:left-[28%]">
-              <picture>
-                <source media="(max-width: 767px)" srcSet={slide.mobileImage} />
-                <Image
-                  src={slide.image}
-                  alt={`${slide.line2} ${slide.highlight} ${slide.line3 ?? ''}`}
-                  fill
-                  priority={idx === 0}
-                  sizes="(max-width: 767px) 100vw, 72vw"
-                  className="object-cover object-center"
-                />
-              </picture>
+            {/* Mobile + desktop hero images (full bleed; text sits on left gradient) */}
+            <div className="absolute inset-0">
+              <Image
+                src={slide.mobileImage}
+                alt={`${slide.line2} ${slide.highlight} ${slide.line3 ?? ''}`}
+                fill
+                priority={idx === 0}
+                sizes="100vw"
+                className={`object-cover object-center md:hidden ${slide.mobileImageClass ?? ''}`}
+              />
+              <Image
+                src={slide.image}
+                alt={`${slide.line2} ${slide.highlight} ${slide.line3 ?? ''}`}
+                fill
+                priority={idx === 0}
+                sizes="100vw"
+                className={`hidden object-cover object-center md:block ${slide.desktopImageClass ?? ''}`}
+              />
             </div>
 
-            {/* Dark forest green → photo gradient (desktop) */}
+            {/* Desktop: 0.55 on left → transparent on right */}
             <div
               className="absolute inset-0 hidden md:block"
               style={{
                 background: `
                   linear-gradient(
                     105deg,
-                    ${FOREST} 0%,
-                    ${FOREST} 42%,
-                    rgba(10, 42, 34, 0.92) 45%,
-                    rgba(10, 42, 34, 0.55) 65%,
-                    rgba(10, 42, 34, 0.15) 82%,
+                    rgba(10, 42, 34, 0.55) 0%,
+                    rgba(10, 42, 34, 0.55) 38%,
+                    rgba(10, 42, 34, 0.25) 62%,
                     transparent 100%
                   )
                 `,
@@ -217,7 +226,7 @@ export function HeroSlider() {
             <div
               className="pointer-events-none absolute inset-0 z-[1] md:hidden"
               style={{
-                background: `linear-gradient(180deg, ${FOREST} 0%, rgba(10,42,34,0.42) 48%, rgba(10,42,34,0.38) 100%)`,
+                background: `linear-gradient(180deg, rgba(10,42,34,0.72) 0%, rgba(10,42,34,0.42) 48%, rgba(10,42,34,0.38) 100%)`,
               }}
             />
 

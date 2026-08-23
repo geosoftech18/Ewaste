@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -18,6 +18,8 @@ import { cn } from "@/lib/utils"
 interface PickupFormModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  defaultCity?: string
+  defaultInquiryType?: string
 }
 
 const cities = [
@@ -33,12 +35,18 @@ const cities = [
   "Other",
 ]
 
-export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
+export function PickupFormModal({
+  open,
+  onOpenChange,
+  defaultCity,
+  defaultInquiryType,
+}: PickupFormModalProps) {
   const [formData, setFormData] = useState({
     fullName: "",
     phone: "",
     email: "",
     city: "",
+    inquiryType: "",
     date: undefined as Date | undefined,
     agreeToTerms: false,
   })
@@ -46,6 +54,22 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [showSuccess, setShowSuccess] = useState(false)
+
+  useEffect(() => {
+    if (!open) return
+
+    setFormData((prev) => {
+      const matchedCity =
+        defaultCity &&
+        cities.find((city) => city.toLowerCase() === defaultCity.toLowerCase())
+
+      return {
+        ...prev,
+        city: matchedCity ?? prev.city,
+        inquiryType: defaultInquiryType ?? "",
+      }
+    })
+  }, [open, defaultCity, defaultInquiryType])
 
   const validateField = (name: string, value: any) => {
     const newErrors = { ...errors }
@@ -178,6 +202,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
             email: formData.email,
             city: formData.city,
             date: formData.date ? formData.date.toISOString() : undefined,
+            wasteTypes: formData.inquiryType ? [formData.inquiryType] : undefined,
           },
         }),
       })
@@ -198,6 +223,7 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
           phone: "",
           email: "",
           city: "",
+          inquiryType: "",
           date: undefined,
           agreeToTerms: false,
         })
@@ -247,6 +273,17 @@ export function PickupFormModal({ open, onOpenChange }: PickupFormModalProps) {
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-8 mt-4">
+          {formData.inquiryType ? (
+            <div className="rounded-lg border border-emerald-200 bg-emerald-50 px-4 py-3">
+              <p className="text-xs font-semibold uppercase tracking-wide text-emerald-800">
+                Inquiry type
+              </p>
+              <p className="mt-1 text-sm font-medium text-gray-900">
+                {formData.inquiryType}
+              </p>
+            </div>
+          ) : null}
+
           <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-3">

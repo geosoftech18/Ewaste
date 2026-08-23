@@ -13,6 +13,7 @@ import FAQ from "@/components/service/FAQ"
 import { RequestPickup } from "@/components/city/request-pickup"
 import { ServiceCities } from "@/components/city/service-cities"
 import { TestimonialsSection } from "@/components/testimonials-section"
+import { ScrapTypesSection } from "@/components/scrap-types-section"
 import {
   getCityData,
   getAllCitySlugs,
@@ -198,6 +199,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
         heroImage={city.heroImage}
         stats={city.stats}
       />
+      <ScrapTypesSection cityName={city.name} />
       <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
         <p
           className="mx-auto max-w-3xl text-center text-sm sm:text-base text-muted-foreground leading-relaxed [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-primary/85"
