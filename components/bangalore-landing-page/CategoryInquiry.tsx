@@ -16,10 +16,9 @@ export default function CategoryInquiry() {
   const [selected, setSelected] = useState<string[]>([]);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
   const [area, setArea] = useState("");
-  const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [openItems, setOpenItems] = useState<string | null>(null);
 
@@ -38,10 +37,14 @@ export default function CategoryInquiry() {
     );
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (selected.length === 0) {
       setError("Please select at least one e-waste category.");
+      return;
+    }
+    if (!name.trim()) {
+      setError("Please enter your full name.");
       return;
     }
     const phoneError = getPhoneValidationError(phone);
@@ -49,8 +52,45 @@ export default function CategoryInquiry() {
       setError(phoneError);
       return;
     }
+
     setError("");
-    setSubmitted(true);
+    setSubmitting(true);
+
+    try {
+      const categoryTitles = selectedCategories.map((c) => c.title);
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "pickup-form",
+          data: {
+            fullName: name.trim(),
+            phone,
+            email: "",
+            city: "Hyderabad",
+            wasteTypes: categoryTitles,
+            additionalNotes: [
+              "Source: Hyderabad landing page — Category inquiry",
+              area.trim() ? `Area: ${area.trim()}` : null,
+              `Categories: ${categoryTitles.join(", ")}`,
+            ]
+              .filter(Boolean)
+              .join(" | "),
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to submit inquiry");
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -268,7 +308,6 @@ export default function CategoryInquiry() {
               <label className="mt-3 block text-sm font-medium text-gray-700">
                 Area in Hyderabad (Optional)
                 <input
-                  required
                   value={area}
                   onChange={(event) => setArea(event.target.value)}
                   className={inputClass}
@@ -282,16 +321,22 @@ export default function CategoryInquiry() {
               {submitted ? (
                 <p className="mt-3 rounded-xl bg-mint px-3 py-2 text-sm font-medium text-brand-dark">
                   Thanks {name}. We received your inquiry for{" "}
-                  {selectedCategories.map((category) => category.title).join(", ")}{" "}
-                  from {area}. Our team will call you shortly.
+                  {selectedCategories.map((category) => category.title).join(", ")}
+                  {area.trim() ? ` from ${area.trim()}` : ""}. Our team will call
+                  you shortly.
                 </p>
               ) : null}
 
               <button
                 type="submit"
-                className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand text-sm font-semibold text-white transition hover:bg-brand-dark"
+                disabled={submitting || submitted}
+                className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand text-sm font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Submit inquiry
+                {submitting
+                  ? "Submitting..."
+                  : submitted
+                    ? "Inquiry sent"
+                    : "Submit inquiry"}
               </button>
             </form>
           </aside>

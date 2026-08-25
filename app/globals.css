@@ -385,6 +385,31 @@
   }
 }
 
+@keyframes sell-products-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.sell-products-marquee-track {
+  animation: sell-products-marquee 40s linear infinite;
+  width: max-content;
+  will-change: transform;
+}
+
+.sell-products-marquee-track.is-paused {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sell-products-marquee-track {
+    animation: none;
+  }
+}
+
 @keyframes shimmer {
   0% {
     background-position: -200% center;

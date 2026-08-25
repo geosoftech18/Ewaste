@@ -45,7 +45,12 @@ const socialLinks = [
 
 export function Header() {
   const pathname = usePathname()
-  const hideWhatsAppFab = pathname === "/e-waste-recycling-hyderabad"
+  const isHyderabadLanding = pathname === "/e-waste-recycling-hyderabad"
+  const hideWhatsAppFab = isHyderabadLanding
+  const hideCallFab = isHyderabadLanding
+  const hyderabadWhatsAppMessage = encodeURIComponent(
+    "Hi SP Recycling! I want to sell e-waste / old appliances in Hyderabad. Please share pickup details and pricing."
+  )
   const [isScrolled, setIsScrolled] = useState(false)
   const [showTopBar, setShowTopBar] = useState(true)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -376,28 +381,40 @@ export function Header() {
         </div>
       </div>
 
-      {/* Floating Call Button (left) */}
-      <div className="fixed bottom-6 left-6 z-50 flex flex-col items-center">
-        <div className="relative mb-2 call-label-reveal">
-          <span className="relative z-10 block text-xs font-bold tracking-wide text-white bg-[#2563eb]/90 px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap">
-            Call now
-          </span>
-          {/* Arrow pointing down to the button */}
-          <span
-            className="absolute left-1/2 -bottom-1.5 -translate-x-1/2 w-0 h-0 border-l-[7px] border-r-[7px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#2563eb]/90"
-            aria-hidden
-          />
+      {/* Floating Call Button (left) — hidden on Hyderabad landing */}
+      {!hideCallFab ? (
+        <div className="fixed bottom-6 left-6 z-50 flex flex-col items-center">
+          <div className="relative mb-2 call-label-reveal">
+            <span className="relative z-10 block text-xs font-bold tracking-wide text-white bg-[#2563eb]/90 px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap">
+              Call now
+            </span>
+            <span
+              className="absolute left-1/2 -bottom-1.5 -translate-x-1/2 w-0 h-0 border-l-[7px] border-r-[7px] border-t-[8px] border-l-transparent border-r-transparent border-t-[#2563eb]/90"
+              aria-hidden
+            />
+          </div>
+          <a
+            href="tel:+919949901238"
+            className="call-zoom-pulse bg-[#2563eb]/90 hover:bg-[#1d4ed8] text-white p-4 rounded-full shadow-lg hover:shadow-2xl z-50 [transform:translateZ(0)] will-change-transform"
+            aria-label="Call now 9949901238"
+          >
+            <Phone className="w-6 h-6" aria-hidden />
+          </a>
         </div>
+      ) : (
+        /* Hyderabad landing: WhatsApp on left with page-specific message */
         <a
-          href="tel:+919949901238"
-          className="call-zoom-pulse bg-[#2563eb]/90 hover:bg-[#1d4ed8] text-white p-4 rounded-full shadow-lg hover:shadow-2xl z-50 [transform:translateZ(0)] will-change-transform"
-          aria-label="Call now 9949901238"
+          href={`https://wa.me/919949901238?text=${hyderabadWhatsAppMessage}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-6 left-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg transition-transform duration-300 hover:scale-110 hover:bg-emerald-600 hover:shadow-2xl animate-bounce [transform:translateZ(0)] will-change-transform"
+          aria-label="Chat on WhatsApp about e-waste recycling in Hyderabad"
         >
-          <Phone className="w-6 h-6" aria-hidden />
+          <MessageCircle className="h-6 w-6" />
         </a>
-      </div>
+      )}
 
-      {/* WhatsApp Floating Button (right) */}
+      {/* WhatsApp Floating Button (right) — hidden on Hyderabad (Need Assistance uses right side) */}
       {!hideWhatsAppFab ? (
         <a
           href="https://wa.me/919949901238"

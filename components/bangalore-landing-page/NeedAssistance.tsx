@@ -15,17 +15,52 @@ export default function NeedAssistance() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
     const phoneError = getPhoneValidationError(phone);
     if (phoneError) {
       setError(phoneError);
       return;
     }
+
     setError("");
-    setSubmitted(true);
+    setSubmitting(true);
+
+    try {
+      const response = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "pickup-form",
+          data: {
+            fullName: name.trim(),
+            phone,
+            email: "",
+            city: "Hyderabad",
+            additionalNotes:
+              "Source: Hyderabad landing page — Need Assistance callback request",
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to submit request");
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -73,9 +108,10 @@ export default function NeedAssistance() {
               ) : null}
               <button
                 type="submit"
-                className="mt-3 inline-flex h-10 w-full items-center justify-center rounded-lg bg-brand text-sm font-semibold text-white transition hover:bg-brand-dark"
+                disabled={submitting}
+                className="mt-3 inline-flex h-10 w-full items-center justify-center rounded-lg bg-brand text-sm font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70"
               >
-                Request a callback
+                {submitting ? "Sending..." : "Request a callback"}
               </button>
             </>
           )}

@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="relative isolate flex min-h-[min(52vh,400px)] items-center overflow-hidden sm:min-h-[min(60vh,460px)] md:min-h-[80vh]"
+      className="relative isolate flex min-h-[min(38vh,300px)] items-center overflow-hidden sm:min-h-[min(42vh,340px)] md:min-h-[min(52vh,480px)]"
     >
       <Image
         src="/mobile-slider/slide-3.jpeg"
@@ -26,7 +26,7 @@ export default function Hero() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 sm:py-20 md:py-32">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-5 py-10 sm:px-8 sm:py-12 md:py-16">
         <div className="max-w-2xl">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-sm font-semibold text-white shadow-sm backdrop-blur-sm md:mb-5">
             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand">
