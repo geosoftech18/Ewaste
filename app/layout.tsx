@@ -16,8 +16,8 @@ import { DeferredGtm } from "@/components/deferred-gtm"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "E-Waste Recycling Services in India | SP Recycling",
-  description: "ISO Certified E-Waste Recycling | Secure Data Destruction | 100% Eco-Friendly",
+  title: "Sell E-Waste Online in Hyderabad | Authorised Recycler",
+  description: "Looking to sell e-waste online in Hyderabad? We are an authorised, certified e-waste recycling service providing hassle-free pickup and green disposal.",
   generator: "geosoft tech private limited",
   icons: {
     icon: "/favicon.ico",

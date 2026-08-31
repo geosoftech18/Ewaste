@@ -5,6 +5,12 @@ import { TrustStrip } from "@/components/trust-strip"
 import { ViewportMount } from "@/components/viewport-mount"
 import { BreadcrumbJsonLd, canonicalMetadata } from "@/components/seo/breadcrumb-json-ld"
 import HeroSlider from "@/components/hero-slider"
+import { SellProductsCarousel } from "@/components/bangalore-landing-page/SellProductsCarousel"
+import {
+  electronicsGadgets,
+  largeAppliances,
+  smallAppliances,
+} from "@/data/sell-products";
 
 const ServicesGrid = dynamic(
   () => import("@/components/services-grid").then((m) => ({ default: m.ServicesGrid })),
@@ -70,10 +76,10 @@ const EWastePopup = dynamic(() => import("@/components/EWastePopup"), {
 })
 
 export const metadata: Metadata = {
-  title: "E-Waste Recycling Services in India | SP Recycling Pvt Ltd - Certified & Eco-Friendly",
+  title: " Sell E-Waste Online in Hyderabad | Authorised Recycler",
   description:
-    "Professional e-waste recycling services across India. ISO certified, secure data destruction, 100% eco-friendly disposal. Serving Hyderabad, Mumbai, Delhi, Bangalore, Chennai, Pune & more. Get cash for old electronics, corporate bulk processing, and certified data destruction certificates.",
-  keywords:
+      "Professional e-waste recycling services across India. ISO certified, secure data destruction, 100% eco-friendly disposal. Serving Hyderabad, Mumbai, Delhi, Bangalore, Chennai, Pune & more. Get cash for old electronics, corporate bulk processing, and certified data destruction certificates.",
+    keywords:
     "e-waste recycling, electronic waste disposal, data destruction, IT equipment recycling, certified recycling, eco-friendly disposal, Hyderabad, Mumbai, Delhi, Bangalore",
   ...canonicalMetadata("/"),
   openGraph: {
@@ -91,6 +97,24 @@ export default function Home() {
       <HeroSlider />
       {/* <VideoHero /> */}
       <TrustStrip />
+      <SellProductsCarousel
+          title="Turn Large Appliances into Cash"
+          subtitle="Sell old ACs, fridges, washing machines and more in Hyderabad at fixed scrap rates."
+          products={largeAppliances}
+          cityName="Hyderabad"
+        />
+        <SellProductsCarousel
+          title="Cash for Small Home Appliances"
+          subtitle="Book a pickup for mixers, geysers, fans, chimneys and other household gadgets."
+          products={smallAppliances}
+          cityName="Hyderabad"
+        />
+        <SellProductsCarousel
+          title="Sell Old Electronics & Gadgets"
+          subtitle="Get instant quotes for laptops, mobiles, tablets, CPUs, printers and more."
+          products={electronicsGadgets}
+          cityName="Hyderabad"
+        />
       <ServicesGrid />
       <ScrapTypesSection />
       <ProcessSteps />

@@ -25,7 +25,12 @@ import {
 } from '@/lib/city-data';
 import { SITE_URL, absoluteUrl } from '@/lib/seo';
 import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
-
+import { SellProductsCarousel } from "@/components/bangalore-landing-page/SellProductsCarousel"
+import {
+  electronicsGadgets,
+  largeAppliances,
+  smallAppliances,
+} from "@/data/sell-products";
 export async function generateStaticParams() {
   return getAllCitySlugs().map((slug) => ({
     slug: slug,
@@ -199,6 +204,24 @@ export default function CityPage({ params }: { params: { slug: string } }) {
         heroImage={city.heroImage}
         stats={city.stats}
       />
+      <SellProductsCarousel
+          title="Turn Large Appliances into Cash"
+          subtitle="Sell old ACs, fridges, washing machines and more in Hyderabad at fixed scrap rates."
+          products={largeAppliances}
+          cityName={city.name}
+        />
+        <SellProductsCarousel
+          title="Cash for Small Home Appliances"
+          subtitle="Book a pickup for mixers, geysers, fans, chimneys and other household gadgets."
+          products={smallAppliances}
+          cityName={city.name}
+        />
+        <SellProductsCarousel
+          title="Sell Old Electronics & Gadgets"
+          subtitle="Get instant quotes for laptops, mobiles, tablets, CPUs, printers and more."
+          products={electronicsGadgets}
+          cityName={city.name}
+        />
       <ScrapTypesSection cityName={city.name} />
       <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
         <p
