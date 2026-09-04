@@ -60,7 +60,7 @@ export const cityData: Record<string, CityData> = {
       'We make it incredibly easy to sell old electronics in Hyderabad for the best value. From legacy servers and outdated office laptops to old home appliances, our team handles the heavy lifting with free doorstep pickup across major tech hubs like HITEC City, Madhapur, and Gachibowli. Turn your old, retired electronic scrap into clean space today—responsibly, safely, and transparently.',
     bridgeParagraph:
       'SP Recycling clears the clutter. If you want the highest payout for old tech in Hyderabad or need a verified office cleanup, we manage the entire process starting at your front door.',
-    metaTitle: 'E-Waste Recycling & Scrap Buyers in Hyderabad | Sell Old Electronics',
+    metaTitle: 'E-Waste Recycling Services in Hyderabad — Sell E-Waste Online with Authorized Recycler',
     metaDescription:
       'Certified e-waste recycling & premium scrap buyers in Hyderabad. Sell old electronics, laptops, and corporate IT assets with free doorstep pickup and secure data wiping',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
