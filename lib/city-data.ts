@@ -170,6 +170,7 @@ export const cityData: Record<string, CityData> = {
     wasteCollection: 920,
     coverage: 'Brihanmumbai Municipal Corporation',
     establishedYear: '2016',
+    metaDescription:'E-Waste Recycling Services in Mumbai — Sell E-Waste Online with Authorized Recycler',
     facilities: [
       'Advanced Data Destruction Center',
       'Multi-Metal Recovery Facility',
@@ -299,7 +300,7 @@ export const cityData: Record<string, CityData> = {
     name: 'Bangalore',
     title: 'E-Waste Recycling & Certified Scrap Buyers in Bangalore: Sell Old Electronics Fast ',
     description: 'Laptops, servers, and networking gear are securely recycled with data destruction and complete asset recovery, while battery and circuit-board recovery for the city’s IT and EV sectors plays a crucial role in responsible waste management. WEEE handling supports end-to-end disposal for the region and beyond. EVs are increasingly part of the transition to cleaner transport and smarter asset planning, highlighting the importance of effective recovery processes for sustainable growth.',
-   metaTitle: 'E-Waste Recycling & Certified Scrap Buyers in Bangalore | SP Recycling ',
+   metaTitle: 'E-Waste Recycling Services in Bangalore — Sell E-Waste Online with Authorized Recycler',
    metaDescription: 'Secure corporate e-waste recycling and certified IT asset disposal in Bangalore. Get free doorstep pickup across Whitefield, Electronic City, and Koramangala. 100% data destruction guaranteed.  ',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '13.6M',
@@ -388,6 +389,7 @@ export const cityData: Record<string, CityData> = {
     population: '11.2M',
     wasteCollection: 520,
     coverage: 'Greater Chennai Corporation',
+    metaTitle:'E-Waste Recycling Services in Chennai — Sell E-Waste Online with Authorized Recycler',
     establishedYear: '2018',
     facilities: [
       'Regional Processing Center',
@@ -590,6 +592,7 @@ export const cityData: Record<string, CityData> = {
     wasteCollection: 380,
     coverage: 'Pune Municipal Corporation',
     establishedYear: '2018',
+    metaTitle:'Add this.   E-Waste Recycling & Scrap Buyers in Pune — Sell E-Waste Online with Authorized Recycler',
     facilities: [
       'Educational Electronics Center',
       'IT Equipment Processing Unit',
