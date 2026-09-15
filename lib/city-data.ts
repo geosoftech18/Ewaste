@@ -163,14 +163,15 @@ export const cityData: Record<string, CityData> = {
   'mumbai': {
     slug: 'mumbai',
     name: 'Mumbai',
-    title: 'E-Waste Recycling Services in Mumbai',
+    title: 'E-Waste Recycling Services in Mumbai — Sell E-Waste Online with Authorized Recycler',
     description: 'Leading e-waste recycling services in Mumbai with state-of-the-art facilities, secure data destruction, and comprehensive pickup services across the financial capital.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '20.4M',
     wasteCollection: 920,
     coverage: 'Brihanmumbai Municipal Corporation',
     establishedYear: '2016',
-    metaDescription:'E-Waste Recycling Services in Mumbai — Sell E-Waste Online with Authorized Recycler',
+    metaTitle:'E-Waste Recycling Services in Mumbai — Sell E-Waste Online with Authorized Recycler',
+    metaDescription:'Secure corporate e-waste recycling and certified IT asset disposal in Mumbai. Get free doorstep pickup across South Mumbai, Western Suburbs, and Eastern Suburbs. 100% data destruction guaranteed.  ',
     facilities: [
       'Advanced Data Destruction Center',
       'Multi-Metal Recovery Facility',
@@ -298,7 +299,7 @@ export const cityData: Record<string, CityData> = {
   'bangalore': {
     slug: 'bangalore',
     name: 'Bangalore',
-    title: 'E-Waste Recycling & Certified Scrap Buyers in Bangalore: Sell Old Electronics Fast ',
+    title: 'E-Waste Recycling Services in Bangalore — Sell E-Waste Online with Authorized Recycler',
     description: 'Laptops, servers, and networking gear are securely recycled with data destruction and complete asset recovery, while battery and circuit-board recovery for the city’s IT and EV sectors plays a crucial role in responsible waste management. WEEE handling supports end-to-end disposal for the region and beyond. EVs are increasingly part of the transition to cleaner transport and smarter asset planning, highlighting the importance of effective recovery processes for sustainable growth.',
    metaTitle: 'E-Waste Recycling Services in Bangalore — Sell E-Waste Online with Authorized Recycler',
    metaDescription: 'Secure corporate e-waste recycling and certified IT asset disposal in Bangalore. Get free doorstep pickup across Whitefield, Electronic City, and Koramangala. 100% data destruction guaranteed.  ',
@@ -383,7 +384,7 @@ export const cityData: Record<string, CityData> = {
   'chennai': {
     slug: 'chennai',
     name: 'Chennai',
-    title: 'E-Waste Recycling Services in Chennai',
+    title: 'E-Waste Recycling Services in Chennai — Sell E-Waste Online with Authorized Recycler',
     description: 'Reliable e-waste recycling services in Chennai with certified facilities, secure data destruction, and comprehensive coverage across Tamil Nadu\'s capital.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '11.2M',
@@ -585,14 +586,14 @@ export const cityData: Record<string, CityData> = {
   'pune': {
     slug: 'pune',
     name: 'Pune',
-    title: 'E-Waste Recycling Services in Pune',
+    title: 'E-Waste Recycling & Scrap Buyers in Pune — Sell E-Waste Online with Authorized Recycler',
     description: 'Leading e-waste recycling services in Pune with state-of-the-art facilities, secure data destruction, and comprehensive coverage serving the educational and IT hub of Maharashtra.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '7.2M',
     wasteCollection: 380,
     coverage: 'Pune Municipal Corporation',
     establishedYear: '2018',
-    metaTitle:'Add this.   E-Waste Recycling & Scrap Buyers in Pune — Sell E-Waste Online with Authorized Recycler',
+    metaTitle:'E-Waste Recycling & Scrap Buyers in Pune — Sell E-Waste Online with Authorized Recycler',
     facilities: [
       'Educational Electronics Center',
       'IT Equipment Processing Unit',
