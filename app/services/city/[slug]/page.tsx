@@ -197,7 +197,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <CityJsonLd city={city} faqs={cityFaqs} />
       <Hero
         cityName={city.name}
-        heroTitle={city.heroTitle}
+        heroTitle={city.heroTitle ?? city.title}
         cityDescription={city.description}
         cityDescriptionHtml={city.descriptionHtml}
         heroSubdescription={city.heroSubdescription}
