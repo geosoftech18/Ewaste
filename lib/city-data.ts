@@ -50,8 +50,8 @@ export const cityData: Record<string, CityData> = {
   'hyderabad': {
     slug: 'hyderabad',
     name: 'Hyderabad',
-    title: 'E-Waste Recycling & Certified Scrap Buyers in Hyderabad: Sell Old Electronics Fast',
-    heroTitle: 'E-Waste Recycling & Certified Scrap Buyers in Hyderabad: Sell Old Electronics Fast',
+    title: 'E-Waste Recycling Services in Hyderabad — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling Services in Hyderabad — Sell E-Waste Online with Authorized Recycler',
     description:
     "Clearing out office tech clutter or home gadgets shouldn't be a headache. Whether you need corporate-grade e-waste recycling in Hyderabad with certified data destruction, or you are simply looking for trusted scrap buyers in Hyderabad to offload bulk hardware, SP Recycling has you covered.",
   descriptionHtml:
