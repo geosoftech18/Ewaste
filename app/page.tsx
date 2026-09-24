@@ -97,7 +97,7 @@ export default function Home() {
       <HeroSlider />
       {/* <VideoHero /> */}
       <TrustStrip />
-      <SellProductsCarousel
+      {/* <SellProductsCarousel
           title="Turn Large Appliances into Cash"
           subtitle="Sell old ACs, fridges, washing machines and more in Hyderabad at fixed scrap rates."
           products={largeAppliances}
@@ -114,9 +114,9 @@ export default function Home() {
           subtitle="Get instant quotes for laptops, mobiles, tablets, CPUs, printers and more."
           products={electronicsGadgets}
           cityName="Hyderabad"
-        />
-      <ServicesGrid />
+        /> */}
       <ScrapTypesSection />
+      <ServicesGrid />
       <ProcessSteps />
       <WhyChooseUs />
       <CertificationsCompliance />
