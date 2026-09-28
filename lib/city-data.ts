@@ -18,6 +18,10 @@ export interface CityData {
   metaTitle?: string;
   /** Optional meta description override */
   metaDescription?: string;
+  /** Target keywords from keyword research (used in metadata) */
+  keywords?: string[];
+  /** ISO date (YYYY-MM-DD) when editorial content was last reviewed */
+  lastReviewed?: string;
   heroImage: string;
   population: string;
   wasteCollection: number;
@@ -63,6 +67,14 @@ export const cityData: Record<string, CityData> = {
     metaTitle: 'E-Waste Recycling Services in Hyderabad — Sell E-Waste Online with Authorized Recycler',
     metaDescription:
       'Certified e-waste recycling & premium scrap buyers in Hyderabad. Sell old electronics, laptops, and corporate IT assets with free doorstep pickup and secure data wiping',
+    keywords: [
+      'e-waste recycling in Hyderabad',
+      'scrap buyers in Hyderabad',
+      'sell old electronics in Hyderabad',
+      'sell e-waste online Hyderabad',
+      'authorized e-waste recycler Hyderabad',
+    ],
+    lastReviewed: '2026-09-24',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '10.4M',
     wasteCollection: 450,
@@ -164,6 +176,7 @@ export const cityData: Record<string, CityData> = {
     slug: 'mumbai',
     name: 'Mumbai',
     title: 'E-Waste Recycling Services in Mumbai — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling Services in Mumbai — Sell E-Waste Online with Authorized Recycler',
     description: 'Leading e-waste recycling services in Mumbai with state-of-the-art facilities, secure data destruction, and comprehensive pickup services across the financial capital.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '20.4M',
@@ -171,7 +184,15 @@ export const cityData: Record<string, CityData> = {
     coverage: 'Brihanmumbai Municipal Corporation',
     establishedYear: '2016',
     metaTitle:'E-Waste Recycling Services in Mumbai — Sell E-Waste Online with Authorized Recycler',
-    metaDescription:'Secure corporate e-waste recycling and certified IT asset disposal in Mumbai. Get free doorstep pickup across South Mumbai, Western Suburbs, and Eastern Suburbs. 100% data destruction guaranteed.  ',
+    metaDescription:'Secure corporate e-waste recycling and certified IT asset disposal in Mumbai. Get free doorstep pickup across South Mumbai, Western Suburbs, and Eastern Suburbs. 100% data destruction guaranteed.',
+    keywords: [
+      'e-waste recycling in Mumbai',
+      'scrap buyers in Mumbai',
+      'sell old electronics in Mumbai',
+      'IT asset disposal Mumbai',
+      'authorized e-waste recycler Mumbai',
+    ],
+    lastReviewed: '2026-09-24',
     facilities: [
       'Advanced Data Destruction Center',
       'Multi-Metal Recovery Facility',
@@ -232,13 +253,25 @@ export const cityData: Record<string, CityData> = {
   'delhi': {
     slug: 'delhi',
     name: 'Delhi',
-    title: 'E-Waste Recycling Services in Delhi',
+    title: 'E-Waste Recycling Services in Delhi — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling Services in Delhi — Sell E-Waste Online with Authorized Recycler',
     description: 'Comprehensive e-waste recycling services in Delhi NCR with certified facilities, secure data destruction, and extensive coverage across the national capital region.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '32.9M',
     wasteCollection: 850,
     coverage: 'Delhi Municipal Corporation',
     establishedYear: '2015',
+    metaTitle: 'E-Waste Recycling Services in Delhi — Sell E-Waste Online with Authorized Recycler',
+    metaDescription:
+      'Certified e-waste recycling & scrap buyers in Delhi NCR. Sell old electronics with free pickup across Delhi, Gurgaon, Noida and Faridabad. Secure data destruction included.',
+    keywords: [
+      'e-waste recycling in Delhi',
+      'scrap buyers in Delhi NCR',
+      'sell old electronics in Delhi',
+      'e-waste pickup Gurgaon Noida',
+      'authorized e-waste recycler Delhi',
+    ],
+    lastReviewed: '2026-09-24',
     facilities: [
       'Central Data Destruction Hub',
       'Multi-Material Recovery Facility',
@@ -300,9 +333,18 @@ export const cityData: Record<string, CityData> = {
     slug: 'bangalore',
     name: 'Bangalore',
     title: 'E-Waste Recycling Services in Bangalore — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling Services in Bangalore — Sell E-Waste Online with Authorized Recycler',
     description: 'Laptops, servers, and networking gear are securely recycled with data destruction and complete asset recovery, while battery and circuit-board recovery for the city’s IT and EV sectors plays a crucial role in responsible waste management. WEEE handling supports end-to-end disposal for the region and beyond. EVs are increasingly part of the transition to cleaner transport and smarter asset planning, highlighting the importance of effective recovery processes for sustainable growth.',
    metaTitle: 'E-Waste Recycling Services in Bangalore — Sell E-Waste Online with Authorized Recycler',
-   metaDescription: 'Secure corporate e-waste recycling and certified IT asset disposal in Bangalore. Get free doorstep pickup across Whitefield, Electronic City, and Koramangala. 100% data destruction guaranteed.  ',
+   metaDescription: 'Secure corporate e-waste recycling and certified IT asset disposal in Bangalore. Get free doorstep pickup across Whitefield, Electronic City, and Koramangala. 100% data destruction guaranteed.',
+    keywords: [
+      'e-waste recycling in Bangalore',
+      'scrap buyers in Bangalore',
+      'sell old electronics in Bangalore',
+      'IT asset disposal Whitefield',
+      'authorized e-waste recycler Bangalore',
+    ],
+    lastReviewed: '2026-09-24',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '13.6M',
     wasteCollection: 680,
@@ -385,12 +427,23 @@ export const cityData: Record<string, CityData> = {
     slug: 'chennai',
     name: 'Chennai',
     title: 'E-Waste Recycling Services in Chennai — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling Services in Chennai — Sell E-Waste Online with Authorized Recycler',
     description: 'Reliable e-waste recycling services in Chennai with certified facilities, secure data destruction, and comprehensive coverage across Tamil Nadu\'s capital.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '11.2M',
     wasteCollection: 520,
     coverage: 'Greater Chennai Corporation',
     metaTitle:'E-Waste Recycling Services in Chennai — Sell E-Waste Online with Authorized Recycler',
+    metaDescription:
+      'Certified e-waste recycling & scrap buyers in Chennai. Sell old electronics with free doorstep pickup across Greater Chennai. Secure data destruction and transparent rates.',
+    keywords: [
+      'e-waste recycling in Chennai',
+      'scrap buyers in Chennai',
+      'sell old electronics in Chennai',
+      'automotive electronics recycling Chennai',
+      'authorized e-waste recycler Chennai',
+    ],
+    lastReviewed: '2026-09-24',
     establishedYear: '2018',
     facilities: [
       'Regional Processing Center',
@@ -452,13 +505,25 @@ export const cityData: Record<string, CityData> = {
   'gujarat': {
     slug: 'gujarat',
     name: 'Gujarat',
-    title: 'E-Waste Recycling Services in Gujarat',
+    title: 'E-Waste Recycling Services in Gujarat — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling Services in Gujarat — Sell E-Waste Online with Authorized Recycler',
     description: 'Comprehensive e-waste recycling services across Gujarat with certified facilities, secure data destruction, and extensive coverage serving Ahmedabad, Surat, Vadodara, and other major cities.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '60.4M',
     wasteCollection: 1200,
     coverage: 'Gujarat State',
     establishedYear: '2017',
+    metaTitle: 'E-Waste Recycling Services in Gujarat — Sell E-Waste Online with Authorized Recycler',
+    metaDescription:
+      'Certified e-waste recycling across Gujarat — Ahmedabad, Surat, Vadodara & more. Sell industrial and household electronics with free pickup and secure data destruction.',
+    keywords: [
+      'e-waste recycling in Gujarat',
+      'scrap buyers in Ahmedabad',
+      'sell old electronics in Surat',
+      'industrial e-waste recycling Gujarat',
+      'authorized e-waste recycler Gujarat',
+    ],
+    lastReviewed: '2026-09-24',
     facilities: [
       'State-of-the-art Processing Center',
       'Multi-Material Recovery Facility',
@@ -519,13 +584,25 @@ export const cityData: Record<string, CityData> = {
   'andhra-pradesh': {
     slug: 'andhra-pradesh',
     name: 'Andhra Pradesh',
-    title: 'E-Waste Recycling Services in Andhra Pradesh',
+    title: 'E-Waste Recycling Services in Andhra Pradesh — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling Services in Andhra Pradesh — Sell E-Waste Online with Authorized Recycler',
     description: 'Professional e-waste recycling services across Andhra Pradesh with certified facilities, secure data destruction, and comprehensive coverage serving Visakhapatnam, Vijayawada, and other major cities.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '49.4M',
     wasteCollection: 850,
     coverage: 'Andhra Pradesh State',
     establishedYear: '2018',
+    metaTitle: 'E-Waste Recycling Services in Andhra Pradesh — Sell E-Waste Online with Authorized Recycler',
+    metaDescription:
+      'Certified e-waste recycling in Andhra Pradesh — Visakhapatnam, Vijayawada & more. Sell old electronics with free pickup, data destruction, and compliance support.',
+    keywords: [
+      'e-waste recycling in Andhra Pradesh',
+      'scrap buyers in Visakhapatnam',
+      'sell old electronics in Vijayawada',
+      'e-waste pickup Andhra Pradesh',
+      'authorized e-waste recycler Andhra Pradesh',
+    ],
+    lastReviewed: '2026-09-24',
     facilities: [
       'Regional Processing Hub',
       'Marine Electronics Facility',
@@ -587,6 +664,7 @@ export const cityData: Record<string, CityData> = {
     slug: 'pune',
     name: 'Pune',
     title: 'E-Waste Recycling & Scrap Buyers in Pune — Sell E-Waste Online with Authorized Recycler',
+    heroTitle: 'E-Waste Recycling & Scrap Buyers in Pune — Sell E-Waste Online with Authorized Recycler',
     description: 'Leading e-waste recycling services in Pune with state-of-the-art facilities, secure data destruction, and comprehensive coverage serving the educational and IT hub of Maharashtra.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '7.2M',
@@ -594,6 +672,16 @@ export const cityData: Record<string, CityData> = {
     coverage: 'Pune Municipal Corporation',
     establishedYear: '2018',
     metaTitle:'E-Waste Recycling & Scrap Buyers in Pune — Sell E-Waste Online with Authorized Recycler',
+    metaDescription:
+      'Certified e-waste recycling & scrap buyers in Pune. Sell old electronics from homes, colleges and IT parks with free doorstep pickup and secure data wiping.',
+    keywords: [
+      'e-waste recycling in Pune',
+      'scrap buyers in Pune',
+      'sell old electronics in Pune',
+      'campus e-waste recycling Pune',
+      'authorized e-waste recycler Pune',
+    ],
+    lastReviewed: '2026-09-24',
     facilities: [
       'Educational Electronics Center',
       'IT Equipment Processing Unit',

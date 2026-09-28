@@ -24,6 +24,7 @@ import {
   type CityData,
 } from '@/lib/city-data';
 import { SITE_URL, absoluteUrl } from '@/lib/seo';
+import { getCitySeoKeywords, getDefaultCityMetaDescription, getDefaultCityMetaTitle } from '@/lib/seo-keywords';
 import { BreadcrumbJsonLd, canonicalMetadata } from '@/components/seo/breadcrumb-json-ld';
 import { SellProductsCarousel } from "@/components/bangalore-landing-page/SellProductsCarousel"
 import {
@@ -31,6 +32,9 @@ import {
   largeAppliances,
   smallAppliances,
 } from "@/data/sell-products";
+import { ContentFreshness } from "@/components/seo/content-freshness";
+import { ComparisonGuidesTeaser } from "@/components/seo/comparison-guides-teaser";
+import { AuthorityResources } from "@/components/seo/authority-resources";
 export async function generateStaticParams() {
   return getAllCitySlugs().map((slug) => ({
     slug: slug,
@@ -51,11 +55,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   const seoTitle =
-    city.metaTitle ?? `E-waste Recycling & Sell Old Electronics in ${city.name} | Best Prices`;
+    city.metaTitle ?? getDefaultCityMetaTitle(city.name);
 
   const metaDescription =
-    city.metaDescription ??
-    `Professional e-waste recycling in ${city.name}. Same-day pickup, certified data destruction, cash for electronics. ISO certified & eco-friendly disposal.`;
+    city.metaDescription ?? getDefaultCityMetaDescription(city.name);
 
   const pageUrl = absoluteUrl(`/services/city/${city.slug}`);
   const imageUrl = absoluteUrl(city.heroImage);
@@ -63,13 +66,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   return {
     title: seoTitle,
     description: metaDescription,
-    keywords: [
-      `e-waste recycling in ${city.name}`,
-      `scrap buyers in ${city.name}`,
-      `sell old electronics in ${city.name}`,
-      'certified data destruction',
-      'free e-waste pickup',
-    ],
+    keywords: city.keywords ?? getCitySeoKeywords(city.name),
     ...canonicalMetadata(`/services/city/${city.slug}`),
     robots: {
       index: true,
@@ -206,19 +203,19 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       />
       <SellProductsCarousel
           title="Turn Large Appliances into Cash"
-          subtitle="Sell old ACs, fridges, washing machines and more in Hyderabad at fixed scrap rates."
+          subtitle={`Sell old ACs, fridges, washing machines and more in ${city.name} at fixed scrap rates.`}
           products={largeAppliances}
           cityName={city.name}
         />
         <SellProductsCarousel
           title="Cash for Small Home Appliances"
-          subtitle="Book a pickup for mixers, geysers, fans, chimneys and other household gadgets."
+          subtitle={`Book a pickup for mixers, geysers, fans, chimneys and other household gadgets in ${city.name}.`}
           products={smallAppliances}
           cityName={city.name}
         />
         <SellProductsCarousel
           title="Sell Old Electronics & Gadgets"
-          subtitle="Get instant quotes for laptops, mobiles, tablets, CPUs, printers and more."
+          subtitle={`Get instant quotes for laptops, mobiles, tablets, CPUs, printers and more in ${city.name}.`}
           products={electronicsGadgets}
           cityName={city.name}
         />
@@ -229,6 +226,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
           dangerouslySetInnerHTML={{ __html: bridgeParagraphHtml }}
         />
       </section>
+      <ComparisonGuidesTeaser />
       <Services
         cityName={city.name}
         services={linkedServices}
@@ -242,6 +240,12 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       <ImpactCalculator cityName={city.name} />
       <Certifications />
       <FAQ faqs={cityFaqs} />
+      <AuthorityResources compact />
+      {city.lastReviewed ? (
+        <div className="px-4 sm:px-6 lg:px-8 pb-6">
+          <ContentFreshness lastReviewed={city.lastReviewed} className="mx-auto max-w-3xl" />
+        </div>
+      ) : null}
       <RequestPickup cityName={city.name} />
       <ServiceCities />
       <CTA />

@@ -70,6 +70,13 @@ export default function BlogPage() {
           <p className="text-gray-600 text-lg">
             Discover amazing content about E-Waste Recycling and Sustainability
           </p>
+          <p className="mt-4 text-sm text-gray-600">
+            Looking for side-by-side answers?{" "}
+            <Link href="/compare" className="font-semibold text-emerald-700 underline underline-offset-4">
+              Read our comparison guides
+            </Link>
+            .
+          </p>
         </motion.div>
 
         {/* Blog Posts Grid */}

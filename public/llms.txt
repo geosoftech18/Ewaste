@@ -20,6 +20,8 @@ SP Recycling Pvt Ltd provides certified e-waste recycling, secure data destructi
 - [EPR Compliance](https://www.sprecycling.in/services/EPR-Compliance-Solutions)
 - [Cities We Serve](https://www.sprecycling.in/services/city): City-specific service pages
 - [Blog](https://www.sprecycling.in/blog): Guides and industry articles
+- [Comparison Guides](https://www.sprecycling.in/compare): Recycler vs dealer, recycling vs landfill, pickup vs drop-off
+- [Resources](https://www.sprecycling.in/resources): Citeable facts and official e-waste references
 - [Contact](https://www.sprecycling.in/contact): Request a pickup or quote
 - [Social Impact](https://www.sprecycling.in/social-impact)
 

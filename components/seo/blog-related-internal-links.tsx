@@ -76,6 +76,34 @@ export function BlogRelatedInternalLinks() {
           </Link>
         </div>
       </div>
+
+      <div>
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">Compare options</h2>
+        <p className="text-gray-600 text-sm mb-6">
+          Side-by-side guides before you sell or schedule pickup.
+        </p>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/compare/authorized-recycler-vs-local-scrap-dealer"
+            className="inline-flex items-center rounded-full border border-gray-200 bg-white px-3.5 py-2 text-sm font-medium text-gray-700 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
+          >
+            Recycler vs scrap dealer
+          </Link>
+          <Link
+            href="/compare/recycling-vs-landfill-ewaste"
+            className="inline-flex items-center rounded-full border border-gray-200 bg-white px-3.5 py-2 text-sm font-medium text-gray-700 hover:border-emerald-300 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
+          >
+            Recycling vs landfill
+          </Link>
+          <Link
+            href="/compare"
+            className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100 transition-colors"
+          >
+            All comparisons
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </div>
+      </div>
     </section>
   )
 }

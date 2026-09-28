@@ -1,8 +1,9 @@
 import { MetadataRoute } from 'next'
 import { SITE_URL } from '@/lib/seo'
 import { getAllServiceSlugs } from '@/lib/service-data'
-import { getAllCitySlugs } from '@/lib/city-data'
+import { getAllCities } from '@/lib/city-data'
 import { getAllEPRServiceSlugs } from '@/lib/epr-service-data'
+import { comparisonGuides } from '@/data/comparisons'
 
 /** Refresh sitemap periodically so newly published blogs appear without a full redeploy. */
 export const revalidate = 3600
@@ -43,6 +44,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
+      url: `${baseUrl}/compare`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/resources`,
+      lastModified: now,
+      changeFrequency: 'monthly',
+      priority: 0.7,
+    },
+    {
       url: `${baseUrl}/landing-page`,
       lastModified: now,
       changeFrequency: 'weekly',
@@ -68,6 +81,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
     {
       url: `${baseUrl}/services/EPR-compliance`,
+      lastModified: now,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/e-waste-recycling-hyderabad`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.8,
@@ -119,11 +138,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }))
 
   // City landing pages — keep discoverable for Google
-  const cityPages: MetadataRoute.Sitemap = getAllCitySlugs().map((slug) => ({
-    url: `${baseUrl}/services/city/${slug}`,
-    lastModified: now,
+  const cityPages: MetadataRoute.Sitemap = getAllCities().map((city) => ({
+    url: `${baseUrl}/services/city/${city.slug}`,
+    lastModified: city.lastReviewed ? new Date(`${city.lastReviewed}T00:00:00Z`) : now,
     changeFrequency: 'weekly' as const,
     priority: 0.85,
+  }))
+
+  const comparisonPages: MetadataRoute.Sitemap = comparisonGuides.map((guide) => ({
+    url: `${baseUrl}/compare/${guide.slug}`,
+    lastModified: new Date(`${guide.lastReviewed}T00:00:00Z`),
+    changeFrequency: 'monthly' as const,
+    priority: 0.75,
   }))
 
   const eprServicePages: MetadataRoute.Sitemap = getAllEPRServiceSlugs().map((slug) => ({
@@ -138,6 +164,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogPosts,
     ...servicePages,
     ...cityPages,
+    ...comparisonPages,
     ...eprServicePages,
   ]
 }

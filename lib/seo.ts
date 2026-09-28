@@ -10,6 +10,8 @@ const SEGMENT_LABELS: Record<string, string> = {
   services: 'Services',
   city: 'Cities We Serve',
   blog: 'Blog',
+  compare: 'Compare',
+  resources: 'Resources',
   contact: 'Contact Us',
   'social-impact': 'Social Impact',
   'EPR-compliance': 'EPR Compliance',

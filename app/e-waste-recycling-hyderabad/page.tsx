@@ -11,6 +11,29 @@ import {
   largeAppliances,
   smallAppliances,
 } from "@/data/sell-products";
+import type { Metadata } from "next";
+import { canonicalMetadata } from "@/components/seo/breadcrumb-json-ld";
+import { absoluteUrl } from "@/lib/seo";
+
+export const metadata: Metadata = {
+  title: "E-Waste Recycling in Hyderabad — Sell Old Electronics Fast | SP Recycling",
+  description:
+    "Sell old ACs, phones, laptops and appliances in Hyderabad. Authorized e-waste recycling with fixed scrap rates, free doorstep pickup and secure data handling.",
+  keywords: [
+    "e-waste recycling in Hyderabad",
+    "sell old electronics Hyderabad",
+    "scrap buyers Hyderabad",
+    "sell AC fridge washing machine Hyderabad",
+  ],
+  ...canonicalMetadata("/e-waste-recycling-hyderabad"),
+  openGraph: {
+    title: "E-Waste Recycling in Hyderabad | SP Recycling",
+    description:
+      "Fixed prices, free pickup, authorized recycling — sell old electronics across Hyderabad.",
+    url: absoluteUrl("/e-waste-recycling-hyderabad"),
+    type: "website",
+  },
+};
 
 export default function Home() {
   return (
