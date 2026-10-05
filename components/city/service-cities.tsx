@@ -6,10 +6,22 @@ import { ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { getAllCities } from "@/lib/city-data"
 
+const CITY_CARD_IMAGES: Record<string, string> = {
+  hyderabad: "/city/hyderabad-charminar.jpg",
+  mumbai: "/city/mumbai-metropolitan.jpg",
+  delhi: "/city/new-delhi-capital-city.jpg",
+  bangalore: "/city/bangalore-tech-city.jpg",
+  chennai: "/city/chennai-coastal-city.jpg",
+  gujarat: "/city/gujarat-industrial-area.jpg",
+  "andhra-pradesh": "/city/e-waste-recycling-facility-with-circuit-boards-and.jpg",
+  pune: "/city/pune-city-landscape.jpg",
+  kolkata: "/city/west-bengal-landscape.jpg",
+}
+
 const cities = getAllCities().map((city) => ({
   name: city.name,
   slug: city.slug,
-  image: city.heroImage || "/placeholder.svg",
+  image: CITY_CARD_IMAGES[city.slug] || "/placeholder.svg",
 }))
 
 export function ServiceCities() {
