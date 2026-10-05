@@ -151,7 +151,7 @@ export const cityData: Record<string, CityData> = {
       },
       {
         question: 'What areas in Hyderabad do you cover?',
-        answer: 'We cover all areas under Greater Hyderabad Municipal Corporation including IT Corridor, Secunderabad, and surrounding areas.'
+        answer: 'All areas under GHMC, including HITEC City, Madhapur, Gachibowli, Kondapur, Secunderabad, Kukatpally, Uppal and Begumpet. For industrial belts such as Patancheru, Jeedimetla, Cherlapally and Pashamylaram, and for Genome Valley, we schedule pickups by volume and location.'
       },
       {
         question: 'Our services cover both commercial and residential scrap needs in Hyderabad.',
@@ -169,7 +169,39 @@ export const cityData: Record<string, CityData> = {
         question: ' What eco-friendly disposal routes does S P Recycling provide for businesses and residents in Central, Southern, and Eastern Hyderabad neighborhoods?',
         answer: ' SP Recycling’ certified e-waste recovery operations extend deeply into the traditional commercial districts, core residential clusters, and expanding southern corridors of the city. For corporate outfits, healthcare centers, and trading firms operating out of busy business areas like Abids, Koti, Nampally, Sultan Bazar, Kachiguda, Barkatpura, Narayanaguda, and Himayat Nagar, we offer secure data sanitization alongside verified hardware disposal.\n\n Dilsukhnagar, L B Nagar, Kothapet, Saroornagar, and Karmanghat\n Vanasthalipuram, Hayathnagar, Bn reddy nagar, and Hasthinapuram\n Nagole, Moosarambagh, Saidabad, Champapet, and Malakpet\n Santosh nagar, Balapur, Jillelaguda, Meerpet, and Nadergul\nNagole, Moosarambagh, Saidabad, Champapet, and Malakpet\nSantosh nagar, Balapur, Jillelaguda, Meerpet, and Nadergul\nSantosh nagar, Balapur, Jillelaguda, Meerpet, and Nadergul\n\nFurthermore, our regular collection drives actively cover high-density markets and heritage sectors around Charminar, Ghansi Bazar, Begum Bazar, Osmangunj, Chaderghat, and Chikkadpally, stretching out seamlessly to Mettuguda, Amberpet, Red Hills, Mallepally, Masab Tank, and Rtc x Roads. From safely discarding household appliances in Vijayanagar Colony, Humain nagar, and Ziaguda to handling commercial hardware updates in Attapur, Rajendra Nagar, Bandlaguda, and Shamshabad, S P Recycling provides every neighborhood with a reliable, certified pathway to meet environmental safety norms effortlessly.'
       },
-     
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler in Hyderabad?',
+        answer:
+          'Yes. We hold e-waste authorization from the Central Pollution Control Board and the Telangana State Pollution Control Board. We can share copies before you book, and you can verify authorized recyclers on the CPCB website.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer: 'Form 6 is the manifest that travels with e-waste during transport. It records what is being moved, from whom, and to which authorized facility. Yes, we issue one with every pickup, and it forms part of the paper trail you keep for audits.'
+      },
+      {
+        question: 'Do you offer on-site hard drive shredding in Hyderabad?',
+        answer:
+          'Yes. We bring shredding and degaussing equipment to your premises so drives never leave the building intact. Your team can witness the process, and you receive a certificate of destruction listing each serial number.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Hyderabad?',
+        answer: 'Urgent requests within GHMC can often be collected the same day. Standard pickups are scheduled within 24–48 hours. Large decommissioning projects are planned with a site visit and a fixed date.'
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. Old CRT monitors, damaged items and some peripherals may have none. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'Can you handle e-waste from pharma and lab facilities?',
+        answer:
+          'Yes, including lab and analytical electronics and plant control equipment. If your site needs decontamination records or an EHS sign-off before material leaves, share the format and we will work to it.',
+      },
+      {
+        question: 'What documents do I receive after pickup?',
+        answer:
+          'A Form 6 manifest, a weighment slip, a certificate of destruction for storage media, and a recycling certificate.',
+      },
     ]
   },
   'mumbai': {
@@ -200,7 +232,7 @@ export const cityData: Record<string, CityData> = {
       'Lithium Battery Processing Plant'
     ],
     highlights: [
-      '24/7 emergency pickup',
+      'Urgent pickup in working hours',
       'Corporate partnerships',
       'Financial district coverage',
       'Bulk processing capabilities'
@@ -238,16 +270,54 @@ export const cityData: Record<string, CityData> = {
     faqs: [
       {
         question: 'Do you serve the Mumbai financial district?',
-        answer: 'Yes, we have specialized services for the financial sector with enhanced security protocols.'
+        answer:
+          'Yes. We serve banks, NBFCs, brokerages and corporate offices across Nariman Point, Fort, BKC and related districts, with gate-pass planning, witnessed collection and data-destruction certificates when required.',
       },
       {
         question: 'What is your coverage area in Mumbai?',
-        answer: 'We cover all areas under BMC including South Mumbai, Western Suburbs, and Eastern Suburbs.'
+        answer:
+          'Mumbai city and the suburbs, including South Mumbai, BKC, Andheri, Powai, Goregaon, Malad, Vikhroli and Mulund. For Navi Mumbai, Thane, Taloja and Bhiwandi we schedule by volume and location — call to confirm your pin code.',
       },
       {
         question: 'Do you offer emergency pickup services?',
-        answer: 'Yes, we provide 24/7 emergency pickup services for urgent e-waste disposal needs.'
-      }
+        answer:
+          'Urgent requests are handled in working hours (Mon–Sat, 9 AM–6 PM) with a fast callback. After-hours and Sunday pickups for commercial buildings are available by arrangement.',
+      },
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler for Mumbai pickups?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. Mumbai consignments move under a Form 6 manifest to our authorized processing facility in Telangana. We share authorization copies before you book, and you can verify recyclers on the CPCB website.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Mumbai pickup comes with one, and it forms part of the audit trail you keep.',
+      },
+      {
+        question: 'Where does my Mumbai e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility, so you always know where the waste went.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office in Mumbai?',
+        answer:
+          'Yes, for corporate sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Mumbai?',
+        answer:
+          'Standard pickups are scheduled within 24–48 hours. Small urgent lots are slotted as soon as a vehicle is available, often within 24 hours. Large decommissioning projects are planned with a site visit and a fixed date.',
+      },
+      {
+        question: 'Can you work around building rules in South Mumbai and BKC?',
+        answer:
+          "Yes. Send us your building's access rules: goods lift timings, permitted vehicle sizes, gate-pass requirements. We plan the pickup around them and share vehicle and team details in advance.",
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
     ]
   },
   'delhi': {
@@ -317,16 +387,59 @@ export const cityData: Record<string, CityData> = {
     faqs: [
       {
         question: 'Do you cover Delhi NCR areas?',
-        answer: 'Yes, we provide services across Delhi NCR including Gurgaon, Noida, and Faridabad.'
+        answer:
+          'Yes. We plan pickups across Delhi, Gurugram (Gurgaon), Noida, Greater Noida, Faridabad and Ghaziabad. Because NCR spans three states, we confirm the paperwork route when you book. For Faridabad, Ghaziabad and outer industrial belts, call to confirm your pin code.',
       },
       {
         question: 'Do you work with government departments?',
-        answer: 'Yes, we have specialized services and compliance protocols for government e-waste disposal.'
+        answer:
+          'We provide serial-number lists, weighment slips, and destruction and recycling certificates that departments can use for audit and condemnation records. Share your department\'s format and we will work to it.',
       },
       {
         question: 'What about educational institutions?',
-        answer: 'We offer special programs for schools, colleges, and universities with bulk processing capabilities.'
-      }
+        answer:
+          'Yes. We plan bulk pickups around term breaks and exam schedules, list devices by serial number, and give you recycling and destruction certificates for institutional records.',
+      },
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler for Delhi NCR pickups?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. NCR consignments move under a Form 6 manifest to our authorized processing facility in Telangana. We share authorization copies before you book, and you can verify recyclers on the CPCB and state board websites (DPCC, HSPCB, UPPCB).',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every pickup comes with one, including pickups that cross between Delhi, Haryana and Uttar Pradesh.',
+      },
+      {
+        question: 'Where does my NCR e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility, so you always know where the waste went.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office in Delhi NCR?',
+        answer:
+          'Yes, for corporate and institutional sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'Do you cover Gurugram, Noida and Faridabad as well as Delhi?',
+        answer:
+          'Yes, we plan pickups across Delhi NCR. Because NCR spans three states, we confirm the paperwork route when you book.',
+      },
+      {
+        question: 'Do winter pollution restrictions affect pickups?',
+        answer:
+          'They can. From roughly October to January, air-quality restrictions may limit commercial vehicle movement. We plan around them and tell you early if a date needs to move.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Delhi NCR?',
+        answer:
+          'Standard pickups are scheduled within 24–48 hours. Small urgent lots are slotted as soon as a vehicle is available, often within 24 hours. Large decommissioning projects are planned with a site visit and a fixed date. Small lots may be batched for route efficiency.',
+      },
     ]
   },
   'bangalore': {
@@ -399,7 +512,8 @@ export const cityData: Record<string, CityData> = {
       },
       {
         question: 'What areas of Bangalore do you cover?',
-        answer: 'We cover all areas under BBMP including Electronic City, Whitefield, and Koramangala.'
+        answer:
+          'All areas under BBMP, including Whitefield, Electronic City, Koramangala, Indiranagar, Marathahalli, Manyata, Hebbal, Peenya, HSR Layout, Jayanagar and Sarjapur. Industrial and tech-park pickups are scheduled by volume and location.',
       },
       {
         question: 'Do you handle data center equipment?',
@@ -420,7 +534,37 @@ export const cityData: Record<string, CityData> = {
       {
         question: 'Do you provide authenticated Data Destruction Certificates?  ',
         answer: 'Absolutely. For every project involving storage media like hard disks, solid-state drives, or backup tapes, we execute rigorous data sanitization. Once the destruction or shredding process is complete, we issue an official, audit-ready Data Destruction Certificate detailing the serial numbers of the processed devices for your corporate compliance records.  '
-      }
+      },
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler serving Bangalore?',
+        answer:
+          'Yes. We operate as a CPCB-authorized e-waste recycling channel and issue the paperwork your auditor expects — including Form 6 manifests and certificates of destruction. You can verify authorized recyclers on the CPCB website before you book.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one in Bangalore?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is being moved, from whom, and to which authorized facility. Yes, we issue one with every Bangalore pickup as part of your audit trail.',
+      },
+      {
+        question: 'Do you offer on-site hard drive shredding in Bangalore?',
+        answer:
+          'Yes. We can bring shredding and degaussing equipment to your premises so drives never leave the building intact. Your team can witness the process, and you receive a certificate of destruction listing each serial number.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Bangalore?',
+        answer:
+          'Urgent requests within BBMP can often be collected the same day. Standard pickups are scheduled within 24–48 hours. Large decommissioning projects are planned with a site visit and a fixed date.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. Old CRT monitors, damaged items and some peripherals may have none. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'What documents do I receive after a Bangalore pickup?',
+        answer:
+          'A Form 6 manifest, a weighment slip, a certificate of destruction for storage media, and a recycling certificate.',
+      },
     ]
   },
   'chennai': {
@@ -489,17 +633,60 @@ export const cityData: Record<string, CityData> = {
     },
     faqs: [
       {
-        question: 'Do you handle automotive electronics?',
-        answer: 'Yes, we specialize in automotive electronics recycling with industry-specific protocols.'
+        question: 'Do you handle automotive and industrial electronics?',
+        answer:
+          'We collect industrial electronics such as PLC panels, control cabinets, circuit boards, UPS and battery banks from plants in Sriperumbudur, Oragadam, Maraimalai Nagar and Guindy. Call us before booking if you have vehicle electronics in bulk, so we can confirm handling and paperwork.',
       },
       {
         question: 'What about manufacturing equipment?',
-        answer: 'We have specialized facilities for industrial and manufacturing electronics disposal.'
+        answer:
+          'Yes. We schedule pickups for plant electronics and obsolete office IT from manufacturing and engineering units, with category documentation and Form 6 manifests for your audit trail.',
       },
       {
         question: 'Do you cover Chennai port area?',
-        answer: 'Yes, we provide services for marine and port electronics with specialized handling protocols.'
-      }
+        answer:
+          'We collect IT assets from shipping, logistics and port-side businesses around Ennore and Manali. For marine or salt-exposed equipment, contact us before booking so we can confirm what we can take and how it will be documented.',
+      },
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler for Chennai pickups?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. Chennai consignments move under a Form 6 manifest to our authorized processing facility in Telangana. We share authorization copies before you book, and you can verify recyclers on the CPCB website.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Chennai pickup comes with one, and it forms part of the audit trail you keep.',
+      },
+      {
+        question: 'Where does my Chennai e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility, so you always know where the waste went.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office in Chennai?',
+        answer:
+          'Yes, for corporate sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Chennai?',
+        answer:
+          'Standard pickups are scheduled within 24–48 hours. Small urgent lots are slotted as soon as a vehicle is available, often within 24 hours. Large decommissioning projects are planned with a site visit and a fixed date. Small lots may be batched for route efficiency.',
+      },
+      {
+        question: 'Can you take flood-damaged or water-damaged equipment?',
+        answer:
+          'Tell us what was affected when you book. Water-damaged devices can carry battery and safety risks, and we plan the pickup accordingly.',
+      },
+      {
+        question: 'Which areas of Chennai do you cover?',
+        answer:
+          'Greater Chennai, including OMR, Guindy, Ambattur, Anna Salai and Velachery. For Sriperumbudur, Oragadam, Maraimalai Nagar, Ennore and Manali we schedule by volume — call to confirm your pin code.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
     ]
   },
   'gujarat': {
@@ -727,18 +914,175 @@ export const cityData: Record<string, CityData> = {
     faqs: [
       {
         question: 'Do you serve educational institutions in Pune?',
-        answer: 'Yes, we have special programs for schools, colleges, and universities with bulk processing capabilities.'
+        answer:
+          'Yes. We plan bulk pickups around term breaks and exam schedules, list devices by serial number, and give you recycling and destruction certificates for institutional records. Share your list for a quote.',
       },
       {
         question: 'What areas of Pune do you cover?',
-        answer: 'We cover all areas under PMC including IT parks, educational zones, and industrial areas.'
+        answer:
+          'Pune city, including Hinjewadi, Baner, Kharadi, Magarpatta, Hadapsar and Shivajinagar, plus Pimpri-Chinchwad. For Chakan, Ranjangaon, Talegaon and other MIDC areas we schedule by volume — call to confirm your pin code.',
       },
       {
-        question: 'Do you handle automotive electronics?',
-        answer: 'Yes, we specialize in automotive electronics recycling with industry-specific protocols for Pune\'s automotive sector.'
-      }
+        question: 'Do you handle industrial and automotive electronics?',
+        answer:
+          'We collect industrial electronics such as PLC panels, control cabinets, circuit boards, UPS and battery banks from plants in Pimpri-Chinchwad, Chakan and Ranjangaon. Call us before booking if you have vehicle electronics in bulk, so we can confirm handling and paperwork.',
+      },
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler for Pune pickups?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. Pune consignments move under a Form 6 manifest to our authorized processing facility in Telangana. We share authorization copies before you book, and you can verify recyclers on the CPCB website.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Pune pickup comes with one, and it forms part of the audit trail you keep.',
+      },
+      {
+        question: 'Where does my Pune e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility, so you always know where the waste went.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office or campus in Pune?',
+        answer:
+          'Yes, for corporate and institutional sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Pune?',
+        answer:
+          'Standard pickups are scheduled within 24–48 hours. Small urgent lots are slotted as soon as a vehicle is available, often within 24 hours. Large decommissioning projects are planned with a site visit and a fixed date. Small lots may be batched for route efficiency.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
     ]
-  }
+  },
+  'kolkata': {
+    slug: 'kolkata',
+    name: 'Kolkata',
+    title: 'E-Waste Recycling and IT Asset Disposal in Kolkata',
+    heroTitle: 'E-Waste Recycling and IT Asset Disposal in Kolkata',
+    description:
+      "Kolkata's IT parks, banks, hospitals, universities and engineering units retire a lot of electronics, and each one needs proof of how it was disposed of. SP Recycling collects e-waste across Kolkata and Howrah, destroys the data, and gives you the documents your auditor, management or department will ask for. Every pickup comes with a weighed receipt, a Form 6 transport manifest, and a certificate of destruction or recycling.",
+    metaTitle: 'E-Waste Recycling in Kolkata | Certified ITAD & IT Scrap Pickup',
+    metaDescription:
+      'Authorized e-waste recycling and IT asset disposal in Kolkata. Pickup from Salt Lake Sector V, New Town and Howrah. Data destruction certificate included.',
+    keywords: [
+      'e-waste recycling kolkata',
+      'IT asset disposal kolkata',
+      'e-waste pickup kolkata',
+      'corporate e-waste disposal kolkata',
+      'authorized e-waste recycler kolkata',
+      'IT scrap buyers kolkata',
+      'e-waste pickup salt lake',
+      'e-waste pickup new town',
+      'hard drive shredding kolkata',
+    ],
+    lastReviewed: '2026-10-05',
+    heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
+    population: '14.8M',
+    wasteCollection: 0,
+    coverage: 'Kolkata Municipal Corporation & Howrah',
+    establishedYear: '2018',
+    facilities: [
+      'CPCB-authorized processing (Telangana)',
+      'Form 6 tracked transport',
+      'On-site data destruction (corporate)',
+      'Institutional documentation support',
+    ],
+    highlights: [
+      'Salt Lake Sector V & New Town coverage',
+      'Banks, hospitals and campuses',
+      'Form 6 on every pickup',
+      'Serving Kolkata from Telangana base',
+    ],
+    stats: {
+      totalPickups: 'On request',
+      totalWeight: 'Documented',
+      satisfactionRate: 'Form 6',
+    },
+    servicesBlurb:
+      'SP Recycling serves Kolkata IT parks, financial firms, hospitals, universities and engineering units with doorstep pickup, certified data destruction and audit-ready paperwork. Consignments move under Form 6 to our CPCB-authorized facility in Telangana.',
+    services: {
+      title: 'Our Services in Kolkata',
+      items: [
+        {
+          name: 'IT & ITES Recycling',
+          description: 'Laptop refresh batches and office IT from Sector V and New Town',
+          icon: 'Cpu',
+        },
+        {
+          name: 'Financial Sector ITAD',
+          description: 'Secure collection and destruction certificates for banks and insurers',
+          icon: 'Building2',
+        },
+        {
+          name: 'Healthcare Electronics',
+          description: 'Hospital and diagnostic IT with documented media destruction',
+          icon: 'Heart',
+        },
+        {
+          name: 'Data Destruction',
+          description: 'On-site or escorted off-site destruction with serial-number certificates',
+          icon: 'Shield',
+        },
+      ],
+    },
+    faqs: [
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler for Kolkata pickups?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. Kolkata consignments move under a Form 6 manifest to our authorized processing facility in Telangana. We share authorization copies before you book, and you can verify recyclers on the CPCB and WBPCB websites.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Kolkata pickup comes with one.',
+      },
+      {
+        question: 'Where does my Kolkata e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility, so you always know where the waste went.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office in Kolkata?',
+        answer:
+          'Yes, for corporate and institutional sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Kolkata?',
+        answer:
+          'Standard pickups are scheduled within 24–48 hours after confirmation. Large decommissioning projects are planned with a site visit and a fixed date. Small lots may be batched for route efficiency from our Telangana base.',
+      },
+      {
+        question: 'Do you cover Salt Lake Sector V and New Town?',
+        answer:
+          'Yes, we plan pickups across Salt Lake, Sector V, New Town and Rajarhat. Send us your building\'s access rules and we plan around them.',
+      },
+      {
+        question: 'Do you work with government departments?',
+        answer:
+          'We provide serial-number lists, weighment slips, and destruction and recycling certificates that departments can use for audit and condemnation records. Share your department\'s format and we will work to it.',
+      },
+      {
+        question: 'Do you serve schools, colleges and universities?',
+        answer:
+          'Yes. We plan bulk pickups around term breaks and exam schedules, list devices by serial number, and give you recycling and destruction certificates for institutional records.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'Which areas of Kolkata do you cover?',
+        answer:
+          'Kolkata and Howrah, including Salt Lake Sector V, New Town, Rajarhat, Park Street, BBD Bagh and Ballygunge. For Dankuni, Uluberia, Barasat, Barrackpore and port-side areas we schedule by volume — call to confirm your pin code.',
+      },
+    ],
+  },
 };
 
 type LinkedServiceItem = CityData['services']['items'][number];

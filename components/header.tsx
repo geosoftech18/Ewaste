@@ -33,6 +33,7 @@ const cities = [
   { name: "Bangalore", slug: "bangalore" },
   { name: "Chennai", slug: "chennai" },
   { name: "Pune", slug: "pune" },
+  { name: "Kolkata", slug: "kolkata" },
   { name: "Andhra Pradesh", slug: "andhra-pradesh" }
 ]
 

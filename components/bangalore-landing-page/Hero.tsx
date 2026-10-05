@@ -15,7 +15,7 @@ export default function Hero() {
         className="object-cover object-center md:hidden"
       />
       <Image
-        src="/bangalore-landing/hero-image.jpg"
+        src="/landing-page/hero-image.jpg"
         alt="Circuit board from electronics prepared for authorised e-waste recycling"
         fill
         sizes="90vw"

@@ -9,6 +9,7 @@ const CITY_ORDER = [
   "chennai",
   "delhi",
   "bangalore",
+  "kolkata",
   "gujarat",
   "andhra-pradesh",
 ] as const

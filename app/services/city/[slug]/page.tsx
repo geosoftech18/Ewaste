@@ -35,6 +35,13 @@ import {
 import { ContentFreshness } from "@/components/seo/content-freshness";
 import { ComparisonGuidesTeaser } from "@/components/seo/comparison-guides-teaser";
 import { AuthorityResources } from "@/components/seo/authority-resources";
+import { HyderabadSeoSections } from "@/components/city/hyderabad-seo-sections";
+import { BangaloreSeoSections } from "@/components/city/bangalore-seo-sections";
+import { MumbaiSeoSections } from "@/components/city/mumbai-seo-sections";
+import { PuneSeoSections } from "@/components/city/pune-seo-sections";
+import { ChennaiSeoSections } from "@/components/city/chennai-seo-sections";
+import { DelhiSeoSections } from "@/components/city/delhi-seo-sections";
+import { KolkataSeoSections } from "@/components/city/kolkata-seo-sections";
 export async function generateStaticParams() {
   return getAllCitySlugs().map((slug) => ({
     slug: slug,
@@ -201,6 +208,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
         heroImage={city.heroImage}
         stats={city.stats}
       />
+     
       <SellProductsCarousel
           title="Turn Large Appliances into Cash"
           subtitle={`Sell old ACs, fridges, washing machines and more in ${city.name} at fixed scrap rates.`}
@@ -220,6 +228,13 @@ export default function CityPage({ params }: { params: { slug: string } }) {
           cityName={city.name}
         />
       <ScrapTypesSection cityName={city.name} />
+      {city.slug === "hyderabad" ? <HyderabadSeoSections /> : null}
+      {city.slug === "bangalore" ? <BangaloreSeoSections /> : null}
+      {city.slug === "mumbai" ? <MumbaiSeoSections /> : null}
+      {city.slug === "pune" ? <PuneSeoSections /> : null}
+      {city.slug === "chennai" ? <ChennaiSeoSections /> : null}
+      {city.slug === "delhi" ? <DelhiSeoSections /> : null}
+      {city.slug === "kolkata" ? <KolkataSeoSections /> : null}
       <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
         <p
           className="mx-auto max-w-3xl text-center text-sm sm:text-base text-muted-foreground leading-relaxed [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-primary/85"

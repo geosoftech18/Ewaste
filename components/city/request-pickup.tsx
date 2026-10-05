@@ -120,7 +120,7 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
                 </div>
                 <div>
                   <h4 className="font-semibold text-foreground">Email</h4>
-                  <p className="text-muted-foreground">siliconplanetrecycling@gmail.com</p>
+                  <p className="text-muted-foreground">info@sprecycling.in</p>
                 </div>
               </div>
 
@@ -233,6 +233,7 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
                     <option value="mumbai">Mumbai</option>
                     <option value="delhi">Delhi</option>
                     <option value="pune">Pune</option>
+                    <option value="kolkata">Kolkata</option>
                     <option value="gujarat">Gujarat</option>
                     <option value="andhra-pradesh">Andhra Pradesh</option>
                   </select>

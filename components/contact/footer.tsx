@@ -98,6 +98,7 @@ export default function Footer() {
                 { label: "Bangalore", slug: "bangalore" },
                 { label: "Chennai", slug: "chennai" },
                 { label: "Pune", slug: "pune" },
+                { label: "Kolkata", slug: "kolkata" },
                 { label: "Andhra Pradesh", slug: "andhra-pradesh" },
                 { label: "Gujarat", slug: "gujarat" },
               ].map((city) => (
