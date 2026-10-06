@@ -228,12 +228,16 @@ export function RequestPickup({ cityName = "Hyderabad" }: RequestPickupProps) {
                   >
                     <option value="">Select city</option>
                     <option value="hyderabad">Hyderabad</option>
+                    <option value="warangal">Warangal</option>
+                    <option value="nizamabad">Nizamabad</option>
                     <option value="bangalore">Bangalore</option>
                     <option value="chennai">Chennai</option>
                     <option value="mumbai">Mumbai</option>
                     <option value="delhi">Delhi</option>
                     <option value="pune">Pune</option>
                     <option value="kolkata">Kolkata</option>
+                    <option value="coimbatore">Coimbatore</option>
+                    <option value="visakhapatnam">Visakhapatnam</option>
                     <option value="gujarat">Gujarat</option>
                     <option value="andhra-pradesh">Andhra Pradesh</option>
                   </select>

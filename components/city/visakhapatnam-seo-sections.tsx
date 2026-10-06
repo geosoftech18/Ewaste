@@ -7,15 +7,19 @@ import {
   MapPinned,
   Shield,
   Building2,
-  FlaskConical,
   Factory,
   Home,
+  GraduationCap,
+  Heart,
   CheckCircle2,
   Phone,
   MessageCircle,
   ArrowRight,
   Scale,
   Recycle,
+  CalendarDays,
+  Landmark,
+  Anchor,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PickupFormModal } from "@/components/pickup-form-modal"
@@ -23,76 +27,136 @@ import { useState } from "react"
 
 const pickupRows = [
   {
-    type: "Urgent (small lot, within GHMC)",
+    type: "Small or urgent lot in Vizag",
     response: "Callback within 1 hour in working hours",
-    pickup: "Same day, subject to slot availability",
+    pickup: "Next available slot after confirmation",
   },
   {
-    type: "Standard office or campus clearance",
+    type: "Standard office, plant or campus clearance",
     response: "Quote within 24 hours",
     pickup: "Within 24–48 hours of confirmation",
   },
   {
-    type: "Bulk decommissioning (100+ assets, server rooms)",
+    type: "Bulk decommissioning (100+ assets, server rooms, plant electronics)",
     response: "Site visit and written quote",
     pickup: "Scheduled date after confirmation",
   },
   {
     type: "On-site data destruction",
     response: "Aligned with your clearance plan",
-    pickup: "Done at your premises, witnessed by your team",
+    pickup: "At your premises, witnessed by your team",
   },
 ]
 
 const corridors = [
   {
     icon: Building2,
-    title: "HITEC City, Madhapur, Gachibowli, Kondapur, Financial District & Nanakramguda",
-    body: "Enterprise IT retirement: laptop refresh cycles, server room closures, and office moves between towers.",
+    title: "Madhurawada, Rushikonda, Kapuluppada and Gambheeram",
+    body: "The city's growing IT and ITES area, with IT SEZ and tech park campuses. Regular laptop and desktop refresh batches, floor closures and office moves.",
     points: [
-      "Laptop and desktop refresh batches with asset-tag reconciliation",
-      "Server, storage array and network rack decommissioning",
-      "Building-access scheduling, including weekend and after-hours pickups for managed buildings and SEZ campuses",
-      "On-site hard drive degaussing and shredding, witnessed by your IT or security team",
-      "Gate-pass lists and vehicle details in advance for security clearance",
-    ],
-  },
-  {
-    icon: FlaskConical,
-    title: "Genome Valley, Pashamylaram, Patancheru, Jeedimetla & Bollaram",
-    body: "Pharma and biotech sites produce lab instruments, analytical equipment, plant PLC panels, control cabinets, UPS and battery banks.",
-    points: [
-      "Lab and analytical equipment at end of life",
-      "Plant electronics and industrial control panels",
-      "Battery waste with separate handling and documentation",
-      "Work with your site’s EHS or QA sign-off format when waste leaves the premises",
+      "Asset-tag reconciliation for refresh lots",
+      "Bulk collection and on-site destruction when required",
+      "Gate-pass lists and vehicle details in advance",
     ],
   },
   {
     icon: Factory,
-    title: "Cherlapally, Mallapur, Nacharam, ECIL & Uppal",
-    body: "Manufacturing units, warehouses and educational institutions generating obsolete boards, industrial scrap and bulk office IT.",
+    title: "Gajuwaka, Autonagar, Pendurthi and the steel plant belt",
+    body: "Engineering, fabrication, steel-related and heavy industry. Plant electronics sit alongside obsolete office IT — scheduled pickups by volume.",
     points: [
-      "Scheduled pickups for recurring volumes",
-      "Monthly or quarterly collection plans",
-      "Bulk office IT and industrial electronics",
+      "Control panels, drives, PLC units and circuit boards",
+      "UPS, battery banks and test equipment",
+      "Monthly or quarterly collection plans available",
+    ],
+  },
+  {
+    icon: Anchor,
+    title: "Port, harbour and shipyard areas",
+    body: "Port operators, shipping agents, logistics and marine businesses. We collect IT assets from these sites. For marine and specialised port electronics, call before booking so we can confirm handling and paperwork.",
+    points: [
+      "Office and logistics IT from port-side businesses",
+      "Confirm marine equipment before pickup",
+      "Documented transport under Form 6",
+    ],
+  },
+  {
+    icon: Factory,
+    title: "Parawada, Atchutapuram, Anakapalli and the pharma / SEZ belt",
+    body: "Pharma, chemicals and SEZ units. Lab and analytical equipment, plant electronics and IT assets, often with EHS sign-off requirements. Scheduled by volume — call to confirm coverage.",
+    points: [
+      "Work to your EHS format when you share it",
+      "Category-wise documentation",
+      "Volume-based scheduling for SEZ sites",
+    ],
+  },
+  {
+    icon: Building2,
+    title: "MVP Colony, Dwaraka Nagar, Siripuram, Maharanipeta, Seethammadhara and Gopalapatnam",
+    body: "Offices, hospitals, banks, schools and housing societies in the core city. We plan vehicle size and timing around tight lanes and limited parking.",
+    points: [
+      "Building-access friendly scheduling",
+      "Witnessed collection for regulated firms",
+      "Per-device documentation on request",
+    ],
+  },
+  {
+    icon: GraduationCap,
+    title: "Andhra University, GITAM and other campuses",
+    body: "Vizag has a large student population. We plan bulk collection around term breaks and exams, list devices by serial number, and give certificates for institutional records.",
+    points: [
+      "Term-break and exam-window planning",
+      "Serial-number lists for institutional records",
+      "Storage media destroyed first when required",
     ],
   },
   {
     icon: Home,
-    title: "Secunderabad, Begumpet, Ameerpet, Kukatpally & Greater Hyderabad",
-    body: "Offices, hospitals, schools and housing societies across GHMC get doorstep pickup. Households can sell old laptops, phones, appliances and metal scrap.",
+    title: "Residential societies across Visakhapatnam",
+    body: "Apartment communities and households get doorstep pickup. Many have lift and timing rules — tell us when you book, and we will plan around them.",
     points: [
-      "Doorstep pickup across Greater Hyderabad",
-      "Residential and small-office clearances",
-      "Published indicative scrap rates on this page",
+      "Society-friendly timing windows",
+      "Household appliances and gadgets",
+      "Indicative scrap rates on this page",
     ],
+  },
+]
+
+const audienceCards = [
+  {
+    icon: Anchor,
+    title: "Port, shipping and marine businesses",
+    text: "Electronics used in harsh conditions, with strict records. We document each category separately and give you a certificate for your files. Call before booking specialised marine equipment.",
+  },
+  {
+    icon: Factory,
+    title: "Industrial and steel-related units",
+    text: "Plant electronics sit alongside normal office IT. We separate and document each category, and work to your EHS format if you share it. Metal scrap that goes with the load is weighed and priced separately.",
+  },
+  {
+    icon: Factory,
+    title: "Pharma, chemical and SEZ units",
+    text: "Lab equipment, analytical instruments and plant electronics. Share your site's decontamination and sign-off requirements and we will work to your format.",
+  },
+  {
+    icon: Landmark,
+    title: "Government departments, PSUs and STPI-type bodies",
+    text: "Government disposal often runs through GeM or departmental condemnation committees, open to CPCB or SPCB-registered recyclers. We supply serial-number lists, weighment slips, and destruction and recycling certificates for audit records.",
+  },
+  {
+    icon: Building2,
+    title: "IT, ITES and startups",
+    text: "Regular volumes, client data policies and frequent audits. We provide recurring collection, a single point of contact and device-level documentation.",
+  },
+  {
+    icon: Heart,
+    title: "Hospitals, colleges and schools",
+    text: "Diagnostic and lab equipment, and IT assets that may hold patient or student data. We destroy storage media first and document it.",
   },
 ]
 
 const destructionMethods = [
   {
-    method: "Hard drive shredding (on-site)",
+    method: "On-site hard drive shredding",
     bestFor: "HDDs, SSDs and tapes that must not be reused",
     result: "Physically destroyed; certificate issued",
   },
@@ -109,22 +173,22 @@ const destructionMethods = [
   {
     method: "Off-site destruction under escort",
     bestFor: "Large volumes with limited space on-site",
-    result: "Sealed, tracked transport; destruction at our facility",
+    result: "Sealed, tracked transport; destruction at the processing facility",
   },
 ]
 
 const processSteps = [
   {
     title: "Share the list",
-    text: "Send asset counts or a spreadsheet by category. A rough count is fine for a quote.",
+    text: "Send asset counts or a spreadsheet by category. A rough count is enough for a quote.",
   },
   {
     title: "Get a written quote",
-    text: "IT assets with resale or scrap value are priced on current rates. Zero-value items are listed clearly — disposal cost is not hidden.",
+    text: "Assets with resale or scrap value are priced on current rates. Zero-value items are listed clearly.",
   },
   {
     title: "Schedule",
-    text: "Pick a date. We confirm vehicle, team and gate-pass details.",
+    text: "Pick a date. We confirm vehicle, team and gate-pass details, including port or plant security passes.",
   },
   {
     title: "Collect and weigh",
@@ -132,7 +196,7 @@ const processSteps = [
   },
   {
     title: "Destroy",
-    text: "Data destruction is done on-site or at our facility, as agreed.",
+    text: "Data destruction is done on-site or at the processing facility, as agreed.",
   },
   {
     title: "Receive documents",
@@ -142,11 +206,11 @@ const processSteps = [
 
 const businessItems = [
   "Laptops, desktops, servers, storage arrays",
-  "Switches, routers, firewalls, printers and copiers",
-  "Monitors, UPS units and batteries",
-  "Lab and analytical equipment",
-  "Industrial PLC panels and circuit boards",
-  "Hard drives, SSDs and backup tapes",
+  "Switches, routers, printers and copiers",
+  "Monitors, projectors, UPS units and batteries",
+  "Lab and test equipment",
+  "PLC panels, drives and control cabinets",
+  "Circuit boards, hard drives, SSDs and backup tapes",
 ]
 
 const householdItems = [
@@ -159,7 +223,7 @@ const householdItems = [
 const comparisonRows = [
   {
     label: "Pollution board authorization",
-    us: "CPCB and TSPCB",
+    us: "CPCB-authorized recycling channel + Form 6 trail",
     them: "Usually none",
   },
   {
@@ -185,26 +249,20 @@ const comparisonRows = [
 ]
 
 /**
- * Hyderabad-only SEO content blocks. Additive — does not replace hero, rates carousels, or metadata.
- * Placeholders (authorization numbers, unverified stats) intentionally omitted.
- * FAQs live in city-data / the existing FAQ section — not duplicated here.
+ * Visakhapatnam-only SEO content. Additive — matches Kolkata/Coimbatore layout.
+ * Does not claim APPCB or GeM registration, or invent Vizag volume stats.
  */
-export function HyderabadSeoSections() {
+export function VisakhapatnamSeoSections() {
   const [pickupOpen, setPickupOpen] = useState(false)
 
   return (
     <div className="bg-background">
-      {/* Trust strip */}
       <section className="border-y border-emerald-100 bg-emerald-50/70">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-center text-xs sm:text-sm font-semibold text-emerald-900">
             <span className="inline-flex items-center gap-1.5">
               <Shield className="h-3.5 w-3.5 text-emerald-600" />
               CPCB Authorized
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Shield className="h-3.5 w-3.5 text-emerald-600" />
-              TSPCB Authorized
             </span>
             <span className="inline-flex items-center gap-1.5">
               <FileCheck2 className="h-3.5 w-3.5 text-emerald-600" />
@@ -214,11 +272,14 @@ export function HyderabadSeoSections() {
               <Recycle className="h-3.5 w-3.5 text-emerald-600" />
               Certificate of destruction
             </span>
+            <span className="inline-flex items-center gap-1.5">
+              <MapPinned className="h-3.5 w-3.5 text-emerald-600" />
+              Madhurawada · Gajuwaka · Autonagar
+            </span>
           </div>
         </div>
       </section>
 
-      {/* Pickup times */}
       <section className="py-14 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="mb-8 max-w-2xl">
@@ -233,8 +294,9 @@ export function HyderabadSeoSections() {
               Working hours: Mon–Sat, 9 AM–6 PM. Call{" "}
               <a href="tel:+919949901238" className="font-medium text-primary hover:underline">
                 +91 99499 01238
-              </a>{" "}
-              for urgent slots within GHMC.
+              </a>
+              . Small lots may be batched for route efficiency from our Telangana base — we will say
+              so when you book.
             </p>
           </div>
 
@@ -250,10 +312,7 @@ export function HyderabadSeoSections() {
                 </thead>
                 <tbody>
                   {pickupRows.map((row, i) => (
-                    <tr
-                      key={row.type}
-                      className={i % 2 === 0 ? "bg-white" : "bg-muted/30"}
-                    >
+                    <tr key={row.type} className={i % 2 === 0 ? "bg-white" : "bg-muted/30"}>
                       <td className="px-4 py-3.5 font-medium text-foreground sm:px-5">
                         {row.type}
                       </td>
@@ -272,43 +331,42 @@ export function HyderabadSeoSections() {
         </div>
       </section>
 
-      {/* Paperwork / Form 6 */}
       <section className="relative overflow-hidden py-14 sm:py-16 bg-gradient-to-br from-slate-950 via-emerald-950 to-slate-900 text-white">
         <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full bg-emerald-500/20 blur-3xl" />
         <div className="container relative mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="mb-10 max-w-3xl">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-100">
               <FileCheck2 className="h-3.5 w-3.5" />
-              Compliance first
+              Authorization & paperwork
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">
-              Why Hyderabad businesses ask for our paperwork first
+              Authorization and paperwork for Visakhapatnam pickups
             </h2>
             <p className="mt-3 text-emerald-50/85 leading-relaxed">
-              Most e-waste problems in Hyderabad are paperwork problems. A pickup happens, the scrap
-              leaves the building, and six months later nobody can prove where it went. That is a
-              risk under the E-Waste (Management) Rules — and a data risk if a drive was in the load.
-              We work the other way round: documentation is part of the job, not an extra.
+              Under the E-Waste (Management) Rules, a company that hands e-waste to an unauthorized
+              party stays exposed. Visakhapatnam sits under the Andhra Pradesh Pollution Control
+              Board (APPCB). We make documentation the core of the job — paperwork and data
+              destruction are how we compete with local recyclers.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: "Authorization",
-                text: "CPCB and TSPCB e-waste authorization. Ask for copies before you book, and verify recyclers on the CPCB website.",
+                title: "Central authorization",
+                text: "SP Recycling is authorized by the Central Pollution Control Board as an e-waste recycler. Ask for copies before you book.",
               },
               {
-                title: "Form 6 manifest",
-                text: "Every consignment moves under a Form 6 manifest so the load can be traced from your gate to our facility.",
+                title: "How Vizag waste moves",
+                text: "Visakhapatnam consignments move under a Form 6 manifest to our CPCB-authorized processing facility in Telangana (Thumkunta, Bibinagar). Your manifest names the destination.",
               },
               {
-                title: "Facility",
-                text: "Processing at our authorized facility in Thumkunta, Bibinagar, Telangana. Facility visits can be arranged for corporate clients and auditors.",
+                title: "Transport manifest",
+                text: "Every load can be traced from your Vizag gate to final processing — Form 6 is part of every pickup.",
               },
               {
-                title: "What you receive",
-                text: "Form 6 manifest, weighed receipt, and a certificate of destruction or recycling with every pickup.",
+                title: "Check us",
+                text: "Verify recyclers on the CPCB and APPCB websites before you hand over assets. We encourage it.",
               },
             ].map((card) => (
               <div
@@ -348,7 +406,7 @@ export function HyderabadSeoSections() {
               className="border-white/30 bg-transparent text-white hover:bg-white/10 hover:text-white"
             >
               <a
-                href="https://wa.me/919949901238?text=Hi%20SP%20Recycling%2C%20I%20need%20IT%20scrap%20pickup%20in%20Hyderabad"
+                href="https://wa.me/919949901238?text=Hi%20SP%20Recycling%2C%20I%20need%20IT%20asset%20disposal%20in%20Visakhapatnam"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -360,7 +418,6 @@ export function HyderabadSeoSections() {
         </div>
       </section>
 
-      {/* Corridors */}
       <section className="py-14 sm:py-16 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="mb-10 max-w-3xl">
@@ -369,11 +426,22 @@ export function HyderabadSeoSections() {
               Local coverage
             </div>
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-              Serving Hyderabad&apos;s IT corridors and industrial belts
+              Serving Vizag&apos;s IT areas, port and industrial belts
             </h2>
             <p className="mt-2 text-muted-foreground">
-              Hyderabad&apos;s e-waste comes from very different places — each needs a different kind of
-              pickup.
+              Madhurawada IT, Gajuwaka industry, port logistics, pharma SEZs and core-city campuses —
+              planned by area. Also see our{" "}
+              <Link
+                href="/services/city/andhra-pradesh"
+                className="font-medium text-primary hover:underline"
+              >
+                Andhra Pradesh
+              </Link>{" "}
+              page for statewide coverage, and{" "}
+              <Link href="/services/city/hyderabad" className="font-medium text-primary hover:underline">
+                Hyderabad
+              </Link>{" "}
+              for our Telangana processing base.
             </p>
           </div>
 
@@ -407,8 +475,38 @@ export function HyderabadSeoSections() {
         </div>
       </section>
 
-      {/* On-site data destruction */}
       <section className="py-14 sm:py-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+          <div className="mb-8 max-w-3xl">
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+              Built for how Vizag organizations actually work
+            </h2>
+            <p className="mt-2 text-muted-foreground">
+              Port, steel, pharma, IT and campuses — what an authorized recycler can credibly deliver
+              when serving Visakhapatnam from Telangana.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {audienceCards.map((card) => {
+              const Icon = card.icon
+              return (
+                <div
+                  key={card.title}
+                  className="rounded-2xl border border-border bg-background p-5 shadow-sm"
+                >
+                  <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-50 text-emerald-700">
+                    <Icon className="h-4 w-4" />
+                  </div>
+                  <h3 className="font-semibold text-foreground mb-2">{card.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{card.text}</p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 sm:py-16 bg-emerald-50/40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
@@ -417,12 +515,12 @@ export function HyderabadSeoSections() {
                 ITAD & data security
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-                On-site data destruction for enterprises
+                On-site data destruction in Visakhapatnam
               </h2>
               <p className="mt-2 text-muted-foreground leading-relaxed">
                 If a drive leaves your building intact, you are trusting someone else with your data.
-                We offer destruction at your premises so drives never travel when that is not
-                acceptable.
+                For hospitals, IT firms under client NDAs, port and defence-linked contractors and
+                government bodies, that is often not acceptable.
               </p>
             </div>
             <Link
@@ -457,22 +555,21 @@ export function HyderabadSeoSections() {
             </div>
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
-            You receive a certificate of destruction listing each serial number, the method used, the
-            date, and who witnessed it. Photos or video of the process are available on request for
-            audits.
+            You receive a certificate of destruction listing each serial number, the method, the date,
+            and who witnessed it. Photos or video of the process are available on request.
           </p>
         </div>
       </section>
 
-      {/* Corporate process */}
-      <section className="py-14 sm:py-16 bg-emerald-50/50">
+      <section className="py-14 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="mb-10 max-w-2xl">
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-              How a corporate pickup works
+              How a corporate or plant pickup works
             </h2>
             <p className="mt-2 text-muted-foreground">
-              A clear sequence from asset list to compliance documents.
+              From asset list to compliance documents — planned around Vizag plant, port and campus
+              access, and the cyclone season.
             </p>
           </div>
           <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -489,18 +586,29 @@ export function HyderabadSeoSections() {
               </li>
             ))}
           </ol>
+
+          <div className="mt-6 flex gap-3 rounded-2xl border border-sky-200 bg-sky-50/80 p-4 sm:p-5">
+            <CalendarDays className="h-5 w-5 shrink-0 text-sky-800 mt-0.5" />
+            <p className="text-sm text-sky-950 leading-relaxed">
+              <span className="font-semibold">Cyclone and monsoon note:</span> Vizag&apos;s coast is
+              exposed to cyclones and heavy rain, mostly between October and December. We plan covered
+              transport, avoid dates with weather alerts, and tell you early if a pickup needs to
+              move.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* What we collect */}
-      <section className="py-14 sm:py-16">
+      <section className="py-14 sm:py-16 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <h2 className="mb-8 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            What we collect in Hyderabad
+            What we collect in Visakhapatnam
           </h2>
           <div className="grid gap-5 md:grid-cols-2">
             <div className="rounded-2xl border border-border bg-background p-6">
-              <h3 className="mb-4 text-lg font-semibold text-foreground">For businesses</h3>
+              <h3 className="mb-4 text-lg font-semibold text-foreground">
+                For businesses and institutions
+              </h3>
               <ul className="space-y-2.5">
                 {businessItems.map((item) => (
                   <li key={item} className="flex gap-2 text-sm text-muted-foreground">
@@ -521,16 +629,15 @@ export function HyderabadSeoSections() {
                 ))}
               </ul>
               <p className="mt-5 text-xs text-muted-foreground">
-                Call before booking if you have damaged lithium batteries or unusual equipment — we
-                will confirm whether it can be collected.
+                Call before booking if you have damaged or swollen lithium batteries, large battery
+                packs, marine electronics, or equipment from regulated or restricted areas.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Authorized vs dealer */}
-      <section className="py-14 sm:py-16 bg-muted/30">
+      <section className="py-14 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -579,66 +686,39 @@ export function HyderabadSeoSections() {
               </table>
             </div>
           </div>
-          <p className="mt-4 text-sm text-muted-foreground max-w-3xl">
-            If your company is a bulk consumer of electronics, the Rules expect e-waste to go to an
-            authorized recycler. The cheapest quote is not the cheapest outcome if it leaves you
-            without records.
-          </p>
         </div>
       </section>
 
-      {/* ITAD & EPR */}
-      <section className="py-14 sm:py-16">
+      <section className="py-14 sm:py-16 bg-muted/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-          <h2 className="mb-6 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
-            Corporate clients, ITAD and EPR
+          <h2 className="mb-4 text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            EPR and compliance support
           </h2>
-          <div className="grid gap-5 md:grid-cols-2">
-            <div className="rounded-2xl border border-border bg-gradient-to-br from-white to-emerald-50/40 p-6">
-              <h3 className="text-lg font-semibold text-foreground">Enterprises & IT companies</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                End-to-end IT asset disposition: inventory reconciliation, secure collection, data
-                destruction, resale of working equipment where it makes sense, and certified recycling
-                of the rest.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-3 text-sm font-semibold">
-                <Link href="/services/it-telecom" className="text-primary hover:underline">
-                  IT & telecom →
-                </Link>
-                <Link
-                  href="/services/electronic-waste-recycle"
-                  className="text-primary hover:underline"
-                >
-                  E-waste recycling →
-                </Link>
-                <Link href="/services/city/warangal" className="text-primary hover:underline">
-                  Warangal city page →
-                </Link>
-                <Link href="/services/city/nizamabad" className="text-primary hover:underline">
-                  Nizamabad city page →
-                </Link>
-              </div>
-            </div>
-            <div className="rounded-2xl border border-border bg-gradient-to-br from-white to-teal-50/40 p-6">
-              <h3 className="text-lg font-semibold text-foreground">
-                Brands, producers & importers
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                EPR support under the E-Waste (Management) Rules, 2022 — documentation,
-                channelization and reporting on the CPCB EPR portal.
-              </p>
-              <Link
-                href="/services/EPR-Compliance-Solutions"
-                className="mt-4 inline-flex text-sm font-semibold text-primary hover:underline"
-              >
-                EPR compliance services →
-              </Link>
-            </div>
+          <p className="max-w-3xl text-muted-foreground leading-relaxed mb-4">
+            Brands, importers and producers selling electronics in India have obligations under the
+            E-Waste (Management) Rules, 2022, including registration and reporting on the CPCB EPR
+            portal. We support documentation, channelization and reporting.
+          </p>
+          <div className="flex flex-wrap gap-4 text-sm font-semibold">
+            <Link href="/services/EPR-Compliance-Solutions" className="text-primary hover:underline">
+              EPR compliance services →
+            </Link>
+            <Link href="/services/it-telecom" className="text-primary hover:underline">
+              IT & telecom →
+            </Link>
+            <Link href="/services/electronic-waste-recycle" className="text-primary hover:underline">
+              E-waste recycling →
+            </Link>
+            <Link href="/services/city/andhra-pradesh" className="text-primary hover:underline">
+              Andhra Pradesh page →
+            </Link>
+            <Link href="/services/city/hyderabad" className="text-primary hover:underline">
+              Hyderabad page →
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Closing CTA + official links */}
       <section className="py-14 sm:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
           <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-600 to-teal-700 p-8 sm:p-10 text-white shadow-lg">
@@ -646,7 +726,7 @@ export function HyderabadSeoSections() {
               Book a pickup or request a bulk quote
             </h2>
             <p className="mt-2 max-w-2xl text-emerald-50/90">
-              Send us your asset list or call us. For urgent pickups in Hyderabad, call before noon.
+              Send us your asset list or call us. For urgent pickups in Vizag, call before noon.
             </p>
             <dl className="mt-6 grid gap-3 text-sm sm:grid-cols-2 max-w-2xl">
               <div>
@@ -662,8 +742,8 @@ export function HyderabadSeoSections() {
                 <dd className="font-semibold">Mon–Sat, 9 AM–6 PM</dd>
               </div>
               <div>
-                <dt className="text-emerald-100/80">Address</dt>
-                <dd className="font-semibold">Thumkunta, Bibinagar, Telangana 500078</dd>
+                <dt className="text-emerald-100/80">Serving Visakhapatnam from</dt>
+                <dd className="font-semibold">Authorized facility, Telangana (Form 6 tracked)</dd>
               </div>
             </dl>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -680,7 +760,7 @@ export function HyderabadSeoSections() {
                 variant="outline"
                 className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
               >
-                <Link href="/contact?city=hyderabad">Get bulk quote</Link>
+                <Link href="/contact?city=visakhapatnam">Get bulk quote</Link>
               </Button>
             </div>
           </div>
@@ -700,6 +780,16 @@ export function HyderabadSeoSections() {
               </li>
               <li>
                 <a
+                  href="https://cpcb.nic.in/rules-3/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  CPCB – Rules
+                </a>
+              </li>
+              <li>
+                <a
                   href="https://moef.gov.in/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -710,12 +800,12 @@ export function HyderabadSeoSections() {
               </li>
               <li>
                 <a
-                  href="https://tspcb.cgg.gov.in/"
+                  href="https://pcb.ap.gov.in/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  TSPCB
+                  APPCB
                 </a>
               </li>
             </ul>

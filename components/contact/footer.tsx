@@ -93,12 +93,16 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {[
                 { label: "Hyderabad", slug: "hyderabad" },
+                { label: "Warangal", slug: "warangal" },
+                { label: "Nizamabad", slug: "nizamabad" },
                 { label: "Delhi", slug: "delhi" },
                 { label: "Mumbai", slug: "mumbai" },
                 { label: "Bangalore", slug: "bangalore" },
                 { label: "Chennai", slug: "chennai" },
                 { label: "Pune", slug: "pune" },
                 { label: "Kolkata", slug: "kolkata" },
+                { label: "Coimbatore", slug: "coimbatore" },
+                { label: "Visakhapatnam", slug: "visakhapatnam" },
                 { label: "Andhra Pradesh", slug: "andhra-pradesh" },
                 { label: "Gujarat", slug: "gujarat" },
               ].map((city) => (

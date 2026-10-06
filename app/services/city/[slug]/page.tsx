@@ -42,6 +42,10 @@ import { PuneSeoSections } from "@/components/city/pune-seo-sections";
 import { ChennaiSeoSections } from "@/components/city/chennai-seo-sections";
 import { DelhiSeoSections } from "@/components/city/delhi-seo-sections";
 import { KolkataSeoSections } from "@/components/city/kolkata-seo-sections";
+import { CoimbatoreSeoSections } from "@/components/city/coimbatore-seo-sections";
+import { VisakhapatnamSeoSections } from "@/components/city/visakhapatnam-seo-sections";
+import { WarangalSeoSections } from "@/components/city/warangal-seo-sections";
+import { NizamabadSeoSections } from "@/components/city/nizamabad-seo-sections";
 export async function generateStaticParams() {
   return getAllCitySlugs().map((slug) => ({
     slug: slug,
@@ -235,6 +239,10 @@ export default function CityPage({ params }: { params: { slug: string } }) {
       {city.slug === "chennai" ? <ChennaiSeoSections /> : null}
       {city.slug === "delhi" ? <DelhiSeoSections /> : null}
       {city.slug === "kolkata" ? <KolkataSeoSections /> : null}
+      {city.slug === "coimbatore" ? <CoimbatoreSeoSections /> : null}
+      {city.slug === "visakhapatnam" ? <VisakhapatnamSeoSections /> : null}
+      {city.slug === "warangal" ? <WarangalSeoSections /> : null}
+      {city.slug === "nizamabad" ? <NizamabadSeoSections /> : null}
       <section className="px-4 sm:px-6 lg:px-8 pb-4 mt-2">
         <p
           className="mx-auto max-w-3xl text-center text-sm sm:text-base text-muted-foreground leading-relaxed [&_a]:font-medium [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-4 [&_a:hover]:text-primary/85"

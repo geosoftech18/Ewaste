@@ -139,7 +139,7 @@ export default function ContactForm() {
     }, 3000)
   }
 
-  const cities = ["Hyderabad", "Mumbai", "Pune", "Chennai", "Bangalore", "Delhi", "Kolkata", "Other"]
+  const cities = ["Hyderabad", "Warangal", "Nizamabad", "Mumbai", "Pune", "Chennai", "Bangalore", "Delhi", "Kolkata", "Coimbatore", "Visakhapatnam", "Other"]
   const serviceTypes = ["Pickup Request", "Bulk Disposal", "Corporate Partnership", "General Inquiry"]
 
   return (

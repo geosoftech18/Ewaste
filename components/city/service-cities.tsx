@@ -16,6 +16,10 @@ const CITY_CARD_IMAGES: Record<string, string> = {
   "andhra-pradesh": "/city/e-waste-recycling-facility-with-circuit-boards-and.jpg",
   pune: "/city/pune-city-landscape.jpg",
   kolkata: "/city/west-bengal-landscape.jpg",
+  coimbatore: "/city/gujarat-industrial-area.jpg",
+  visakhapatnam: "/city/chennai-coastal-city.jpg",
+  warangal: "/city/hyderabad-charminar.jpg",
+  nizamabad: "/city/hyderabad-charminar.jpg",
 }
 
 const cities = getAllCities().map((city) => ({

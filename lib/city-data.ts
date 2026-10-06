@@ -773,7 +773,7 @@ export const cityData: Record<string, CityData> = {
     name: 'Andhra Pradesh',
     title: 'E-Waste Recycling Services in Andhra Pradesh — Sell E-Waste Online with Authorized Recycler',
     heroTitle: 'E-Waste Recycling Services in Andhra Pradesh — Sell E-Waste Online with Authorized Recycler',
-    description: 'Professional e-waste recycling services across Andhra Pradesh with certified facilities, secure data destruction, and comprehensive coverage serving Visakhapatnam, Vijayawada, and other major cities.',
+    description: 'Professional e-waste recycling services across Andhra Pradesh with certified facilities, secure data destruction, and coverage across major cities including Vijayawada, Guntur, Tirupati and Visakhapatnam.',
     heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
     population: '49.4M',
     wasteCollection: 850,
@@ -781,32 +781,37 @@ export const cityData: Record<string, CityData> = {
     establishedYear: '2018',
     metaTitle: 'E-Waste Recycling Services in Andhra Pradesh — Sell E-Waste Online with Authorized Recycler',
     metaDescription:
-      'Certified e-waste recycling in Andhra Pradesh — Visakhapatnam, Vijayawada & more. Sell old electronics with free pickup, data destruction, and compliance support.',
+      'Certified e-waste recycling across Andhra Pradesh — Vijayawada, Guntur, Tirupati & more. Sell old electronics with free pickup, data destruction, and Form 6 documentation.',
     keywords: [
       'e-waste recycling in Andhra Pradesh',
-      'scrap buyers in Visakhapatnam',
-      'sell old electronics in Vijayawada',
+      'scrap buyers in Vijayawada',
+      'sell old electronics in Guntur',
       'e-waste pickup Andhra Pradesh',
       'authorized e-waste recycler Andhra Pradesh',
+      'e-waste recycling Tirupati',
     ],
-    lastReviewed: '2026-09-24',
+    lastReviewed: '2026-10-06',
     facilities: [
-      'Regional Processing Hub',
-      'Marine Electronics Facility',
+      'CPCB-authorized processing (Telangana)',
+      'Form 6 tracked transport',
       'IT Equipment Center',
       'Healthcare Electronics Unit'
     ],
     highlights: [
-      'Coastal city expertise',
-      'IT sector focus',
+      'Statewide Andhra Pradesh coverage',
+      'IT and campus pickups',
       'Healthcare partnerships',
-      'Regional coverage'
+      'Form 6 on every pickup'
     ],
     stats: {
-      totalPickups: '4,200+',
-      totalWeight: '850+ tons',
-      satisfactionRate: '97%'
+      totalPickups: 'On request',
+      totalWeight: 'Documented',
+      satisfactionRate: 'Form 6'
     },
+    servicesBlurb:
+      'SP Recycling serves businesses and households across Andhra Pradesh with doorstep pickup, certified data destruction and audit-ready paperwork. Consignments move under Form 6 to our CPCB-authorized facility in Telangana.',
+    servicesBlurbHtml:
+      'SP Recycling serves businesses and households across Andhra Pradesh with doorstep pickup, certified data destruction and audit-ready paperwork. Consignments move under Form 6 to our CPCB-authorized facility in Telangana. For Visakhapatnam-specific ITAD, port and industrial coverage, see our <a href="/services/city/visakhapatnam">Visakhapatnam e-waste recycling</a> page.',
     services: {
       title: 'Our Services in Andhra Pradesh',
       items: [
@@ -821,9 +826,9 @@ export const cityData: Record<string, CityData> = {
           icon: 'Heart'
         },
         {
-          name: 'Marine Electronics',
-          description: 'Port and marine equipment recycling services',
-          icon: 'Ship'
+          name: 'Industrial Electronics',
+          description: 'Plant electronics, control panels and UPS from factories',
+          icon: 'Factory'
         },
         {
           name: 'Educational Services',
@@ -834,17 +839,26 @@ export const cityData: Record<string, CityData> = {
     },
     faqs: [
       {
-        question: 'Do you serve Visakhapatnam port area?',
-        answer: 'Yes, we provide specialized services for port cities including marine electronics handling.'
+        question: 'What cities in Andhra Pradesh do you cover?',
+        answer:
+          'We cover major cities including Vijayawada, Guntur, Tirupati and other urban centres. For Visakhapatnam (Vizag) pickups — including Madhurawada, Gajuwaka and port-area IT — see our dedicated Visakhapatnam e-waste recycling page.',
+        answerHtml:
+          'We cover major cities including Vijayawada, Guntur, Tirupati and other urban centres. For Visakhapatnam (Vizag) pickups — including Madhurawada, Gajuwaka and port-area IT — see our dedicated <a href="/services/city/visakhapatnam">Visakhapatnam e-waste recycling</a> page.',
       },
       {
-        question: 'What cities in Andhra Pradesh do you cover?',
-        answer: 'We cover major cities including Visakhapatnam, Vijayawada, Guntur, Tirupati, and other urban centers.'
+        question: 'Where does Andhra Pradesh e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility.',
       },
       {
         question: 'Do you handle healthcare electronics?',
-        answer: 'Yes, we specialize in medical equipment disposal with proper compliance and documentation.'
-      }
+        answer: 'Yes, we handle medical and hospital electronics with certified data destruction and compliance documentation.',
+      },
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler for Andhra Pradesh pickups?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. Andhra Pradesh consignments move under a Form 6 manifest to our authorized facility in Telangana. We share authorization copies before you book.',
+      },
     ]
   },
   'pune': {
@@ -1080,6 +1094,532 @@ export const cityData: Record<string, CityData> = {
         question: 'Which areas of Kolkata do you cover?',
         answer:
           'Kolkata and Howrah, including Salt Lake Sector V, New Town, Rajarhat, Park Street, BBD Bagh and Ballygunge. For Dankuni, Uluberia, Barasat, Barrackpore and port-side areas we schedule by volume — call to confirm your pin code.',
+      },
+    ],
+  },
+  'coimbatore': {
+    slug: 'coimbatore',
+    name: 'Coimbatore',
+    title: 'E-Waste Recycling and IT Asset Disposal in Coimbatore',
+    heroTitle: 'E-Waste Recycling and IT Asset Disposal in Coimbatore',
+    description:
+      "Coimbatore's pump, motor and engineering units, colleges, hospitals and IT companies all retire electronics, and each one needs proof of how it was disposed of. SP Recycling collects e-waste across Coimbatore and the surrounding industrial belts, destroys the data, and gives you the documents your auditor, management or trustees will ask for. Every pickup comes with a weighed receipt, a Form 6 transport manifest, and a certificate of destruction or recycling.",
+    metaTitle: 'E-Waste Recycling in Coimbatore | Certified ITAD & IT Scrap Pickup',
+    metaDescription:
+      'Authorized e-waste recycling and IT asset disposal in Coimbatore. Pickup from Saravanampatti, Kurichi, Peelamedu and Sulur. Data destruction certificate included.',
+    keywords: [
+      'e-waste recycling coimbatore',
+      'IT asset disposal coimbatore',
+      'e-waste pickup coimbatore',
+      'industrial e-waste recycling coimbatore',
+      'authorized e-waste recycler coimbatore',
+      'IT scrap buyers coimbatore',
+      'sell old laptops coimbatore',
+      'hard drive shredding coimbatore',
+      'college e-waste coimbatore',
+      'electronic scrap buyers coimbatore',
+      'e-waste recycling kovai',
+    ],
+    lastReviewed: '2026-10-06',
+    heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
+    population: '2.1M',
+    wasteCollection: 0,
+    coverage: 'Coimbatore city & industrial belts',
+    establishedYear: '2018',
+    facilities: [
+      'CPCB-authorized processing (Telangana)',
+      'Form 6 tracked transport',
+      'On-site data destruction (corporate)',
+      'Industrial & MSME documentation support',
+    ],
+    highlights: [
+      'Saravanampatti, Kurichi & Peelamedu coverage',
+      'Industrial electronics & MSME pickups',
+      'Form 6 on every pickup',
+      'Serving Coimbatore from Telangana base',
+    ],
+    stats: {
+      totalPickups: 'On request',
+      totalWeight: 'Documented',
+      satisfactionRate: 'Form 6',
+    },
+    servicesBlurb:
+      'SP Recycling serves Coimbatore engineering units, MSMEs, colleges, hospitals and IT offices with doorstep pickup, certified data destruction and audit-ready paperwork. Consignments move under Form 6 to our CPCB-authorized facility in Telangana.',
+    services: {
+      title: 'Our Services in Coimbatore',
+      items: [
+        {
+          name: 'Industrial Electronics Recycling',
+          description: 'Control panels, drives, PLC units and plant electronics from Kurichi and SIDCO belts',
+          icon: 'Factory',
+        },
+        {
+          name: 'IT & ITES Recycling',
+          description: 'Laptop refresh batches and office IT from Saravanampatti and Peelamedu',
+          icon: 'Cpu',
+        },
+        {
+          name: 'Campus & Hospital Clearance',
+          description: 'Serial-listed collection with media destruction for institutions',
+          icon: 'GraduationCap',
+        },
+        {
+          name: 'Data Destruction',
+          description: 'On-site or escorted off-site destruction with serial-number certificates',
+          icon: 'Shield',
+        },
+      ],
+    },
+    faqs: [
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler in Coimbatore?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. Coimbatore consignments move under a Form 6 manifest to our authorized processing facility in Telangana. We share authorization copies before you book, and you can verify recyclers on the CPCB and TNPCB websites.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Coimbatore pickup comes with one.',
+      },
+      {
+        question: 'Where does my Coimbatore e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility, so you always know where the waste went.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office in Coimbatore?',
+        answer:
+          'Yes, for corporate and institutional sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'Do you collect industrial electronics from factories and workshops?',
+        answer:
+          'Yes. We collect industrial electronics such as control panels, motor drives, PLC units, circuit boards, UPS and battery banks. Motors, pumps and other metal scrap are priced separately. Call us before booking if you have large volumes.',
+      },
+      {
+        question: 'Do you take small lots from workshops and small offices?',
+        answer:
+          'Yes. Small lots are accepted; they may be batched for route efficiency from our Telangana base. We will say so when you book, and you still get a receipt and certificate.',
+      },
+      {
+        question: 'How fast can you pick up IT scrap in Coimbatore?',
+        answer:
+          'Standard pickups are scheduled within 24–48 hours after confirmation. Large decommissioning projects are planned with a site visit and a fixed date. Small lots may be batched for route efficiency.',
+      },
+      {
+        question: 'Do you serve colleges and hospitals?',
+        answer:
+          'Yes. We plan bulk pickups around term breaks and exams, list devices by serial number, destroy storage media first, and give you certificates for institutional records.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'Which areas do you cover?',
+        answer:
+          'Coimbatore city and its industrial belts, including Saravanampatti, Peelamedu, Kurichi, Singanallur, Ganapathy, Sulur, RS Puram and Race Course. For Tiruppur, Erode, Salem, Pollachi and Mettupalayam we schedule by volume — call to confirm your pin code and minimum quantity.',
+      },
+      {
+        question: 'Can brands and manufacturers get EPR support?',
+        answer:
+          'Yes. We support documentation, channelization and reporting under the E-Waste (Management) Rules, 2022. See our EPR compliance services page for details.',
+      },
+    ],
+  },
+  'visakhapatnam': {
+    slug: 'visakhapatnam',
+    name: 'Visakhapatnam',
+    title: 'E-Waste Recycling and IT Asset Disposal in Visakhapatnam',
+    heroTitle: 'E-Waste Recycling and IT Asset Disposal in Visakhapatnam',
+    description:
+      "Visakhapatnam's port, steel and shipbuilding businesses, pharma units, IT companies, universities and hospitals all retire electronics, and each one needs proof of how it was disposed of. SP Recycling collects e-waste across Vizag and its industrial belts, destroys the data, and gives you the documents your auditor, department or management will ask for. Every pickup comes with a weighed receipt, a Form 6 transport manifest, and a certificate of destruction or recycling.",
+    metaTitle: 'E-Waste Recycling in Visakhapatnam | Certified ITAD & Pickup',
+    metaDescription:
+      'Authorized e-waste recycling and IT asset disposal in Visakhapatnam. Pickup from Madhurawada, Gajuwaka, Autonagar and the port. Data destruction certificate included.',
+    keywords: [
+      'e-waste recycling visakhapatnam',
+      'e-waste recycling vizag',
+      'IT asset disposal visakhapatnam',
+      'e-waste pickup vizag',
+      'corporate e-waste disposal visakhapatnam',
+      'authorized e-waste recycler vizag',
+      'sell old laptops vizag',
+      'hard drive shredding visakhapatnam',
+      'industrial electronics recycling vizag',
+      'e-waste disposal for government departments vizag',
+    ],
+    lastReviewed: '2026-10-06',
+    heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
+    population: '2.0M',
+    wasteCollection: 0,
+    coverage: 'Visakhapatnam city & industrial belts',
+    establishedYear: '2018',
+    facilities: [
+      'CPCB-authorized processing (Telangana)',
+      'Form 6 tracked transport',
+      'On-site data destruction (corporate)',
+      'Industrial & institutional documentation',
+    ],
+    highlights: [
+      'Madhurawada, Gajuwaka & Autonagar coverage',
+      'Industrial and campus pickups',
+      'Form 6 on every pickup',
+      'Serving Vizag from Telangana base',
+    ],
+    stats: {
+      totalPickups: 'On request',
+      totalWeight: 'Documented',
+      satisfactionRate: 'Form 6',
+    },
+    servicesBlurb:
+      'SP Recycling serves Visakhapatnam IT parks, industrial units, campuses, hospitals and offices with doorstep pickup, certified data destruction and audit-ready paperwork. Consignments move under Form 6 to our CPCB-authorized facility in Telangana.',
+    services: {
+      title: 'Our Services in Visakhapatnam',
+      items: [
+        {
+          name: 'IT & ITES Recycling',
+          description: 'Laptop refresh batches and office IT from Madhurawada and Rushikonda',
+          icon: 'Cpu',
+        },
+        {
+          name: 'Industrial Electronics',
+          description: 'Control panels, drives and plant electronics from Gajuwaka and Autonagar',
+          icon: 'Factory',
+        },
+        {
+          name: 'Campus & Hospital Clearance',
+          description: 'Serial-listed collection with media destruction for institutions',
+          icon: 'GraduationCap',
+        },
+        {
+          name: 'Data Destruction',
+          description: 'On-site or escorted off-site destruction with serial-number certificates',
+          icon: 'Shield',
+        },
+      ],
+    },
+    faqs: [
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler in Visakhapatnam?',
+        answer:
+          'We are authorized by the Central Pollution Control Board as an e-waste recycler. Visakhapatnam consignments move under a Form 6 manifest to our authorized processing facility in Telangana. We share authorization copies before you book, and you can verify recyclers on the CPCB and APPCB websites.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Vizag pickup comes with one.',
+      },
+      {
+        question: 'Where does my Vizag e-waste go after pickup?',
+        answer:
+          'Loads move under a Form 6 manifest to our CPCB-authorized processing facility at Thumkunta, Bibinagar, Telangana. Your manifest and recycling certificate name the facility, so you always know where the waste went.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office in Visakhapatnam?',
+        answer:
+          'Yes, for corporate and institutional sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'Do you work with government departments and GeM tenders?',
+        answer:
+          'Government disposal often requires a recycler registered with CPCB or a State Pollution Control Board, and many departments use GeM. We supply serial-number lists, weighment slips, and destruction and recycling certificates that departments can use for audit and condemnation records. Ask us about current GeM / tender readiness when you enquire.',
+      },
+      {
+        question: 'Do you collect port and marine electronics?',
+        answer:
+          'We collect IT assets from port, harbour and shipyard businesses. For marine and specialised port electronics, call before booking so we can confirm handling and paperwork.',
+      },
+      {
+        question: 'Do you collect industrial electronics from factories and plants?',
+        answer:
+          'Yes. We collect industrial electronics such as control panels, drives, PLC units, circuit boards, UPS and battery banks. Metal scrap is priced separately. Call us before booking if you have large volumes.',
+      },
+      {
+        question: 'Can pickups be affected by cyclones or heavy rain?',
+        answer:
+          'Yes, occasionally. Vizag\'s coast is exposed to cyclones and heavy rain, mostly between October and December. We plan around weather alerts and tell you early if a date needs to move.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'Is there a minimum quantity for pickup in Vizag?',
+        answer:
+          'Small lots are accepted; they may be batched for route efficiency from our Telangana base. We will say so when you book, and you still get a receipt and certificate.',
+      },
+      {
+        question: 'Which areas do you cover?',
+        answer:
+          'Visakhapatnam city and its industrial belts, including Madhurawada, Rushikonda, Gajuwaka, Autonagar, Pendurthi, MVP Colony and Dwaraka Nagar. For Parawada, Atchutapuram, Anakapalli, Vizianagaram and Srikakulam we schedule by volume — call to confirm your pin code and minimum quantity.',
+      },
+      {
+        question: 'Can brands and manufacturers get EPR support?',
+        answer:
+          'Yes. We support documentation, channelization and reporting under the E-Waste (Management) Rules, 2022. See our EPR compliance services page for details.',
+      },
+    ],
+  },
+  'warangal': {
+    slug: 'warangal',
+    name: 'Warangal',
+    title: 'E-Waste Recycling and IT Scrap Pickup in Warangal',
+    heroTitle: 'E-Waste Recycling and IT Scrap Pickup in Warangal',
+    description:
+      "Warangal's colleges, hospitals, government offices, IT centres and factories all retire computers and electronics, and each needs to show where they went. SP Recycling is a CPCB and TSPCB authorized e-waste recycler based in Telangana. We collect from Warangal, Hanamkonda and Kazipet, destroy the data, and give you the paperwork your auditor, management or department will ask for. Every pickup comes with a weighed receipt, a Form 6 transport manifest, and a certificate of destruction or recycling.",
+    metaTitle: 'E-Waste Recycling in Warangal | TSPCB Authorized Pickup',
+    metaDescription:
+      'Authorized e-waste recycling in Warangal, Hanamkonda and Kazipet. Doorstep IT scrap pickup, data destruction certificate and Form 6 manifest. Get a quote.',
+    keywords: [
+      'e-waste recycling warangal',
+      'e-waste pickup warangal',
+      'IT scrap buyers warangal',
+      'sell old laptops warangal',
+      'computer scrap buyers hanamkonda',
+      'authorized e-waste recycler warangal',
+      'college e-waste disposal warangal',
+      'hospital e-waste warangal',
+      'hard drive destruction warangal',
+      'e-waste pickup kazipet',
+    ],
+    lastReviewed: '2026-10-06',
+    heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
+    population: '0.8M',
+    wasteCollection: 0,
+    coverage: 'Warangal, Hanamkonda & Kazipet',
+    establishedYear: '2018',
+    facilities: [
+      'CPCB & TSPCB authorized processing (Bibinagar)',
+      'Form 6 tracked transport within Telangana',
+      'On-site data destruction (corporate)',
+      'Institutional documentation support',
+    ],
+    highlights: [
+      'Same-state TSPCB authorization',
+      'Short route from Bibinagar facility',
+      'Colleges, hospitals & Madikonda IT',
+      'Form 6 on every pickup',
+    ],
+    stats: {
+      totalPickups: 'On request',
+      totalWeight: 'Documented',
+      satisfactionRate: 'Form 6',
+    },
+    servicesBlurb:
+      'SP Recycling serves Warangal, Hanamkonda and Kazipet colleges, hospitals, government offices, IT centres and factories with doorstep pickup, certified data destruction and audit-ready paperwork. Loads stay in Telangana and move under Form 6 to our CPCB and TSPCB authorized facility in Bibinagar.',
+    services: {
+      title: 'Our Services in Warangal',
+      items: [
+        {
+          name: 'Campus & College Clearance',
+          description: 'Serial-listed lab and office IT clearances around term breaks',
+          icon: 'GraduationCap',
+        },
+        {
+          name: 'Hospital Electronics',
+          description: 'Diagnostic IT and storage media with destruction certificates',
+          icon: 'Heart',
+        },
+        {
+          name: 'IT & Office Recycling',
+          description: 'Laptop refresh batches from Madikonda and commercial centres',
+          icon: 'Cpu',
+        },
+        {
+          name: 'Data Destruction',
+          description: 'On-site or escorted off-site destruction with serial-number certificates',
+          icon: 'Shield',
+        },
+      ],
+    },
+    faqs: [
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler in Warangal?',
+        answer:
+          'Yes. We hold e-waste authorization from the Central Pollution Control Board and the Telangana State Pollution Control Board. We share copies before you book, and you can verify recyclers on the CPCB and TSPCB websites.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Warangal pickup comes with one.',
+      },
+      {
+        question: 'Where does my Warangal e-waste go after pickup?',
+        answer:
+          'To our authorized facility at Thumkunta, Bibinagar, Telangana 500078 — within Telangana. Your e-waste does not leave the state. Your manifest and recycling certificate name the facility.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office or college in Warangal?',
+        answer:
+          'Yes, for institutional and corporate sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'How fast can you pick up e-waste in Warangal?',
+        answer:
+          'Standard pickups are scheduled within 24–48 hours after confirmation. Large clearances are planned with a site visit and a fixed date. Small lots may be batched with scheduled Warangal runs for route efficiency.',
+      },
+      {
+        question: 'Do you serve colleges, universities and hospitals?',
+        answer:
+          'Yes. We plan bulk pickups around term breaks and exam schedules, list devices by serial number, destroy storage media first, and give you certificates for institutional records.',
+      },
+      {
+        question: 'Do you work with government departments?',
+        answer:
+          'We supply serial-number lists, weighment slips, and destruction and recycling certificates that departments can use for audit and condemnation records. Share your department\'s format and we will work to it.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'Is there a minimum quantity for pickup in Warangal?',
+        answer:
+          'Small lots are accepted; they may be batched with scheduled Warangal runs from our Bibinagar facility. We will say so when you book, and you still get a receipt and certificate.',
+      },
+      {
+        question: 'Which areas do you cover?',
+        answer:
+          'Warangal, Hanamkonda and Kazipet, including Madikonda, Subedari and Hunter Road. For Jangaon, Mahabubabad, Bhupalpally and Mulugu we schedule by volume — usually combined with a Warangal run. Call to confirm your pin code and minimum quantity.',
+      },
+      {
+        question: 'Can brands and manufacturers get EPR support?',
+        answer:
+          'Yes. We support documentation, channelization and reporting under the E-Waste (Management) Rules, 2022. See our EPR compliance services page for details.',
+      },
+    ],
+  },
+  'nizamabad': {
+    slug: 'nizamabad',
+    name: 'Nizamabad',
+    title: 'E-Waste Recycling and IT Scrap Pickup in Nizamabad',
+    heroTitle: 'E-Waste Recycling and IT Scrap Pickup in Nizamabad',
+    description:
+      "Nizamabad's colleges, hospitals, banks, government offices and agri-processing units all retire computers and electronics, and each needs to show where they went. SP Recycling is a CPCB and TSPCB authorized e-waste recycler based in Telangana. We collect from Nizamabad, Armoor, Bodhan and nearby towns, destroy the data, and give you the paperwork your auditor, management or department will ask for. Every pickup comes with a weighed receipt, a Form 6 transport manifest, and a certificate of destruction or recycling.",
+    metaTitle: 'E-Waste Recycling in Nizamabad | TSPCB Authorized Pickup',
+    metaDescription:
+      'Authorized e-waste recycling in Nizamabad, Armoor and Bodhan. Doorstep IT scrap pickup, data destruction certificate and Form 6 manifest. Get a quote today.',
+    keywords: [
+      'e-waste recycling nizamabad',
+      'e-waste pickup nizamabad',
+      'computer scrap buyers nizamabad',
+      'sell old laptops nizamabad',
+      'authorized e-waste recycler nizamabad',
+      'college e-waste disposal nizamabad',
+      'hospital e-waste nizamabad',
+      'e-waste pickup armoor',
+      'e-waste pickup bodhan',
+      'e-waste pickup kamareddy',
+    ],
+    lastReviewed: '2026-10-06',
+    heroImage: '/city/e-waste-recycling-facility-with-circuit-boards-and.jpg',
+    population: '0.3M',
+    wasteCollection: 0,
+    coverage: 'Nizamabad, Armoor & Bodhan',
+    establishedYear: '2018',
+    facilities: [
+      'CPCB & TSPCB authorized processing (Bibinagar)',
+      'Form 6 tracked transport within Telangana',
+      'On-site data destruction (corporate)',
+      'Institutional documentation support',
+    ],
+    highlights: [
+      'Same-state TSPCB authorization',
+      'Scheduled Nizamabad district runs',
+      'Colleges, hospitals & agri units',
+      'Form 6 on every pickup',
+    ],
+    stats: {
+      totalPickups: 'On request',
+      totalWeight: 'Documented',
+      satisfactionRate: 'Form 6',
+    },
+    servicesBlurb:
+      'SP Recycling serves Nizamabad, Armoor and Bodhan colleges, hospitals, banks, government offices and agri-processing units with doorstep pickup, certified data destruction and audit-ready paperwork. Loads stay in Telangana and move under Form 6 to our CPCB and TSPCB authorized facility in Bibinagar.',
+    services: {
+      title: 'Our Services in Nizamabad',
+      items: [
+        {
+          name: 'Campus & College Clearance',
+          description: 'Serial-listed lab and office IT clearances around term breaks',
+          icon: 'GraduationCap',
+        },
+        {
+          name: 'Hospital Electronics',
+          description: 'Diagnostic IT and storage media with destruction certificates',
+          icon: 'Heart',
+        },
+        {
+          name: 'Agri & Mill Electronics',
+          description: 'Plant electronics and office IT from rice mills and processing units',
+          icon: 'Factory',
+        },
+        {
+          name: 'Data Destruction',
+          description: 'On-site or escorted off-site destruction with serial-number certificates',
+          icon: 'Shield',
+        },
+      ],
+    },
+    faqs: [
+      {
+        question: 'Is SP Recycling an authorized e-waste recycler in Nizamabad?',
+        answer:
+          'Yes. We hold e-waste authorization from the Central Pollution Control Board and the Telangana State Pollution Control Board. We share copies before you book, and you can verify recyclers on the CPCB and TSPCB websites.',
+      },
+      {
+        question: 'What is a Form 6 manifest and will I get one?',
+        answer:
+          'Form 6 is the manifest that travels with e-waste during transport. It records what is moved, from whom, and to which authorized facility. Yes, every Nizamabad pickup comes with one.',
+      },
+      {
+        question: 'Where does my Nizamabad e-waste go after pickup?',
+        answer:
+          'To our authorized facility at Thumkunta, Bibinagar, Telangana 500078 — within Telangana. Your e-waste does not leave the state. Your manifest and recycling certificate name the facility.',
+      },
+      {
+        question: 'Can you destroy hard drives at our office or college in Nizamabad?',
+        answer:
+          'Yes, for institutional and corporate sites we can arrange on-site shredding or degaussing so drives never leave the building intact. Your team can witness the process, and you receive a certificate listing every serial number. Off-site destruction under sealed escort is also available.',
+      },
+      {
+        question: 'How often do you come to Nizamabad?',
+        answer:
+          'We run scheduled pickups for the Nizamabad corridor — often combined with Armoor, Bodhan and Kamareddy. Ask us for the next available run when you enquire. Large clearances are planned with a site visit and a fixed date.',
+      },
+      {
+        question: 'Do you serve colleges, universities and hospitals?',
+        answer:
+          'Yes. We plan bulk pickups around term breaks and exam schedules, list devices by serial number, destroy storage media first, and give you certificates for institutional records.',
+      },
+      {
+        question: 'Do you work with government departments?',
+        answer:
+          'We supply serial-number lists, weighment slips, and destruction and recycling certificates that departments can use for audit and condemnation records. Share your department\'s format and we will work to it.',
+      },
+      {
+        question: 'Do you pay for IT scrap, or do I pay for disposal?',
+        answer:
+          'It depends on the equipment. Working laptops, servers and networking gear usually carry value. CRT monitors, damaged items and some peripherals may not. We tell you which is which in the quote, before pickup.',
+      },
+      {
+        question: 'Is there a minimum quantity for pickup in Nizamabad?',
+        answer:
+          'Small lots are accepted; they may be batched with scheduled Nizamabad runs from our Bibinagar facility. We will say so when you book, and you still get a receipt and certificate.',
+      },
+      {
+        question: 'Which areas do you cover?',
+        answer:
+          'Nizamabad, Armoor, Bodhan and nearby towns including Dichpally and the college belt. For Kamareddy, Banswada and Nirmal we schedule by volume — usually combined with a Nizamabad run. Call to confirm your pin code and minimum quantity.',
+      },
+      {
+        question: 'Can brands and manufacturers get EPR support?',
+        answer:
+          'Yes. We support documentation, channelization and reporting under the E-Waste (Management) Rules, 2022. See our EPR compliance services page for details.',
       },
     ],
   },

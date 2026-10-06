@@ -115,7 +115,7 @@ export const comparisonGuides: ComparisonGuide[] = [
           'Often yes. Metals and components retain scrap value even when the device does not turn on. An authorized recycler can assess mixed lots.',
       },
     ],
-    relatedCitySlugs: ['hyderabad', 'chennai', 'pune', 'gujarat'],
+    relatedCitySlugs: ['hyderabad', 'chennai', 'pune', 'gujarat', 'coimbatore'],
     relatedServiceSlugs: ['electronic-waste-recycle', 'consumer-electronics'],
   },
   {
@@ -167,7 +167,7 @@ export const comparisonGuides: ComparisonGuide[] = [
           'Yes. Share item type, photos if asked, and a phone number. The team confirms a slot and pays as per agreed rates after assessment.',
       },
     ],
-    relatedCitySlugs: ['hyderabad', 'bangalore', 'mumbai', 'delhi', 'chennai'],
+    relatedCitySlugs: ['hyderabad', 'bangalore', 'mumbai', 'delhi', 'chennai', 'visakhapatnam'],
     relatedServiceSlugs: ['electronic-waste-recycle', 'it-telecom'],
   },
 ]

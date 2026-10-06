@@ -28,12 +28,16 @@ const navigation = [
 
 const cities = [
   { name: "Hyderabad", slug: "hyderabad" },
+  { name: "Warangal", slug: "warangal" },
+  { name: "Nizamabad", slug: "nizamabad" },
   { name: "Delhi", slug: "delhi" },
   { name: "Mumbai", slug: "mumbai" },
   { name: "Bangalore", slug: "bangalore" },
   { name: "Chennai", slug: "chennai" },
   { name: "Pune", slug: "pune" },
   { name: "Kolkata", slug: "kolkata" },
+  { name: "Coimbatore", slug: "coimbatore" },
+  { name: "Visakhapatnam", slug: "visakhapatnam" },
   { name: "Andhra Pradesh", slug: "andhra-pradesh" }
 ]
 

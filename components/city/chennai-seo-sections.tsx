@@ -665,6 +665,11 @@ export function ChennaiSeoSections() {
             Brands, importers and producers selling electronics in Tamil Nadu and across India have
             obligations under the E-Waste (Management) Rules, 2022, including registration and
             reporting on the CPCB EPR portal. We support documentation, channelization and reporting.
+            Also serving{" "}
+            <Link href="/services/city/coimbatore" className="font-medium text-primary hover:underline">
+              Coimbatore
+            </Link>
+            .
           </p>
           <div className="flex flex-wrap gap-4 text-sm font-semibold">
             <Link href="/services/EPR-Compliance-Solutions" className="text-primary hover:underline">
@@ -675,6 +680,9 @@ export function ChennaiSeoSections() {
             </Link>
             <Link href="/services/electronic-waste-recycle" className="text-primary hover:underline">
               E-waste recycling →
+            </Link>
+            <Link href="/services/city/coimbatore" className="text-primary hover:underline">
+              Coimbatore city page →
             </Link>
           </div>
         </div>
