@@ -8,7 +8,6 @@ import {
   Zap,
   Droplets,
   AlertCircle,
-  CheckCircle,
   Loader,
   ChevronLeft,
   ChevronRight,
@@ -22,7 +21,16 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PhoneInput } from "@/components/ui/phone-input"
-import { getPhoneValidationError } from "@/lib/phone-validation"
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from "@/lib/phone-validation"
+import {
+  getEmailFieldState,
+  getEmailValidationError,
+} from "@/lib/email-validation"
+import { redirectToThankYou } from "@/lib/form-redirect"
+import { FormFieldStatus } from "@/components/form-field-status"
 
 interface EquipmentCategory {
   id: string
@@ -139,8 +147,9 @@ export function ImpactCalculator({ cityName }: { cityName: string }) {
     selectedCategories: {},
   })
   const [loading, setLoading] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
   const [errors, setErrors] = useState<Record<string, string>>({})
+  const phoneState = getPhoneFieldState(formData.phone)
+  const emailState = getEmailFieldState(formData.email)
 
   const calculateTotalImpact = () => {
     let totalCo2 = 0
@@ -203,8 +212,9 @@ export function ImpactCalculator({ cityName }: { cityName: string }) {
     const newErrors: Record<string, string> = {}
 
     if (!formData.name.trim()) newErrors.name = "Name is required"
-    if (!formData.email.trim()) newErrors.email = "Email is required"
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format"
+
+    const emailError = getEmailValidationError(formData.email)
+    if (emailError) newErrors.email = emailError
 
     const phoneError = getPhoneValidationError(formData.phone)
     if (phoneError) newErrors.phone = phoneError
@@ -250,22 +260,9 @@ export function ImpactCalculator({ cityName }: { cityName: string }) {
 
       if (!response.ok) throw new Error("Failed to submit")
 
-      setSubmitted(true)
-      setTimeout(() => {
-        setSubmitted(false)
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          address: "",
-          city: "Hyderabad",
-          zipCode: "",
-          selectedCategories: {},
-        })
-      }, 4000)
+      redirectToThankYou(formData.name, "impact-calculator")
     } catch (err) {
       setErrors({ submit: "Failed to submit. Please try again." })
-    } finally {
       setLoading(false)
     }
   }
@@ -431,10 +428,24 @@ export function ImpactCalculator({ cityName }: { cityName: string }) {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="your@email.com"
-                    className="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
+                    className={`w-full px-4 py-2 rounded-lg border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
+                      emailState === "invalid" || errors.email
+                        ? "border-red-400"
+                        : emailState === "valid"
+                          ? "border-emerald-500"
+                          : "border-border"
+                    }`}
                     disabled={loading}
+                    aria-invalid={emailState === "invalid"}
                   />
-                  {errors.email && <p className="text-xs text-red-600 mt-1">{errors.email}</p>}
+                  <FormFieldStatus
+                    state={emailState}
+                    validMessage="Valid email address"
+                    invalidMessage="Use Gmail, Yahoo, Outlook, or a valid company email"
+                  />
+                  {errors.email && emailState === "empty" && (
+                    <p className="text-xs text-red-600 mt-1">{errors.email}</p>
+                  )}
                 </div>
 
                 <div>
@@ -444,10 +455,23 @@ export function ImpactCalculator({ cityName }: { cityName: string }) {
                     onChange={(value) => setFormData({ ...formData, phone: value })}
                     placeholder="Enter phone number"
                     disabled={loading}
-                    inputClassName="w-full px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all"
-                    aria-invalid={!!errors.phone}
+                    inputClassName={`w-full px-4 py-2 rounded-lg border bg-background text-foreground placeholder-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all ${
+                      phoneState === "invalid" || errors.phone
+                        ? "border-red-400"
+                        : phoneState === "valid"
+                          ? "border-emerald-500"
+                          : "border-border"
+                    }`}
+                    aria-invalid={phoneState === "invalid" || !!errors.phone}
                   />
-                  {errors.phone && <p className="text-xs text-red-600 mt-1">{errors.phone}</p>}
+                  <FormFieldStatus
+                    state={phoneState}
+                    validMessage="Valid mobile number"
+                    invalidMessage="Enter a valid mobile number with country code"
+                  />
+                  {errors.phone && phoneState === "empty" && (
+                    <p className="text-xs text-red-600 mt-1">{errors.phone}</p>
+                  )}
                 </div>
 
                 <div>
@@ -503,21 +527,14 @@ export function ImpactCalculator({ cityName }: { cityName: string }) {
                 </div>
               )}
 
-              {submitted && (
-                <div className="p-4 rounded-lg bg-green-500/10 border border-green-500/30 flex items-start gap-3 animate-fade-in-up">
-                  <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <p className="text-sm font-semibold text-green-700">Pickup Request Submitted Successfully!</p>
-                    <p className="text-xs text-green-600 mt-1">
-                      We'll contact you shortly to confirm your pickup schedule. Check your email for details.
-                    </p>
-                  </div>
-                </div>
-              )}
-
               <Button
                 type="submit"
-                disabled={loading}
+                disabled={
+                  loading ||
+                  phoneState !== "valid" ||
+                  emailState !== "valid" ||
+                  !formData.name.trim()
+                }
                 className="w-full px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold"
               >
                 {loading ? (

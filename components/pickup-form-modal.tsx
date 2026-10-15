@@ -8,11 +8,20 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Label } from "@/components/ui/label"
-import { getPhoneValidationError } from "@/lib/phone-validation"
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from "@/lib/phone-validation"
+import {
+  getEmailFieldState,
+  getEmailValidationError,
+} from "@/lib/email-validation"
+import { redirectToThankYou } from "@/lib/form-redirect"
+import { FormFieldStatus } from "@/components/form-field-status"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
-import { CalendarIcon, CheckCircle2 } from "lucide-react"
+import { CalendarIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface PickupFormModalProps {
@@ -63,11 +72,12 @@ export function PickupFormModal({
 
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showSuccess, setShowSuccess] = useState(false)
 
   // Prefer live props so product name + price always show when opening
   const selectedProductName = defaultInquiryType || formData.inquiryType
   const selectedProductPrice = defaultInquiryPrice || formData.inquiryPrice
+  const phoneState = getPhoneFieldState(formData.phone)
+  const emailState = getEmailFieldState(formData.email)
 
   useEffect(() => {
     if (!open) return
@@ -105,16 +115,12 @@ export function PickupFormModal({
         else delete newErrors.phone
         break
       }
-      case "email":
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        if (!value.trim()) {
-          newErrors.email = "Email address is required"
-        } else if (!emailRegex.test(value.trim())) {
-          newErrors.email = "Please enter a valid email address"
-        } else {
-          delete newErrors.email
-        }
+      case "email": {
+        const emailError = getEmailValidationError(value)
+        if (emailError) newErrors.email = emailError
+        else delete newErrors.email
         break
+      }
       case "city":
         if (!value) {
           newErrors.city = "City is required"
@@ -161,22 +167,18 @@ export function PickupFormModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
-    // Validate all required fields
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-    // Check for validation errors
     const validationErrors: Record<string, string> = {}
-    
+
     if (!formData.fullName?.trim()) {
       validationErrors.fullName = "Full name is required"
     }
-    
+
     const phoneError = getPhoneValidationError(formData.phone)
     if (phoneError) validationErrors.phone = phoneError
 
     if (!hideExtras) {
-      if (!formData.email?.trim() || !emailRegex.test(formData.email.trim())) {
-        validationErrors.email = "Please enter a valid email address"
-      }
+      const emailError = getEmailValidationError(formData.email)
+      if (emailError) validationErrors.email = emailError
 
       if (!formData.city) {
         validationErrors.city = "City is required"
@@ -185,6 +187,9 @@ export function PickupFormModal({
       if (!formData.agreeToTerms) {
         validationErrors.agreeToTerms = "You must agree to terms and privacy policy"
       }
+    } else if (formData.email?.trim()) {
+      const emailError = getEmailValidationError(formData.email, false)
+      if (emailError) validationErrors.email = emailError
     }
 
     if (Object.keys(validationErrors).length > 0) {
@@ -243,61 +248,12 @@ export function PickupFormModal({
         throw new Error(errorData.error || 'Failed to send email')
       }
 
-      setShowSuccess(true)
-
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setShowSuccess(false)
-        onOpenChange(false)
-        setFormData({
-          fullName: "",
-          phone: "",
-          email: "",
-          city: "",
-          inquiryType: "",
-          inquiryPrice: "",
-          date: undefined,
-          agreeToTerms: false,
-        })
-        setErrors({})
-      }, 3000)
+      onOpenChange(false)
+      redirectToThankYou(formData.fullName, "pickup")
     } catch (error) {
       toast.error("Something went wrong. Please try again.")
-    } finally {
       setIsSubmitting(false)
     }
-  }
-
-  if (showSuccess) {
-    return (
-      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="z-[1002] w-[calc(100%-1.25rem)] max-w-md rounded-2xl p-5 sm:p-6">
-          <div className="flex flex-col items-center justify-center py-4 text-center sm:py-8">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100 sm:h-16 sm:w-16">
-              <CheckCircle2 className="h-8 w-8 text-green-600 sm:h-10 sm:w-10" />
-            </div>
-            <h3 className="mb-2 text-xl font-bold text-gray-900 sm:text-2xl">
-              Thank You!
-            </h3>
-            <p className="mb-6 text-sm text-gray-600 sm:text-base">
-              Your pickup request has been received. Our team will contact you
-              soon.
-            </p>
-            <Button
-              onClick={() => {
-                const message = encodeURIComponent(
-                  `Hi! I just scheduled an e-waste pickup. My name is ${formData.fullName}.`,
-                )
-                window.open(`https://wa.me/+919949901238?text=${message}`, "_blank")
-              }}
-              className="h-11 w-full bg-green-600 hover:bg-green-700 sm:w-auto"
-            >
-              Send Confirmation via WhatsApp
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
-    )
   }
 
   return (
@@ -375,16 +331,24 @@ export function PickupFormModal({
                       value={formData.phone}
                       onChange={(value) => handleInputChange("phone", value)}
                       placeholder="Enter mobile number"
-                      className={cn(errors.phone && "phone-input-field--error")}
+                      className={cn(
+                        (errors.phone || phoneState === "invalid") &&
+                          "phone-input-field--error"
+                      )}
                       inputClassName={cn(
                         "h-12 text-base sm:h-11 sm:text-sm",
-                        errors.phone && "border-red-500"
+                        (errors.phone || phoneState === "invalid") && "border-red-500",
+                        phoneState === "valid" && "border-emerald-500"
                       )}
-                      aria-invalid={!!errors.phone}
+                      aria-invalid={!!errors.phone || phoneState === "invalid"}
                     />
-                    {errors.phone && (
-                      <p className="text-xs text-red-500 sm:text-sm">{errors.phone}</p>
-                    )}
+                    <FormFieldStatus
+                      state={phoneState}
+                      validMessage="Valid mobile number"
+                      invalidMessage={
+                        errors.phone || "Enter a valid mobile number with country code"
+                      }
+                    />
                   </div>
                 </div>
               ) : (
@@ -420,16 +384,24 @@ export function PickupFormModal({
                         value={formData.phone}
                         onChange={(value) => handleInputChange("phone", value)}
                         placeholder="Enter mobile number"
-                        className={cn(errors.phone && "phone-input-field--error")}
+                        className={cn(
+                          (errors.phone || phoneState === "invalid") &&
+                            "phone-input-field--error"
+                        )}
                         inputClassName={cn(
                           "h-12 text-base sm:h-11 sm:text-sm",
-                          errors.phone && "border-red-500"
+                          (errors.phone || phoneState === "invalid") && "border-red-500",
+                          phoneState === "valid" && "border-emerald-500"
                         )}
-                        aria-invalid={!!errors.phone}
+                        aria-invalid={!!errors.phone || phoneState === "invalid"}
                       />
-                      {errors.phone && (
-                        <p className="text-xs text-red-500 sm:text-sm">{errors.phone}</p>
-                      )}
+                      <FormFieldStatus
+                        state={phoneState}
+                        validMessage="Valid mobile number"
+                        invalidMessage={
+                          errors.phone || "Enter a valid mobile number with country code"
+                        }
+                      />
                     </div>
                   </div>
 
@@ -443,17 +415,24 @@ export function PickupFormModal({
                         type="email"
                         inputMode="email"
                         autoComplete="email"
-                        placeholder="your.email@example.com"
+                        placeholder="you@gmail.com"
                         value={formData.email}
                         onChange={(e) => handleInputChange("email", e.target.value)}
                         className={cn(
                           "h-12 text-base sm:h-11 sm:text-sm",
-                          errors.email && "border-red-500"
+                          (errors.email || emailState === "invalid") && "border-red-500",
+                          emailState === "valid" && "border-emerald-500"
                         )}
+                        aria-invalid={!!errors.email || emailState === "invalid"}
                       />
-                      {errors.email && (
-                        <p className="text-xs text-red-500 sm:text-sm">{errors.email}</p>
-                      )}
+                      <FormFieldStatus
+                        state={emailState}
+                        validMessage="Valid email address"
+                        invalidMessage={
+                          errors.email ||
+                          "Use Gmail, Yahoo, Outlook, or your company email"
+                        }
+                      />
                     </div>
 
                     <div className="space-y-2">

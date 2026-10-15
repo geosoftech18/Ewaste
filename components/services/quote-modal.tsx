@@ -13,6 +13,16 @@ import { Input } from '@/components/ui/input'
 import { PhoneInput } from '@/components/ui/phone-input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from '@/lib/phone-validation';
+import {
+  getEmailFieldState,
+  getEmailValidationError,
+} from '@/lib/email-validation';
+import { redirectToThankYou } from '@/lib/form-redirect';
+import { FormFieldStatus } from '@/components/form-field-status';
 import { Upload } from 'lucide-react';
 
 interface QuoteModalProps {
@@ -30,14 +40,31 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const phoneState = getPhoneFieldState(formData.phone);
+  const emailState = getEmailFieldState(formData.email);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
     setSubmitError('');
 
+    if (!formData.name.trim()) {
+      setSubmitError('Name is required');
+      return;
+    }
+    const phoneError = getPhoneValidationError(formData.phone);
+    if (phoneError) {
+      setSubmitError(phoneError);
+      return;
+    }
+    const emailError = getEmailValidationError(formData.email);
+    if (emailError) {
+      setSubmitError(emailError);
+      return;
+    }
+
+    setIsSubmitting(true);
+
     try {
-      // Send email via API
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,19 +85,11 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
         throw new Error(errorData.error || 'Failed to send email');
       }
 
-      // Reset form and close modal
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        items: '',
-        message: ''
-      });
       onClose();
+      redirectToThankYou(formData.name, 'quote');
     } catch (error: any) {
       console.error('Error submitting quote request:', error);
       setSubmitError(error.message || 'Failed to submit request. Please try again.');
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -85,7 +104,7 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mt-4" noValidate>
           {submitError && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
               {submitError}
@@ -113,6 +132,19 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
               onChange={(value) => setFormData({ ...formData, phone: value })}
               placeholder="Enter phone number"
               disabled={isSubmitting}
+              inputClassName={
+                phoneState === "invalid"
+                  ? "border-red-500"
+                  : phoneState === "valid"
+                    ? "border-emerald-500"
+                    : ""
+              }
+              aria-invalid={phoneState === "invalid"}
+            />
+            <FormFieldStatus
+              state={phoneState}
+              validMessage="Valid mobile number"
+              invalidMessage="Enter a valid mobile number with country code"
             />
           </div>
 
@@ -126,6 +158,19 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               placeholder="john@example.com"
               disabled={isSubmitting}
+              className={
+                emailState === "invalid"
+                  ? "border-red-500"
+                  : emailState === "valid"
+                    ? "border-emerald-500"
+                    : ""
+              }
+              aria-invalid={emailState === "invalid"}
+            />
+            <FormFieldStatus
+              state={emailState}
+              validMessage="Valid email address"
+              invalidMessage="Use Gmail, Yahoo, Outlook, or a valid company email"
             />
           </div>
 
@@ -177,7 +222,12 @@ export function QuoteModal({ open, onClose }: QuoteModalProps) {
             <Button
               type="submit"
               className="flex-1 bg-emerald-500 hover:bg-emerald-600"
-              disabled={isSubmitting}
+              disabled={
+                isSubmitting ||
+                phoneState !== "valid" ||
+                emailState !== "valid" ||
+                !formData.name.trim()
+              }
             >
               {isSubmitting ? 'Submitting...' : 'Submit Request'}
             </Button>

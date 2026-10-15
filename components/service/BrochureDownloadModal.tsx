@@ -12,8 +12,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { PhoneInput } from '@/components/ui/phone-input';
 import { Label } from '@/components/ui/label';
-import { isPhoneValid } from '@/lib/phone-validation';
-import { Download, CheckCircle2, AlertCircle } from 'lucide-react';
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from '@/lib/phone-validation';
+import { getEmailValidationError, getEmailFieldState } from '@/lib/email-validation';
+import { redirectToThankYou } from '@/lib/form-redirect';
+import { FormFieldStatus } from '@/components/form-field-status';
+import { Download, AlertCircle } from 'lucide-react';
 
 interface BrochureDownloadModalProps {
   open: boolean;
@@ -28,24 +34,22 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
+  const phoneState = getPhoneFieldState(formData.phone);
+  const emailState = getEmailFieldState(formData.email);
 
   const validateForm = () => {
     if (!formData.name.trim()) {
       setSubmitError('Name is required');
       return false;
     }
-    if (!isPhoneValid(formData.phone)) {
-      setSubmitError('Please enter a valid phone number');
+    const phoneError = getPhoneValidationError(formData.phone);
+    if (phoneError) {
+      setSubmitError(phoneError);
       return false;
     }
-    if (!formData.email.trim()) {
-      setSubmitError('Email is required');
-      return false;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setSubmitError('Please enter a valid email address');
+    const emailError = getEmailValidationError(formData.email);
+    if (emailError) {
+      setSubmitError(emailError);
       return false;
     }
     return true;
@@ -81,23 +85,11 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
         throw new Error(errorData.error || 'Failed to send request');
       }
 
-      // Show success message
-      setIsSuccess(true);
-
-      // Reset form after 2 seconds and close modal
-      setTimeout(() => {
-        setFormData({
-          name: '',
-          phone: '',
-          email: '',
-        });
-        setIsSuccess(false);
-        onClose();
-      }, 2000);
+      onClose();
+      redirectToThankYou(formData.name, 'brochure');
     } catch (error: any) {
       console.error('Error submitting brochure request:', error);
       setSubmitError(error.message || 'Failed to submit request. Please try again.');
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -115,18 +107,7 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
           </DialogDescription>
         </DialogHeader>
 
-        {isSuccess ? (
-          <div className="py-8 text-center">
-            <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle2 className="w-10 h-10 text-emerald-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Thank You!</h3>
-            <p className="text-gray-600">
-              Your request has been received. We'll send you the brochure shortly.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4 mt-4">
+          <form onSubmit={handleSubmit} className="space-y-4 mt-4" noValidate>
             {submitError && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm flex items-start gap-2">
                 <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
@@ -161,7 +142,19 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
                 onChange={(value) => setFormData({ ...formData, phone: value })}
                 placeholder="Enter phone number"
                 disabled={isSubmitting}
-                inputClassName="w-full h-10"
+                inputClassName={`w-full h-10 ${
+                  phoneState === "invalid"
+                    ? "border-red-500"
+                    : phoneState === "valid"
+                      ? "border-emerald-500"
+                      : ""
+                }`}
+                aria-invalid={phoneState === "invalid"}
+              />
+              <FormFieldStatus
+                state={phoneState}
+                validMessage="Valid mobile number"
+                invalidMessage="Enter a valid mobile number with country code"
               />
             </div>
 
@@ -175,9 +168,21 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="your.email@example.com"
+                placeholder="you@gmail.com"
                 disabled={isSubmitting}
-                className="w-full"
+                className={`w-full ${
+                  emailState === "invalid"
+                    ? "border-red-500"
+                    : emailState === "valid"
+                      ? "border-emerald-500"
+                      : ""
+                }`}
+                aria-invalid={emailState === "invalid"}
+              />
+              <FormFieldStatus
+                state={emailState}
+                validMessage="Valid email address"
+                invalidMessage="Use Gmail, Yahoo, Outlook, or your company email"
               />
             </div>
 
@@ -200,7 +205,9 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
               <Button
                 type="submit"
                 className="flex-1 bg-emerald-500 hover:bg-emerald-600 text-white"
-                disabled={isSubmitting}
+                disabled={
+                  isSubmitting || phoneState === "invalid" || emailState === "invalid"
+                }
               >
                 {isSubmitting ? (
                   <>
@@ -215,7 +222,6 @@ export function BrochureDownloadModal({ open, onClose }: BrochureDownloadModalPr
               </Button>
             </div>
           </form>
-        )}
       </DialogContent>
     </Dialog>
   );

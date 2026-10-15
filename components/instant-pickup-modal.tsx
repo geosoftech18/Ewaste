@@ -6,8 +6,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { PhoneInput } from '@/components/ui/phone-input'
 import { Label } from '@/components/ui/label'
-import { isPhoneValid } from '@/lib/phone-validation'
-import { Loader, CheckCircle2 } from 'lucide-react'
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from '@/lib/phone-validation'
+import { redirectToThankYou } from '@/lib/form-redirect'
+import { FormFieldStatus } from '@/components/form-field-status'
+import { Loader } from 'lucide-react'
 
 interface InstantPickupModalProps {
   open: boolean
@@ -18,26 +23,21 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
   const [name, setName] = useState('')
   const [number, setNumber] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSuccess, setIsSuccess] = useState(false)
   const [error, setError] = useState('')
+  const phoneState = getPhoneFieldState(number)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
 
-    // Validation
     if (!name.trim()) {
       setError('Name is required')
       return
     }
 
-    if (!number.trim()) {
-      setError('Contact number is required')
-      return
-    }
-
-    if (!isPhoneValid(number)) {
-      setError('Please enter a valid phone number')
+    const phoneError = getPhoneValidationError(number)
+    if (phoneError) {
+      setError(phoneError)
       return
     }
 
@@ -61,21 +61,15 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
       const result = await response.json()
 
       if (result.success) {
-        setIsSuccess(true)
-        // Reset form after 2 seconds and close modal
-        setTimeout(() => {
-          setName('')
-          setNumber('')
-          setIsSuccess(false)
-          onOpenChange(false)
-        }, 2000)
+        onOpenChange(false)
+        redirectToThankYou(name, 'instant-pickup')
       } else {
         setError(result.error || 'Failed to submit. Please try again.')
+        setIsSubmitting(false)
       }
     } catch (error) {
       console.error('Error submitting form:', error)
       setError('Unable to submit. Please check your connection and try again.')
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -85,7 +79,6 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
       setName('')
       setNumber('')
       setError('')
-      setIsSuccess(false)
       onOpenChange(false)
     }
   }
@@ -102,18 +95,7 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
           </DialogDescription>
         </DialogHeader>
 
-        {isSuccess ? (
-          <div className="text-center py-8">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <CheckCircle2 className="w-8 h-8 text-green-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2">Request Submitted!</h3>
-            <p className="text-gray-600">
-              We'll contact you shortly to schedule your pickup.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-6 mt-4">
+          <form onSubmit={handleSubmit} className="space-y-6 mt-4" noValidate>
             {error && (
               <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
                 {error}
@@ -147,7 +129,19 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
                 onChange={setNumber}
                 disabled={isSubmitting}
                 placeholder="Enter phone number"
-                inputClassName="h-11"
+                inputClassName={`h-11 ${
+                  phoneState === "invalid"
+                    ? "border-red-500"
+                    : phoneState === "valid"
+                      ? "border-emerald-500"
+                      : ""
+                }`}
+                aria-invalid={phoneState === "invalid"}
+              />
+              <FormFieldStatus
+                state={phoneState}
+                validMessage="Valid mobile number"
+                invalidMessage="Enter a valid mobile number with country code"
               />
             </div>
 
@@ -163,7 +157,9 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
               </Button>
               <Button
                 type="submit"
-                disabled={isSubmitting || !name.trim() || !number.trim()}
+                disabled={
+                  isSubmitting || !name.trim() || phoneState !== "valid"
+                }
                 className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white"
               >
                 {isSubmitting ? (
@@ -181,7 +177,6 @@ export function InstantPickupModal({ open, onOpenChange }: InstantPickupModalPro
               Your details are safe and used only for pickup coordination.
             </p>
           </form>
-        )}
       </DialogContent>
     </Dialog>
   )

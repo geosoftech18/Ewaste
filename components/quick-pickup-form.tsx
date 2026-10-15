@@ -21,14 +21,24 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from "@/components/ui/phone-input"
-import { getPhoneValidationError, isPhoneValid } from "@/lib/phone-validation"
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+  isPhoneValid,
+} from "@/lib/phone-validation"
+import {
+  getEmailFieldState,
+  getEmailValidationError,
+  isEmailValid,
+} from "@/lib/email-validation"
+import { redirectToThankYou } from "@/lib/form-redirect"
+import { FormFieldStatus } from "@/components/form-field-status"
 import { cn } from "@/lib/utils"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Label } from "@/components/ui/label"
 
 const VALIDATION_RULES = {
-  EMAIL_REGEX: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
   MAX_FILES: 5,
   ALLOWED_FILE_TYPES: ["image/jpeg", "image/jpg", "image/png", "image/webp"],
@@ -96,6 +106,7 @@ export function QuickPickupForm() {
     const filledFields = requiredFields.filter((field) => {
       const value = formData[field as keyof FormData]
       if (field === "phone") return isPhoneValid(String(value))
+      if (field === "email") return isEmailValid(String(value))
       return value && value.toString().trim().length > 0
     })
     setFormProgress(Math.round((filledFields.length / requiredFields.length) * 100))
@@ -119,13 +130,7 @@ export function QuickPickupForm() {
         return getPhoneValidationError(typeof value === "string" ? value : "")
 
       case "email":
-        if (!value || (typeof value === "string" && !value.trim())) {
-          return "Email address is required"
-        }
-        if (typeof value === "string" && !VALIDATION_RULES.EMAIL_REGEX.test(value)) {
-          return "Please enter a valid email address"
-        }
-        break
+        return getEmailValidationError(typeof value === "string" ? value : "")
 
       case "itemType":
         if (!value) {
@@ -222,27 +227,12 @@ export function QuickPickupForm() {
         throw new Error(errorData.error || 'Failed to send email')
       }
 
-      setShowSuccess(true)
-      setFormData({
-        fullName: "",
-        phone: "",
-        email: "",
-        itemType: "",
-        address: "",
-        
-        
-      })
-      setErrors({})
-      setTouched({})
-
-      // Auto-hide success message
-      setTimeout(() => setShowSuccess(false), 6000)
+      redirectToThankYou(formData.fullName, "quick-pickup")
     } catch (error) {
       console.error("Error submitting form:", error)
       setErrorMessage("Failed to submit request. Please try again.")
       setShowError(true)
       setTimeout(() => setShowError(false), 4000)
-    } finally {
       setIsSubmitting(false)
     }
   }
@@ -269,8 +259,14 @@ export function QuickPickupForm() {
     if (fieldName === "phone") {
       return touched.phone && !errors.phone && isPhoneValid(formData.phone)
     }
+    if (fieldName === "email") {
+      return touched.email && !errors.email && isEmailValid(formData.email)
+    }
     return touched[fieldName] && !errors[fieldName as keyof FormErrors] && !!formData[fieldName as keyof FormData]
   }
+
+  const livePhoneState = getPhoneFieldState(formData.phone)
+  const liveEmailState = getEmailFieldState(formData.email)
 
   return (
     <section className="py-12 md:py-20 lg:py-24 bg-gradient-to-b from-white via-green-50/20 to-white">
@@ -431,17 +427,13 @@ export function QuickPickupForm() {
                       <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500 pointer-events-none z-10" />
                     )}
                   </div>
-                  {errors.phone && touched.phone && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      id="phone-error"
-                      className="text-sm text-red-500 flex items-center gap-1"
-                    >
-                      <AlertCircle className="w-3.5 h-3.5" />
-                      {errors.phone}
-                    </motion.p>
-                  )}
+                  <FormFieldStatus
+                    state={livePhoneState}
+                    validMessage="Valid mobile number"
+                    invalidMessage={
+                      errors.phone || "Enter a valid mobile number with country code"
+                    }
+                  />
                 </div>
 
                 {/* Email */}
@@ -454,7 +446,7 @@ export function QuickPickupForm() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="your.email@example.com"
+                      placeholder="you@gmail.com"
                       value={formData.email}
                       onChange={(e) => {
                         setFormData({ ...formData, email: e.target.value })
@@ -465,30 +457,27 @@ export function QuickPickupForm() {
                       }}
                       onBlur={() => handleBlur("email")}
                       className={`pl-10 pr-10 h-11 transition-all ${
-                        errors.email && touched.email
+                        liveEmailState === "invalid" || (errors.email && touched.email)
                           ? "border-red-500 focus:border-red-500"
-                          : isFieldValid("email")
+                          : liveEmailState === "valid"
                             ? "border-green-500"
                             : ""
                       }`}
-                      aria-invalid={!!errors.email && touched.email}
+                      aria-invalid={liveEmailState === "invalid" || (!!errors.email && touched.email)}
                       aria-describedby={errors.email ? "email-error" : undefined}
                     />
-                    {isFieldValid("email") && (
+                    {liveEmailState === "valid" && (
                       <CheckCircle2 className="absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-green-500" />
                     )}
                   </div>
-                  {errors.email && touched.email && (
-                    <motion.p
-                      initial={{ opacity: 0, y: -5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      id="email-error"
-                      className="text-sm text-red-500 flex items-center gap-1"
-                    >
-                      <AlertCircle className="w-3.5 h-3.5" />
-                      {errors.email}
-                    </motion.p>
-                  )}
+                  <FormFieldStatus
+                    state={liveEmailState}
+                    validMessage="Valid email address"
+                    invalidMessage={
+                      errors.email ||
+                      "Use Gmail, Yahoo, Outlook, or your company email"
+                    }
+                  />
                 </div>
 
                 {/* Item Type */}

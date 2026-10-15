@@ -1,5 +1,7 @@
 import { isValidPhoneNumber } from 'libphonenumber-js'
 
+export type FieldValidity = 'empty' | 'valid' | 'invalid'
+
 export function isPhoneValid(value: string | undefined | null): boolean {
   if (!value?.trim()) return false
   try {
@@ -13,11 +15,11 @@ export function getPhoneValidationError(
   value: string | undefined | null,
   required = true
 ): string | undefined {
-  if (!value?.trim()) {
+  if (isPhoneEmpty(value)) {
     return required ? 'Phone number is required' : undefined
   }
   if (!isPhoneValid(value)) {
-    return 'Please enter a valid phone number'
+    return 'Please enter a valid mobile number with country code'
   }
   return undefined
 }
@@ -26,4 +28,12 @@ export function getPhoneValidationError(
 export function isPhoneEmpty(value: string | undefined | null): boolean {
   if (!value?.trim()) return true
   return /^\+[1-9]\d{0,3}$/.test(value.trim())
+}
+
+/** Live field state for correct / incorrect UI hints. */
+export function getPhoneFieldState(
+  value: string | undefined | null
+): FieldValidity {
+  if (isPhoneEmpty(value)) return 'empty'
+  return isPhoneValid(value) ? 'valid' : 'invalid'
 }

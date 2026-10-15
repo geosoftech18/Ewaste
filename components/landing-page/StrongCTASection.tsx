@@ -1,8 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Phone, MessageCircle, ArrowRight, CheckCircle2, Shield } from "lucide-react";
+import { Phone, MessageCircle, ArrowRight, Shield } from "lucide-react";
 import { PhoneInput } from "@/components/ui/phone-input";
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from "@/lib/phone-validation";
+import { redirectToThankYou } from "@/lib/form-redirect";
+import { FormFieldStatus } from "@/components/form-field-status";
 
 export default function StrongCTASection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -14,8 +20,9 @@ export default function StrongCTASection() {
   });
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const sectionRef = useRef<HTMLDivElement>(null);
+  const phoneState = getPhoneFieldState(formData.phone);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,6 +43,18 @@ export default function StrongCTASection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError("");
+
+    if (!formData.name.trim()) {
+      setSubmitError("Name is required");
+      return;
+    }
+    const phoneError = getPhoneValidationError(formData.phone);
+    if (phoneError) {
+      setSubmitError(phoneError);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -58,21 +77,16 @@ export default function StrongCTASection() {
       const result = await response.json();
 
       if (result.success) {
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
-    setTimeout(() => {
-      setSubmitSuccess(false);
-      setFormData({ name: "", company: "", city: "", phone: "" });
-    }, 3000);
+        redirectToThankYou(formData.name, "strong-cta");
       } else {
         setIsSubmitting(false);
         console.error('Error submitting form:', result.error);
-        alert('Failed to submit. Please try again.');
+        setSubmitError('Failed to submit. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
       setIsSubmitting(false);
-      alert('Unable to submit. Please check your connection and try again.');
+      setSubmitError('Unable to submit. Please check your connection and try again.');
     }
   };
 
@@ -230,21 +244,12 @@ export default function StrongCTASection() {
                   </div>
                 </div>
 
-                {submitSuccess ? (
-                  <div className="flex flex-col items-center justify-center py-12 text-center">
-                    <div className="relative mb-4">
-                      <CheckCircle2 className="w-16 h-16 text-emerald-400" />
-                      <div className="absolute inset-0 bg-emerald-500/30 rounded-full blur-xl animate-pulse" />
-                    </div>
-                    <h4 className="text-2xl font-bold text-white mb-2">
-                      Request Received!
-                    </h4>
-                    <p className="text-white/70">
-                      We'll contact you shortly to confirm your pickup.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+                    {submitError && (
+                      <div className="rounded-lg border border-red-400/40 bg-red-500/20 px-4 py-3 text-sm text-red-200">
+                        {submitError}
+                      </div>
+                    )}
                     <div className="relative">
                       <label
                         className={`absolute left-4 transition-all duration-300 pointer-events-none
@@ -323,7 +328,7 @@ export default function StrongCTASection() {
 
                       <div className="relative">
                         <label
-                          className={`absolute left-4 transition-all duration-300 pointer-events-none
+                          className={`absolute left-4 transition-all duration-300 pointer-events-none z-10
                             ${focusedField === "phone" || formData.phone
                               ? "top-2 text-xs text-emerald-400"
                               : "top-5 text-base text-white"
@@ -340,14 +345,27 @@ export default function StrongCTASection() {
                           onFocus={() => setFocusedField("phone")}
                           onBlur={() => setFocusedField(null)}
                           placeholder=" "
-                          inputClassName="w-full h-14 bg-white/15 border border-white/30 rounded-xl px-4 pt-6 pb-2 text-white placeholder-white/50 outline-none focus:border-emerald-400 focus:shadow-[0_0_20px_rgba(31,164,99,0.3)] transition-all duration-300"
+                          inputClassName={`w-full h-14 bg-white/15 border rounded-xl px-4 pt-6 pb-2 text-white placeholder-white/50 outline-none focus:shadow-[0_0_20px_rgba(31,164,99,0.3)] transition-all duration-300 ${
+                            phoneState === "invalid"
+                              ? "border-red-400 focus:border-red-400"
+                              : phoneState === "valid"
+                                ? "border-emerald-400 focus:border-emerald-400"
+                                : "border-white/30 focus:border-emerald-400"
+                          }`}
+                          aria-invalid={phoneState === "invalid"}
+                        />
+                        <FormFieldStatus
+                          state={phoneState}
+                          validMessage="Valid mobile number"
+                          invalidMessage="Enter a valid mobile number with country code"
+                          className="mt-2"
                         />
                       </div>
                     </div>
 
                     <button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={isSubmitting || phoneState !== "valid" || !formData.name.trim()}
                       className="group relative w-full bg-white text-[#0F3D2E] px-8 py-4 rounded-2xl font-bold text-base
                         hover:-translate-y-1 transition-all duration-300
                         shadow-[0_12px_35px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_45px_rgba(255,255,255,0.2)]
@@ -374,7 +392,6 @@ export default function StrongCTASection() {
                       By submitting, you agree to our secure data handling policy.
                     </p>
                   </form>
-                )}
               </div>
 
               <div className="absolute -bottom-2 -right-2 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl" />

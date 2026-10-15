@@ -13,9 +13,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from "@/components/ui/phone-input"
 import { Label } from "@/components/ui/label"
-import { getPhoneValidationError } from "@/lib/phone-validation"
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from "@/lib/phone-validation"
+import { redirectToThankYou } from "@/lib/form-redirect"
+import { FormFieldStatus } from "@/components/form-field-status"
 import { toast } from "sonner"
-import { CheckCircle2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 type SellProductFormModalProps = {
@@ -37,12 +41,11 @@ export function SellProductFormModal({
   const [phone, setPhone] = useState("")
   const [errors, setErrors] = useState<{ fullName?: string; phone?: string }>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [showSuccess, setShowSuccess] = useState(false)
+  const phoneState = getPhoneFieldState(phone)
 
   useEffect(() => {
     if (!open) return
     setErrors({})
-    setShowSuccess(false)
   }, [open, productName, productPrice])
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -94,39 +97,12 @@ export function SellProductFormModal({
         throw new Error(errorData.error || "Failed to send email")
       }
 
-      setShowSuccess(true)
-      window.setTimeout(() => {
-        setShowSuccess(false)
-        onOpenChange(false)
-        setFullName("")
-        setPhone("")
-        setErrors({})
-      }, 2500)
+      onOpenChange(false)
+      redirectToThankYou(fullName, "sell-product")
     } catch {
       toast.error("Something went wrong. Please try again.")
-    } finally {
       setIsSubmitting(false)
     }
-  }
-
-  if (showSuccess) {
-    return (
-      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="z-[1002] w-[calc(100%-1.25rem)] max-w-md rounded-2xl p-5 sm:p-6">
-          <div className="flex flex-col items-center justify-center py-6 text-center">
-            <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100">
-              <CheckCircle2 className="h-8 w-8 text-green-600" />
-            </div>
-            <h3 className="mb-2 text-xl font-bold text-gray-900">Thank You!</h3>
-            <p className="text-sm text-gray-600">
-              We received your inquiry
-              {productName ? ` for ${productName}` : ""}. Our team will call you
-              shortly.
-            </p>
-          </div>
-        </DialogContent>
-      </Dialog>
-    )
   }
 
   return (
@@ -208,13 +184,18 @@ export function SellProductFormModal({
                   className={cn(errors.phone && "phone-input-field--error")}
                   inputClassName={cn(
                     "h-12 text-base sm:h-11 sm:text-sm",
-                    errors.phone && "border-red-500"
+                    (errors.phone || phoneState === "invalid") && "border-red-500",
+                    phoneState === "valid" && "border-emerald-500"
                   )}
-                  aria-invalid={!!errors.phone}
+                  aria-invalid={!!errors.phone || phoneState === "invalid"}
                 />
-                {errors.phone ? (
-                  <p className="text-xs text-red-500">{errors.phone}</p>
-                ) : null}
+                <FormFieldStatus
+                  state={phoneState}
+                  validMessage="Valid mobile number"
+                  invalidMessage={
+                    errors.phone || "Enter a valid mobile number with country code"
+                  }
+                />
               </div>
             </div>
 
@@ -229,7 +210,7 @@ export function SellProductFormModal({
               </Button>
               <Button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || phoneState === "invalid"}
                 className="h-12 w-full bg-emerald-700 text-base text-white hover:bg-emerald-800 sm:h-10 sm:w-auto sm:text-sm"
               >
                 {isSubmitting ? "Submitting..." : "Submit Request"}

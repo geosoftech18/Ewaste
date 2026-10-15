@@ -1,7 +1,17 @@
 "use client"
 import { useState } from 'react';
-import { Send, Phone, Mail, MessageCircle, MapPin } from 'lucide-react';
+import { Send, Phone, Mail, MessageCircle, MapPin, Loader } from 'lucide-react';
 import { PhoneInput } from '@/components/ui/phone-input';
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from '@/lib/phone-validation';
+import {
+  getEmailFieldState,
+  getEmailValidationError,
+} from '@/lib/email-validation';
+import { redirectToThankYou } from '@/lib/form-redirect';
+import { FormFieldStatus } from '@/components/form-field-status';
 
 export default function QuoteForm() {
   const [formData, setFormData] = useState({
@@ -11,10 +21,67 @@ export default function QuoteForm() {
     wasteType: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const phoneState = getPhoneFieldState(formData.phone);
+  const emailState = getEmailFieldState(formData.email);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setSubmitError('');
+
+    if (!formData.name.trim()) {
+      setSubmitError('Name is required');
+      return;
+    }
+    const phoneError = getPhoneValidationError(formData.phone);
+    if (phoneError) {
+      setSubmitError(phoneError);
+      return;
+    }
+    const emailError = getEmailValidationError(formData.email);
+    if (emailError) {
+      setSubmitError(emailError);
+      return;
+    }
+    if (!formData.wasteType) {
+      setSubmitError('Please select a type of e-waste');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'quote-modal',
+          data: {
+            name: formData.name.trim(),
+            phone: formData.phone,
+            email: formData.email.trim(),
+            items: formData.wasteType,
+            message: formData.message.trim() || undefined,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Failed to submit request');
+      }
+
+      redirectToThankYou(formData.name, 'quote-form');
+    } catch (error: unknown) {
+      console.error('Error submitting quote form:', error);
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : 'Failed to submit. Please try again.'
+      );
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -37,13 +104,19 @@ export default function QuoteForm() {
             Get Our Service Now
           </h2>
           <p className="text-xl text-gray-300">
-            Fill in your details and we'll contact you shortly
+            Fill in your details and we&apos;ll contact you shortly
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              {submitError && (
+                <div className="rounded-lg border border-red-400/40 bg-red-500/20 px-4 py-3 text-sm text-red-200">
+                  {submitError}
+                </div>
+              )}
+
               <div>
                 <label htmlFor="name" className="block text-white font-medium mb-2">
                   Full Name
@@ -55,6 +128,7 @@ export default function QuoteForm() {
                   value={formData.name}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                   placeholder="Enter your name"
                 />
@@ -70,8 +144,21 @@ export default function QuoteForm() {
                   value={formData.phone}
                   onChange={(value) => setFormData({ ...formData, phone: value })}
                   placeholder="Enter phone number"
+                  disabled={isSubmitting}
                   className="phone-input-field--on-dark"
-                  inputClassName="w-full px-4 py-3 rounded-lg text-white bg-white/10 border border-white/20 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  inputClassName={`w-full px-4 py-3 rounded-lg text-white bg-white/10 border placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent ${
+                    phoneState === 'invalid'
+                      ? 'border-red-400 focus:ring-red-500'
+                      : phoneState === 'valid'
+                        ? 'border-emerald-500 focus:ring-emerald-500'
+                        : 'border-white/20 focus:ring-emerald-500'
+                  }`}
+                  aria-invalid={phoneState === 'invalid'}
+                />
+                <FormFieldStatus
+                  state={phoneState}
+                  validMessage="Valid mobile number"
+                  invalidMessage="Enter a valid mobile number with country code"
                 />
               </div>
 
@@ -86,8 +173,21 @@ export default function QuoteForm() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  disabled={isSubmitting}
+                  aria-invalid={emailState === 'invalid'}
+                  className={`w-full px-4 py-3 rounded-lg bg-white/10 border text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent ${
+                    emailState === 'invalid'
+                      ? 'border-red-400 focus:ring-red-500'
+                      : emailState === 'valid'
+                        ? 'border-emerald-500 focus:ring-emerald-500'
+                        : 'border-white/20 focus:ring-emerald-500'
+                  }`}
                   placeholder="your.email@example.com"
+                />
+                <FormFieldStatus
+                  state={emailState}
+                  validMessage="Valid email address"
+                  invalidMessage="Use Gmail, Yahoo, Outlook, or a valid company email"
                 />
               </div>
 
@@ -101,6 +201,7 @@ export default function QuoteForm() {
                   value={formData.wasteType}
                   onChange={handleChange}
                   required
+                  disabled={isSubmitting}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
                 >
                   <option value="" className="text-gray-900">Select type</option>
@@ -123,6 +224,7 @@ export default function QuoteForm() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
+                  disabled={isSubmitting}
                   className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent resize-none"
                   placeholder="Tell us more about your requirements..."
                 />
@@ -130,10 +232,25 @@ export default function QuoteForm() {
 
               <button
                 type="submit"
-                className="w-full px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2"
+                disabled={
+                  isSubmitting ||
+                  phoneState !== 'valid' ||
+                  emailState !== 'valid' ||
+                  !formData.name.trim()
+                }
+                className="w-full px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <Send className="w-5 h-5" />
-                Submit Request
+                {isSubmitting ? (
+                  <>
+                    <Loader className="w-5 h-5 animate-spin" />
+                    Submitting...
+                  </>
+                ) : (
+                  <>
+                    <Send className="w-5 h-5" />
+                    Submit Request
+                  </>
+                )}
               </button>
             </form>
           </div>

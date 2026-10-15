@@ -4,7 +4,12 @@ import Image from "next/image";
 import { FormEvent, useMemo, useState } from "react";
 import { ewasteCategories } from "@/data/categories";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { getPhoneValidationError } from "@/lib/phone-validation";
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from "@/lib/phone-validation";
+import { redirectToThankYou } from "@/lib/form-redirect";
+import { FormFieldStatus } from "@/components/form-field-status";
 
 const inputClass =
   "mt-1.5 w-full rounded-xl border border-gray-200 bg-white px-3.5 py-2.5 text-sm text-gray-900 outline-none transition placeholder:text-gray-400 focus:border-brand focus:ring-2 focus:ring-brand/20";
@@ -17,10 +22,10 @@ export default function CategoryInquiry() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [area, setArea] = useState("");
-  const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
   const [openItems, setOpenItems] = useState<string | null>(null);
+  const phoneState = getPhoneFieldState(phone);
 
   const selectedCategories = useMemo(
     () => ewasteCategories.filter((category) => selected.includes(category.id)),
@@ -28,7 +33,6 @@ export default function CategoryInquiry() {
   );
 
   function toggleCategory(id: string) {
-    setSubmitted(false);
     setError("");
     setSelected((current) =>
       current.includes(id)
@@ -85,10 +89,9 @@ export default function CategoryInquiry() {
         throw new Error(errorData.error || "Failed to submit inquiry");
       }
 
-      setSubmitted(true);
+      redirectToThankYou(name, "category-inquiry");
     } catch {
       setError("Something went wrong. Please try again.");
-    } finally {
       setSubmitting(false);
     }
   }
@@ -300,7 +303,19 @@ export default function CategoryInquiry() {
                     value={phone}
                     onChange={setPhone}
                     placeholder="Enter phone number"
-                    inputClassName={phoneInputClass}
+                    inputClassName={`${phoneInputClass} ${
+                      phoneState === "invalid"
+                        ? "border-red-500"
+                        : phoneState === "valid"
+                          ? "border-emerald-500"
+                          : ""
+                    }`}
+                    aria-invalid={phoneState === "invalid"}
+                  />
+                  <FormFieldStatus
+                    state={phoneState}
+                    validMessage="Valid mobile number"
+                    invalidMessage="Enter a valid mobile number with country code"
                   />
                 </div>
               </label>
@@ -318,25 +333,13 @@ export default function CategoryInquiry() {
               {error ? (
                 <p className="mt-3 text-sm text-red-600">{error}</p>
               ) : null}
-              {submitted ? (
-                <p className="mt-3 rounded-xl bg-mint px-3 py-2 text-sm font-medium text-brand-dark">
-                  Thanks {name}. We received your inquiry for{" "}
-                  {selectedCategories.map((category) => category.title).join(", ")}
-                  {area.trim() ? ` from ${area.trim()}` : ""}. Our team will call
-                  you shortly.
-                </p>
-              ) : null}
 
               <button
                 type="submit"
-                disabled={submitting || submitted}
+                disabled={submitting || phoneState !== "valid" || !name.trim()}
                 className="mt-5 inline-flex h-12 w-full items-center justify-center rounded-full bg-brand text-sm font-semibold text-white transition hover:bg-brand-dark disabled:cursor-not-allowed disabled:opacity-70"
               >
-                {submitting
-                  ? "Submitting..."
-                  : submitted
-                    ? "Inquiry sent"
-                    : "Submit inquiry"}
+                {submitting ? "Submitting..." : "Submit inquiry"}
               </button>
             </form>
           </aside>

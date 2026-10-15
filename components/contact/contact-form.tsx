@@ -6,7 +6,13 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { PhoneInput } from "@/components/ui/phone-input"
-import { getPhoneValidationError } from "@/lib/phone-validation"
+import { getPhoneFieldState, getPhoneValidationError } from "@/lib/phone-validation"
+import {
+  getEmailFieldState,
+  getEmailValidationError,
+} from "@/lib/email-validation"
+import { redirectToThankYou } from "@/lib/form-redirect"
+import { FormFieldStatus } from "@/components/form-field-status"
 import { Textarea } from "@/components/ui/textarea"
 import {
   User,
@@ -15,7 +21,6 @@ import {
   Building2,
   MapPin,
   FileText,
-  CheckCircle2,
   ChevronRight,
   ChevronLeft,
   AlertCircle,
@@ -35,23 +40,30 @@ export default function ContactForm() {
   })
 
   const [errors, setErrors] = useState<Record<string, string>>({})
-  const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
   const [submitError, setSubmitError] = useState('')
+
+  const phoneState = getPhoneFieldState(formData.mobile)
+  const emailState = getEmailFieldState(formData.email)
 
   const validateStep = (currentStep: number): boolean => {
     const newErrors: Record<string, string> = {}
 
     if (currentStep === 1) {
       if (!formData.fullName.trim()) newErrors.fullName = "Full name is required"
-      if (!formData.email.trim()) newErrors.email = "Email is required"
-      else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = "Invalid email format"
+      const emailError = getEmailValidationError(formData.email)
+      if (emailError) newErrors.email = emailError
       const mobileError = getPhoneValidationError(formData.mobile)
       if (mobileError) newErrors.mobile = mobileError
     } else if (currentStep === 2) {
       if (!formData.city) newErrors.city = "Please select a city"
       if (!formData.serviceType) newErrors.serviceType = "Please select a service type"
       if (!formData.agreeTerms) newErrors.agreeTerms = "You must agree to terms & privacy policy"
+      // Re-check contact fields before final submit
+      const emailError = getEmailValidationError(formData.email)
+      if (emailError) newErrors.email = emailError
+      const mobileError = getPhoneValidationError(formData.mobile)
+      if (mobileError) newErrors.mobile = mobileError
     }
 
     setErrors(newErrors)
@@ -85,13 +97,15 @@ export default function ContactForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!validateStep(2)) return
+    if (!validateStep(1) || !validateStep(2)) {
+      setStep(1)
+      return
+    }
 
     setLoading(true)
     setSubmitError('')
 
     try {
-      // Send email via API
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -114,29 +128,12 @@ export default function ContactForm() {
         throw new Error(errorData.error || 'Failed to send email')
       }
 
-      setSubmitted(true)
+      redirectToThankYou(formData.fullName, 'contact')
     } catch (error: any) {
       console.error('Error submitting form:', error)
       setSubmitError(error.message || 'Failed to submit inquiry. Please try again.')
-    } finally {
       setLoading(false)
     }
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setFormData({
-        fullName: "",
-        companyName: "",
-        email: "",
-        mobile: "",
-        city: "",
-        serviceType: "",
-        message: "",
-        agreeTerms: false,
-      })
-      setSubmitted(false)
-      setStep(1)
-    }, 3000)
   }
 
   const cities = ["Hyderabad", "Warangal", "Nizamabad", "Mumbai", "Pune", "Chennai", "Bangalore", "Delhi", "Kolkata", "Coimbatore", "Visakhapatnam", "Other"]
@@ -152,13 +149,6 @@ export default function ContactForm() {
           </p>
         </div>
 
-        {submitted ? (
-          <div className="bg-emerald-50 border-2 border-emerald-500 rounded-xl p-8 text-center animate-scale-in">
-            <CheckCircle2 className="w-16 h-16 text-emerald-500 mx-auto mb-4 animate-bounce" />
-            <h3 className="text-2xl font-bold text-emerald-900 mb-2">Thank You!</h3>
-            <p className="text-emerald-700">Your inquiry has been submitted successfully. We'll contact you soon.</p>
-          </div>
-        ) : (
           <form
             onSubmit={handleSubmit}
             className="bg-white rounded-2xl shadow-lg p-8 sm:p-12 border border-emerald-100 hover:shadow-2xl transition-all duration-300 animate-fade-in"
@@ -257,14 +247,25 @@ export default function ContactForm() {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="john@example.com"
+                      placeholder="you@gmail.com"
                       className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 hover:border-emerald-300 focus:shadow-lg ${
-                        errors.email
+                        errors.email || emailState === "invalid"
                           ? "border-red-500 focus:border-red-500"
-                          : "border-gray-200 focus:border-emerald-500"
+                          : emailState === "valid"
+                            ? "border-emerald-500 focus:border-emerald-500"
+                            : "border-gray-200 focus:border-emerald-500"
                       }`}
+                      aria-invalid={!!errors.email || emailState === "invalid"}
                     />
-                    {errors.email && (
+                    <FormFieldStatus
+                      state={emailState}
+                      validMessage="Valid email address"
+                      invalidMessage={
+                        errors.email ||
+                        "Use Gmail, Yahoo, Outlook, or your company email"
+                      }
+                    />
+                    {errors.email && emailState === "empty" && (
                       <div className="flex items-center gap-1 mt-2 text-red-600 text-sm">
                         <AlertCircle className="w-4 h-4" />
                         {errors.email}
@@ -279,19 +280,39 @@ export default function ContactForm() {
                     <PhoneInput
                       name="mobile"
                       value={formData.mobile}
-                      onChange={(value) =>
+                      onChange={(value) => {
                         setFormData((prev) => ({ ...prev, mobile: value }))
-                      }
+                        if (errors.mobile) {
+                          setErrors((prev) => {
+                            const next = { ...prev }
+                            delete next.mobile
+                            return next
+                          })
+                        }
+                      }}
                       placeholder="Enter phone number"
-                      className={errors.mobile ? "phone-input-field--error" : undefined}
+                      className={
+                        errors.mobile || phoneState === "invalid"
+                          ? "phone-input-field--error"
+                          : undefined
+                      }
                       inputClassName={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none transition-all duration-300 hover:border-emerald-300 focus:shadow-lg ${
-                        errors.mobile
+                        errors.mobile || phoneState === "invalid"
                           ? "border-red-500 focus:border-red-500"
-                          : "border-gray-200 focus:border-emerald-500"
+                          : phoneState === "valid"
+                            ? "border-emerald-500 focus:border-emerald-500"
+                            : "border-gray-200 focus:border-emerald-500"
                       }`}
-                      aria-invalid={!!errors.mobile}
+                      aria-invalid={!!errors.mobile || phoneState === "invalid"}
                     />
-                    {errors.mobile && (
+                    <FormFieldStatus
+                      state={phoneState}
+                      validMessage="Valid mobile number"
+                      invalidMessage={
+                        errors.mobile || "Enter a valid mobile number with country code"
+                      }
+                    />
+                    {errors.mobile && phoneState === "empty" && (
                       <div className="flex items-center gap-1 mt-2 text-red-600 text-sm">
                         <AlertCircle className="w-4 h-4" />
                         {errors.mobile}
@@ -447,7 +468,6 @@ export default function ContactForm() {
               </div>
             )}
           </form>
-        )}
       </div>
     </section>
   )

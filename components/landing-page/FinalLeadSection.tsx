@@ -4,6 +4,16 @@ import { useState, useEffect, useRef } from "react";
 import { Shield, ArrowRight, CheckCircle2, Award, TrendingUp, Users, Lock, Fingerprint, FileCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PhoneInput } from "@/components/ui/phone-input";
+import {
+  getPhoneFieldState,
+  getPhoneValidationError,
+} from "@/lib/phone-validation";
+import {
+  getEmailFieldState,
+  getEmailValidationError,
+} from "@/lib/email-validation";
+import { redirectToThankYou } from "@/lib/form-redirect";
+import { FormFieldStatus } from "@/components/form-field-status";
 
 interface FormData {
   fullName: string;
@@ -59,6 +69,9 @@ export default function FinalLeadSection() {
   });
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
+  const [submitError, setSubmitError] = useState("");
+  const phoneState = getPhoneFieldState(formData.phone);
+  const emailState = getEmailFieldState(formData.workEmail);
 
   useEffect(() => {
     const newParticles: FloatingParticle[] = Array.from({ length: 12 }, (_, i) => ({
@@ -91,6 +104,23 @@ export default function FinalLeadSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError("");
+
+    if (!formData.fullName.trim()) {
+      setSubmitError("Full name is required");
+      return;
+    }
+    const emailError = getEmailValidationError(formData.workEmail);
+    if (emailError) {
+      setSubmitError(emailError);
+      return;
+    }
+    const phoneError = getPhoneValidationError(formData.phone);
+    if (phoneError) {
+      setSubmitError(phoneError);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -108,7 +138,7 @@ export default function FinalLeadSection() {
             phone: formData.phone.trim(),
             industry: formData.industry,
             service: formData.service,
-            email: formData.workEmail.trim(), // For thank you email
+            email: formData.workEmail.trim(),
           },
         }),
       });
@@ -116,26 +146,16 @@ export default function FinalLeadSection() {
       const result = await response.json();
 
       if (result.success) {
-        setIsSubmitting(false);
-        // Reset form
-        setFormData({
-          fullName: "",
-          companyName: "",
-          workEmail: "",
-          phone: "",
-          industry: "",
-          service: ""
-        });
-        alert('Request submitted successfully! We will contact you shortly.');
+        redirectToThankYou(formData.fullName, "final-lead");
       } else {
         setIsSubmitting(false);
         console.error('Error submitting form:', result.error);
-        alert('Failed to submit. Please try again.');
+        setSubmitError('Failed to submit. Please try again.');
       }
     } catch (error) {
       console.error('Error submitting form:', error);
-    setIsSubmitting(false);
-      alert('Unable to submit. Please check your connection and try again.');
+      setIsSubmitting(false);
+      setSubmitError('Unable to submit. Please check your connection and try again.');
     }
   };
 
@@ -224,7 +244,12 @@ export default function FinalLeadSection() {
                 <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-emerald-500/30 to-transparent" />
 
-                <form onSubmit={handleSubmit} className="relative space-y-6">
+                <form onSubmit={handleSubmit} className="relative space-y-6" noValidate>
+                {submitError && (
+                  <div className="rounded-lg border border-red-400/40 bg-red-500/20 px-4 py-3 text-sm text-red-200">
+                    {submitError}
+                  </div>
+                )}
                 <div className={`transform transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: '300ms' }}>
                   <label className="block text-white/90 text-xs sm:text-sm font-bold mb-2 sm:mb-3 tracking-wide">
                     Full Name
@@ -284,12 +309,24 @@ export default function FinalLeadSection() {
                         onBlur={() => setFocusedField(null)}
                         placeholder="you@company.com"
                         required
-                        className="w-full h-[50px] sm:h-[58px] px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-white/[0.06] border-2 border-white/10 text-white text-sm sm:text-base placeholder:text-white/50 focus:border-emerald-500 focus:bg-white/[0.08] focus:outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300 hover:border-white/20"
+                        aria-invalid={emailState === "invalid"}
+                        className={`w-full h-[50px] sm:h-[58px] px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-white/[0.06] border-2 text-white text-sm sm:text-base placeholder:text-white/50 focus:bg-white/[0.08] focus:outline-none focus:ring-4 transition-all duration-300 hover:border-white/20 ${
+                          emailState === "invalid"
+                            ? "border-red-400 focus:border-red-400 focus:ring-red-500/20"
+                            : emailState === "valid"
+                              ? "border-emerald-500 focus:border-emerald-500 focus:ring-emerald-500/20"
+                              : "border-white/10 focus:border-emerald-500 focus:ring-emerald-500/20"
+                        }`}
                       />
                       {focusedField === 'workEmail' && (
                         <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
                       )}
                     </div>
+                    <FormFieldStatus
+                      state={emailState}
+                      validMessage="Valid email address"
+                      invalidMessage="Use Gmail, Yahoo, Outlook, or a valid company email"
+                    />
                   </div>
 
                   <div className={`transform transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: '600ms' }}>
@@ -304,12 +341,24 @@ export default function FinalLeadSection() {
                         onFocus={() => setFocusedField('phone')}
                         onBlur={() => setFocusedField(null)}
                         placeholder="Enter phone number"
-                        inputClassName="w-full h-[50px] sm:h-[58px] px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-white/[0.06] border-2 border-white/10 text-white text-sm sm:text-base placeholder:text-white/50 focus:border-emerald-500 focus:bg-white/[0.08] focus:outline-none focus:ring-4 focus:ring-emerald-500/20 transition-all duration-300 hover:border-white/20"
+                        aria-invalid={phoneState === "invalid"}
+                        inputClassName={`w-full h-[50px] sm:h-[58px] px-4 sm:px-6 rounded-xl sm:rounded-2xl bg-white/[0.06] border-2 text-white text-sm sm:text-base placeholder:text-white/50 focus:bg-white/[0.08] focus:outline-none focus:ring-4 transition-all duration-300 hover:border-white/20 ${
+                          phoneState === "invalid"
+                            ? "border-red-400 focus:border-red-400 focus:ring-red-500/20"
+                            : phoneState === "valid"
+                              ? "border-emerald-500 focus:border-emerald-500 focus:ring-emerald-500/20"
+                              : "border-white/10 focus:border-emerald-500 focus:ring-emerald-500/20"
+                        }`}
                       />
                       {focusedField === 'phone' && (
                         <div className="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full animate-ping" />
                       )}
                     </div>
+                    <FormFieldStatus
+                      state={phoneState}
+                      validMessage="Valid mobile number"
+                      invalidMessage="Enter a valid mobile number with country code"
+                    />
                   </div>
                 </div>
 
@@ -396,7 +445,12 @@ export default function FinalLeadSection() {
                 <div className={`transform transition-all duration-500 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-4 opacity-0'}`} style={{ transitionDelay: '900ms' }}>
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
+                    disabled={
+                      isSubmitting ||
+                      phoneState !== "valid" ||
+                      emailState !== "valid" ||
+                      !formData.fullName.trim()
+                    }
                     className="group relative w-full h-[56px] sm:h-[64px] bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 hover:from-emerald-600 hover:via-emerald-500 hover:to-teal-500 text-white font-bold text-sm sm:text-base md:text-lg rounded-xl sm:rounded-2xl shadow-[0_20px_60px_rgba(31,164,99,0.4)] hover:shadow-[0_25px_80px_rgba(31,164,99,0.6)] hover:-translate-y-2 active:scale-[0.98] transition-all duration-500 disabled:opacity-60 disabled:cursor-not-allowed overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-1000" />
