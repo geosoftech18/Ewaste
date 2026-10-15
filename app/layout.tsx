@@ -12,7 +12,7 @@ import { SITE_URL } from "@/lib/seo"
 import { PageSeo } from "@/components/seo/page-seo"
 import { OrganizationJsonLd } from "@/components/seo/organization-json-ld"
 import { DeferredAnalytics } from "@/components/deferred-analytics"
-import { DeferredGtm } from "@/components/deferred-gtm"
+import { GoogleTagManager } from "@/components/google-tag-manager"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -89,7 +89,7 @@ export default function RootLayout({
         </Script>
       </head>
       <body className={`font-sans ${GeistSans.variable}`}>
-        <DeferredGtm />
+        <GoogleTagManager />
         <Suspense fallback={null}>
           <OrganizationJsonLd />
           <PageSeo />
