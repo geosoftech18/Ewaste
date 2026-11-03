@@ -56,6 +56,10 @@ const corridors = [
       "On-site hard drive degaussing and shredding, witnessed by your IT or security team",
       "Gate-pass lists and vehicle details in advance for security clearance",
     ],
+    href: "/services/city/hyderabad/hitec-city",
+    hrefLabel: "HITEC City & Madhapur guide",
+    secondaryHref: "/services/city/hyderabad/gachibowli",
+    secondaryHrefLabel: "Gachibowli & Financial District",
   },
   {
     icon: FlaskConical,
@@ -77,6 +81,8 @@ const corridors = [
       "Monthly or quarterly collection plans",
       "Bulk office IT and industrial electronics",
     ],
+    href: "/services/city/hyderabad/uppal",
+    hrefLabel: "Uppal, Pocharam & Cherlapally guide",
   },
   {
     icon: Home,
@@ -87,6 +93,8 @@ const corridors = [
       "Residential and small-office clearances",
       "Published indicative scrap rates on this page",
     ],
+    href: "/services/city/hyderabad/secunderabad",
+    hrefLabel: "Secunderabad & Kukatpally guide",
   },
 ]
 
@@ -400,6 +408,26 @@ export function HyderabadSeoSections() {
                       </li>
                     ))}
                   </ul>
+                  {"href" in area && area.href ? (
+                    <div className="mt-5 flex flex-wrap gap-3">
+                      <Link
+                        href={area.href}
+                        className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                      >
+                        {area.hrefLabel}
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      {"secondaryHref" in area && area.secondaryHref ? (
+                        <Link
+                          href={area.secondaryHref}
+                          className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
+                        >
+                          {area.secondaryHrefLabel}
+                          <ArrowRight className="h-4 w-4" />
+                        </Link>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </article>
               )
             })}

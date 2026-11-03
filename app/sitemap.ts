@@ -4,6 +4,7 @@ import { getAllServiceSlugs } from '@/lib/service-data'
 import { getAllCities } from '@/lib/city-data'
 import { getAllEPRServiceSlugs } from '@/lib/epr-service-data'
 import { comparisonGuides } from '@/data/comparisons'
+import { getAllHyderabadAreaSlugs } from '@/data/hyderabad-areas'
 
 /** Refresh sitemap periodically so newly published blogs appear without a full redeploy. */
 export const revalidate = 3600
@@ -145,6 +146,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.85,
   }))
 
+  const hyderabadAreaPages: MetadataRoute.Sitemap = getAllHyderabadAreaSlugs().map(
+    (area) => ({
+      url: `${baseUrl}/services/city/hyderabad/${area}`,
+      lastModified: now,
+      changeFrequency: 'weekly' as const,
+      priority: 0.8,
+    })
+  )
+
   const comparisonPages: MetadataRoute.Sitemap = comparisonGuides.map((guide) => ({
     url: `${baseUrl}/compare/${guide.slug}`,
     lastModified: new Date(`${guide.lastReviewed}T00:00:00Z`),
@@ -164,6 +174,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...blogPosts,
     ...servicePages,
     ...cityPages,
+    ...hyderabadAreaPages,
     ...comparisonPages,
     ...eprServicePages,
   ]

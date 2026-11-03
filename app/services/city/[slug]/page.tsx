@@ -36,6 +36,7 @@ import { ContentFreshness } from "@/components/seo/content-freshness";
 import { ComparisonGuidesTeaser } from "@/components/seo/comparison-guides-teaser";
 import { AuthorityResources } from "@/components/seo/authority-resources";
 import { HyderabadSeoSections } from "@/components/city/hyderabad-seo-sections";
+import { HyderabadLocationsServed } from "@/components/city/hyderabad-locations-served";
 import { BangaloreSeoSections } from "@/components/city/bangalore-seo-sections";
 import { MumbaiSeoSections } from "@/components/city/mumbai-seo-sections";
 import { PuneSeoSections } from "@/components/city/pune-seo-sections";
@@ -232,6 +233,7 @@ export default function CityPage({ params }: { params: { slug: string } }) {
           cityName={city.name}
         />
       <ScrapTypesSection cityName={city.name} />
+      {city.slug === "hyderabad" ? <HyderabadLocationsServed /> : null}
       {city.slug === "hyderabad" ? <HyderabadSeoSections /> : null}
       {city.slug === "bangalore" ? <BangaloreSeoSections /> : null}
       {city.slug === "mumbai" ? <MumbaiSeoSections /> : null}

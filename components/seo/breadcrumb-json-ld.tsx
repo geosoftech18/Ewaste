@@ -29,6 +29,24 @@ function labelOverridesForPath(pathname: string): Record<string, string> {
 
   if (
     parts[0] === 'services' &&
+    parts[1] === 'city' &&
+    parts[2] === 'hyderabad' &&
+    parts[3]
+  ) {
+    const labels: Record<string, string> = {
+      'hitec-city': 'HITEC City & Madhapur',
+      gachibowli: 'Gachibowli & Financial District',
+      secunderabad: 'Secunderabad & Kukatpally',
+      uppal: 'Uppal, Pocharam & Cherlapally',
+    }
+    const label = labels[parts[3]]
+    if (label) {
+      overrides[`/services/city/hyderabad/${parts[3]}`] = label
+    }
+  }
+
+  if (
+    parts[0] === 'services' &&
     parts[1] &&
     parts[1] !== 'city' &&
     parts[1] !== 'EPR-compliance' &&
