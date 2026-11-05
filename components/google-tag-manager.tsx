@@ -1,14 +1,35 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import Script from "next/script"
+import { readCookieConsent, type CookieConsentValue } from "@/lib/cookie-consent"
 
 /** Production GTM container — keep in sync with Google Tag Manager UI */
 export const GTM_ID = "GTM-MVCCSXW6"
 
 /**
- * Official GTM install for Next.js App Router:
- * - script via next/script (afterInteractive ≈ high in head, non-blocking)
- * - noscript iframe immediately after <body>
+ * Loads GTM only after the visitor accepts analytics/advertising cookies.
+ * Essential-only consent keeps GTM off.
  */
 export function GoogleTagManager() {
+  const [allowed, setAllowed] = useState(false)
+
+  useEffect(() => {
+    const sync = (value: CookieConsentValue | null = readCookieConsent()) => {
+      setAllowed(value === "accepted")
+    }
+    sync()
+
+    const onConsent = (event: Event) => {
+      const detail = (event as CustomEvent<CookieConsentValue>).detail
+      sync(detail)
+    }
+    window.addEventListener("sp-cookie-consent", onConsent)
+    return () => window.removeEventListener("sp-cookie-consent", onConsent)
+  }, [])
+
+  if (!allowed) return null
+
   return (
     <>
       <Script id="gtm-script" strategy="afterInteractive">

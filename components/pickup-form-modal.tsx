@@ -505,12 +505,22 @@ export function PickupFormModal({
                       className="cursor-pointer text-sm font-normal leading-relaxed"
                     >
                       I agree to the{" "}
-                      <a href="/terms" className="text-green-600 hover:underline">
-                        terms & conditions
+                      <a
+                        href="/terms-and-conditions"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:underline"
+                      >
+                        Terms and Conditions
                       </a>{" "}
                       and{" "}
-                      <a href="/privacy" className="text-green-600 hover:underline">
-                        privacy policy
+                      <a
+                        href="/privacy-policy"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-600 hover:underline"
+                      >
+                        Privacy Policy
                       </a>
                       <span className="text-red-500"> *</span>
                     </Label>

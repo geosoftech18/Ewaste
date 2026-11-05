@@ -90,6 +90,8 @@ export default function BlogAdminPage() {
         if (searchQuery) {
           params.append('search', searchQuery)
         }
+        // Admin needs thumbnails even when stored as data URLs
+        params.append('includeImages', '1')
 
         const response = await fetch(`/api/blog?${params.toString()}`)
         const result = await response.json()

@@ -1,5 +1,6 @@
 import { Facebook, Linkedin, Twitter, Youtube } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -148,12 +149,18 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4 animate-fade-in animation-delay-800">
             <p className="text-sm text-gray-400">© {currentYear} SP Recycling Pvt Ltd. All rights reserved.</p>
             <div className="flex gap-6 text-sm">
-              <a href="#" className="hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-block">
+              <Link
+                href="/privacy-policy"
+                className="hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-block"
+              >
                 Privacy Policy
-              </a>
-              <a href="#" className="hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-block">
+              </Link>
+              <Link
+                href="/terms-and-conditions"
+                className="hover:text-emerald-400 transition-all duration-300 hover:scale-105 inline-block"
+              >
                 Terms & Conditions
-              </a>
+              </Link>
             </div>
           </div>
         </div>

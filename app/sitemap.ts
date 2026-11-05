@@ -75,6 +75,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
+      url: `${baseUrl}/terms-and-conditions`,
+      lastModified: new Date('2026-11-04T00:00:00Z'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/privacy-policy`,
+      lastModified: new Date('2026-11-04T00:00:00Z'),
+      changeFrequency: 'yearly',
+      priority: 0.3,
+    },
+    {
       url: `${baseUrl}/services/city`,
       lastModified: now,
       changeFrequency: 'weekly',
@@ -104,9 +116,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     await dbConnect()
     const blogs = await Blog.find({ status: 'published', slug: { $exists: true, $ne: '' } })
       .select('slug updatedAt createdAt')
-      .sort({ updatedAt: -1 })
       .lean()
       .exec()
+
+    blogs.sort(
+      (a, b) =>
+        new Date(b.updatedAt || b.createdAt || 0).getTime() -
+        new Date(a.updatedAt || a.createdAt || 0).getTime()
+    )
 
     const seen = new Set<string>()
     blogPosts = blogs.flatMap((blog) => {

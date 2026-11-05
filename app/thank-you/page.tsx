@@ -55,6 +55,14 @@ export default function ThankYouPage() {
           </Button>
         </div>
 
+        <p className="mb-6 text-sm text-muted-foreground">
+          See{" "}
+          <Link href="/privacy-policy" className="font-medium text-primary hover:underline">
+            how we use your details
+          </Link>
+          .
+        </p>
+
         <div className="flex flex-wrap gap-4 justify-center text-sm font-medium">
           <Link href="/" className="inline-flex items-center gap-1.5 text-primary hover:underline">
             <Home className="h-4 w-4" />

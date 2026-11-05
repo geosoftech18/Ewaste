@@ -189,20 +189,23 @@ export default function BlogDetailPage({ params }: { params: Promise<{ slug: str
           }
           setPost(foundPost)
 
-          // Fetch related posts based on tags
+          // Related posts: lite published list only (no search regex / no base64 images)
           try {
-            const tagsQuery = blogData.tags?.join(',') || ''
-            if (tagsQuery) {
-              const relatedResponse = await fetch(`/api/blog?search=${tagsQuery}`)
-              const relatedResult = await relatedResponse.json()
-              
-              if (relatedResult.success && relatedResult.data) {
-                // Filter out current post and only show published posts
-                const filtered = relatedResult.data
-                  .filter((p: any) => (p._id || p.id) !== (blogData._id || blogData.id) && p.status === 'published')
-                  .slice(0, 2)
-                setRelatedPosts(filtered)
-              }
+            const relatedResponse = await fetch('/api/blog?status=published&limit=8')
+            const relatedResult = await relatedResponse.json()
+
+            if (relatedResult.success && relatedResult.data) {
+              const currentId = String(blogData._id || blogData.id || '')
+              const tags = new Set(
+                (blogData.tags || []).map((t: string) => t.toLowerCase())
+              )
+              const others = relatedResult.data.filter(
+                (p: any) => String(p._id || p.id || '') !== currentId
+              )
+              const tagged = others.filter((p: any) =>
+                (p.tags || []).some((t: string) => tags.has(String(t).toLowerCase()))
+              )
+              setRelatedPosts((tagged.length > 0 ? tagged : others).slice(0, 2))
             }
           } catch (error) {
             console.error('Error fetching related posts:', error)

@@ -427,10 +427,21 @@ export default function ContactForm() {
                   <label className="text-sm text-gray-600">
                     I agree to the{" "}
                     <a
-                      href="#"
+                      href="/terms-and-conditions"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="text-emerald-600 font-semibold hover:underline hover:text-emerald-700 transition-colors"
                     >
-                      terms & privacy policy
+                      Terms and Conditions
+                    </a>{" "}
+                    and{" "}
+                    <a
+                      href="/privacy-policy"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-emerald-600 font-semibold hover:underline hover:text-emerald-700 transition-colors"
+                    >
+                      Privacy Policy
                     </a>
                   </label>
                 </div>

@@ -11,7 +11,7 @@ export async function GET(
 
     const { slug } = params
 
-    const blog = await Blog.findOne({ slug })
+    const blog = await Blog.findOne({ slug, status: 'published' }).lean()
 
     if (!blog) {
       return NextResponse.json(
@@ -20,10 +20,15 @@ export async function GET(
       )
     }
 
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       data: blog,
     })
+    response.headers.set(
+      'Cache-Control',
+      'public, s-maxage=120, stale-while-revalidate=600'
+    )
+    return response
   } catch (error: any) {
     console.error('Error fetching blog:', error)
     return NextResponse.json(
@@ -32,4 +37,3 @@ export async function GET(
     )
   }
 }
-

@@ -13,6 +13,7 @@ import { PageSeo } from "@/components/seo/page-seo"
 import { OrganizationJsonLd } from "@/components/seo/organization-json-ld"
 import { DeferredAnalytics } from "@/components/deferred-analytics"
 import { GoogleTagManager } from "@/components/google-tag-manager"
+import { CookieConsentBanner } from "@/components/cookie-consent-banner"
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -97,6 +98,7 @@ export default function RootLayout({
           {children}
         </Suspense>
         <DeferredAnalytics />
+        <CookieConsentBanner />
         <Toaster />
         <FooterHighlights />
         <Footer />

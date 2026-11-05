@@ -19,7 +19,7 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PickupFormModal } from "@/components/pickup-form-modal"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const pickupRows = [
   {
@@ -199,6 +199,40 @@ const comparisonRows = [
  */
 export function HyderabadSeoSections() {
   const [pickupOpen, setPickupOpen] = useState(false)
+  const [processStepIndex, setProcessStepIndex] = useState(0)
+  const processCarouselRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const root = processCarouselRef.current
+    if (!root) return
+
+    const slides = Array.from(root.children) as HTMLElement[]
+    if (!slides.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!visible) return
+        const index = slides.indexOf(visible.target as HTMLElement)
+        if (index >= 0) setProcessStepIndex(index)
+      },
+      { root, threshold: [0.55, 0.75, 1] }
+    )
+
+    slides.forEach((slide) => observer.observe(slide))
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollToProcessStep = (index: number) => {
+    const root = processCarouselRef.current
+    if (!root) return
+    const slide = root.children[index] as HTMLElement | undefined
+    if (!slide) return
+    root.scrollTo({ left: slide.offsetLeft, behavior: "smooth" })
+    setProcessStepIndex(index)
+  }
 
   return (
     <div className="bg-background">
@@ -503,7 +537,52 @@ export function HyderabadSeoSections() {
               A clear sequence from asset list to compliance documents.
             </p>
           </div>
-          <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Mobile: swipe carousel — Desktop: grid */}
+          <div className="sm:hidden">
+            <div
+              ref={processCarouselRef}
+              className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {processSteps.map((step, index) => (
+                <div
+                  key={step.title}
+                  className="min-w-full flex-[0_0_100%] snap-center snap-always px-0.5"
+                >
+                  <div className="relative h-full rounded-2xl border border-emerald-100 bg-white p-5 shadow-sm">
+                    <div className="mb-3 flex items-center justify-between gap-3">
+                      <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
+                        {index + 1}
+                      </span>
+                      <span className="text-xs font-medium text-emerald-700/80">
+                        Step {index + 1} of {processSteps.length}
+                      </span>
+                    </div>
+                    <h3 className="font-semibold text-foreground">{step.title}</h3>
+                    <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                      {step.text}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 flex items-center justify-center gap-2">
+              {processSteps.map((step, index) => (
+                <button
+                  key={step.title}
+                  type="button"
+                  aria-label={`Go to step ${index + 1}`}
+                  onClick={() => scrollToProcessStep(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    processStepIndex === index
+                      ? "w-7 bg-emerald-600"
+                      : "w-2 bg-emerald-200 hover:bg-emerald-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <ol className="hidden gap-4 sm:grid sm:grid-cols-2 lg:grid-cols-3">
             {processSteps.map((step, index) => (
               <li
                 key={step.title}

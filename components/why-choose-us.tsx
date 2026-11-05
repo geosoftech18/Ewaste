@@ -100,7 +100,59 @@ function AnimatedCounter({
   )
 }
 
+function FeatureCard({
+  feature,
+}: {
+  feature: (typeof features)[number]
+}) {
+  const Icon = feature.icon
+  return (
+    <div className="group h-full bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+      <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+        <Icon className="w-7 h-7 md:w-8 md:h-8 text-green-600" strokeWidth={1.5} />
+      </div>
+      <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">{feature.title}</h3>
+      <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+    </div>
+  )
+}
+
 export function WhyChooseUs() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const root = carouselRef.current
+    if (!root) return
+
+    const slides = Array.from(root.children) as HTMLElement[]
+    if (!slides.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!visible) return
+        const index = slides.indexOf(visible.target as HTMLElement)
+        if (index >= 0) setActiveIndex(index)
+      },
+      { root, threshold: [0.55, 0.75, 1] }
+    )
+
+    slides.forEach((slide) => observer.observe(slide))
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollToSlide = (index: number) => {
+    const root = carouselRef.current
+    if (!root) return
+    const slide = root.children[index] as HTMLElement | undefined
+    if (!slide) return
+    root.scrollTo({ left: slide.offsetLeft, behavior: "smooth" })
+    setActiveIndex(index)
+  }
+
   return (
     <section className="relative py-16 md:py-24 overflow-hidden">
       {/* Background with gradient */}
@@ -128,26 +180,44 @@ export function WhyChooseUs() {
           ))}
         </div>
 
-        {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-          {features.map((feature, index) => {
-            const Icon = feature.icon
-            return (
-              <div
-                key={index}
-                className="group bg-white rounded-2xl p-6 md:p-8 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100"
-              >
-                {/* Icon */}
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-xl bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <Icon className="w-7 h-7 md:w-8 md:h-8 text-green-600" strokeWidth={1.5} />
+        {/* Features — carousel on mobile, grid from md up */}
+        <div className="max-w-6xl mx-auto">
+          <div className="md:hidden">
+            <div
+              ref={carouselRef}
+              className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {features.map((feature, index) => (
+                <div
+                  key={feature.title}
+                  className="min-w-full flex-[0_0_100%] snap-center snap-always px-1"
+                >
+                  <FeatureCard feature={feature} />
                 </div>
+              ))}
+            </div>
+            <div className="mt-5 flex items-center justify-center gap-2">
+              {features.map((feature, index) => (
+                <button
+                  key={feature.title}
+                  type="button"
+                  aria-label={`Go to feature ${index + 1}`}
+                  onClick={() => scrollToSlide(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    activeIndex === index
+                      ? "w-7 bg-green-600"
+                      : "w-2 bg-green-200 hover:bg-green-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
 
-                {/* Content */}
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-              </div>
-            )
-          })}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {features.map((feature) => (
+              <FeatureCard key={feature.title} feature={feature} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

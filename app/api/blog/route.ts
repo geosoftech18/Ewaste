@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import dbConnect from '@/lib/mongodb'
 import { getMongoConnectionHint } from '@/lib/mongodb-errors'
 import Blog from '@/lib/models/blog'
+import { toListFeaturedImage } from '@/lib/blog-queries'
 
 export async function GET(request: NextRequest) {
   try {
@@ -10,29 +11,67 @@ export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status') || 'published'
     const search = searchParams.get('search')
+    // Admin list needs thumbnails (may be base64). Public callers stay lite.
+    const includeImages = searchParams.get('includeImages') === '1'
+    const limitParam = Number(searchParams.get('limit') || '0')
+    const limit =
+      Number.isFinite(limitParam) && limitParam > 0
+        ? Math.min(Math.floor(limitParam), 50)
+        : 0
 
-    let query: any = {}
+    const query: Record<string, unknown> = {}
 
-    // Filter by status
     if (status && status !== 'all') {
       query.status = status
     }
 
-    // Search in title, content, or tags
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: 'i' } },
-        { content: { $regex: search, $options: 'i' } },
+        { excerpt: { $regex: search, $options: 'i' } },
         { tags: { $regex: search, $options: 'i' } },
       ]
     }
 
-    const blogs = await Blog.find(query).sort({ createdAt: -1 }).lean()
+    // Lean list only — never pull HTML content into the listing payload.
+    const blogs = await Blog.find(query)
+      .select(
+        includeImages
+          ? 'title excerpt metaTitle metaDescription tags status featuredImage slug createdAt updatedAt'
+          : 'title excerpt tags status featuredImage slug createdAt'
+      )
+      .lean()
 
-    return NextResponse.json({
+    blogs.sort(
+      (a, b) =>
+        new Date(b.createdAt as Date).getTime() - new Date(a.createdAt as Date).getTime()
+    )
+
+    const sliced = limit > 0 ? blogs.slice(0, limit) : blogs
+
+    const data = includeImages
+      ? sliced
+      : sliced.map((blog) => ({
+          ...blog,
+          featuredImage: toListFeaturedImage(blog.featuredImage as string | null),
+        }))
+
+    const response = NextResponse.json({
       success: true,
-      data: blogs,
+      data,
     })
+
+    // Short CDN/browser cache for the public published list (no search)
+    if (status === 'published' && !search && !includeImages) {
+      response.headers.set(
+        'Cache-Control',
+        'public, s-maxage=120, stale-while-revalidate=600'
+      )
+    } else {
+      response.headers.set('Cache-Control', 'no-store')
+    }
+
+    return response
   } catch (error: unknown) {
     console.error('Error fetching blogs:', error)
     const hint = getMongoConnectionHint(error)
@@ -91,4 +130,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-

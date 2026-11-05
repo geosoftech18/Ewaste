@@ -67,6 +67,10 @@ const BlogSchema = new Schema<IBlog>(
   }
 )
 
+// Speeds up list queries filtered by status and sorted by date
+BlogSchema.index({ status: 1, createdAt: -1 })
+BlogSchema.index({ status: 1, updatedAt: -1 })
+
 // Generate slug before saving
 BlogSchema.pre('save', function (next) {
   if (this.isModified('title') || !this.slug) {

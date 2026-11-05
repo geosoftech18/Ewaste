@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useRef, useState } from "react"
 import {
   Truck,
   BadgeIndianRupee,
@@ -54,7 +55,75 @@ const materials = [
   "Corporate e-waste and bulk industrial scrap",
 ]
 
+function PillarCard({
+  pillar,
+  index,
+}: {
+  pillar: (typeof pillars)[number]
+  index: number
+}) {
+  const Icon = pillar.icon
+  return (
+    <article className="group relative h-full bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-emerald-200/80 transition-all duration-300 overflow-hidden">
+      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${pillar.accent}`} />
+      <div className="p-6 sm:p-8">
+        <div className="flex items-start gap-4 sm:gap-5">
+          <div
+            className={`flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${pillar.accent} flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300`}
+          >
+            <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" strokeWidth={1.75} />
+          </div>
+          <div className="flex-1 min-w-0">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2 block">
+              0{index + 1}
+            </span>
+            <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-snug">
+              {pillar.title}
+            </h3>
+            <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{pillar.description}</p>
+          </div>
+        </div>
+      </div>
+    </article>
+  )
+}
+
 export function HyderabadWhyChooseUs() {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const carouselRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const root = carouselRef.current
+    if (!root) return
+
+    const slides = Array.from(root.children) as HTMLElement[]
+    if (!slides.length) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+        if (!visible) return
+        const index = slides.indexOf(visible.target as HTMLElement)
+        if (index >= 0) setActiveIndex(index)
+      },
+      { root, threshold: [0.55, 0.75, 1] }
+    )
+
+    slides.forEach((slide) => observer.observe(slide))
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollToSlide = (index: number) => {
+    const root = carouselRef.current
+    if (!root) return
+    const slide = root.children[index] as HTMLElement | undefined
+    if (!slide) return
+    root.scrollTo({ left: slide.offsetLeft, behavior: "smooth" })
+    setActiveIndex(index)
+  }
+
   const scrollToPickup = () => {
     document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
   }
@@ -88,37 +157,44 @@ export function HyderabadWhyChooseUs() {
           </p>
         </div>
 
-        {/* Pillar cards */}
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-8 mb-12 sm:mb-16">
-          {pillars.map((pillar, index) => {
-            const Icon = pillar.icon
-            return (
-              <article
-                key={pillar.title}
-                className="group relative bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:border-emerald-200/80 transition-all duration-300 overflow-hidden"
-              >
-                <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${pillar.accent}`} />
-                <div className="p-6 sm:p-8">
-                  <div className="flex items-start gap-4 sm:gap-5">
-                    <div
-                      className={`flex-shrink-0 w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br ${pillar.accent} flex items-center justify-center shadow-md group-hover:scale-105 transition-transform duration-300`}
-                    >
-                      <Icon className="w-6 h-6 sm:w-7 sm:h-7 text-white" strokeWidth={1.75} />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 mb-2 block">
-                        0{index + 1}
-                      </span>
-                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 leading-snug">
-                        {pillar.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm sm:text-base leading-relaxed">{pillar.description}</p>
-                    </div>
-                  </div>
+        {/* Pillar cards — carousel on mobile, grid from md up */}
+        <div className="mb-12 sm:mb-16">
+          <div className="md:hidden">
+            <div
+              ref={carouselRef}
+              className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            >
+              {pillars.map((pillar, index) => (
+                <div
+                  key={pillar.title}
+                  className="min-w-full flex-[0_0_100%] snap-center snap-always px-1"
+                >
+                  <PillarCard pillar={pillar} index={index} />
                 </div>
-              </article>
-            )
-          })}
+              ))}
+            </div>
+            <div className="mt-5 flex items-center justify-center gap-2">
+              {pillars.map((pillar, index) => (
+                <button
+                  key={pillar.title}
+                  type="button"
+                  aria-label={`Go to card ${index + 1}`}
+                  onClick={() => scrollToSlide(index)}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    activeIndex === index
+                      ? "w-7 bg-emerald-600"
+                      : "w-2 bg-emerald-200 hover:bg-emerald-300"
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="hidden md:grid md:grid-cols-2 gap-6 lg:gap-8">
+            {pillars.map((pillar, index) => (
+              <PillarCard key={pillar.title} pillar={pillar} index={index} />
+            ))}
+          </div>
         </div>
 
         {/* Materials accepted */}
