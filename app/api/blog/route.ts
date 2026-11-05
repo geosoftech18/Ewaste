@@ -53,7 +53,10 @@ export async function GET(request: NextRequest) {
       ? sliced
       : sliced.map((blog) => ({
           ...blog,
-          featuredImage: toListFeaturedImage(blog.featuredImage as string | null),
+          featuredImage: toListFeaturedImage(
+            String(blog._id),
+            blog.featuredImage as string | null
+          ),
         }))
 
     const response = NextResponse.json({

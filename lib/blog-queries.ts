@@ -12,8 +12,14 @@ export type BlogCard = {
   createdAt: string
 }
 
-/** Keep only URL / path images — skip huge base64 payloads from list APIs. */
-export function toListFeaturedImage(src?: string | null): string | null {
+/**
+ * Resolve a list-card image URL without embedding huge base64 in JSON.
+ * External/path URLs pass through; data-URI images use the image API.
+ */
+export function toListFeaturedImage(
+  id: string,
+  src?: string | null
+): string | null {
   if (!src) return null
   if (
     src.startsWith("http://") ||
@@ -21,6 +27,9 @@ export function toListFeaturedImage(src?: string | null): string | null {
     src.startsWith("/")
   ) {
     return src
+  }
+  if (src.startsWith("data:")) {
+    return `/api/blog/${id}/image`
   }
   return null
 }
@@ -61,7 +70,7 @@ export async function getPublishedBlogCards(): Promise<BlogCard[]> {
     excerpt: blog.excerpt || "",
     tags: blog.tags || [],
     status: blog.status as BlogCard["status"],
-    featuredImage: toListFeaturedImage(blog.featuredImage),
+    featuredImage: toListFeaturedImage(String(blog._id), blog.featuredImage),
     slug: blog.slug,
     createdAt:
       blog.createdAt instanceof Date
